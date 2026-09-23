@@ -1,0 +1,9 @@
+{
+  "activation":"blocked",
+  "required":["founder_authorized_stratum","verified_authority","conformance_passed","authenticated_transport","destination_connected","reconciliation_connected","production_authorized"],
+  "port_id":"REPLACE_WITH_AUTHORIZED_ID",
+  "capabilities":[],
+  "accepted_classifications":[],
+  "route_modes":["direct"],
+  "tenant_scope":"required"
+}

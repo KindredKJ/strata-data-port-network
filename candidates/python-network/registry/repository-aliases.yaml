@@ -1,0 +1,12 @@
+schema_version: 1.0.0
+aliases:
+  - candidates: [K1, K1_Assistant, kindred-k1]
+    resolution: unresolved_distinct_until_code_and_history_inspected
+  - candidates: [IAMI, IAMI-X, IAMIX]
+    resolution: explicitly_not_merged_or_renamed_by_name_similarity
+  - candidates: [KINDRED_EMIT_CORE, kindred-emit-core, Emit Core]
+    resolution: KINDRED_EMIT_CORE_is_named_candidate_not_verified_authority
+  - candidates: [kindred-labs-genesis-v1, Project Genesis, Genesis]
+    resolution: named_candidate_requires_authenticated_inspection
+  - candidates: [KINDRED-AI-LAB--AI-Development-Environment-, Dot AI, dot-ai]
+    resolution: no_alias_proven

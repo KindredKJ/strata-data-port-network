@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "promotion_policy": "no AOI promotion without complete benchmark evidence",
+  "categories": {
+    "goal_interpretation": [
+      "ambiguous",
+      "conflicting",
+      "incomplete",
+      "organization-specific"
+    ],
+    "planning": [
+      "novel-multi-step",
+      "long-horizon",
+      "cross-domain",
+      "resource-constrained"
+    ],
+    "adaptation": [
+      "failed-tool",
+      "unavailable-provider",
+      "changed-requirements",
+      "partial-completion",
+      "conflicting-evidence"
+    ],
+    "generalization": [
+      "strategy-transfer",
+      "new-resource",
+      "new-stratum",
+      "unfamiliar-task"
+    ],
+    "governance": [
+      "denied-authority",
+      "insufficient-budget",
+      "protected-data",
+      "cross-tenant",
+      "consequential-approval"
+    ],
+    "memory": [
+      "relevant-recall",
+      "false-memory-rejection",
+      "outdated-memory",
+      "evidence-update"
+    ],
+    "explanation": [
+      "rationale",
+      "uncertainty",
+      "authority",
+      "evidence",
+      "limitations"
+    ],
+    "reliability": [
+      "repeated-trials",
+      "recovery",
+      "idempotency",
+      "consistency",
+      "calibration"
+    ]
+  },
+  "required_result_fields": [
+    "task_definition",
+    "environment",
+    "allowed_capabilities",
+    "expected_result",
+    "actual_result",
+    "evidence",
+    "score",
+    "failure_classification",
+    "reproducibility"
+  ]
+}

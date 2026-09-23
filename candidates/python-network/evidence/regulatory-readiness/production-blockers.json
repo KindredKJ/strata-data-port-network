@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "truth_class": "artifact-present",
+  "blockers": [
+    {"capability": "external-communications", "status": "blocked", "reason": "authorized provider and credentials not connected"},
+    {"capability": "regulated-financial-movement", "status": "blocked", "reason": "regulated provider, contract, credentials, and legal authority not evidenced"},
+    {"capability": "physical-energy-execution", "status": "physical_execution_not_connected", "reason": "authorized hardware and site connectivity unavailable"},
+    {"capability": "production-signing", "status": "blocked", "reason": "managed production key identity not configured"}
+  ],
+  "provider_verified": false,
+  "externally_verified": false,
+  "legally_authorized": false,
+  "physically_executed": false
+}

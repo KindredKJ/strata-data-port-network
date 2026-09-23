@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "physical_execution_status": "physical_execution_not_connected",
+  "categories": [
+    "data-quality",
+    "site-asset-model",
+    "anomaly-detection",
+    "forecasting",
+    "confidence-calibration",
+    "advisory-optimization",
+    "safety-policy",
+    "historical-evaluation"
+  ],
+  "rules": [
+    "real datasets require provenance",
+    "test fixtures cannot establish WATT maturity",
+    "no actuation benchmark without authorization"
+  ],
+  "required_result_fields": [
+    "task_definition",
+    "environment",
+    "allowed_capabilities",
+    "expected_result",
+    "actual_result",
+    "evidence",
+    "score",
+    "failure_classification",
+    "reproducibility"
+  ]
+}

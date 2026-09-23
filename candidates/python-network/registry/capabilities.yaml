@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "capabilities": [
+    {"id": "communications-transport", "authority": "G3T Connected", "bounded": true},
+    {"id": "tenant-provisioning", "authority": "Kindred One", "bounded": true},
+    {"id": "partner-embedded-interfaces", "authority": "Kindred One", "bounded": true},
+    {"id": "usage-metering-entitlements", "authority": "Kindred One", "bounded": true},
+    {"id": "campaign-orchestration", "authority": "Brainstem InTouch", "bounded": true},
+    {"id": "financial-ledger", "authority": "RetroBank", "bounded": true},
+    {"id": "agent-contracting", "authority": "Agent-to-Agent Economy", "bounded": true},
+    {"id": "energy-analysis", "authority": "KINDRED-WATT", "bounded": true, "unavailable_status": "blocked"},
+    {"id": "immutable-watt-record", "authority": "WATT-BLOCK", "bounded": true, "effects": false}
+  ]
+}

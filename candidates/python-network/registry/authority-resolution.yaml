@@ -1,0 +1,57 @@
+schema_version: 2.0.0
+resolution_basis: founder_directive_plus_observed_public_metadata
+rules:
+  provider_is_internal_authority: false
+  unresolved_is_not_assumed: true
+  repository_name_similarity_is_not_equivalence: true
+assignments:
+  kindred-labs-superstructure:
+    authority: architecture_governance_registry_integration_control
+    confidence: founder_defined
+    repository: KindredKJ/kindred-labs-superstructure
+    repository_state: local_only_observed
+  kindred-brainstem:
+    authority: protected_cognition_policy_planning_orchestration
+    confidence: founder_defined
+    repository: KindredKJ/kindred-brainstem
+    repository_state: public_live_head_observed
+  brainstem-in-touch:
+    authority: organization_campaign_and_communication_intent_orchestration
+    confidence: founder_defined
+    repository: KindredKJ/brainstem-in-touch
+    repository_state: inaccessible_or_absent_via_public_api
+  kindred-watt:
+    authority: bounded_energy_domain
+    confidence: founder_defined
+    repository: KindredKJ/KINDRED-WATT
+    repository_state: inaccessible_or_absent_via_public_api
+  retrobank:
+    authority: canonical_financial_authority
+    confidence: founder_defined
+    repository: unresolved
+  g3t-connected:
+    authority: governed_communications_transport
+    confidence: founder_defined
+    repository: unresolved
+  dot-ai:
+    authority: founder_defined_component_repository_authority_unresolved
+    confidence: unresolved
+    repository: unresolved
+  iami:
+    authority: unresolved_identity_system
+    confidence: blocked_pending_authenticated_inspection
+    repository: KindredKJ/IAMI
+  iami-x:
+    authority: unresolved_identity_system_distinct_from_iami
+    confidence: blocked_pending_authenticated_inspection
+    repository: KindredKJ/IAMI-X
+  kindred-cloud:
+    authority: runtime_hosting_persistence_provider_adapters_device_presence
+    confidence: founder_defined
+    repository: KindredKJ/kindred-cloud
+    repository_state: inaccessible_or_absent_via_public_api
+  emit-core:
+    authority: effects_reconciliation_operational_truth_state_transitions
+    confidence: founder_defined
+    repository: KindredKJ/KINDRED_EMIT_CORE
+    repository_state: inaccessible_or_absent_via_public_api

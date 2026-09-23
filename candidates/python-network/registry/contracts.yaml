@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "canonical_authority": "kindred-protocol",
+  "contracts": [
+    "NeedEnvelope",
+    "OutcomeContract",
+    "CapabilityManifest",
+    "ClaimRecord",
+    "CognitiveTransaction",
+    "ExecutionIntent",
+    "EvidenceReceipt",
+    "OutcomeCapsule",
+    "EvolutionProposal",
+    "KJManifest",
+    "WorldContext",
+    "StrataTransportEnvelope",
+    "B2BContext",
+    "CommunicationLifecycleEvent",
+    "SignedPortReceipt",
+    "EmitCoreReconciliation"
+  ],
+  "schema_standard": "JSON Schema 2020-12",
+  "versioning": "semantic-versioning",
+  "breaking_change": [
+    "new-major-version",
+    "ADR",
+    "migration-instructions",
+    "compatibility-evidence"
+  ]
+}

@@ -1,0 +1,23 @@
+schema_version: 1.0.0
+scale: [blocked, artifact_present, locally_executed, reproducibly_validated, connected, externally_verified]
+repositories:
+  KindredKJ/kindred-labs-superstructure:
+    state: locally_executed
+    limitations: [no_remote, production_providers_not_connected, external_validation_not_run]
+  KindredKJ/kindred-brainstem:
+    state: artifact_present
+    limitations: [public_metadata_only, integration_not_executed]
+  KindredKJ/K1:
+    state: artifact_present
+    limitations: [public_metadata_only, authority_unresolved]
+  KindredKJ/KINDRED-WATT:
+    state: blocked
+    limitations: [repository_not_accessible, windows_p1_unresolved, physical_execution_not_connected]
+  KindredKJ/brainstem-in-touch:
+    state: blocked
+    limitations: [repository_not_accessible]
+production_routes:
+  communications: {state: blocked, reason: no_authenticated_authorized_provider}
+  financial_settlement: {state: blocked, reason: no_authorized_provider_or_legal_evidence}
+  watt_physical_execution: {state: blocked, reason: physical_execution_not_connected}
+  external_agent_economy: {state: blocked, reason: no_resolved_authority_or_conformance_connection}

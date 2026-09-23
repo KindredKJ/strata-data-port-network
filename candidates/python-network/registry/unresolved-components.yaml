@@ -1,0 +1,26 @@
+schema_version: 1.0.0
+components:
+  Dot AI:
+    status: founder_defined_component_repository_authority_unresolved
+    blocker: authenticated_ecosystem_code_search_unavailable
+  RetroBank:
+    status: canonical_financial_authority_repository_unresolved
+    blocker: no_accessible_repository_discovered
+  Agent-to-Agent Economy:
+    status: repository_authority_unresolved
+    blocker: no_accessible_repository_discovered
+  G3T Connected:
+    status: repository_authority_unresolved
+    blocker: no_accessible_repository_discovered
+  IAMI:
+    status: identity_role_unresolved
+    blocker: repository_not_visible_to_public_unauthenticated_api
+  IAMI-X:
+    status: identity_role_unresolved_and_not_assumed_equivalent_to_IAMI
+    blocker: repository_not_visible_to_public_unauthenticated_api
+  StrataFortress:
+    status: repository_authority_unresolved
+    blocker: authenticated_ecosystem_inventory_unavailable
+  Mesh:
+    status: network_authority_unresolved
+    blocker: authenticated_ecosystem_code_search_unavailable

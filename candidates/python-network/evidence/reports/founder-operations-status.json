@@ -1,0 +1,20 @@
+{
+  "schema_version":"1.0.0",
+  "readiness_dimensions":{"interface_defined":true,"implemented_local":true,"transport_connected":false,"destination_connected":false,"reconciliation_connected":false,"conformance_passed":false,"provider_verified":false,"externally_verified":false,"production_authorized":false,"blocked":true},
+  "repository_access":"local-superstructure-and-public-brainstem-read-only",
+  "port_readiness_source":"registry/ports.yaml",
+  "emit_core":"emit_core_authority_not_connected",
+  "aoi_level":null,
+  "brainstem_memory":"implemented_local_not_authority_connected",
+  "brainstem_planning":"implemented_local_not_authority_connected",
+  "g3t":"repository_and_transport_not_connected",
+  "retrobank":"authority_repository_not_connected",
+  "a2a":"authority_repository_not_connected",
+  "watt_repository":"not_accessible",
+  "watt_telemetry":"not_connected",
+  "watt_physical":"physical_execution_not_connected",
+  "mtls_identity":"not_configured",
+  "managed_key":"not_configured",
+  "active_prs":"unverified_metadata_only",
+  "latest_validation_evidence":"generated locally by scripts/validate-world.sh"
+}

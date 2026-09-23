@@ -1,0 +1,37 @@
+{
+  "schema_version": "2.0.0",
+  "generated_at": "2026-07-28T09:50:15Z",
+  "floating_references": false,
+  "repositories": [
+    {
+      "name": "KindredKJ/kindred-labs-superstructure",
+      "commit": "70ce4244c8e432bc3adfaadb46f7235a9e44110d",
+      "source": "local-observed",
+      "integration_status": "available"
+    },
+    {
+      "name": "KindredKJ/kindred-brainstem",
+      "commit": "7ec86653a73c635b5bff69c4819ff050fafb6976",
+      "source": "public-api-observed",
+      "integration_status": "available"
+    },
+    {
+      "name": "KindredKJ/brainstem-in-touch",
+      "commit": "328813aebfea8eb6d4d71ef49ed568b36ad1bcb0",
+      "source": "founder-provided-unverified",
+      "integration_status": "blocked-unverified"
+    },
+    {
+      "name": "KindredKJ/KINDRED-WATT",
+      "commit": "f81d2ec00b39f876a94e6bcace127fdb2c276b92",
+      "source": "founder-provided-unverified",
+      "integration_status": "blocked-unverified"
+    },
+    {
+      "name": "KindredKJ/K1",
+      "commit": "ad8e571aedec26a0a1643c0cec3866a1d9329aae",
+      "source": "public-api-observed",
+      "integration_status": "available"
+    }
+  ]
+}

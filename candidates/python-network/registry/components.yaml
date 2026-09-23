@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "components": [
+    {"id": "brainstem", "name": "BRAINSTEM", "authority": "BRAINSTEM", "boundary": "protected", "classification": "quadrant", "stratum": false},
+    {"id": "kindred-cloud", "name": "Kindred Cloud", "authority": "Kindred Cloud", "boundary": "protected", "classification": "quadrant", "is_runtime": false},
+    {"id": "emit-core", "name": "Emit Core", "authority": "Emit Core", "boundary": "protected", "classification": "quadrant"},
+    {"id": "retrobank", "name": "RetroBank", "authority": "RetroBank", "boundary": "protected", "classification": "quadrant"},
+    {"id": "port-zero", "name": "Strata Data Port Zero", "authority": "Unified Quad Runtime", "boundary": "protected", "classification": "internal-anchor"},
+    {"id": "g3t-connected", "name": "G3T Connected", "authority": "communications_service_delivery", "boundary": "external", "classification": "kindred_provider", "provider_of_record": true},
+    {"id": "kindred-one", "name": "Kindred One", "authority": "B2B enablement and infrastructure platform", "boundary": "protected-and-partner-facing", "classification": "b2b-enabler", "consumer_first": false},
+    {"id": "watt-block", "name": "WATT-BLOCK", "authority": "WATT-BLOCK", "boundary": "external", "classification": "record-only"}
+  ]
+}

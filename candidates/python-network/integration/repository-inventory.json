@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-07-28T00:00:00Z",
+  "discovery_scope": "local-only",
+  "limitations": ["No git remote is configured", "GitHub CLI is unavailable", "Remote visibility, branches, PRs, reviews, protections, workflows, and releases were not verified"],
+  "repositories": [
+    {"name": "KindredKJ/kindred-labs-superstructure", "local": true, "base_sha": "99658b30c2eafa354cd58438c2d1067802dd1a42", "branch": "work", "visibility": "unverified", "dirty_at_discovery": false},
+    {"name": "KindredKJ/KINDRED-WATT", "local": false, "provided_pin": "f81d2ec00b39f876a94e6bcace127fdb2c276b92", "live_state": "unverified"},
+    {"name": "KindredKJ/kindred-brainstem", "local": false, "provided_pin": "7ec86653a73c635b5bff69c4819ff050fafb6976", "live_state": "unverified"},
+    {"name": "KindredKJ/brainstem-in-touch", "local": false, "provided_pin": "328813aebfea8eb6d4d71ef49ed568b36ad1bcb0", "live_state": "unverified"}
+  ]
+}

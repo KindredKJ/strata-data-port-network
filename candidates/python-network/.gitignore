@@ -1,0 +1,115 @@
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*secret*
+*secrets*
+credentials*.json
+service-account*.json
+wallet*.json
+mnemonic*
+private-key*
+private_key*
+id_rsa*
+id_ed25519*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+pip-wheel-metadata/
+
+# Node / JS
+node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+
+# .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# Build and package output
+build/
+dist/
+out/
+target/
+*.egg-info/
+*.whl
+
+# Runtime state
+*.log
+logs/
+*.pid
+*.tmp
+*.temp
+*.lock
+*.db
+*.sqlite
+*.sqlite3
+data/local/*
+!data/local/.gitkeep
+artifacts/local/*
+!artifacts/local/.gitkeep
+
+# Models, checkpoints, and large generated data
+*.gguf
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.tflite
+*.h5
+*.bin
+models/cache/
+checkpoints/
+datasets/
+vector_store/
+chroma/
+faiss/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Backups and archives
+*.bak
+*.zip
+*.7z
+*.tar
+*.tar.gz
+
+# Terraform and cloud state
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Local override files
+config.local.*
+settings.local.*
+
+# Generated local evidence bundles
+evidence/runs/*
+!evidence/runs/.gitkeep

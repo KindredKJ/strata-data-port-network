@@ -1,0 +1,43 @@
+{
+  "schema": "kindred.canonical-record.v1",
+  "record_id": "KINDRED-CANON-STRATA-20260726-001",
+  "title": "StrataFortress Evidence-Backed Strata and StrataData Port Canonical Architecture Directive",
+  "status": "FOUNDER_APPROVED",
+  "classification": "PRIVATE_INTERNAL",
+  "founder": {
+    "name": "Kindred Jermaine Cox",
+    "role": "Founder and Chief Architect, Kindred Labs",
+    "signature_representation": "/s/ Kindred Jermaine Cox",
+    "approval_timestamp": "2026-07-26T18:31:57-06:00",
+    "approval_method": "direct authenticated working-session instruction"
+  },
+  "governance": {
+    "repository": "KindredKJ/kindred-labs-superstructure",
+    "routing_issue": 1,
+    "publication": "private",
+    "partner_disclosure": false,
+    "public_disclosure": false
+  },
+  "architecture": {
+    "brainstem_location": "protected Kindred Labs internal environment",
+    "unified_quad_runtime_role": "horizontal integration fabric",
+    "stratafortress_role": "vertical integration architecture",
+    "stratadata_port_zero_role": "internal anchor and origin station",
+    "tesseract_transport": "approved architectural objective; implementation evidence pending",
+    "strata": [
+      "Communications: G3T Connected + Brainstem InTouch collaboration",
+      "RetroBank + Agent-to-Agent Economy"
+    ]
+  },
+  "truth_status": {
+    "architecture_approved": true,
+    "fully_implemented": false,
+    "deployed": false,
+    "externally_authorized": false,
+    "production_proven": false
+  },
+  "artifacts": {
+    "canonical_markdown_path": "governance/canonical/2026/07/KINDRED-CANON-STRATA-20260726-001.md",
+    "canonical_markdown_sha256": "F51B86711AFE09336BE74781E673A460018E2310FF581F2E99A6B587DB914A61"
+  }
+}

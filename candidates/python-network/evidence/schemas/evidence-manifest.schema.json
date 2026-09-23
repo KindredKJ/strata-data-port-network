@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kindred-labs.local/schemas/evidence-manifest/v1.0.0",
+  "title": "Kindred Labs Evidence Manifest",
+  "type": "object",
+  "required": ["schema_version", "run_id", "repository", "branch", "commit", "dirty", "environment", "tests", "generated_files", "truth_classification", "validation_level", "limitations"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "run_id": {"type": "string", "pattern": "^[0-9]{8}T[0-9]{6}Z(-[A-Za-z0-9._-]+)?$"},
+    "repository": {"type": "string", "minLength": 1},
+    "branch": {"type": "string", "minLength": 1},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "dirty": {"type": "boolean"},
+    "environment": {"type": "object", "required": ["operating_system", "python"], "additionalProperties": {"type": "string"}},
+    "tests": {"type": "array", "items": {"type": "object", "required": ["command", "exit_code"], "properties": {"command": {"type": "string"}, "exit_code": {"type": "integer"}, "skipped": {"type": "boolean"}}}},
+    "generated_files": {"type": "array", "items": {"type": "string"}},
+    "truth_classification": {"enum": ["simulated", "estimated", "observed", "provider-reported", "verified"]},
+    "validation_level": {"enum": ["artifact present", "locally executed", "reproducibly validated", "resilience validated", "independently production validated"]},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

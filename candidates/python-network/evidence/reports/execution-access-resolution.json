@@ -1,0 +1,162 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-07-28T22:30:00Z",
+  "mechanisms_attempted": {
+    "configured_remotes": false,
+    "github_cli": false,
+    "environment_tokens": false,
+    "github_rest_authenticated_user": "401",
+    "github_rest_public": true,
+    "ssh_agent": false,
+    "mounted_git_workspaces": [
+      "/workspace/kindred-labs-superstructure"
+    ],
+    "pull_request_metadata_tool": "metadata-only-not-GitHub-authentication"
+  },
+  "repositories": [
+    {
+      "repository": "KindredKJ/kindred-labs-superstructure",
+      "visibility": "unknown",
+      "remote_url": null,
+      "default_branch": null,
+      "remote_head": "70ce4244c8e432bc3adfaadb46f7235a9e44110d",
+      "access_mechanism": "local Git object database; no configured remote",
+      "read_permission": true,
+      "write_permission": "local-only",
+      "branch_permission": "local-only",
+      "pr_permission": false,
+      "blocker": "no remote or authenticated GitHub credential; public API result cannot distinguish private from absent"
+    },
+    {
+      "repository": "KindredKJ/kindred-brainstem",
+      "visibility": "public",
+      "remote_url": "https://github.com/KindredKJ/kindred-brainstem",
+      "default_branch": "main",
+      "remote_head": "7ec86653a73c635b5bff69c4819ff050fafb6976",
+      "access_mechanism": "GitHub REST API without authentication",
+      "read_permission": true,
+      "write_permission": false,
+      "branch_permission": false,
+      "pr_permission": false,
+      "blocker": null
+    },
+    {
+      "repository": "KindredKJ/KINDRED_EMIT_CORE",
+      "visibility": "unknown",
+      "remote_url": null,
+      "default_branch": null,
+      "remote_head": null,
+      "access_mechanism": "GitHub REST API without authentication",
+      "read_permission": false,
+      "write_permission": false,
+      "branch_permission": false,
+      "pr_permission": false,
+      "blocker": "no remote or authenticated GitHub credential; public API result cannot distinguish private from absent"
+    },
+    {
+      "repository": "KindredKJ/KINDRED-WATT",
+      "visibility": "unknown",
+      "remote_url": null,
+      "default_branch": null,
+      "remote_head": null,
+      "access_mechanism": "GitHub REST API without authentication",
+      "read_permission": false,
+      "write_permission": false,
+      "branch_permission": false,
+      "pr_permission": false,
+      "blocker": "no remote or authenticated GitHub credential; public API result cannot distinguish private from absent"
+    },
+    {
+      "repository": "KindredKJ/brainstem-in-touch",
+      "visibility": "unknown",
+      "remote_url": null,
+      "default_branch": null,
+      "remote_head": null,
+      "access_mechanism": "GitHub REST API without authentication",
+      "read_permission": false,
+      "write_permission": false,
+      "branch_permission": false,
+      "pr_permission": false,
+      "blocker": "no remote or authenticated GitHub credential; public API result cannot distinguish private from absent"
+    },
+    {
+      "repository": "G3T Connected authority unresolved",
+      "visibility": "unresolved",
+      "remote_url": null,
+      "default_branch": null,
+      "remote_head": null,
+      "access_mechanism": "none",
+      "read_permission": false,
+      "write_permission": false,
+      "branch_permission": false,
+      "pr_permission": false,
+      "blocker": "authority repository unresolved and authenticated inventory unavailable"
+    },
+    {
+      "repository": "RetroBank authority unresolved",
+      "visibility": "unresolved",
+      "remote_url": null,
+      "default_branch": null,
+      "remote_head": null,
+      "access_mechanism": "none",
+      "read_permission": false,
+      "write_permission": false,
+      "branch_permission": false,
+      "pr_permission": false,
+      "blocker": "authority repository unresolved and authenticated inventory unavailable"
+    },
+    {
+      "repository": "Agent-to-Agent Economy authority unresolved",
+      "visibility": "unresolved",
+      "remote_url": null,
+      "default_branch": null,
+      "remote_head": null,
+      "access_mechanism": "none",
+      "read_permission": false,
+      "write_permission": false,
+      "branch_permission": false,
+      "pr_permission": false,
+      "blocker": "authority repository unresolved and authenticated inventory unavailable"
+    },
+    {
+      "repository": "KindredKJ/IAMI",
+      "visibility": "unknown",
+      "remote_url": null,
+      "default_branch": null,
+      "remote_head": null,
+      "access_mechanism": "GitHub REST API without authentication",
+      "read_permission": false,
+      "write_permission": false,
+      "branch_permission": false,
+      "pr_permission": false,
+      "blocker": "no remote or authenticated GitHub credential; public API result cannot distinguish private from absent"
+    },
+    {
+      "repository": "KindredKJ/IAMI-X",
+      "visibility": "unknown",
+      "remote_url": null,
+      "default_branch": null,
+      "remote_head": null,
+      "access_mechanism": "GitHub REST API without authentication",
+      "read_permission": false,
+      "write_permission": false,
+      "branch_permission": false,
+      "pr_permission": false,
+      "blocker": "no remote or authenticated GitHub credential; public API result cannot distinguish private from absent"
+    },
+    {
+      "repository": "KindredKJ/kindred-cloud",
+      "visibility": "unknown",
+      "remote_url": null,
+      "default_branch": null,
+      "remote_head": null,
+      "access_mechanism": "GitHub REST API without authentication",
+      "read_permission": false,
+      "write_permission": false,
+      "branch_permission": false,
+      "pr_permission": false,
+      "blocker": "no remote or authenticated GitHub credential; public API result cannot distinguish private from absent"
+    }
+  ],
+  "secrets_read_or_recorded": false
+}

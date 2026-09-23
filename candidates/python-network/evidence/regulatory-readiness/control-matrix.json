@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "truth_class": "artifact-present",
+  "legal_authorization_claim": false,
+  "controls": [
+    {"id": "identity", "scope": "human-agent-service-workload identity and revocation", "state": "designed", "independent_validation": "required"},
+    {"id": "financial-segregation", "scope": "double-entry journals, budgets, reservations, obligations", "state": "designed", "independent_validation": "required"},
+    {"id": "reconciliation", "scope": "provider-reported to RetroBank verified state", "state": "designed", "independent_validation": "required"},
+    {"id": "approval-thresholds", "scope": "delegated limits and founder-controlled policy", "state": "designed", "independent_validation": "required"},
+    {"id": "verification-hooks", "scope": "customer, agent, sanctions, and suspicious-activity provider hooks", "state": "designed", "independent_validation": "required"},
+    {"id": "disputes-reversals", "scope": "append-only case state and compensating entries", "state": "designed", "independent_validation": "required"},
+    {"id": "continuity", "scope": "backup, restore, recovery, dependency failure", "state": "designed", "independent_validation": "required"},
+    {"id": "key-management", "scope": "managed KMS or hardware-backed production signer", "state": "blocked", "blocker": "provider and credentials not authorized"},
+    {"id": "privacy", "scope": "classification, minimization, selective disclosure, retention", "state": "designed", "independent_validation": "required"},
+    {"id": "provider-diligence", "scope": "regulated and communications providers", "state": "blocked", "blocker": "provider contracts and diligence evidence unavailable"},
+    {"id": "external-agent-admission", "scope": "identity, capability, authority, finance and evidence conformance", "state": "designed", "independent_validation": "required"}
+  ]
+}

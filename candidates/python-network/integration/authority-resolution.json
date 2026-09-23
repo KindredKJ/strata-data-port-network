@@ -1,0 +1,15 @@
+{
+  "status": "provisional-local-artifact",
+  "authorities": {
+    "protocol": "kindred-protocol",
+    "tesseract": "kindred-tesseract",
+    "unified_quad_runtime": "kindred-unified-quad-runtime",
+    "modular_core": "kindred-modular-core",
+    "protected_cognition": "kindred-brainstem",
+    "communications_transport": "g3t-connected",
+    "organizational_orchestration": "brainstem-in-touch",
+    "energy_stratum": "KINDRED-WATT",
+    "architecture_control_plane": "kindred-labs-superstructure"
+  },
+  "note": "Resolution requires remote inventory before repository creation."
+}

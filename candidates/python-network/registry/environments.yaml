@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "environments": [
+    {"id": "protected-kindred-labs", "boundary": "protected", "contains": ["Protocol", "Tesseract internal world context", "Unified Quad Runtime", "Strata Data Port Zero"]},
+    {"id": "external-strata", "boundary": "external", "contains": ["StrataFortress", "External Communications Strata Data Port", "External Economy Strata Data Port", "External Kindred WATT Strata Data Port"]},
+    {"id": "partner-tenant", "boundary": "tenant-isolated", "principal_context": "organization-or-authorized-partner", "downstream_experience_owner": "partner"}
+  ],
+  "default_execution": {"local_only": true, "production_adapters_required": true, "unavailable_dependencies": "fail-closed", "external_side_effects": false}
+}

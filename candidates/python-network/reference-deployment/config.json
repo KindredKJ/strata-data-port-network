@@ -1,0 +1,7 @@
+{
+  "designation":"reference_deployment_not_production_authorized",
+  "environment":"reference",
+  "required_secret_references":["KINDRED_MTLS_CERT_PATH","KINDRED_MTLS_KEY_PATH","KINDRED_CA_BUNDLE_PATH","KINDRED_MANAGED_KEY_REFERENCE"],
+  "production_interfaces":["Kindred One PartnerContext","PortZeroClient","ProductionEnvelope","HttpMTLSDispatcher","SignedPortReceipt","EmitCoreReconciliation"],
+  "external_effects":false
+}

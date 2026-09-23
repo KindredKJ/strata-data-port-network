@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "repositories": [
+    {"name": "kindred-labs-superstructure", "authority": "governance-architecture-registry-release-and-integration-control"},
+    {"name": "kindred-protocol", "authority": "canonical-contract-and-protocol-law"},
+    {"name": "kindred-tesseract", "authority": "world-context-and-adapter-neutral-transport"},
+    {"name": "kindred-unified-quad-runtime", "authority": "horizontal-integration-fabric-and-port-zero"},
+    {"name": "kindred-modular-core", "authority": "bounded-replaceable-capabilities"},
+    {"name": "kindred-strata-fortress", "authority": "vertical-domain-topology"},
+    {"name": "kindred-strata-data-port", "authority": "bounded-external-port-framework"},
+    {"name": "kindred-brainstem", "authority": "protected-cognition-policy-planning-orchestration"},
+    {"name": "brainstem-in-touch", "authority": "organization-and-campaign-orchestration"},
+    {"name": "KINDRED-WATT", "authority": "bounded-energy-analysis-stratum"}
+  ]
+}

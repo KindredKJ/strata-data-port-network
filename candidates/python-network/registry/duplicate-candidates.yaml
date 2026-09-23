@@ -1,0 +1,13 @@
+schema_version: 1.0.0
+truth_class: inference
+candidates:
+  - names: [K1, K1_Assistant]
+    reason: overlapping K1 naming
+    action: preserve_both_and_inspect_before_resolution
+  - names: [IAMI, IAMI-X]
+    reason: overlapping identity naming
+    action: preserve_distinct_authorities_pending_inspection
+  - names: [kindred-labs-genesis-v1, project-genesis]
+    reason: potential historical/canonical naming overlap
+    action: do_not_create_project_genesis_without_resolution
+no_deletion_or_archival_authorized: true

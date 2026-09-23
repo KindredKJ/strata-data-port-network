@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "axis": "vertical-y",
+  "strata": [
+    {"id": "communications", "port": "external-communications", "authorities": ["G3T Connected", "Brainstem InTouch"]},
+    {"id": "economy", "port": "external-economy", "authorities": ["RetroBank", "Agent-to-Agent Economy"]},
+    {"id": "watt", "port": "external-watt", "authorities": ["KINDRED-WATT", "WATT-BLOCK"]}
+  ],
+  "excluded": ["BRAINSTEM", "Strata Data Port Zero"]
+}

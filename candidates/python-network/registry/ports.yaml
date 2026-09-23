@@ -1,0 +1,101 @@
+{
+  "schema_version": "2.0.0",
+  "ports": [
+    {
+      "id": "zero",
+      "canonical_name": "Strata Data Port Zero",
+      "boundary": "protected",
+      "authority": "Unified Quad Runtime",
+      "equivalent_to_external": false,
+      "route_modes": [
+        "direct",
+        "split",
+        "multicast"
+      ],
+      "readiness": "implemented_local",
+      "readiness_dimensions": {
+        "interface_defined": true,
+        "implemented_local": true,
+        "transport_connected": false,
+        "destination_connected": false,
+        "reconciliation_connected": false,
+        "conformance_passed": false,
+        "externally_verified": false,
+        "production_authorized": false,
+        "blocked": false
+      }
+    },
+    {
+      "id": "communications",
+      "canonical_name": "Communications Strata Data Port",
+      "boundary": "external",
+      "upstream": "zero",
+      "authority": "G3T Connected",
+      "capabilities": [
+        "communications.send"
+      ],
+      "readiness": "blocked",
+      "blocker": "authorized G3T transport rail and credentials unavailable",
+      "readiness_dimensions": {
+        "interface_defined": true,
+        "implemented_local": true,
+        "transport_connected": false,
+        "destination_connected": false,
+        "reconciliation_connected": false,
+        "conformance_passed": false,
+        "externally_verified": false,
+        "production_authorized": false,
+        "blocked": true
+      }
+    },
+    {
+      "id": "economy",
+      "canonical_name": "Economy Strata Data Port",
+      "boundary": "external",
+      "upstream": "zero",
+      "authority": "bounded-interface-only",
+      "financial_authority": false,
+      "capabilities": [
+        "a2a.contract",
+        "retrobank.reserve"
+      ],
+      "readiness": "blocked",
+      "blocker": "authoritative repositories and regulated rail unavailable",
+      "readiness_dimensions": {
+        "interface_defined": true,
+        "implemented_local": false,
+        "transport_connected": false,
+        "destination_connected": false,
+        "reconciliation_connected": false,
+        "conformance_passed": false,
+        "externally_verified": false,
+        "production_authorized": false,
+        "blocked": true
+      }
+    },
+    {
+      "id": "watt",
+      "canonical_name": "Kindred WATT Strata Data Port",
+      "boundary": "external",
+      "upstream": "zero",
+      "authority": "KINDRED-WATT",
+      "capabilities": [
+        "watt.analyze"
+      ],
+      "readiness": "blocked",
+      "blocker": "repository and physical connectivity unavailable",
+      "physical_status": "physical_execution_not_connected",
+      "readiness_dimensions": {
+        "interface_defined": true,
+        "implemented_local": false,
+        "transport_connected": false,
+        "destination_connected": false,
+        "reconciliation_connected": false,
+        "conformance_passed": false,
+        "externally_verified": false,
+        "production_authorized": false,
+        "blocked": true
+      }
+    }
+  ]
+}

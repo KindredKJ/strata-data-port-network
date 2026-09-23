@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "truth_class": "observed",
+  "authenticated_identity": null,
+  "authentication_verified": false,
+  "mechanisms": {
+    "github_cli": {"available": false, "authenticated": false},
+    "environment_token": {"available": false, "names_checked": ["GH_TOKEN", "GITHUB_TOKEN"]},
+    "github_rest_authenticated_user": {"status": 401, "authenticated": false},
+    "github_rest_public": {"status": 200, "authenticated": false},
+    "git_remote": {"configured": false},
+    "ssh_agent": {"available": false},
+    "authenticated_connector": {"available": false},
+    "pull_request_metadata_tool": {"available": true, "note": "Records PR metadata only; it does not prove GitHub authentication or create a remote PR."}
+  },
+  "permissions": {
+    "public_repository_read": "verified_via_unauthenticated_api",
+    "private_repository_read": "not_verified",
+    "repository_write": "not_verified",
+    "branch_creation": "local_only_verified",
+    "remote_branch_creation": "not_verified",
+    "pull_request_creation": "not_verified"
+  },
+  "limitations": [
+    "GitHub returns 404 both for absent repositories and inaccessible private repositories; no existence conclusion is drawn from 404.",
+    "Repository visibility is known only for public API results.",
+    "No credential values were read, logged, or stored."
+  ]
+}

@@ -1,0 +1,45 @@
+name: world-validation
+on:
+  pull_request:
+  push:
+    branches: [main, "release/**"]
+  workflow_dispatch:
+concurrency:
+  group: world-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: python -m pip install -e . pytest
+      - run: python scripts/generate_contracts.py --check
+      - run: python scripts/validate_production_config.py config/production-policy.json
+      - run: python scripts/audit_production_routes.py
+      - run: pytest -q
+      - run: bash scripts/validate-world.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: linux-evidence, path: evidence/runs/}
+  windows-pwsh:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python -m pip install -e . pytest
+      - shell: pwsh
+        run: ./scripts/validate-world.ps1
+  windows-51:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python -m pip install -e . pytest
+      - shell: powershell
+        run: ./scripts/validate-world.ps1

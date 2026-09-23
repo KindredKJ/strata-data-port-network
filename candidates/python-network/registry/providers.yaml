@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy": ["kindred_provider", "kindred_authority", "transport_rail", "carrier", "infrastructure_vendor", "regulated_partner", "integration_partner", "customer_organization", "tenant", "downstream_recipient"],
+  "providers": [
+    {"id": "g3t-connected", "name": "G3T Connected", "classification": "kindred_provider", "domain": "communications", "authority": "communications_service_delivery", "provider_of_record": true, "requires_reconciliation": true}
+  ],
+  "rail_defaults": {"provider_of_record": false, "authority": "subordinate-transport-only"},
+  "defaults": {"internal_authority": false, "result_truth_class": "provider-reported", "requires_reconciliation": true},
+  "production_credentials": "fail-closed-when-missing"
+}

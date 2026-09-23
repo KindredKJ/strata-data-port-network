@@ -1,0 +1,5 @@
+{
+  "discovery_scope": "local-only",
+  "candidates": [],
+  "conclusion": "No duplicate determination is possible without authenticated remote inventory; no repositories were created."
+}

@@ -1,0 +1,6 @@
+schema_version: 1.0.0
+mode: production-control-plane
+sequence: [Protocol, Tesseract, Unified Quad Runtime, Modular Core]
+lock: integration/repos.lock.json
+external_side_effects: disabled
+unavailable_dependencies: fail-closed
