@@ -11,7 +11,7 @@ Strata Data Port Network is Kindred Labs' engineering research into permissioned
 The public repository contains separately identified Python network and Unified Quad / Direct Pipe candidates, lineage, and a verification record. The candidates are not yet one production runtime. The current Direct Pipe baseline is portable and buffered; reduced-copy, zero-copy, a two-device production proof, and a generally available service are not established.
 
 Review the work:
-- Public launch: https://stratadataportnetwork-kindred-coxs-projects.vercel.app
+- Public launch: https://stratadataportnetwork.vercel.app
 - Source: https://github.com/KindredKJ/strata-data-port-network
 - Verification: https://github.com/KindredKJ/strata-data-port-network/blob/main/docs/VERIFICATION.md
 

@@ -2,7 +2,7 @@
 
 **Sole founder and creator: Kindred Jermaine Cox.** Strata Data Port Network is a Kindred Labs project.
 
-[Visit the public launch site](https://stratadataportnetwork-kindred-coxs-projects.vercel.app) · [Read verification status](docs/VERIFICATION.md)
+[Visit the public launch site](https://stratadataportnetwork.vercel.app) · [Read verification status](docs/VERIFICATION.md)
 
 The Strata Data Port Network is Kindred Labs' research into permissioned data ports, identity-bound device presence, and governed transport across local and distributed environments. This repository contains preserved, separately identified implementation candidates from the Kindred Labs Superstructure. It is a public source repository; the implementation candidates are **not a production release**.
 
