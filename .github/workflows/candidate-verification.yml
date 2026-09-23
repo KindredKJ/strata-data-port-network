@@ -1,0 +1,40 @@
+name: Candidate verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python-network:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Check generated contracts
+        working-directory: candidates/python-network
+        run: python scripts/generate_contracts.py --check
+      - name: Run Python candidate tests
+        working-directory: candidates/python-network
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -q
+
+  direct-pipe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Run portable buffered candidate test
+        working-directory: candidates/unified-quad-direct-pipe/runtime/unified-quad
+        env:
+          KINDRED_DIRECT_PIPE_EVIDENCE: ${{ runner.temp }}/direct-pipe-evidence.json
+        run: node --test test/direct-pipe-runtime.v1.test.mjs
