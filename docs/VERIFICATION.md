@@ -9,6 +9,15 @@ This repository contains imported candidate source and inherited historical rece
 
 The authoritative source is `KindredKJ/kindred-labs-superstructure`. Candidate snapshots retain their original relative paths under separate roots. [The manifest](../lineage/source-manifest.json) lists every imported file and its original Git blob SHA-1. No historical receipt has been regenerated during import.
 
+## Reproducible checks
+
+At repository commit `29c12dac1ca352df327f2ea25df34198d96778cc`, [GitHub Actions run 35884929707](https://github.com/KindredKJ/strata-data-port-network/actions/runs/35884929707) completed successfully with both jobs:
+
+- Python 3.12: contract generator `--check` and standard-library `unittest` candidate suite (60 tests locally).
+- Node 24: focused `direct-pipe-runtime.v1.test.mjs` with evidence written to the runner's temporary directory.
+
+The same checks passed in a clean local clone with Python 3.12.14 and Node 24.19.0. The focused Node test first failed without `KINDRED_DIRECT_PIPE_EVIDENCE`; rerunning it with a temporary output path passed. The broader Unified Quad suite is still outside this passing gate.
+
 ## Scope and limits
 
 PR #5 reports a portable buffered Direct Pipe result and expressly leaves reduced-copy and zero-copy unproven. Its review identified missing versioned schemas, helper files discovered as tests, unconfigured evidence output paths, writes to tracked historical receipts, workstation-specific absolute paths, and security or correctness issues in mandate validation, authorization, consent, activation plans, event integrity, state concurrency, fencing and process metrics. Those findings require reproduction and repairs.
