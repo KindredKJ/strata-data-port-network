@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "levels": [
+    {"id": "public", "rank": 0, "external_disclosure": "allowed-by-policy"},
+    {"id": "internal", "rank": 1, "external_disclosure": "selective-only"},
+    {"id": "confidential", "rank": 2, "external_disclosure": "explicit-policy-and-minimization"},
+    {"id": "restricted", "rank": 3, "external_disclosure": "deny-by-default"}
+  ],
+  "rules": ["classify-before-routing", "minimum-necessary-disclosure", "redact-sensitive-log-fields", "external-ports-cannot-reclassify-downward"]
+}

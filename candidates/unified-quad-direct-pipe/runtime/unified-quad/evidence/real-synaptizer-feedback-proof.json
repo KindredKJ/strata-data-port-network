@@ -1,0 +1,61 @@
+{
+  "schema": "kindred.real-synaptizer-feedback-proof.v1",
+  "generatedAt": "2026-09-01T21:44:57.3053339-06:00",
+  "classification": {
+    "firstCanonicalSynaptizer": "LOCAL_RUNTIME_PROVEN",
+    "realProcessEdgeEventConsumption": "LOCAL_RUNTIME_PROVEN",
+    "verifiedEvidenceOnlyLearning": "LOCAL_RUNTIME_PROVEN",
+    "relationshipStateFormation": "LOCAL_RUNTIME_PROVEN",
+    "evidenceBackedReinforcement": "LOCAL_RUNTIME_PROVEN",
+    "duplicateEventProtection": "LOCAL_RUNTIME_PROVEN",
+    "synapticStateCommitment": "LOCAL_RUNTIME_PROVEN",
+    "fullFeedbackLoop": "LOCAL_RUNTIME_PROVEN"
+  },
+  "provenLoop": [
+    "INTENT_COGNITON",
+    "COGNITIVE_GRAPH",
+    "DCML",
+    "PROCESS_PORT",
+    "REAL_PROCESS_INTELLIGENCE",
+    "PROSYNTHESIZED_CAPABILITY",
+    "PROCESS_SKILLS",
+    "PROCESS_EDGE_EVIDENCE",
+    "SYNAPTIZER",
+    "RELATIONSHIP_LEARNING",
+    "VERIFICATION"
+  ],
+  "learning": {
+    "processEdges": 3,
+    "eventsConsumed": 3,
+    "relationshipsLearned": 3,
+    "expectedReinforcement": 3.25,
+    "duplicateProtection": true,
+    "unverifiedEvidenceExcludedFromLearning": true
+  },
+  "truthBoundary": {
+    "realSynaptizerConsumer": "LOCAL_RUNTIME_PROVEN",
+    "realSynapticRelationshipLearning": "LOCAL_RUNTIME_PROVEN",
+    "persistentSynapticMemory": "UNPROVEN",
+    "crossRunLearning": "UNPROVEN",
+    "learnedRelationshipUsedForFutureDCMLSelection": "UNPROVEN",
+    "realCognitizer": "UNPROVEN",
+    "adaptiveFullDcml": "UNPROVEN",
+    "realStrata": "UNPROVEN",
+    "productionReady": false
+  },
+  "sources": {
+    "processIntelligenceUnchanged": true,
+    "cognitiveBodyUnchanged": true,
+    "sw02b2ProofUnchanged": true,
+    "synaptizerFile": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\synaptizer.mjs",
+    "synaptizerSha256": "AD1F2E64A53923EBD2B375AD996BD183C7CFCD9982918D6CF6A84750B89D91A4",
+    "integrationTest": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-body-synaptizer-feedback.integration.test.mjs",
+    "integrationTestSha256": "67B6E568BB0F838C402722F1A8C3A0AF3E8F9B634504E6E41A8952F89E97C385"
+  },
+  "regressions": {
+    "Process Intelligence": true,
+    "Cognitive Body": true,
+    "Real PI Attachment": true,
+    "Real Capability Via Body": true
+  }
+}

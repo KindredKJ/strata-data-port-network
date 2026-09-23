@@ -1,0 +1,49 @@
+{
+  "organization": "KINDRED LABS",
+  "founded_by": "Kindred Jermaine Cox",
+  "generated_at": "2026-09-01T15:00:00.000Z",
+  "evidence_class": "E3_LOCAL_DETERMINISTIC_CANDIDATE",
+  "process_genome": "PROVEN",
+  "role_preservation": "PROVEN",
+  "edge_observer": "PROVEN",
+  "edge_credit_assignment": "PROVEN",
+  "process_fitness": "PROVEN",
+  "process_skill_graduation": "PROVEN",
+  "failed_process_rejection": "PROVEN",
+  "prosynthesine": "PROVEN",
+  "prosynthesized_capability": "PROVEN",
+  "capability_execution": "PROVEN",
+  "composition_cache": {
+    "status": "PROVEN",
+    "process_skill_reuse": 3,
+    "capability_composition_hits": 1,
+    "capability_composition_misses": 1,
+    "planning_discovery_avoided": 1,
+    "fresh_discovery_count": 3
+  },
+  "post_synthesis": "PROVEN",
+  "dynamic_recomposition": "PROVEN",
+  "cycle_guard": "PROVEN",
+  "deadline_guard": "PROVEN",
+  "budget_guard": "PROVEN",
+  "fencing_guard": "PROVEN",
+  "dcml_connection": "ADAPTER_ONLY",
+  "cognitive_port_connection": "ADAPTER_ONLY",
+  "synaptizer_connection": "ADAPTER_ONLY",
+  "strata_adapter": "IMPLEMENTED",
+  "real_strata_execution": "UNPROVEN",
+  "direct_pipe": "UNPROVEN",
+  "tests": {
+    "command": "node test/process-intelligence.test.mjs",
+    "status": "PASSED",
+    "scope": "focused_process_intelligence"
+  },
+  "state_roots": {
+    "process_genome": "sha256:2571c5cde6aac06dbe68481f8fbba8e5666605171418c5e2e4746510709ba101",
+    "process_fitness_delta": "sha256:d2929a18879c80e5edb287753703319d419bc5f7636d88ce560d5668309fe31e",
+    "prosynthesized_capability": "sha256:1fa82f6adcd51f8ba5d21f49df992a8d86c63285504ba737374c4fb5f524940a",
+    "capability_outcome": "sha256:477156e556cbe60ef8ee255446b76462da2fbaa709e9c63391d5a2c04aaf0b21",
+    "post_synthesis_checkpoint": "sha256:10e13f90638fd54223a1f540ff3731287e3fdd9adb7f1bfc052ecdbd240f2831",
+    "strata_adapter_commitment": "sha256:1954b4781e042baeed25d353f7649540e7a8787d0e8f96ecffd25d506d0b65d5"
+  }
+}

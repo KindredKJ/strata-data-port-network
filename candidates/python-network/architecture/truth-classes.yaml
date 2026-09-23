@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "classes": [
+    {"id": "simulated", "verified_outcome": false},
+    {"id": "estimated", "verified_outcome": false},
+    {"id": "observed", "verified_outcome": false},
+    {"id": "provider-reported", "verified_outcome": false},
+    {"id": "verified", "verified_outcome": true}
+  ],
+  "evidence_levels": ["E0-claim", "E1-artifact", "E2-local-execution", "E3-reproducibility", "E4-resilience-security-validation", "E5-independent-production-validation"],
+  "rules": ["no-implicit-truth-promotion", "provider-status-requires-reconciliation", "simulation-is-not-physical-effect", "transfer-is-not-revenue-without-classification-and-reconciliation"]
+}

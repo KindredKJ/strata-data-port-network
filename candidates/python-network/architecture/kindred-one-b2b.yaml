@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "name": "Kindred One",
+  "classification": "B2B enablement and infrastructure platform",
+  "consumer_first": false,
+  "principal_context": "organization-or-authorized-partner",
+  "customers": ["businesses", "institutions", "platforms", "enterprises", "agencies", "operators", "developers", "service-providers", "partner-organizations"],
+  "interfaces": ["partner-admin", "organizational-user", "operator", "embedded", "white-label", "partner-controlled-downstream"],
+  "capabilities": ["organization-onboarding", "tenant-provisioning", "tenant-isolation", "delegated-administration", "partner-identities", "organizational-agents", "workload-identities", "environment-management", "capability-registration", "policy-configuration", "API-access", "SDK-access", "usage-metering", "entitlements", "service-level-objectives", "audit-export", "partner-support"],
+  "partner_owns": ["customer-relationship", "end-user-experience", "business-rules", "downstream-disclosures", "tenant-configuration", "authorized-data", "service-packaging"]
+}

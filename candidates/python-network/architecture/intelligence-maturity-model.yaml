@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "designation": "Adaptive Orchestration Intelligence",
+  "abbreviation": "AOI",
+  "marketing_claim_authorized": false,
+  "agi_equivalent": false,
+  "assignment_rule": "benchmark-evidence-required; architecture-alone-prohibited",
+  "levels": [
+    {
+      "id": "AOI-0",
+      "name": "Architectural foundation",
+      "capabilities": [
+        "contracts",
+        "identity",
+        "authority",
+        "evidence",
+        "governed-transport",
+        "persistent-state"
+      ],
+      "promotion_requirement": "No adaptive orchestration claim; artifact and local control evidence only."
+    },
+    {
+      "id": "AOI-1",
+      "name": "Governed orchestration",
+      "capabilities": [
+        "explicit-workflows",
+        "capability-selection",
+        "policy-enforcement",
+        "complete-evidence"
+      ],
+      "promotion_requirement": "Pass governance, workflow, denial, evidence-chain, and repeated-trial benchmarks at published threshold."
+    },
+    {
+      "id": "AOI-2",
+      "name": "Cross-domain orchestration",
+      "capabilities": [
+        "multi-repository-agent-model-tool-strata",
+        "world-context",
+        "dependency-management",
+        "partial-failure"
+      ],
+      "promotion_requirement": "Pass novel cross-domain scenarios with reconciled outcomes and reproducibility evidence."
+    },
+    {
+      "id": "AOI-3",
+      "name": "Adaptive orchestration",
+      "capabilities": [
+        "replanning",
+        "environmental-change",
+        "alternate-capabilities",
+        "evidence-scored-preferences",
+        "strategy-transfer"
+      ],
+      "promotion_requirement": "Pass adaptation and transfer benchmarks without policy, budget, tenant, or truth violations."
+    },
+    {
+      "id": "AOI-4",
+      "name": "Continual governed improvement",
+      "capabilities": [
+        "outcome-evaluation",
+        "failure-patterns",
+        "EvolutionProposal",
+        "branch-tests-evidence",
+        "no-self-approval"
+      ],
+      "promotion_requirement": "Independently validate proposals improve held-out outcomes; all changes remain human-reviewed."
+    },
+    {
+      "id": "AOI-5",
+      "name": "Broad orchestrational generality",
+      "capabilities": [
+        "materially-different-domains",
+        "novel-problems",
+        "compositional-reasoning",
+        "long-horizon",
+        "explanation",
+        "recovery"
+      ],
+      "promotion_requirement": "Independent evaluation across accepted diverse domains; not automatically AGI."
+    }
+  ]
+}

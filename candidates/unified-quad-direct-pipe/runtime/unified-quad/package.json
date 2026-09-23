@@ -1,0 +1,9 @@
+{
+  "name": "@kindred-labs/unified-quad-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {"./process-intelligence": "./src/process-intelligence.mjs"},
+  "engines": {"node": ">=22"},
+  "scripts": {"test": "node --test --test-isolation=none"}
+}

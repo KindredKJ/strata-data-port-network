@@ -1,0 +1,46 @@
+{
+  "$id": "https://contracts.kindred.invalid/v1/EvolutionProposal.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "object"
+    },
+    "evidence_references": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "truth_class": {
+      "enum": [
+        "simulated",
+        "estimated",
+        "observed",
+        "provider-reported",
+        "verified"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "truth_class",
+    "issued_at",
+    "data"
+  ],
+  "title": "EvolutionProposal",
+  "type": "object"
+}

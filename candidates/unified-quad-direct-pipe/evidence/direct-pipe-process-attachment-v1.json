@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "kindred.direct-pipe.process-attachment-proof.v1",
+  "generatedAt": "2026-09-07T03:49:34.938Z",
+  "directPipe": "Kindred Direct Pipe",
+  "attachment": {
+    "contract": "kindred.direct-pipe.process-attachment.v1",
+    "version": "1.0.0",
+    "processBoundary": "ProcessIntelligenceBoundaryAdapter",
+    "processBoundaryMethod": "mapPort",
+    "directPipeRuntime": "DirectPipeRuntime",
+    "directPipeMethod": "transfer",
+    "fixtureSource": "process-intelligence.test.mjs",
+    "fixtureMode": "TRANSPLANTED_PROVEN_EXECUTION_CONTEXT"
+  },
+  "lineage": {
+    "contractAuthority": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+    "contractSha256": "A3F8B2B9842AB791A5BF80628CBDB08F7D0A557F633D180E0A17854E5ED6FF58",
+    "benchmarkAuthority": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\process-intelligence.test.mjs",
+    "benchmarkSha256": "D7F7B3C70F0ACB933623ABF33246DA65953F99533A0EB476BFADB24B9F07E02D",
+    "implementationMode": "NEW_VERSIONED_EXECUTABLE_AUTHORITY_WITH_LINEAGE"
+  },
+  "measurement": {
+    "schemaVersion": "kindred.direct-pipe.measurement.v1",
+    "directPipe": "Kindred Direct Pipe",
+    "runtimeVersion": "1.0.0",
+    "backend": "node-buffer-explicit-copy",
+    "logicalBytes": 2097152,
+    "physicalBytesMoved": 2097152,
+    "copyCount": 1,
+    "fallbacks": [],
+    "latencyNs": 981000,
+    "latencyMs": 0.981,
+    "cpuUserMicros": 15000,
+    "cpuSystemMicros": 0,
+    "rssBeforeBytes": 40574976,
+    "rssAfterBytes": 42676224,
+    "rssDeltaBytes": 2101248,
+    "externalBeforeBytes": 4634196,
+    "externalAfterBytes": 6731388,
+    "classification": "PORTABLE_BUFFERED",
+    "measurementBasis": "SOFTWARE_ACCOUNTED_EXPLICIT_COPY_BYTES",
+    "hardwarePhysicalTransferMeasured": false,
+    "zeroCopyClaimAuthorized": false,
+    "attachmentContract": "kindred.direct-pipe.process-attachment.v1",
+    "attachmentVersion": "1.0.0",
+    "processPort": "PROCESS",
+    "processBoundaryMethod": "mapPort",
+    "directPipeMethod": "transfer"
+  },
+  "proof": {
+    "realProcessBoundaryFixture": true,
+    "realMapPortCallShape": true,
+    "realDirectPipeRuntime": true,
+    "byteIntegrity": true,
+    "localExecution": true,
+    "simulation": false,
+    "zeroCopyClaim": false
+  }
+}

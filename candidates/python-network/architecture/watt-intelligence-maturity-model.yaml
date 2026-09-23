@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "assignment_rule": "evidence-and-benchmark-required",
+  "current_assignment": null,
+  "physical_execution_status": "physical_execution_not_connected",
+  "levels": [
+    {
+      "id": "WATT-I0",
+      "name": "Software and evidence foundation",
+      "capabilities": [
+        "contracts",
+        "data-models",
+        "repository-validation",
+        "WATT-BLOCK",
+        "no-physical-connectivity"
+      ],
+      "promotion_requirement": "verified preceding-level evidence plus level-specific benchmark and authority"
+    },
+    {
+      "id": "WATT-I1",
+      "name": "Observational intelligence",
+      "capabilities": [
+        "real-telemetry",
+        "data-quality",
+        "site-model",
+        "asset-model",
+        "anomaly-detection",
+        "no-actuation"
+      ],
+      "promotion_requirement": "verified preceding-level evidence plus level-specific benchmark and authority"
+    },
+    {
+      "id": "WATT-I2",
+      "name": "Predictive intelligence",
+      "capabilities": [
+        "load-generation-storage-forecasting",
+        "tariff-impact",
+        "confidence-intervals",
+        "historical-evaluation"
+      ],
+      "promotion_requirement": "verified preceding-level evidence plus level-specific benchmark and authority"
+    },
+    {
+      "id": "WATT-I3",
+      "name": "Advisory optimization",
+      "capabilities": [
+        "recommended-schedules",
+        "recommended-dispatch",
+        "estimated-outcomes",
+        "human-approval"
+      ],
+      "promotion_requirement": "verified preceding-level evidence plus level-specific benchmark and authority"
+    },
+    {
+      "id": "WATT-I4",
+      "name": "Bounded autonomous optimization",
+      "capabilities": [
+        "authorized-limited-actuation",
+        "safety-envelope",
+        "rollback",
+        "continuous-verification"
+      ],
+      "promotion_requirement": "verified preceding-level evidence plus level-specific benchmark and authority"
+    },
+    {
+      "id": "WATT-I5",
+      "name": "Multi-site adaptive energy intelligence",
+      "capabilities": [
+        "authorized-site-learning",
+        "strategy-transfer",
+        "diverse-assets",
+        "bounded-adaptation"
+      ],
+      "promotion_requirement": "verified preceding-level evidence plus level-specific benchmark and authority"
+    }
+  ]
+}

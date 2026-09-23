@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "founder_authority": "Kindred Jermaine Cox",
+  "authorities": {
+    "Protocol": ["identity", "authentication", "authorization", "delegated-authority", "evidence", "truth-classification", "claims", "safety", "approvals", "disclosure", "versioning", "recovery", "change-control"],
+    "BRAINSTEM": ["cognition", "identity-context", "policy", "planning", "orchestration"],
+    "Kindred Cloud": ["runtime-hosting", "distributed-execution", "persistence", "provider-adapters", "device-presence"],
+    "Emit Core": ["effects", "reconciliation", "state-transition", "operational-truth"],
+    "RetroBank": ["accounts", "balances", "budgets", "reservations", "obligations", "settlements", "reversals", "financial-controls"],
+    "G3T Connected": ["communications-service-delivery", "provider-of-record", "sender-recipient-identity-enforcement", "tenant-policy", "channel-selection", "message-lifecycle", "routing", "acknowledgement", "recovery", "reconciliation", "communications-evidence"],
+    "Brainstem InTouch": ["organization-orchestration", "campaign-orchestration", "communication-intent"],
+    "Agent-to-Agent Economy": ["capability-offers", "bounded-agent-contracts", "marketplace-state", "compensation-requests"],
+    "KINDRED-WATT": ["bounded-energy-analysis"],
+    "WATT-BLOCK": ["record", "hash", "timestamp", "link", "verify"]
+  },
+  "non_authorities": ["transport-rails", "carriers", "infrastructure-vendors", "adapters"],
+  "watt_block_prohibited": ["orchestrate", "optimize", "collect-telemetry", "control-equipment", "authorize-grid-action", "calculate-revenue"]
+}

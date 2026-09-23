@@ -1,0 +1,25 @@
+{
+  "contract_version": "kindred.runtime.unified-quad-manifest.v1",
+  "runtime_id": "kindred.runtime.unified-quad.v1",
+  "single_runtime": true,
+  "mode": "local_simulation",
+  "components": [
+    {"component_id": "brainstem", "name": "Brainstem", "authority_boundary": "Identity, governance interpretation, authorization, final commitment, and user-interaction policy."},
+    {"component_id": "kindred_cloud", "name": "Kindred Cloud", "authority_boundary": "Bounded compute, storage, provider, service, and reversible local execution adapters."},
+    {"component_id": "emit_core", "name": "Emit Core", "authority_boundary": "Reasoning, candidate generation, and proposals without tool, memory-commit, or settlement authority."},
+    {"component_id": "retrobank", "name": "RetroBank", "authority_boundary": "Mandate-bound internal accounting; no agent or model directly mutates balances."}
+  ],
+  "adjacent_systems": [
+    {"system_id": "kindred_chain", "name": "Kindred Chain", "relationship": "adjacent_not_runtime_component"}
+  ],
+  "invariants": [
+    "single_canonical_runtime",
+    "companion_never_inherits_founder_authority",
+    "models_never_execute_tools",
+    "memory_writes_are_proposals_until_brainstem_commit",
+    "retrobank_requires_bounded_mandates",
+    "external_effects_remain_disabled",
+    "kindred_chain_is_adjacent"
+  ],
+  "contract_roots": ["contracts/runtime/v1", "contracts/agent/v1"]
+}

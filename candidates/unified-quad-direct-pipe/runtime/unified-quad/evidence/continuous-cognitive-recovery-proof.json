@@ -1,0 +1,71 @@
+{
+  "schema": "kindred.continuous-cognitive-recovery-proof.v1",
+  "generatedAt": "2026-09-01T22:00:13.0489227-06:00",
+  "classification": {
+    "persistentAdaptiveCognition": "LOCAL_RUNTIME_PROVEN",
+    "liveSynaptizerRehydration": "LOCAL_RUNTIME_PROVEN",
+    "synapticReplayIdentityPersistence": "LOCAL_RUNTIME_PROVEN",
+    "postRestartAdaptiveSelection": "LOCAL_RUNTIME_PROVEN",
+    "postRestartCapabilityExecution": "LOCAL_RUNTIME_PROVEN",
+    "continuedLearningAfterRestart": "LOCAL_RUNTIME_PROVEN",
+    "secondDurableCognitiveCommit": "LOCAL_RUNTIME_PROVEN"
+  },
+  "causalProof": {
+    "initialSequence": 1,
+    "continuedSequence": 2,
+    "relationshipsBefore": 3,
+    "relationshipsAfter": 3,
+    "learnedEventsBefore": 3,
+    "learnedEventsAfter": 6,
+    "reinforcementBefore": 3.25,
+    "reinforcementAfter": 6.5,
+    "learnedPathAfterRestart": "process.z-learned",
+    "separateNodeProcess": true,
+    "postRestartExecutionVerified": true
+  },
+  "truthBoundary": {
+    "liveSynaptizerRehydration": "LOCAL_RUNTIME_PROVEN",
+    "continuedSynapticLearningAfterRestart": "LOCAL_RUNTIME_PROVEN",
+    "continuedPersistentAdaptiveCognition": "LOCAL_RUNTIME_PROVEN",
+    "capabilityPersistence": "UNPROVEN",
+    "processSkillPersistence": "UNPROVEN",
+    "multiMachineState": "UNPROVEN",
+    "realStrataIntegration": "UNPROVEN",
+    "realTesseractIntegration": "UNPROVEN",
+    "realDirectPipe": "UNPROVEN",
+    "realCognitizer": "UNPROVEN",
+    "productionReady": false
+  },
+  "existingCore": {
+    "processIntelligenceUnchanged": true,
+    "cognitiveBodyUnchanged": true,
+    "stateStoreUnchanged": true,
+    "sw05ProofUnchanged": true
+  },
+  "synaptizer": {
+    "modified": true,
+    "sha256Before": "AD1F2E64A53923EBD2B375AD996BD183C7CFCD9982918D6CF6A84750B89D91A4",
+    "sha256After": "F16CFA9A959E1304E34BD825E3A60B8F7B8E2604C5EF2504FCB869E88E350F66",
+    "hydrationAdded": true,
+    "replayIdentityPersistenceAdded": true
+  },
+  "worker": {
+    "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-state-continuation-worker.mjs",
+    "sha256": "27A5F0F1C7479ECBB542A3B6EA7A5EDA0B064DA48377DBDD17D1E71BB7121FD1"
+  },
+  "integrationTest": {
+    "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-state-continuation.integration.test.mjs",
+    "sha256": "1CB6DEAF92102B27A9069404D0285E40F9DFEA005767070C2688AA31A5526BA1",
+    "passed": true,
+    "log": "C:\\KindredLabs\\SuperWave\\checkpoints\\SW06-CONTINUOUS-COGNITIVE-RECOVERY-20260901-215957\\continuous-recovery-test.txt"
+  },
+  "regressions": {
+    "Process Intelligence": true,
+    "Cognitive Body": true,
+    "Real PI Attachment": true,
+    "Real Capability Via Body": true,
+    "Real Synaptizer Feedback": true,
+    "Closed Adaptive Cognition": true,
+    "Persistent Restart Recovery": true
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0.0",
+  "sequence": ["Protocol", "Tesseract", "Unified Quad Runtime", "Modular Core"],
+  "axis": {"Unified Quad Runtime": "horizontal-x", "StrataFortress": "vertical-y"},
+  "change_control": "founder-approval-required"
+}

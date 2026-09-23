@@ -2,25 +2,45 @@
 
 Founded by **Kindred Jermaine Cox** and **Kindred Labs**.
 
-Strata Data Port Network is a Kindred Labs project for permissioned data ports, device identity, and governed data movement across local and distributed environments. This repository is the public project home.
+The Strata Data Port Network is Kindred Labs' work on permissioned data ports, identity-bound device presence, and governed transport across local and distributed environments. This repository contains preserved, separately identified implementation candidates from the Kindred Labs Superstructure. It is a public source repository; the implementation candidates are **not a production release**.
 
-## Current status
+## Source layout
 
-The repository has been created. The implementation, tests, and reproducible transport evidence have **not yet been imported or independently verified in this repository**. No production deployment or zero-copy transport result is claimed here.
+| Path | Origin | What is present |
+|---|---|---|
+| [`candidates/python-network/`](candidates/python-network/) | Superstructure [PR #3](https://github.com/KindredKJ/kindred-labs-superstructure/pull/3), commit `1cd44b93c2bc1f924fbda5f7717ec491ec590aeb` | Python ports, transport, Strata network, contracts, architecture, tests and readiness records |
+| [`candidates/unified-quad-direct-pipe/`](candidates/unified-quad-direct-pipe/) | Superstructure [PR #5](https://github.com/KindredKJ/kindred-labs-superstructure/pull/5), commit `999bf2c51da3d014d71150e2295287128a57e63a` | Unified Quad runtime, Direct Pipe source, tests and historical evidence |
 
-The next release will identify its source lineage, published contracts, supported platforms, test commands, and measured transport behavior at a specific commit. Until that release, this README describes the project and its verification boundary, not an installable network.
+Both source pull requests were open and unmerged when imported on 2026-09-23. Their original paths, blob IDs and sizes appear in [`lineage/source-manifest.json`](lineage/source-manifest.json). The candidates have not been reconciled into one default network runtime. The authoritative topology and founder approval record remain in the Superstructure; its historical classification and approval text are not altered by the import.
 
-## Intended capabilities
+## Run the imported candidates
 
-- Persistent, identity-bound data ports with explicit owner permission and revocation.
-- Policy-checked exchange between devices and authorized services.
-- Integrity, replay protection, acknowledgments, and recovery receipts.
-- Local and distributed operation with observable, testable transport boundaries.
+The Python candidate requires Python 3.11 or newer. From this repository root:
 
-These are project objectives. Feature availability will be stated against tagged, tested code when published.
+```bash
+cd candidates/python-network
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -e . pytest
+python scripts/generate_contracts.py --check
+python -m pytest -q
+```
 
-## Project and disclosure
+The Direct Pipe candidate requires Node.js 22 or newer. Its source and focused test may be run from its own package root:
 
-This public repository does not grant rights to unpublished Kindred Labs source, protocols, marks, or documentation. No software license has been selected for future code in this repository. Security reports and collaboration requests can be opened as GitHub issues without including credentials, private data, or exploit details; sensitive reports should use GitHub's private vulnerability reporting if enabled.
+```bash
+cd candidates/unified-quad-direct-pipe/runtime/unified-quad
+node --test test/direct-pipe-runtime.v1.test.mjs
+```
 
-Copyright © 2026 Kindred Jermaine Cox / Kindred Labs.
+The full Unified Quad `npm test` command in the source commit has open review findings, including missing versioned schemas, helper discovery, evidence output paths and tracked-evidence writes. Do not treat that suite as a passing gate until repaired. Historical receipts in `evidence/` are inherited records, not proof that the tests ran in this repository.
+
+## Verification and roadmap
+
+The inherited SW06 baseline reports **PORTABLE_BUFFERED** transport. Neither **REDUCED_COPY** nor **ZERO_COPY** is established by this import. A two-machine transport proof and production readiness must be verified separately. See [verification status](docs/VERIFICATION.md).
+
+The next engineering gate is to repair the source test and authorization findings, reconcile the two candidate interfaces, and publish reproducible results tied to exact commits. No public service, wallet, financial transaction or production deployment is started by this repository.
+
+## Rights and security
+
+Copyright © 2026 Kindred Jermaine Cox and Kindred Labs. All rights reserved. See [LICENSE.md](LICENSE.md). Repository visibility does not grant a license to use, redistribute or deploy the code. Please avoid putting secrets or private data into issues. Use GitHub private vulnerability reporting if available.

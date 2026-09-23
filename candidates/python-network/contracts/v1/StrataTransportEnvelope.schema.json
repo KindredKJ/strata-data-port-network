@@ -1,0 +1,181 @@
+{
+  "$id": "https://contracts.kindred.invalid/v1/StrataTransportEnvelope.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attempt": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "causation_id": {
+      "type": "string"
+    },
+    "classification": {
+      "enum": [
+        "public",
+        "internal",
+        "protected"
+      ]
+    },
+    "contract_references": {
+      "type": "array"
+    },
+    "correlation_id": {
+      "type": "string"
+    },
+    "deadline": {
+      "type": "string"
+    },
+    "delegated_authority": {
+      "type": "string"
+    },
+    "destination_capability": {
+      "type": "string"
+    },
+    "destination_port": {
+      "type": "string"
+    },
+    "destination_stratum": {
+      "type": "string"
+    },
+    "disclosure_policy": {
+      "type": "array"
+    },
+    "encryption_metadata": {
+      "type": "object"
+    },
+    "environment_id": {
+      "type": "string"
+    },
+    "expires_at": {
+      "type": "string"
+    },
+    "idempotency_key": {
+      "type": "string"
+    },
+    "issued_at": {
+      "type": "string"
+    },
+    "message_id": {
+      "type": "string"
+    },
+    "nonce": {
+      "type": "string"
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "origin_port": {
+      "type": "string"
+    },
+    "partner_id": {
+      "type": "string"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "payload_hash": {
+      "type": "string"
+    },
+    "payload_type": {
+      "type": "string"
+    },
+    "policy_references": {
+      "type": "array"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "protocol_version": {
+      "const": "1.0.0"
+    },
+    "route_mode": {
+      "enum": [
+        "direct",
+        "split",
+        "multicast"
+      ]
+    },
+    "route_targets": {
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "sequence": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "signatures": {
+      "type": "array"
+    },
+    "source_authority": {
+      "type": "string"
+    },
+    "source_component": {
+      "type": "string"
+    },
+    "source_identity": {
+      "type": "string"
+    },
+    "source_identity_type": {
+      "type": "string"
+    },
+    "tenant_id": {
+      "type": "string"
+    },
+    "trace_id": {
+      "type": "string"
+    },
+    "transaction_id": {
+      "type": "string"
+    },
+    "truth_class": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_version",
+    "message_id",
+    "correlation_id",
+    "causation_id",
+    "trace_id",
+    "transaction_id",
+    "organization_id",
+    "tenant_id",
+    "partner_id",
+    "environment_id",
+    "project_id",
+    "source_identity",
+    "source_identity_type",
+    "source_component",
+    "source_authority",
+    "delegated_authority",
+    "origin_port",
+    "destination_stratum",
+    "destination_port",
+    "destination_capability",
+    "route_mode",
+    "route_targets",
+    "payload_type",
+    "payload",
+    "payload_hash",
+    "classification",
+    "truth_class",
+    "disclosure_policy",
+    "policy_references",
+    "contract_references",
+    "issued_at",
+    "expires_at",
+    "deadline",
+    "nonce",
+    "sequence",
+    "idempotency_key",
+    "attempt",
+    "signatures",
+    "encryption_metadata"
+  ],
+  "title": "StrataTransportEnvelope",
+  "type": "object"
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version":"1.0.0",
+  "directory_operational":"implemented_local",
+  "routing_engine":"implemented_local",
+  "direct_route":"locally_validated_test_transport",
+  "split_route":"locally_validated_selective_disclosure_test_transport",
+  "multicast_route":"locally_validated_partial_failure_test_transport",
+  "external_port_connected":false,
+  "destination_authority_connected":false,
+  "emit_core_connected":false,
+  "provider_verified":false,
+  "externally_verified":false,
+  "production_authorized":false,
+  "blockers":["authenticated external transport unavailable","destination authorities unavailable","emit_core_authority_not_connected","managed production keys unavailable"]
+}

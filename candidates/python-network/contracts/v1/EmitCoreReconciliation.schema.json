@@ -1,0 +1,101 @@
+{
+  "$id": "https://contracts.kindred.invalid/v1/EmitCoreReconciliation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "conflict_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision": {
+      "type": "string"
+    },
+    "destination_authority": {
+      "type": "string"
+    },
+    "destination_status": {
+      "type": "string"
+    },
+    "destination_transaction_id": {
+      "type": "string"
+    },
+    "evidence_references": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "evidence_status": {
+      "type": "string"
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "previous_reconciliation_state": {
+      "type": "string"
+    },
+    "proposed_reconciliation_state": {
+      "type": "string"
+    },
+    "provider_status": {
+      "type": "string"
+    },
+    "rail_status": {
+      "type": "string"
+    },
+    "receipt_id": {
+      "type": "string"
+    },
+    "result_hash": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "signature": {
+      "type": "object"
+    },
+    "source_authority": {
+      "type": "string"
+    },
+    "tenant_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "transaction_id": {
+      "type": "string"
+    },
+    "truth_class": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "transaction_id",
+    "destination_transaction_id",
+    "receipt_id",
+    "organization_id",
+    "tenant_id",
+    "source_authority",
+    "destination_authority",
+    "provider_status",
+    "rail_status",
+    "destination_status",
+    "evidence_status",
+    "truth_class",
+    "result_hash",
+    "previous_reconciliation_state",
+    "proposed_reconciliation_state",
+    "decision",
+    "conflict_reason",
+    "evidence_references",
+    "timestamp",
+    "signature"
+  ],
+  "title": "EmitCoreReconciliation",
+  "type": "object"
+}

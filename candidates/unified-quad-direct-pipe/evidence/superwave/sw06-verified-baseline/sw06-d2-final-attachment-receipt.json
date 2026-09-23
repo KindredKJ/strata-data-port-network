@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "kindred.superwave.sw06-d2-r2b.v1",
+  "wave": {
+    "id": "SW06-D2-R2B-20260906-214932",
+    "predecessor": "SW06-D2-R2A-20260906-212630",
+    "purpose": "repair-new-attachment-test-from-proven-process-fixture"
+  },
+  "fixture": {
+    "source": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\process-intelligence.test.mjs",
+    "boundaryVariable": "boundary",
+    "mapPortCall": "boundary.mapPort(\"PROCESS\")",
+    "mode": "TRANSPLANTED_PROVEN_EXECUTION_CONTEXT"
+  },
+  "proof": {
+    "directPipeExecutableRuntime": "PROVEN_LOCAL",
+    "directPipeMeasuredClass": "PORTABLE_BUFFERED",
+    "attachmentTest": true,
+    "attachmentEvidenceFresh": true,
+    "attachmentEvidenceValid": true,
+    "regressionFloor": true
+  },
+  "preservation": {
+    "processIntelligence": "UNCHANGED",
+    "directPipeRuntime": "UNCHANGED",
+    "directPipeProcessAdapter": "UNCHANGED",
+    "cognitiveBody": "UNCHANGED",
+    "synaptizer": "UNCHANGED",
+    "attachmentTest": "INTENTIONALLY_REPAIRED",
+    "failedTestCheckpoint": "C:\\KindredLabs\\SuperWave\\checkpoints\\SW06-D2-R2B-20260906-214932\\direct-pipe-process-boundary-adapter.v1.pre-r2b.test.mjs"
+  },
+  "truthBoundary": {
+    "portableBuffered": "PROVEN_LOCAL",
+    "reducedCopy": "UNPROVEN",
+    "zeroCopy": "UNPROVEN"
+  },
+  "evidence": {
+    "path": "D:\\KindredLabs\\kindred-labs-superstructure\\evidence\\direct-pipe-process-attachment-v1.json",
+    "sha256": "EC4ED625BDD5886FAD3759B6B0A1FB8385A1D44F63685FD336108BA86CD5A9C3"
+  },
+  "classification": "DIRECT_PIPE_PROCESS_BOUNDARY_ATTACHMENT_PROVEN_LOCAL",
+  "nextAction": "GITHUB_VERIFIED_BASELINE_PROMOTION_GATE"
+}

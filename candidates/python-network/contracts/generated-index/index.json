@@ -1,0 +1,1 @@
+{"schema_version":"1.0.0","generator":"scripts/generate_contracts.py","language_bindings":["python"],"schema_directory":"contracts/v1","hand_authored_authority_schemas":["B2BContext","CommunicationLifecycleEvent"]}

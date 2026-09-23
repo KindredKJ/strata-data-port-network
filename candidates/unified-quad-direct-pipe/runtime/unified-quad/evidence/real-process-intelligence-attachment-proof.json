@@ -1,0 +1,66 @@
+{
+  "schema": "kindred.real-process-intelligence-attachment-proof.v1",
+  "generatedAt": "2026-09-01T21:13:21.9614087-06:00",
+  "classification": {
+    "processIntelligenceInstance": "REAL_EXISTING_IMPLEMENTATION",
+    "cognitiveBody": "LOCAL_RUNTIME_PROVEN",
+    "dcmlActivationCompiler": "LOCAL_RUNTIME_PROVEN",
+    "processPort": "LOCAL_RUNTIME_PROVEN",
+    "realProcessIntelligenceAttachment": "INTEGRATED",
+    "integrationScope": "LOCAL_DETERMINISTIC_RUNTIME"
+  },
+  "provenPath": [
+    "COGNITON",
+    "COGNITIVE_GRAPH",
+    "DCML_ACTIVATION_PLAN",
+    "COGNITIVE_PROCESS_PORT",
+    "REAL_PROCESS_INTELLIGENCE_BOUNDARY_ADAPTER",
+    "DISCOVER_PROCESS_SKILLS",
+    "VERIFICATION_PORT",
+    "PROOF_CARRYING_OUTCOME"
+  ],
+  "operation": {
+    "requestType": "DISCOVER_PROCESS_SKILLS",
+    "realBoundaryMethod": "discoverProcessSkills",
+    "expectedResult": "EMPTY_ARRAY_FROM_REAL_EMPTY_REGISTRY",
+    "externalEffectsAuthorized": false,
+    "authorityEscalationAuthorized": false
+  },
+  "evidenceBoundary": {
+    "realProcessIntelligenceInstanceAttached": "INTEGRATED",
+    "realPiOperationThroughCognitiveBody": "LOCAL_RUNTIME_PROVEN",
+    "realCapabilityExecutionThroughCognitiveBody": "UNPROVEN",
+    "realProsynthesineExecutionThroughCognitiveBody": "UNPROVEN",
+    "realCognitizer": "UNPROVEN",
+    "realSynaptizerConnection": "UNPROVEN",
+    "realStrataExecution": "UNPROVEN",
+    "realDirectPipe": "UNPROVEN",
+    "adaptiveDcmlOptimization": "UNPROVEN",
+    "productionReady": false
+  },
+  "immutableCoreSources": {
+    "processIntelligence": {
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "sha256Before": "A3F8B2B9842AB791A5BF80628CBDB08F7D0A557F633D180E0A17854E5ED6FF58",
+      "sha256After": "A3F8B2B9842AB791A5BF80628CBDB08F7D0A557F633D180E0A17854E5ED6FF58",
+      "unchanged": true
+    },
+    "cognitiveBody": {
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\cognitive-body.mjs",
+      "sha256Before": "0AB5F86BDE4ACC6B1853C5E28DEAB5C70F2041FBDA1D1468FBAD0DB857F927AD",
+      "sha256After": "0AB5F86BDE4ACC6B1853C5E28DEAB5C70F2041FBDA1D1468FBAD0DB857F927AD",
+      "unchanged": true
+    }
+  },
+  "integrationTest": {
+    "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-body-process-intelligence-integration.test.mjs",
+    "sha256": "B03ABE234A4921566CEB6A9A26ECAC0A6200EBD2141C8DA90F8D50458340B39B",
+    "exitCode": 0,
+    "passed": true,
+    "log": "C:\\KindredLabs\\SuperWave\\checkpoints\\SW02B1C-REAL-PROCESS-INTELLIGENCE-ATTACHMENT-20260901-211318\\real-pi-attachment-test.txt"
+  },
+  "regressions": {
+    "processIntelligencePassed": true,
+    "cognitiveBodyPassed": true
+  }
+}

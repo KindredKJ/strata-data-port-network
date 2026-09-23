@@ -1,0 +1,79 @@
+{
+  "schema": "kindred.real-prosynthesized-capability-body-proof.v1",
+  "generatedAt": "2026-09-01T21:39:38.5328542-06:00",
+  "classification": {
+    "cognitiveBody": "LOCAL_RUNTIME_PROVEN",
+    "dcmlActivation": "LOCAL_RUNTIME_PROVEN",
+    "realProcessIntelligenceAttachment": "INTEGRATED",
+    "processSkillGraduation": "LOCAL_RUNTIME_PROVEN",
+    "realProsynthesineSynthesis": "LOCAL_RUNTIME_PROVEN",
+    "realProsynthesinePromotion": "LOCAL_RUNTIME_PROVEN",
+    "realCapabilityExecutionThroughBody": "LOCAL_RUNTIME_PROVEN",
+    "processEdgeEvidence": "LOCAL_RUNTIME_PROVEN",
+    "outboundSynaptizerEventContract": "LOCAL_RUNTIME_PROVEN"
+  },
+  "provenPath": [
+    "INTENT_COGNITON",
+    "COGNITIVE_GRAPH",
+    "DCML_ACTIVATION",
+    "COGNITIVE_PROCESS_PORT",
+    "REAL_PROCESS_INTELLIGENCE_BOUNDARY",
+    "PROMOTED_PROSYNTHESIZED_CAPABILITY",
+    "PROCESS_SKILL_A",
+    "PROCESS_SKILL_B",
+    "PROCESS_SKILL_C",
+    "PROCESS_EDGE_EVIDENCE",
+    "VERIFICATION_PORT",
+    "PROOF_CARRYING_OUTCOME"
+  ],
+  "capability": {
+    "initialValue": 1,
+    "afterSkillA": 2,
+    "afterSkillB": 4,
+    "finalVerified": true,
+    "processSkillsExecuted": 3,
+    "processEdgeRecords": 3,
+    "outboundLearningEvents": 3
+  },
+  "architecture": {
+    "controlReceiptSeparatedFromExecutionContext": true,
+    "processIntelligenceSourceModified": false,
+    "cognitiveBodySourceModified": true
+  },
+  "truthBoundary": {
+    "realCapabilityExecutionViaBody": "LOCAL_RUNTIME_PROVEN",
+    "realProsynthesineViaBody": "LOCAL_RUNTIME_PROVEN",
+    "realProcessEdgeEvidence": "LOCAL_RUNTIME_PROVEN",
+    "outboundSynaptizerEventTranslation": "LOCAL_RUNTIME_PROVEN",
+    "realSynaptizerConsumer": "UNPROVEN",
+    "realSynapticLearning": "UNPROVEN",
+    "realCognitizer": "UNPROVEN",
+    "adaptiveFullDcml": "UNPROVEN",
+    "realStrata": "UNPROVEN",
+    "realDirectPipe": "UNPROVEN",
+    "realWorldBusinessCapability": "UNPROVEN",
+    "productionReady": false
+  },
+  "sources": {
+    "processIntelligence": {
+      "sha256Before": "A3F8B2B9842AB791A5BF80628CBDB08F7D0A557F633D180E0A17854E5ED6FF58",
+      "sha256After": "A3F8B2B9842AB791A5BF80628CBDB08F7D0A557F633D180E0A17854E5ED6FF58",
+      "unchanged": true
+    },
+    "cognitiveBody": {
+      "sha256Before": "0AB5F86BDE4ACC6B1853C5E28DEAB5C70F2041FBDA1D1468FBAD0DB857F927AD",
+      "sha256After": "EBA111D87919ADBB4A08D35629603078554733C188AADE05389016BFB20EA818"
+    }
+  },
+  "integrationTest": {
+    "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-body-prosynthesized-capability-integration.test.mjs",
+    "sha256": "7F36FCC314D6AB549ABAAD8B5BFC98BE7417FAEE62303931240E548DE461F7B5",
+    "passed": true,
+    "log": "C:\\KindredLabs\\SuperWave\\checkpoints\\SW02B2-REAL-PROSYNTHESIZED-CAPABILITY-BODY-EXECUTION-20260901-213932\\capability-integration-test.txt"
+  },
+  "regressions": {
+    "Process Intelligence": true,
+    "Cognitive Body": true,
+    "Real PI Attachment": true
+  }
+}

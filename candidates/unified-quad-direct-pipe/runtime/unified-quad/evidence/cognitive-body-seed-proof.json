@@ -1,0 +1,43 @@
+{
+  "schema": "kindred.cognitive-body-seed-proof.v1",
+  "generatedAt": "2026-09-01T20:58:38.7437432-06:00",
+  "implementation": {
+    "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\cognitive-body.mjs",
+    "sha256": "C622BDBAAC5E55A248741A47425F953FE59E134DA796812A9E3B1B2C803BE508"
+  },
+  "test": {
+    "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-body.test.mjs",
+    "sha256": "93C3EB363C24C6B312BF2F8EFBD9D781E8F14F7C567353F8583383F2BEE6F0F6",
+    "passed": true,
+    "exitCode": 0
+  },
+  "provenMechanisms": [
+    "DETERMINISTIC_COGNITON_ADDRESSING",
+    "COGNITIVE_GRAPH_STATE_ROOT",
+    "COGNITIVE_PORT_REGISTRATION",
+    "DETERMINISTIC_DCML_ACTIVATION_COMPILATION",
+    "PROCESS_PORT_ATTACHMENT_CONTRACT",
+    "PORT_ORDERED_EXECUTION",
+    "VERIFICATION_PORT_EXECUTION",
+    "EXISTING_PROCESS_ADAPTER_SURFACE_COMPATIBILITY"
+  ],
+  "evidenceBoundary": {
+    "cognitiveBodySeed": "LOCAL_RUNTIME_PROVEN",
+    "dcmlActivationSeed": "LOCAL_RUNTIME_PROVEN",
+    "processPortAttachmentContract": "LOCAL_RUNTIME_PROVEN",
+    "realProcessIntelligenceAttachment": "UNPROVEN",
+    "realDcmlAdaptiveOptimization": "UNPROVEN",
+    "realCognitizer": "UNPROVEN",
+    "realSynaptizer": "UNPROVEN",
+    "realStrataExecution": "UNPROVEN",
+    "realDirectPipe": "UNPROVEN",
+    "fixtureBoundaryUsedForExecution": true,
+    "realProcessAdapterOnlySurfaceChecked": true
+  },
+  "processIntelligence": {
+    "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+    "sha256Before": "A3F8B2B9842AB791A5BF80628CBDB08F7D0A557F633D180E0A17854E5ED6FF58",
+    "sha256After": "A3F8B2B9842AB791A5BF80628CBDB08F7D0A557F633D180E0A17854E5ED6FF58",
+    "unchanged": true
+  }
+}

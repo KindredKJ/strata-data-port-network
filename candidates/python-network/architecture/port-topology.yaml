@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "ports": [
+    {"id": "zero", "name": "Strata Data Port Zero", "placement": "inside-protected-boundary", "kind": "internal-anchor", "authority": "Unified Quad Runtime", "may_receive_from": ["authenticated-internal-components"], "route_via": null},
+    {"id": "external-communications", "name": "External Communications Strata Data Port", "placement": "outside-protected-boundary", "kind": "external", "authority": "bounded-external-port", "may_receive_from": ["zero"], "route_via": "zero"},
+    {"id": "external-economy", "name": "External Economy Strata Data Port", "placement": "outside-protected-boundary", "kind": "external", "authority": "bounded-external-port", "may_receive_from": ["zero"], "route_via": "zero"},
+    {"id": "external-watt", "name": "External Kindred WATT Strata Data Port", "placement": "outside-protected-boundary", "kind": "external", "authority": "bounded-external-port", "may_receive_from": ["zero"], "route_via": "zero"}
+  ],
+  "invariants": ["external-ports-authenticate-zero", "external-ports-reject-direct-untrusted-callers", "external-ports-never-acquire-protected-authority"]
+}

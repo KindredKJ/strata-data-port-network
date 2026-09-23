@@ -1,0 +1,112 @@
+{
+  "$id": "https://contracts.kindred.invalid/v1/SignedPortReceipt.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accepted_at": {
+      "type": "string"
+    },
+    "attempt": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "blocker": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "capability": {
+      "type": "string"
+    },
+    "completed_at": {
+      "type": "string"
+    },
+    "correlation_id": {
+      "type": "string"
+    },
+    "destination_authority": {
+      "type": "string"
+    },
+    "destination_status": {
+      "type": "string"
+    },
+    "destination_transaction_id": {
+      "type": "string"
+    },
+    "evidence_status": {
+      "type": "string"
+    },
+    "expires_at": {
+      "type": "string"
+    },
+    "message_id": {
+      "type": "string"
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "parent_transaction_id": {
+      "type": "string"
+    },
+    "port_id": {
+      "type": "string"
+    },
+    "port_status": {
+      "type": "string"
+    },
+    "provider_status": {
+      "type": "string"
+    },
+    "rail_status": {
+      "type": "string"
+    },
+    "receipt_id": {
+      "type": "string"
+    },
+    "reconciliation_status": {
+      "type": "string"
+    },
+    "result_hash": {
+      "type": "string"
+    },
+    "signatures": {
+      "minItems": 1,
+      "type": "array"
+    },
+    "tenant_id": {
+      "type": "string"
+    },
+    "truth_class": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "receipt_id",
+    "parent_transaction_id",
+    "destination_transaction_id",
+    "message_id",
+    "correlation_id",
+    "port_id",
+    "destination_authority",
+    "organization_id",
+    "tenant_id",
+    "capability",
+    "attempt",
+    "accepted_at",
+    "completed_at",
+    "port_status",
+    "provider_status",
+    "rail_status",
+    "destination_status",
+    "reconciliation_status",
+    "evidence_status",
+    "truth_class",
+    "result_hash",
+    "blocker",
+    "expires_at",
+    "signatures"
+  ],
+  "title": "SignedPortReceipt",
+  "type": "object"
+}

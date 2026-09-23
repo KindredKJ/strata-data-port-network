@@ -1,0 +1,5 @@
+{
+  "schema_version": "1.0.0",
+  "rule": "Within major version 1, required fields and their types may not be removed or narrowed.",
+  "breaking_change_requirements": ["new major version", "ADR", "migration instructions", "compatibility evidence", "founder approval for authority semantics"]
+}

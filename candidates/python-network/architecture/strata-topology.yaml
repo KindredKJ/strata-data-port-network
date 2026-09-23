@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "fabric": {"name": "StrataFortress", "axis": "vertical-y", "placement": "outside-protected-boundary"},
+  "strata": [
+    {"id": "communications", "name": "Communications Stratum", "port": "external-communications", "components": ["G3T Connected", "Brainstem InTouch adapter"]},
+    {"id": "economy", "name": "RetroBank plus Agent-to-Agent Economy Stratum", "port": "external-economy", "components": ["RetroBank external interfaces", "Agent-to-Agent Economy"]},
+    {"id": "watt", "name": "Kindred WATT Stratum", "port": "external-watt", "components": ["KINDRED-WATT"]}
+  ],
+  "not_strata": ["BRAINSTEM", "Strata Data Port Zero"]
+}

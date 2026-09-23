@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "kindred.superwave.sw06-d1.v1",
+  "wave": {
+    "id": "SW06-D1-20260906-201338",
+    "predecessor": "SW06-C-R1-20260906-185045",
+    "purpose": "lock-real-process-boundary-call-shape-for-direct-pipe-attachment"
+  },
+  "proof": {
+    "boundaryPrototypeMethods": 11,
+    "realBoundaryCalls": 9,
+    "processRequestTypes": 8,
+    "processPortTypes": 4,
+    "directPipeProofValid": true,
+    "directPipeMeasuredClass": "PORTABLE_BUFFERED",
+    "attachmentReady": true
+  },
+  "preservation": {
+    "protectedAuthorities": "UNCHANGED",
+    "implementationCreated": false
+  },
+  "classification": "DIRECT_PIPE_PROCESS_ATTACHMENT_CONTRACT_LOCKED",
+  "nextAction": "SW06D2_IMPLEMENT_ADDITIVE_DIRECT_PIPE_PROCESS_BOUNDARY_ADAPTER"
+}

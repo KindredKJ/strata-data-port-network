@@ -1,0 +1,85 @@
+{
+  "$id": "https://contracts.kindred.invalid/v1/B2BContext.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "brand_context": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "capability": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "delegated_authority": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "disclosure_policy": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "entitlement_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "environment_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "evidence_owner": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "metering_context": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "organization_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "partner_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "project_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "provider_of_record": {
+      "const": "g3t-connected"
+    },
+    "requesting_identity": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "tenant_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "transport_rail": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "organization_id",
+    "tenant_id",
+    "partner_id",
+    "environment_id",
+    "project_id",
+    "entitlement_id",
+    "requesting_identity",
+    "delegated_authority",
+    "capability",
+    "provider_of_record",
+    "transport_rail",
+    "brand_context",
+    "metering_context",
+    "evidence_owner",
+    "disclosure_policy"
+  ],
+  "title": "B2BContext",
+  "type": "object"
+}

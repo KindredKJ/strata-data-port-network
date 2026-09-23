@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "kindred.superwave.sw05.v1",
+  "wave": {
+    "id": "SW05-20260906-172641",
+    "predecessor": "SW04-20260906-171504",
+    "purpose": "real-strata-tesseract-state-attachment-proof"
+  },
+  "doctrine": {
+    "preservationFirst": true,
+    "sourceMutationAuthorized": false,
+    "duplicateStrataCreated": false,
+    "duplicateTesseractCreated": false,
+    "adapterPresenceIsProof": false,
+    "directPipeIncludedInProof": false,
+    "broadDiskScanUsed": false
+  },
+  "discovery": {
+    "searchRoots": [
+      "D:\\KindredLabs\\kindred-labs-superstructure\\imports",
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src",
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test"
+    ],
+    "corpusFiles": 51,
+    "scoredCandidates": 46,
+    "realAuthorityCandidates": 1,
+    "attachmentTestCandidates": 1,
+    "passingAttachmentTests": 1
+  },
+  "realAuthorities": [
+    {
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "signals": [
+        "STRATA_IDENTITY",
+        "COMMITMENT",
+        "MATERIALIZATION",
+        "STATE_ROOT",
+        "FENCING",
+        "AUTHORITY",
+        "EVIDENCE",
+        "EXECUTION",
+        "PROCESS_INTELLIGENCE"
+      ]
+    }
+  ],
+  "attachmentTests": [
+    {
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\process-intelligence.test.mjs",
+      "signals": [
+        "STRATA_IDENTITY",
+        "COMMITMENT",
+        "STATE_ROOT",
+        "FENCING",
+        "AUTHORITY",
+        "EVIDENCE",
+        "EXECUTION",
+        "PROCESS_INTELLIGENCE"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "name": "Cognitive Body baseline",
+      "class": "REGRESSION",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-body.test.mjs",
+      "attempted": true,
+      "passed": true,
+      "exitCode": 0,
+      "classification": "PASS"
+    },
+    {
+      "name": "Process Intelligence Cognitive Body regression",
+      "class": "REGRESSION",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-body-process-intelligence-integration.test.mjs",
+      "attempted": true,
+      "passed": true,
+      "exitCode": 0,
+      "classification": "PASS"
+    },
+    {
+      "name": "Synaptizer feedback regression",
+      "class": "REGRESSION",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-body-synaptizer-feedback.integration.test.mjs",
+      "attempted": true,
+      "passed": true,
+      "exitCode": 0,
+      "classification": "PASS"
+    },
+    {
+      "name": "ProSynthesized capability regression",
+      "class": "REGRESSION",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-body-prosynthesized-capability-integration.test.mjs",
+      "attempted": true,
+      "passed": true,
+      "exitCode": 0,
+      "classification": "PASS"
+    },
+    {
+      "name": "Adaptive Cognitive Body loop regression",
+      "class": "REGRESSION",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-body-adaptive-loop.integration.test.mjs",
+      "attempted": true,
+      "passed": true,
+      "exitCode": 0,
+      "classification": "PASS"
+    },
+    {
+      "name": "Real Strata Attachment - process-intelligence.test.mjs",
+      "class": "STRATA_ATTACHMENT",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\process-intelligence.test.mjs",
+      "attempted": true,
+      "passed": true,
+      "exitCode": 0,
+      "classification": "PASS"
+    }
+  ],
+  "proof": {
+    "regressionFloor": true,
+    "realExecutableAuthorityFound": true,
+    "realAttachmentTestFound": true,
+    "realAttachmentTestPassed": true,
+    "passingAuthorities": [
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\process-intelligence.test.mjs"
+    ]
+  },
+  "integrity": {
+    "protectedCognitiveSourceAndTests": "UNCHANGED"
+  },
+  "proofBoundary": {
+    "processIntelligence": "PROVEN_LOCAL",
+    "cognitiveBodyProcessConnection": "PROVEN_LOCAL",
+    "dcmlProcessCapabilityPath": "PROVEN_LOCAL",
+    "synaptizerFeedbackPath": "PROVEN_LOCAL",
+    "endToEndVerifiedCognitiveLoop": "PROVEN_LOCAL",
+    "strataAdapter": "IMPLEMENTED",
+    "realStrataTesseractStateAttachment": "PROVEN_LOCAL",
+    "realDirectPipe": "UNPROVEN"
+  },
+  "classification": "REAL_STRATA_TESSERACT_STATE_ATTACHMENT_PROVEN_LOCAL",
+  "nextAction": "ADVANCE_TO_SW06_REAL_DIRECT_PIPE_BENCHMARK"
+}

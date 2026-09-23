@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "capabilities": [
+    {
+      "name": "governed-transport",
+      "status": "already implemented",
+      "authority": "Unified Quad Runtime"
+    },
+    {
+      "name": "cognitive-resource-registry",
+      "status": "partially implemented",
+      "authority": "BRAINSTEM",
+      "blocker": "authority repository not connected"
+    },
+    {
+      "name": "protected-memory-fabric",
+      "status": "partially implemented",
+      "authority": "BRAINSTEM",
+      "blocker": "authority repository not connected"
+    },
+    {
+      "name": "adaptive-planning",
+      "status": "partially implemented",
+      "authority": "BRAINSTEM",
+      "blocker": "execution and benchmark integration absent"
+    },
+    {
+      "name": "continual-learning",
+      "status": "architectural only",
+      "authority": "BRAINSTEM",
+      "blocker": "data and evaluation"
+    },
+    {
+      "name": "WATT-observational-intelligence",
+      "status": "blocked by data",
+      "authority": "KINDRED-WATT",
+      "blocker": "telemetry and repository unavailable"
+    },
+    {
+      "name": "WATT-predictive-intelligence",
+      "status": "blocked by data",
+      "authority": "KINDRED-WATT",
+      "blocker": "verified historical datasets unavailable"
+    },
+    {
+      "name": "WATT-bounded-actuation",
+      "status": "blocked by hardware",
+      "authority": "KINDRED-WATT",
+      "blocker": "physical_execution_not_connected"
+    }
+  ]
+}

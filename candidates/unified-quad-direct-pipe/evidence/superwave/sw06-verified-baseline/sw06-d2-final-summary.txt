@@ -1,0 +1,28 @@
+================================================================
+ KINDRED LABS — SW06-D2-R2B RESULT
+================================================================
+
+Wave: SW06-D2-R2B-20260906-214932
+Predecessor: SW06-D2-R2A-20260906-212630
+
+Fixture source: D:\KindredLabs\kindred-labs-superstructure\runtime\unified-quad\test\process-intelligence.test.mjs
+Boundary variable: boundary
+
+Attachment test: True
+Evidence fresh: True
+Evidence valid: True
+Measured class: PORTABLE_BUFFERED
+Regression floor: True
+
+Process Intelligence: UNCHANGED
+Direct Pipe runtime: UNCHANGED
+Direct Pipe Process adapter: UNCHANGED
+Cognitive Body: UNCHANGED
+
+CLASSIFICATION: DIRECT_PIPE_PROCESS_BOUNDARY_ATTACHMENT_PROVEN_LOCAL
+NEXT ACTION: GITHUB_VERIFIED_BASELINE_PROMOTION_GATE
+
+PORTABLE_BUFFERED: PROVEN_LOCAL
+REDUCED_COPY: UNPROVEN
+ZERO_COPY: UNPROVEN
+================================================================

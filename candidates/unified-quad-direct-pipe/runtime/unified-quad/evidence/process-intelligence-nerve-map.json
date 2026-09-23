@@ -1,0 +1,753 @@
+{
+  "schema": "kindred.process-intelligence.nerve-map.v3",
+  "generated_at": "2026-09-02T02:09:09.1754097Z",
+  "brand": "KINDRED LABS",
+  "founder": "Kindred Jermaine Cox",
+  "runtime": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad",
+  "process_intelligence": {
+    "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+    "exports": [
+      "CapabilityCompositionCache",
+      "EDGE_SUCCESS_CONTRACT_VERSION",
+      "PROCESS_FITNESS_DELTA_CONTRACT_VERSION",
+      "PROCESS_GENOME_CONTRACT_VERSION",
+      "PROCESS_INTELLIGENCE_BOUNDARY_CONTRACT_VERSION",
+      "PROCESS_INTELLIGENCE_EVENT_CONTRACT_VERSION",
+      "PROCESS_INTELLIGENCE_REQUEST_TYPES",
+      "PROCESS_PORT_TYPES",
+      "PROCESS_SKILL_CONTRACT_VERSION",
+      "PROSYNTHESIZED_CAPABILITY_CONTRACT_VERSION",
+      "PostSynthesizedRuntime",
+      "ProSynthesine",
+      "ProcessEdgeObserver",
+      "ProcessFitnessTracker",
+      "ProcessIntelligenceBoundaryAdapter",
+      "ProcessIntelligenceError",
+      "ProcessSkillCache",
+      "ProcessSkillGraduationPolicy",
+      "ProcessSkillRegistry",
+      "STRATA_PROCESS_COMMITMENT_CONTRACT_VERSION",
+      "STRATA_PROCESS_COMMITMENT_KINDS",
+      "SYNTHESIS_RECEIPT_CONTRACT_VERSION",
+      "createProcessGenome",
+      "evolveProcessGenome",
+      "executeProsynthesizedCapability",
+      "resumePostSynthesis",
+      "selectExecutionComplexity",
+      "stateRoot",
+      "validateProcessGenome"
+    ],
+    "boundary_adapter_present": true,
+    "boundary_methods": [
+      "cacheEvidence",
+      "close",
+      "createStrataCommitment",
+      "discoverProcessSkills",
+      "discoverProsynthesizedCapability",
+      "executeCapability",
+      "mapPort",
+      "request",
+      "requestCandidate",
+      "requestRecomposition",
+      "toSynaptizerEvent"
+    ],
+    "boundary_contract": "kindred.process-intelligence-boundary.v1",
+    "event_contract": "kindred.process-intelligence-event.v1",
+    "request_types": [
+      "DISCOVER_PROCESS_SKILLS",
+      "DISCOVER_PROSYNTHESIZED_CAPABILITY",
+      "REQUEST_PROSYNTHESINE_CANDIDATE",
+      "EXECUTE_CAPABILITY",
+      "REQUEST_POST_SYNTHESIS_RECOMPOSITION"
+    ],
+    "port_types": {
+      "PROCESS": "PROCESS_PORT",
+      "PROCESS_SKILL": "PROCESS_SKILL_PORT",
+      "PROSYNTHESIZED_CAPABILITY": "CAPABILITY_PORT",
+      "POST_SYNTHESIZED_CAPABILITY": "DYNAMIC_CAPABILITY_PORT"
+    },
+    "strata_contract": "kindred.strata-process-commitment-adapter.v1",
+    "strata_kinds": [
+      "PROCESS_GENOME",
+      "PROCESS_SKILL",
+      "PROSYNTHESIZED_CAPABILITY",
+      "POST_SYNTHESIS_CHECKPOINT",
+      "PROCESS_FITNESS_DELTA",
+      "PROCESS_EDGE_EVIDENCE"
+    ]
+  },
+  "search": {
+    "backend": "PowerShell.Select-String",
+    "bounded_root": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src",
+    "files_scanned": 7,
+    "evidence_records": 86,
+    "counts": {
+      "PROCESS_BOUNDARY": 1,
+      "PROCESS_REQUESTS": 2,
+      "PROCESS_PORTS": 2,
+      "COGNITIVE_PORT": 0,
+      "INTENT_PORT": 0,
+      "CAPABILITY_DISCOVERY": 34,
+      "CAPABILITY_SELECTION": 0,
+      "DCML": 0,
+      "SYNAPTIZER": 3,
+      "VERIFICATION": 26,
+      "PROOF_CARRYING": 0,
+      "EVENT_SYSTEM": 9,
+      "STRATA": 8,
+      "TESSERACT": 0,
+      "DIRECT_PIPE": 1
+    }
+  },
+  "candidate_files": [
+    "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+    "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+    "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+    "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+    "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs"
+  ],
+  "category_files": {
+    "COGNITIVE_PORT": [],
+    "INTENT_PORT": [],
+    "CAPABILITY_DISCOVERY": [
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs"
+    ],
+    "CAPABILITY_SELECTION": [],
+    "DCML": [],
+    "SYNAPTIZER": [
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs"
+    ],
+    "VERIFICATION": [
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs"
+    ],
+    "EVENT_SYSTEM": [
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs"
+    ],
+    "STRATA": [
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs"
+    ],
+    "TESSERACT": [],
+    "DIRECT_PIPE": [
+      "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs"
+    ]
+  },
+  "source_evidence": [
+    {
+      "category": "PROCESS_BOUNDARY",
+      "pattern": "ProcessIntelligenceBoundaryAdapter",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 843,
+      "text": "export class ProcessIntelligenceBoundaryAdapter {"
+    },
+    {
+      "category": "PROCESS_REQUESTS",
+      "pattern": "PROCESS_INTELLIGENCE_REQUEST_TYPES",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 26,
+      "text": "export const PROCESS_INTELLIGENCE_REQUEST_TYPES = Object.freeze(["
+    },
+    {
+      "category": "PROCESS_REQUESTS",
+      "pattern": "PROCESS_INTELLIGENCE_REQUEST_TYPES",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 879,
+      "text": "if (!PROCESS_INTELLIGENCE_REQUEST_TYPES.includes(requestType)) {"
+    },
+    {
+      "category": "PROCESS_PORTS",
+      "pattern": "PROCESS_PORT_TYPES",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 19,
+      "text": "export const PROCESS_PORT_TYPES = Object.freeze({"
+    },
+    {
+      "category": "PROCESS_PORTS",
+      "pattern": "PROCESS_PORT_TYPES",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 861,
+      "text": "const portType = PROCESS_PORT_TYPES[componentClass];"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 896,
+      "text": "!grant.permissions.includes(\"capability.discover\") ||"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 13,
+      "text": "export const CAPABILITY_DISCOVERY_QUERY_CONTRACT_VERSION ="
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 14,
+      "text": "\"kindred.agent.capability-discovery-query.v1\";"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 15,
+      "text": "export const CAPABILITY_DISCOVERY_RESULT_CONTRACT_VERSION ="
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 16,
+      "text": "\"kindred.agent.capability-discovery-result.v1\";"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 17,
+      "text": "export const CAPABILITY_DISCOVERY_QUERY_FIELDS = Object.freeze(["
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 32,
+      "text": "export const CAPABILITY_DISCOVERY_RESULT_FIELDS = Object.freeze(["
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 49,
+      "text": "export const CAPABILITY_DISCOVERY_PROJECTION_FIELDS = Object.freeze(["
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 85,
+      "text": "export class CapabilityDiscoveryError extends Error {"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 87,
+      "text": "super(\"Capability discovery request rejected.\");"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 88,
+      "text": "this.name = \"CapabilityDiscoveryError\";"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 89,
+      "text": "this.code = \"capability_discovery_rejected\";"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 96,
+      "text": "throw new CapabilityDiscoveryError(reasonClass);"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 125,
+      "text": "export function validateCapabilityDiscoveryQuery(value) {"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 127,
+      "text": "!exactKeys(value, CAPABILITY_DISCOVERY_QUERY_FIELDS) ||"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 128,
+      "text": "value.contract_version !== CAPABILITY_DISCOVERY_QUERY_CONTRACT_VERSION ||"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 151,
+      "text": "!exactKeys(value, CAPABILITY_DISCOVERY_PROJECTION_FIELDS) ||"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 179,
+      "text": "export function validateCapabilityDiscoveryResult(value) {"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 181,
+      "text": "!exactKeys(value, CAPABILITY_DISCOVERY_RESULT_FIELDS) ||"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 182,
+      "text": "value.contract_version !== CAPABILITY_DISCOVERY_RESULT_CONTRACT_VERSION ||"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 218,
+      "text": "export function createCapabilityDiscoveryArtifacts(input = {}) {"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 233,
+      "text": "const query = validateCapabilityDiscoveryQuery({"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 234,
+      "text": "contract_version: CAPABILITY_DISCOVERY_QUERY_CONTRACT_VERSION,"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 248,
+      "text": "const seed = digest(\"capability-discovery\", identity.agent_id, input.correlationId);"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 261,
+      "text": "permissions: [\"capability.discover\"],"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 299,
+      "text": "export function executeCapabilityDiscovery(input = {}) {"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 307,
+      "text": "if (!(input.catalog instanceof CapabilityDiscoveryCatalog)) {"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 310,
+      "text": "const artifacts = createCapabilityDiscoveryArtifacts(input);"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 330,
+      "text": "export class CapabilityDiscoveryCatalog {"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 377,
+      "text": "query = validateCapabilityDiscoveryQuery(envelope.payload);"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 431,
+      "text": "return validateCapabilityDiscoveryResult({"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 432,
+      "text": "contract_version: CAPABILITY_DISCOVERY_RESULT_CONTRACT_VERSION,"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 866,
+      "text": "discoverProcessSkills({ outcome_class, context }) {"
+    },
+    {
+      "category": "CAPABILITY_DISCOVERY",
+      "pattern": "capability.?discover|discoverCapability|discoverProcessSkills|discoverProsynthesizedCapability",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 874,
+      "text": "discoverProsynthesizedCapability({ intent_class, context_root }) {"
+    },
+    {
+      "category": "SYNAPTIZER",
+      "pattern": "synapt",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 630,
+      "text": "synaptic_evidence: clone(evidence.synaptic_evidence ?? []),"
+    },
+    {
+      "category": "SYNAPTIZER",
+      "pattern": "synapt",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 856,
+      "text": "this.publish(this.toSynaptizerEvent(record));"
+    },
+    {
+      "category": "SYNAPTIZER",
+      "pattern": "synapt",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 903,
+      "text": "toSynaptizerEvent(record) {"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 32,
+      "text": "\"verification\","
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 133,
+      "text": "value.verification !== \"unverified\" ||"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 185,
+      "text": "verification: \"unverified\","
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 133,
+      "text": "\"verification_requirements\","
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 202,
+      "text": "verification_requirements: input.verification_requirements ?? {"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 295,
+      "text": "verification_refs: stringArray("
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 296,
+      "text": "input.verification_refs ?? [],"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 347,
+      "text": "verification_strength:"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 367,
+      "text": ": record.contribution === \"VERIFICATION\""
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 372,
+      "text": "evidence_refs: [...record.evidence_refs, ...record.verification_refs],"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 409,
+      "text": "verification_refs: this.observer.records"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 411,
+      "text": ".flatMap((record) => record.verification_refs),"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 424,
+      "text": "verification_rate: thresholds.verification_rate ?? 1,"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 436,
+      "text": "[\"verification_rate\", evidence.verification_rate],"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 480,
+      "text": "verification_profile: {"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 482,
+      "text": "verification_rate: evidence.verification_rate,"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 594,
+      "text": "verification_policy: clone(input.verification_policy ?? { required: true }),"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 617,
+      "text": "\"verification_passed\","
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 632,
+      "text": "verification_results: clone(evidence.verification_results ?? {}),"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 648,
+      "text": "verification_policy: promoted.verification_policy,"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 690,
+      "text": "verification_refs: output.verification_refs ?? [],"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 705,
+      "text": "verified: input.verify(state) === true,"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 780,
+      "text": "verification_refs: output.verification_refs,"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 810,
+      "text": "verified: input.verify(input.state) === true,"
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 917,
+      "text": "verification_contribution: record.contribution === \"VERIFICATION\","
+    },
+    {
+      "category": "VERIFICATION",
+      "pattern": "verification|verifyOutcome|verify",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 924,
+      "text": "verification_refs: record.verification_refs,"
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "pattern": "event.?bus|publish|subscribe|emit",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 17,
+      "text": "\"emit_core\","
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "pattern": "event.?bus|publish|subscribe|emit",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 154,
+      "text": "![\"brainstem\", \"kindred_cloud\", \"emit_core\", \"retrobank\"].includes("
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "pattern": "event.?bus|publish|subscribe|emit",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 76,
+      "text": "owner_component: \"emit_core\","
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "pattern": "event.?bus|publish|subscribe|emit",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 259,
+      "text": "subscribe(listener) {"
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "pattern": "event.?bus|publish|subscribe|emit",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 853,
+      "text": "this.publish = options.publish ?? (() => {});"
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "pattern": "event.?bus|publish|subscribe|emit",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 854,
+      "text": "if (typeof this.publish !== \"function\") reject(\"event_publisher_invalid\");"
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "pattern": "event.?bus|publish|subscribe|emit",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 855,
+      "text": "this.unsubscribe = this.observer.subscribe((record) => {"
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "pattern": "event.?bus|publish|subscribe|emit",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 856,
+      "text": "this.publish(this.toSynaptizerEvent(record));"
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "pattern": "event.?bus|publish|subscribe|emit",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 956,
+      "text": "this.unsubscribe();"
+    },
+    {
+      "category": "STRATA",
+      "pattern": "strata",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 16,
+      "text": "export const STRATA_PROCESS_COMMITMENT_CONTRACT_VERSION ="
+    },
+    {
+      "category": "STRATA",
+      "pattern": "strata",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 17,
+      "text": "\"kindred.strata-process-commitment-adapter.v1\";"
+    },
+    {
+      "category": "STRATA",
+      "pattern": "strata",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 34,
+      "text": "export const STRATA_PROCESS_COMMITMENT_KINDS = Object.freeze(["
+    },
+    {
+      "category": "STRATA",
+      "pattern": "strata",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 931,
+      "text": "createStrataCommitment(kind, value) {"
+    },
+    {
+      "category": "STRATA",
+      "pattern": "strata",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 932,
+      "text": "if (!STRATA_PROCESS_COMMITMENT_KINDS.includes(kind)) {"
+    },
+    {
+      "category": "STRATA",
+      "pattern": "strata",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 933,
+      "text": "reject(\"strata_process_commitment_kind_invalid\");"
+    },
+    {
+      "category": "STRATA",
+      "pattern": "strata",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 936,
+      "text": "contract_version: STRATA_PROCESS_COMMITMENT_CONTRACT_VERSION,"
+    },
+    {
+      "category": "STRATA",
+      "pattern": "strata",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 938,
+      "text": "state_root: stateRoot(`strata-${kind.toLowerCase()}`, value),"
+    },
+    {
+      "category": "DIRECT_PIPE",
+      "pattern": "direct.?pipe",
+      "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 941,
+      "text": "direct_pipe: false,"
+    }
+  ],
+  "truth_boundary": {
+    "duplicate_adapter_created": false,
+    "existing_boundary_reused": true,
+    "real_cognitive_port_connection_claimed": false,
+    "real_dcml_connection_claimed": false,
+    "real_synaptizer_connection_claimed": false,
+    "real_strata_execution_claimed": false,
+    "direct_pipe_claimed": false
+  }
+}

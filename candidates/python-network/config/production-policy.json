@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "environment": "production",
+  "fail_closed": true,
+  "persistence": {"required": true, "adapter": "credential-bound-external"},
+  "communications": {"required": true, "adapter": "credential-bound-provider", "hard_coded_delivery": false},
+  "financial_rails": {"required": true, "adapter": "regulated-provider", "direct_agent_access": false},
+  "physical_execution": {"enabled": false, "required_status": "physical_execution_not_connected"},
+  "development_signatures_allowed": false,
+  "provider_credentials_required": true
+  ,"b2b": {"consumer_first": false, "organization_context_required": true, "tenant_context_required": true}
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "status": "authority-resolution-pending-remote-inventory",
+  "protocol_authority": "Protocol",
+  "identity_systems": {
+    "IAMI": {"authority": "unresolved", "may_be_assumed_equivalent_to_IAMI-X": false},
+    "IAMI-X": {"authority": "unresolved", "may_be_assumed_equivalent_to_IAMI": false},
+    "BRAINSTEM": {"role": "protected-identity-context-consumer", "boundary": "protected"},
+    "Kindred Cloud": {"role": "workload-and-device-identity-adapter", "final_authority": false}
+  },
+  "identity_kinds": ["founder", "human", "agent", "organization", "service", "workload", "device", "session"],
+  "required_controls": ["authentication", "delegated-authority", "capability-authority", "cryptographic-identity", "provider-mapping", "revocation", "recovery"],
+  "agent_requirements": ["stable-identifier", "controlling-owner-or-organization", "CapabilityManifest", "permitted-actions", "permitted-strata", "financial-policy", "revocation-state", "evidence-history"],
+  "development_signatures_are_production_identity_proof": false,
+  "consequential_request_requirements": ["authenticated-identity", "delegated-authority", "correlation-id"]
+}

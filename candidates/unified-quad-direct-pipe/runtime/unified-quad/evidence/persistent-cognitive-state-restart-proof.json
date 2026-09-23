@@ -1,0 +1,66 @@
+{
+  "schema": "kindred.persistent-cognitive-state-restart-proof.v1",
+  "generatedAt": "2026-09-01T21:53:45.1520908-06:00",
+  "classification": {
+    "closedAdaptiveCognitionLoop": "LOCAL_RUNTIME_PROVEN",
+    "localDurableCognitiveState": "LOCAL_RUNTIME_PROVEN",
+    "cognitiveGraphPersistence": "LOCAL_RUNTIME_PROVEN",
+    "synapticStatePersistence": "LOCAL_RUNTIME_PROVEN",
+    "stateIntegrityCommitment": "LOCAL_RUNTIME_PROVEN",
+    "atomicStateWrite": "LOCAL_RUNTIME_PROVEN",
+    "processRestartRecovery": "LOCAL_RUNTIME_PROVEN",
+    "recoveredLearningUsedByDcml": "LOCAL_RUNTIME_PROVEN",
+    "adaptiveDecisionSurvivesRestart": "LOCAL_RUNTIME_PROVEN",
+    "corruptionDetection": "LOCAL_RUNTIME_PROVEN",
+    "incompatibleContractRejection": "LOCAL_RUNTIME_PROVEN"
+  },
+  "causalProof": {
+    "relationshipsPersisted": 3,
+    "reinforcementPersisted": 3.25,
+    "selectionWithoutRecoveredLearning": "process.a-baseline",
+    "selectionWithRecoveredLearning": "process.z-learned",
+    "restartUsesSeparateNodeProcess": true,
+    "decisionSurvivesRestart": true
+  },
+  "truthBoundary": {
+    "persistentSynapticMemory": "LOCAL_RUNTIME_PROVEN",
+    "crossProcessLearningPersistence": "LOCAL_RUNTIME_PROVEN",
+    "restartRecovery": "LOCAL_RUNTIME_PROVEN",
+    "learnedRelationshipReuseAfterRestart": "LOCAL_RUNTIME_PROVEN",
+    "continuedLearningAfterRehydration": "UNPROVEN",
+    "multiMachinePersistence": "UNPROVEN",
+    "distributedConsensus": "UNPROVEN",
+    "realStrataIntegration": "UNPROVEN",
+    "realTesseractIntegration": "UNPROVEN",
+    "realDirectPipe": "UNPROVEN",
+    "productionReady": false
+  },
+  "existingSources": {
+    "processIntelligenceUnchanged": true,
+    "cognitiveBodyUnchanged": true,
+    "synaptizerUnchanged": true,
+    "sw04ProofUnchanged": true
+  },
+  "newArtifacts": {
+    "stateStore": {
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\cognitive-state-store.mjs",
+      "sha256": "24B63EB8692E4DD5E13B16E4A8C3B228E77D4181DAD4226BA1DD202B2C8F8289"
+    },
+    "restartProbe": {
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-state-restart-probe.mjs",
+      "sha256": "F097DE32CB8A8DA360D5E7DF39572C2C1F5A3D870899C5A07D80380BAAFF57A5"
+    },
+    "persistenceTest": {
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-state-persistence.integration.test.mjs",
+      "sha256": "9ED3D5D224096CCBC2332A1846FF5AB36DC1700B612DFE96604E7A7ADC6A9316"
+    }
+  },
+  "regressions": {
+    "Process Intelligence": true,
+    "Cognitive Body": true,
+    "Real PI Attachment": true,
+    "Real Capability Via Body": true,
+    "Real Synaptizer Feedback": true,
+    "Closed Adaptive Cognition": true
+  }
+}

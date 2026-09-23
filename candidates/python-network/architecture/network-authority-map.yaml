@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "status": "authority-resolution-pending-remote-inventory",
+  "authorities": {
+    "Kindred Cloud": ["hosting-adapters", "provider-connectivity", "device-connectivity"],
+    "Mesh": ["authority-unresolved"],
+    "G3T Connected": ["governed-communications-transport"],
+    "Strata Data Port Zero": ["protected-egress-policy", "route-authorization"],
+    "external Strata Data Ports": ["bounded-external-ingress"]
+  },
+  "required_route": ["protected-component", "Unified Quad Runtime", "Strata Data Port Zero", "external Strata Data Port", "bounded-provider-adapter"],
+  "controls": ["mutual-authentication", "transport-encryption", "classification", "selective-disclosure", "replay-protection", "idempotency", "bounded-retry", "circuit-breaking", "health", "audit"],
+  "denied_routes": [
+    {"source": "external-system", "destination": "BRAINSTEM", "reason": "protected-boundary"},
+    {"source": "external Strata Data Port", "destination": "protected-component", "reason": "must-route-via-port-zero"},
+    {"source": "agent", "destination": "financial-provider", "reason": "must-route-via-retrobank"}
+  ],
+  "provider_is_internal_authority": false
+}

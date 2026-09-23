@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "boundary": "protected-kindred-labs-environment",
+  "inside": ["Protocol", "Tesseract internal world context", "Unified Quad Runtime", "BRAINSTEM", "Kindred Cloud", "Emit Core", "RetroBank runtime authority", "Strata Data Port Zero"],
+  "outside": ["StrataFortress external strata", "External Communications Strata Data Port", "External Economy Strata Data Port", "External Kindred WATT Strata Data Port", "G3T Connected", "Brainstem InTouch adapter", "Agent-to-Agent Economy", "KINDRED-WATT"],
+  "protected_component_rules": {"BRAINSTEM": {"is_stratum": false, "external_provider_direct_invocation": false, "external_route": "Strata Data Port Zero"}},
+  "port_zero": {"placement": "inside", "role": "internal-anchor", "authority": "Unified Quad Runtime"}
+}

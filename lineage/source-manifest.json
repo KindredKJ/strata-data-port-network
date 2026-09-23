@@ -1,0 +1,959 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-09-23",
+  "owner": "Kindred Jermaine Cox / Kindred Labs",
+  "sources": [
+    {
+      "repository": "KindredKJ/kindred-labs-superstructure",
+      "ref": "codex/execute-kindred-labs-architecture-directive-ms11sw",
+      "commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "status": "open PR #3; unmerged"
+    },
+    {
+      "repository": "KindredKJ/kindred-labs-superstructure",
+      "ref": "milestone/sw06-verified-direct-pipe-20260906-220240",
+      "commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "status": "open PR #5; unmerged"
+    }
+  ],
+  "files": [
+    {
+      "target": "candidates/python-network/architecture/MASTER_ARCHITECTURE.md",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/MASTER_ARCHITECTURE.md",
+      "git_blob_sha1": "1c1dae5a7d04f130b6b0ddc3f3cbbc0a80a0fe50",
+      "bytes": 613
+    },
+    {
+      "target": "candidates/python-network/architecture/adr/0001-kindred-one-b2b-enablement.md",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/adr/0001-kindred-one-b2b-enablement.md",
+      "git_blob_sha1": "152ff790417a332556fdaf870684e78e38460340",
+      "bytes": 480
+    },
+    {
+      "target": "candidates/python-network/architecture/adr/0002-g3t-provider-of-record.md",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/adr/0002-g3t-provider-of-record.md",
+      "git_blob_sha1": "2866f49ee36cc82266f4681f38ce7bd8d05cc8fa",
+      "bytes": 406
+    },
+    {
+      "target": "candidates/python-network/architecture/authority-map.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/authority-map.yaml",
+      "git_blob_sha1": "a53db3d09823fc509754bf3af48399e259efc9e6",
+      "bytes": 1608
+    },
+    {
+      "target": "candidates/python-network/architecture/canonical-sequence.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/canonical-sequence.yaml",
+      "git_blob_sha1": "1907c82c7d895a7a36b26a4cb3762f6b0238f036",
+      "bytes": 246
+    },
+    {
+      "target": "candidates/python-network/architecture/data-classification.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/data-classification.yaml",
+      "git_blob_sha1": "f29fac5d06f84d29dd9298640c878a8b48bb5454",
+      "bytes": 528
+    },
+    {
+      "target": "candidates/python-network/architecture/founder-intelligence-roadmap.md",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/founder-intelligence-roadmap.md",
+      "git_blob_sha1": "d888adab5bb93f77027618ae9748831d1baeadf7",
+      "bytes": 3088
+    },
+    {
+      "target": "candidates/python-network/architecture/founder-vision-map.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/founder-vision-map.yaml",
+      "git_blob_sha1": "42a4447e202581cd657844ae2c262b51f8d3c9b3",
+      "bytes": 3328
+    },
+    {
+      "target": "candidates/python-network/architecture/identity-authority-map.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/identity-authority-map.yaml",
+      "git_blob_sha1": "f5de2c43bc8b9f3f7151718e5afe9da9de9979d9",
+      "bytes": 1173
+    },
+    {
+      "target": "candidates/python-network/architecture/intelligence-capability-map.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/intelligence-capability-map.yaml",
+      "git_blob_sha1": "a75c4bf79e9637dc8cac0affd8a1589d9cb7f475",
+      "bytes": 1449
+    },
+    {
+      "target": "candidates/python-network/architecture/intelligence-gap-analysis.md",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/intelligence-gap-analysis.md",
+      "git_blob_sha1": "a76efc9da7090010c7effcd914b2c044aeb2fa33",
+      "bytes": 1630
+    },
+    {
+      "target": "candidates/python-network/architecture/intelligence-maturity-model.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/intelligence-maturity-model.yaml",
+      "git_blob_sha1": "ca04ec68036c657fa27c30e9d1c6f91f4e87695d",
+      "bytes": 2544
+    },
+    {
+      "target": "candidates/python-network/architecture/kindred-one-b2b.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/kindred-one-b2b.yaml",
+      "git_blob_sha1": "acfd12a75b867a51935c5defd103c87f938c53d8",
+      "bytes": 1067
+    },
+    {
+      "target": "candidates/python-network/architecture/network-authority-map.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/network-authority-map.yaml",
+      "git_blob_sha1": "0fbd84183a648fea9b81290773eb0fbbab80e937",
+      "bytes": 1184
+    },
+    {
+      "target": "candidates/python-network/architecture/port-topology.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/port-topology.yaml",
+      "git_blob_sha1": "448ed7c94c855662e089774a6360b63faff61b82",
+      "bytes": 1145
+    },
+    {
+      "target": "candidates/python-network/architecture/protected-boundary.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/protected-boundary.yaml",
+      "git_blob_sha1": "a5d9176f61a0fee65e5dbc40c901892a4fd729d3",
+      "bytes": 791
+    },
+    {
+      "target": "candidates/python-network/architecture/strata-topology.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/strata-topology.yaml",
+      "git_blob_sha1": "36719e750ddfbc2ccca465b7b8c18a6e4a4a26fb",
+      "bytes": 664
+    },
+    {
+      "target": "candidates/python-network/architecture/truth-classes.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/truth-classes.yaml",
+      "git_blob_sha1": "33555ba53609cc92be04e48a2dbc5df07bd7e00c",
+      "bytes": 680
+    },
+    {
+      "target": "candidates/python-network/architecture/watt-intelligence-maturity-model.yaml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "architecture/watt-intelligence-maturity-model.yaml",
+      "git_blob_sha1": "8a1546e2583b2be292cc278c93407b555cf16817",
+      "bytes": 2341
+    },
+    {
+      "target": "candidates/python-network/config/production-policy.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "config/production-policy.json",
+      "git_blob_sha1": "bf5cfc7af4a5eec804c86adab1e5321306aa1ce6",
+      "bytes": 668
+    },
+    {
+      "target": "candidates/python-network/contracts/API.md",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/API.md",
+      "git_blob_sha1": "4304516c1e15a252392c7b53525a4c999c3937e5",
+      "bytes": 493
+    },
+    {
+      "target": "candidates/python-network/contracts/README.md",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/README.md",
+      "git_blob_sha1": "ed376456852f336569a7eb6b97fa2fc864ef755e",
+      "bytes": 365
+    },
+    {
+      "target": "candidates/python-network/contracts/compatibility/v1-policy.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/compatibility/v1-policy.json",
+      "git_blob_sha1": "921337f4146845aaacf8c9da6e3c1a20185ddbbf",
+      "bytes": 293
+    },
+    {
+      "target": "candidates/python-network/contracts/generated-index/index.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/generated-index/index.json",
+      "git_blob_sha1": "7f6af0381aabc30b15f21b776e226da2d03fa6ee",
+      "bytes": 215
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/B2BContext.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/B2BContext.schema.json",
+      "git_blob_sha1": "1da7902baa658945f2e0203bf3b26469a49bee05",
+      "bytes": 1716
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/CapabilityManifest.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/CapabilityManifest.schema.json",
+      "git_blob_sha1": "77cffe8c6790070a5f275cb238746f4dd46805c5",
+      "bytes": 890
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/ClaimRecord.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/ClaimRecord.schema.json",
+      "git_blob_sha1": "c37f1bb6575da91c7ded41dd7de73de063ae4e49",
+      "bytes": 876
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/CognitiveTransaction.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/CognitiveTransaction.schema.json",
+      "git_blob_sha1": "bf0b699006e76c94e74b1a7c52e568cd81541922",
+      "bytes": 894
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/CommunicationLifecycleEvent.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/CommunicationLifecycleEvent.schema.json",
+      "git_blob_sha1": "03d8acebc7606acd1f6ab7c62f706be39d30ba7b",
+      "bytes": 2329
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/EmitCoreReconciliation.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/EmitCoreReconciliation.schema.json",
+      "git_blob_sha1": "eefce320fa2226144c94aa6e59e8fa9554b9d64c",
+      "bytes": 2020
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/EvidenceReceipt.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/EvidenceReceipt.schema.json",
+      "git_blob_sha1": "64ba98497f8fd6e8103096dc10e66baf8c697a88",
+      "bytes": 884
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/EvolutionProposal.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/EvolutionProposal.schema.json",
+      "git_blob_sha1": "844765bda9793c24ea2a69b37133933245a17aa8",
+      "bytes": 888
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/ExecutionIntent.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/ExecutionIntent.schema.json",
+      "git_blob_sha1": "4f42671d1f231872a7c604dc215fd6db6d5c4098",
+      "bytes": 884
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/KJManifest.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/KJManifest.schema.json",
+      "git_blob_sha1": "8170aa804918ead56548f047affbad0a5cc6ce4d",
+      "bytes": 874
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/NeedEnvelope.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/NeedEnvelope.schema.json",
+      "git_blob_sha1": "f9fd72fb4dcd70c6d3963b7901afb60617f42002",
+      "bytes": 878
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/OutcomeCapsule.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/OutcomeCapsule.schema.json",
+      "git_blob_sha1": "98ecaa8336eda3f91393a7a86baa86a971e2d016",
+      "bytes": 882
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/OutcomeContract.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/OutcomeContract.schema.json",
+      "git_blob_sha1": "ab639eda77aaacdcbe446751d022e5165c6dc40c",
+      "bytes": 884
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/SignedPortReceipt.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/SignedPortReceipt.schema.json",
+      "git_blob_sha1": "92633861bc7798eaa1a0171c6e7b3a86b30a7afb",
+      "bytes": 2123
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/StrataTransportEnvelope.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/StrataTransportEnvelope.schema.json",
+      "git_blob_sha1": "939ac2b07ab211779a4ea64ea4af0c19d9fa5043",
+      "bytes": 3400
+    },
+    {
+      "target": "candidates/python-network/contracts/v1/WorldContext.schema.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "contracts/v1/WorldContext.schema.json",
+      "git_blob_sha1": "745656ac92e9773342e89b5791028e627b5f4d60",
+      "bytes": 878
+    },
+    {
+      "target": "candidates/python-network/docs/STRATA_DATA_PORT_NETWORK.md",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "docs/STRATA_DATA_PORT_NETWORK.md",
+      "git_blob_sha1": "10380546f940a388aadc66af577b4d36477749f4",
+      "bytes": 1749
+    },
+    {
+      "target": "candidates/python-network/docs/THREAT_MODEL_STRATA_NETWORK.md",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "docs/THREAT_MODEL_STRATA_NETWORK.md",
+      "git_blob_sha1": "acd1d77eded5f4c7133d572fca6d5679af201eaf",
+      "bytes": 1327
+    },
+    {
+      "target": "candidates/python-network/evidence/reports/strata-network-readiness.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "evidence/reports/strata-network-readiness.json",
+      "git_blob_sha1": "a6e5aff7bd4c61232a16a7d496b3755654ee4037",
+      "bytes": 693
+    },
+    {
+      "target": "candidates/python-network/evidence/retention/strata-network-policy.json",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "evidence/retention/strata-network-policy.json",
+      "git_blob_sha1": "0a7374b9e72f5ff256513a9e0e0a291b95ea7fe6",
+      "bytes": 382
+    },
+    {
+      "target": "candidates/python-network/pyproject.toml",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "pyproject.toml",
+      "git_blob_sha1": "faf0ed5f2934fe514f6b80838f59b14d5e65d8ce",
+      "bytes": 336
+    },
+    {
+      "target": "candidates/python-network/scripts/audit_production_routes.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "scripts/audit_production_routes.py",
+      "git_blob_sha1": "cacafdda199eafd9d6b927ee624d91c7ab0aa0a0",
+      "bytes": 1911
+    },
+    {
+      "target": "candidates/python-network/scripts/generate_contracts.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "scripts/generate_contracts.py",
+      "git_blob_sha1": "83f324d778bac112c274a02c986a73656e777b0e",
+      "bytes": 2540
+    },
+    {
+      "target": "candidates/python-network/scripts/validate_production_config.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "scripts/validate_production_config.py",
+      "git_blob_sha1": "84916abfb953cd93834c6099e87b2dea50e74479",
+      "bytes": 2454
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/__init__.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/__init__.py",
+      "git_blob_sha1": "e22f5d1f1fe6c7ed43f64cce3f3717645b0d4d0b",
+      "bytes": 1598
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/communications.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/communications.py",
+      "git_blob_sha1": "5514112d82e4bdf907deb5a2cd57d283d700b7d0",
+      "bytes": 9254
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/contracts.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/contracts.py",
+      "git_blob_sha1": "1617239c38df79ad13edf060c85abfceb18c79e8",
+      "bytes": 2654
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/http_transport.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/http_transport.py",
+      "git_blob_sha1": "e86c7c2c5c3985fda2dfaad6240c6d4619fa68a4",
+      "bytes": 2352
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/intelligence.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/intelligence.py",
+      "git_blob_sha1": "f9a03bd07d334ea89dd2ccecf27aa85771c58d52",
+      "bytes": 6859
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/models.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/models.py",
+      "git_blob_sha1": "597627a061a1e55412434d7596a82807984468b5",
+      "bytes": 2288
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/partner_sdk.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/partner_sdk.py",
+      "git_blob_sha1": "0094285d0b4875612d669fecf2656c0047fb6ee8",
+      "bytes": 3521
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/persistence.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/persistence.py",
+      "git_blob_sha1": "635be972585897f48ad3cac34a7b6f62ff461478",
+      "bytes": 10674
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/ports.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/ports.py",
+      "git_blob_sha1": "205f86359ef85b0d523d8fb80db2e0d5201d0162",
+      "bytes": 5651
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/runtime.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/runtime.py",
+      "git_blob_sha1": "b6f7b1a230aaaa2d583f400ab8107842f0fdc064",
+      "bytes": 3135
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/security.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/security.py",
+      "git_blob_sha1": "61717f2053fb0fe1098400c13079de311e364fe8",
+      "bytes": 1946
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/strata_network.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/strata_network.py",
+      "git_blob_sha1": "c493863eb018cd396906333bf31fa42df044f451",
+      "bytes": 21129
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/tenancy.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/tenancy.py",
+      "git_blob_sha1": "0c12e9fc4e1a3ae20f36e87e79d7e8f59d09895e",
+      "bytes": 2140
+    },
+    {
+      "target": "candidates/python-network/src/kindred_superstructure/transport.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "src/kindred_superstructure/transport.py",
+      "git_blob_sha1": "ef18325c49023c9b8509e187dc32ddbc96309a77",
+      "bytes": 796
+    },
+    {
+      "target": "candidates/python-network/tests/__init__.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/__init__.py",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "target": "candidates/python-network/tests/fixtures/__init__.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/fixtures/__init__.py",
+      "git_blob_sha1": "54c3525757233572752dbb50858608812cd2df2f",
+      "bytes": 68
+    },
+    {
+      "target": "candidates/python-network/tests/fixtures/runtime.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/fixtures/runtime.py",
+      "git_blob_sha1": "75748e4d4ecdd97df8ccf13fb9e4c2b5944454a0",
+      "bytes": 3206
+    },
+    {
+      "target": "candidates/python-network/tests/fixtures/transport.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/fixtures/transport.py",
+      "git_blob_sha1": "ceae3fd6f391d46fc8e77bd0a63033f4ba5d93a3",
+      "bytes": 1578
+    },
+    {
+      "target": "candidates/python-network/tests/test_architecture_policy.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_architecture_policy.py",
+      "git_blob_sha1": "7057847f6546c52d1b65544514920ab064b0adcc",
+      "bytes": 5351
+    },
+    {
+      "target": "candidates/python-network/tests/test_communications_b2b.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_communications_b2b.py",
+      "git_blob_sha1": "1793aa7aa2372fa259596ffc11f571d758ab4a78",
+      "bytes": 4035
+    },
+    {
+      "target": "candidates/python-network/tests/test_contracts.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_contracts.py",
+      "git_blob_sha1": "77e3bc241aa6f2b7ecfc2485782b9bc6666e5d96",
+      "bytes": 879
+    },
+    {
+      "target": "candidates/python-network/tests/test_evidence.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_evidence.py",
+      "git_blob_sha1": "3ac293631ae7d3ee003a9c3bfa6a06757194fe8e",
+      "bytes": 1808
+    },
+    {
+      "target": "candidates/python-network/tests/test_http_transport.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_http_transport.py",
+      "git_blob_sha1": "edfbd751b71437146be52e5eac9394f89b967303",
+      "bytes": 675
+    },
+    {
+      "target": "candidates/python-network/tests/test_intelligence_foundation.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_intelligence_foundation.py",
+      "git_blob_sha1": "ca9c16257b72c0bc819689a4bbedbdb136007516",
+      "bytes": 3636
+    },
+    {
+      "target": "candidates/python-network/tests/test_partner_sdk.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_partner_sdk.py",
+      "git_blob_sha1": "465ac93bbb70e71b86761ef84db31cc14436fcd2",
+      "bytes": 1916
+    },
+    {
+      "target": "candidates/python-network/tests/test_persistence.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_persistence.py",
+      "git_blob_sha1": "7f5bed5d4191d3d20fad449a0cb0996bebf2383b",
+      "bytes": 3937
+    },
+    {
+      "target": "candidates/python-network/tests/test_production_policy.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_production_policy.py",
+      "git_blob_sha1": "ae816edafc3d673669e8279c407d1742538ec8c0",
+      "bytes": 2153
+    },
+    {
+      "target": "candidates/python-network/tests/test_production_route_audit.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_production_route_audit.py",
+      "git_blob_sha1": "8387fe5ba2e3126eb4c79e216ac2246fe4d027dc",
+      "bytes": 694
+    },
+    {
+      "target": "candidates/python-network/tests/test_provider_b2b_policy.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_provider_b2b_policy.py",
+      "git_blob_sha1": "e9c2e2f634bd74481ec91ae8d21c2838fffe1f7d",
+      "bytes": 2240
+    },
+    {
+      "target": "candidates/python-network/tests/test_runtime.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_runtime.py",
+      "git_blob_sha1": "643697da5597f9e27ca5d7a04733bbcbbd37e9cf",
+      "bytes": 3783
+    },
+    {
+      "target": "candidates/python-network/tests/test_strata_network.py",
+      "source_commit": "1cd44b93c2bc1f924fbda5f7717ec491ec590aeb",
+      "source_path": "tests/test_strata_network.py",
+      "git_blob_sha1": "b1ffa3d7c3679be8b43407c433efd869bdcdad29",
+      "bytes": 8169
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/EVIDENCE_REGISTER.md",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/EVIDENCE_REGISTER.md",
+      "git_blob_sha1": "da0f9ce967b2e5a779eb1b7bbf8d221782062450",
+      "bytes": 322
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/direct-pipe-measurement-v1.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/direct-pipe-measurement-v1.json",
+      "git_blob_sha1": "bc28faf0601485f13ea366aebee065cd1464ccf7",
+      "bytes": 15005
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/direct-pipe-process-attachment-v1.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/direct-pipe-process-attachment-v1.json",
+      "git_blob_sha1": "d0f959f22e5788d7c2806331ed038caf2c6a938f",
+      "bytes": 2307
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/process-intelligence-proof.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/process-intelligence-proof.json",
+      "git_blob_sha1": "8d2cb6d8aee6813650e82395196c5d61cfa0534b",
+      "bytes": 1960
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/superwave/sw06-verified-baseline/large-artifact-index.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/superwave/sw06-verified-baseline/large-artifact-index.json",
+      "git_blob_sha1": "9c92207129cb0faf4ce5effe6acb0c1b142ddf7f",
+      "bytes": 928
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/superwave/sw06-verified-baseline/sw05-strata-attachment-receipt.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/superwave/sw06-verified-baseline/sw05-strata-attachment-receipt.json",
+      "git_blob_sha1": "d03f18be1dfab6e2d880e1049a8d4f8c78298b73",
+      "bytes": 4634
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/superwave/sw06-verified-baseline/sw06-c-direct-pipe-runtime-receipt.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/superwave/sw06-verified-baseline/sw06-c-direct-pipe-runtime-receipt.json",
+      "git_blob_sha1": "ab53d39e3b097f0a2691d3bc138d46a217aeb76b",
+      "bytes": 1789
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/superwave/sw06-verified-baseline/sw06-d1-process-attachment-contract-receipt.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/superwave/sw06-verified-baseline/sw06-d1-process-attachment-contract-receipt.json",
+      "git_blob_sha1": "d5fa07ebd04d0a85270e3ac2af06bf98d674a384",
+      "bytes": 744
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/superwave/sw06-verified-baseline/sw06-d2-final-attachment-receipt.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/superwave/sw06-verified-baseline/sw06-d2-final-attachment-receipt.json",
+      "git_blob_sha1": "92b30a7d6afafad62bddaf55c777887ac7ab6fad",
+      "bytes": 1660
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/superwave/sw06-verified-baseline/sw06-d2-final-summary.txt",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/superwave/sw06-verified-baseline/sw06-d2-final-summary.txt",
+      "git_blob_sha1": "c825b61a8c93f9c433be0b46c5a011d2e7d579b0",
+      "bytes": 902
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/evidence/superwave/sw06-verified-baseline/verified-baseline-manifest.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "evidence/superwave/sw06-verified-baseline/verified-baseline-manifest.json",
+      "git_blob_sha1": "7107f58ffc7001b2bdcd0f9ea3b6034716744d4d",
+      "bytes": 1504
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/README.md",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/README.md",
+      "git_blob_sha1": "56a1fdc5ef6916ecb38cb4f8bbee47261ae33610",
+      "bytes": 4098
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/evidence/closed-adaptive-cognition-loop-proof.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/evidence/closed-adaptive-cognition-loop-proof.json",
+      "git_blob_sha1": "1900adbb83c8b2ecdd5f7f8afd9c63a2af9b06a0",
+      "bytes": 2434
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/evidence/cognitive-body-seed-proof.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/evidence/cognitive-body-seed-proof.json",
+      "git_blob_sha1": "dafb0c6c3a684a0abb5028ffdfd5162f36cbb8e6",
+      "bytes": 1790
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/evidence/continuous-cognitive-recovery-proof.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/evidence/continuous-cognitive-recovery-proof.json",
+      "git_blob_sha1": "c2c75dc6fba136e94cd329e1c5cfba5754cd15b0",
+      "bytes": 2844
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/evidence/persistent-cognitive-state-restart-proof.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/evidence/persistent-cognitive-state-restart-proof.json",
+      "git_blob_sha1": "5eb8411c4be284aa08cd4a5eca5fc78a087c6fd7",
+      "bytes": 2758
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/evidence/process-intelligence-nerve-map.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/evidence/process-intelligence-nerve-map.json",
+      "git_blob_sha1": "9e888b36e8c5116cb5b8c2fbeb3535555af2a472",
+      "bytes": 33869
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/evidence/process-port-contract-alignment-proof.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/evidence/process-port-contract-alignment-proof.json",
+      "git_blob_sha1": "cbae23d411837e72efc3e8f06bf619f4b423c11d",
+      "bytes": 19293
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/evidence/real-process-intelligence-attachment-proof.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/evidence/real-process-intelligence-attachment-proof.json",
+      "git_blob_sha1": "c7c0ee5c7d66575ed156635e495582e3107f2c38",
+      "bytes": 2765
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/evidence/real-prosynthesized-capability-body-proof.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/evidence/real-prosynthesized-capability-body-proof.json",
+      "git_blob_sha1": "95a70fba3208272de111cef076e98094432705a6",
+      "bytes": 2963
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/evidence/real-synaptizer-feedback-proof.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/evidence/real-synaptizer-feedback-proof.json",
+      "git_blob_sha1": "13ca5402cebbe06e41a59b520edfdab88f81ee05",
+      "bytes": 2262
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/evidence/sw02-body-contract-map.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/evidence/sw02-body-contract-map.json",
+      "git_blob_sha1": "1d48a46971eb751bbb0143d41dfc51180e29360a",
+      "bytes": 141729
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/package.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/package.json",
+      "git_blob_sha1": "79b636803448e05319d56ea6d5fc85088c5bd7f5",
+      "bytes": 278
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/runtime-manifest.json",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/runtime-manifest.json",
+      "git_blob_sha1": "5144523cdcfd7fcb43fa8bc1c3d2a6c3eac66b47",
+      "bytes": 1415
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/agent-protocol.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/agent-protocol.mjs",
+      "git_blob_sha1": "31e9807e28fbae3dfe781996166615552849b967",
+      "bytes": 41747
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/brainstem-companion-decision.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/brainstem-companion-decision.mjs",
+      "git_blob_sha1": "ef08fd1e191fc26e5c0fc65d263e88ff71557a63",
+      "bytes": 8307
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/brainstem-memory-decision.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/brainstem-memory-decision.mjs",
+      "git_blob_sha1": "00ce4e68feee90716c802a401bad1f176bf33dcf",
+      "bytes": 9364
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/capability-discovery.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/capability-discovery.mjs",
+      "git_blob_sha1": "b0e0579db54dad5277c4cafd9534657876ddfa0e",
+      "bytes": 16014
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/cognitive-body.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/cognitive-body.mjs",
+      "git_blob_sha1": "4277fc777c4b27f0a3ebc412bc282adb169bf3e7",
+      "bytes": 17983
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/cognitive-state-store.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/cognitive-state-store.mjs",
+      "git_blob_sha1": "27e4a74911167d2331221738d405c51e362d0dd2",
+      "bytes": 5919
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/companion-communication.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/companion-communication.mjs",
+      "git_blob_sha1": "6a4779ce06e5146ff0a2b3d2fa7bfc3391e8f444",
+      "bytes": 7601
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/companion-memory-proposal.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/companion-memory-proposal.mjs",
+      "git_blob_sha1": "f8ceea36dfaa23251e242fcdfbe4b1a7693c98a3",
+      "bytes": 9319
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/direct-pipe-process-boundary-adapter.v1.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/direct-pipe-process-boundary-adapter.v1.mjs",
+      "git_blob_sha1": "92a08691acba5e7bf885ea4aa778049d86e11995",
+      "bytes": 2306
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/direct-pipe-runtime.v1.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/direct-pipe-runtime.v1.mjs",
+      "git_blob_sha1": "f354d0a6a84c22c83fa2b0e099e525f36cee89fa",
+      "bytes": 5960
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/process-intelligence.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/process-intelligence.mjs",
+      "git_blob_sha1": "ade503175d22463fa49cecae41443f6c8c75aa3f",
+      "bytes": 34710
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/synaptizer.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/src/synaptizer.mjs",
+      "git_blob_sha1": "3520c13cb278a67c95e2941282ae0ebed6fa1ef4",
+      "bytes": 14049
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/agent-protocol.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/agent-protocol.test.mjs",
+      "git_blob_sha1": "6c780ba8c479b23845233baa539bc5d681b9d362",
+      "bytes": 16829
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/brainstem-companion-decision.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/brainstem-companion-decision.test.mjs",
+      "git_blob_sha1": "2f6c253822a0d6a1d277bdfe54425c1cac7f9d2d",
+      "bytes": 6245
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/brainstem-memory-decision.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/brainstem-memory-decision.test.mjs",
+      "git_blob_sha1": "ab5b854a28782ab3f1c058863e086b03ae4c8153",
+      "bytes": 6279
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/capability-discovery.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/capability-discovery.test.mjs",
+      "git_blob_sha1": "da7cc60a28a786b947677b812aaefeb167e3865e",
+      "bytes": 12649
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/cognitive-body-adaptive-loop.integration.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/cognitive-body-adaptive-loop.integration.test.mjs",
+      "git_blob_sha1": "891beff3cab856628054c591f6bf993de7a08d3e",
+      "bytes": 25992
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/cognitive-body-process-intelligence-integration.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/cognitive-body-process-intelligence-integration.test.mjs",
+      "git_blob_sha1": "f4a5e79867f4c8d16231c8ad014abde9615b30b4",
+      "bytes": 11129
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/cognitive-body-prosynthesized-capability-integration.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/cognitive-body-prosynthesized-capability-integration.test.mjs",
+      "git_blob_sha1": "a04f941adeb93ac729f6d569e5f91b6c8fb4cd79",
+      "bytes": 22888
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/cognitive-body-synaptizer-feedback.integration.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/cognitive-body-synaptizer-feedback.integration.test.mjs",
+      "git_blob_sha1": "7e72ce05ef123947ec7995999751efd310db63a4",
+      "bytes": 21063
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/cognitive-body.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/cognitive-body.test.mjs",
+      "git_blob_sha1": "4c5f4ed1a77622259b25a4356bbebf831daed753",
+      "bytes": 6690
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/cognitive-state-continuation-worker.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/cognitive-state-continuation-worker.mjs",
+      "git_blob_sha1": "1651e248effe9752b5f875dd0d4fe3def7c61fd9",
+      "bytes": 19698
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/cognitive-state-continuation.integration.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/cognitive-state-continuation.integration.test.mjs",
+      "git_blob_sha1": "f8f82c3f599d7f56f58158f9bb4849321e353e4e",
+      "bytes": 17668
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/cognitive-state-persistence.integration.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/cognitive-state-persistence.integration.test.mjs",
+      "git_blob_sha1": "00ec144e8a31ad68ecf1989fbcd7e69725c9f482",
+      "bytes": 10496
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/cognitive-state-restart-probe.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/cognitive-state-restart-probe.mjs",
+      "git_blob_sha1": "ed264f740fe57511e5ea5482f1c321cbdd056d18",
+      "bytes": 5285
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/companion-communication.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/companion-communication.test.mjs",
+      "git_blob_sha1": "200c5a4072b0ebe1e28d18613ea9c37e9926d58e",
+      "bytes": 5313
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/companion-memory-proposal.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/companion-memory-proposal.test.mjs",
+      "git_blob_sha1": "a1878475caa18ff9b0c39968e959c9b6ee17bef7",
+      "bytes": 5854
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/direct-pipe-process-boundary-adapter.v1.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/direct-pipe-process-boundary-adapter.v1.test.mjs",
+      "git_blob_sha1": "a6c2d696cb82c54fa57c6d561d6a1d50ec026b94",
+      "bytes": 23519
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/direct-pipe-runtime.v1.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/direct-pipe-runtime.v1.test.mjs",
+      "git_blob_sha1": "6cb717661ba0c5d9b5ac885176874999cad6649f",
+      "bytes": 2957
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/process-intelligence.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/process-intelligence.test.mjs",
+      "git_blob_sha1": "8a333ff90e473a6762a24a1ae02c234321dafa68",
+      "bytes": 19103
+    },
+    {
+      "target": "candidates/unified-quad-direct-pipe/runtime/unified-quad/test/revocation.test.mjs",
+      "source_commit": "999bf2c51da3d014d71150e2295287128a57e63a",
+      "source_path": "runtime/unified-quad/test/revocation.test.mjs",
+      "git_blob_sha1": "c8552c3e3833b5aec7e7ca8d25c6789c30ac6df3",
+      "bytes": 11054
+    }
+  ]
+}

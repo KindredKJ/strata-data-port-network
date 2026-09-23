@@ -1,0 +1,9 @@
+{
+  "schema_version":"1.0.0",
+  "scope":"Strata Data Port lifecycle metadata and evidence",
+  "default":"retain-until-founder-authorized-policy-and-legal-basis-are-configured",
+  "payload_storage":"prohibited-in-operational-views",
+  "tenant_override":"requires-authorized-tenant-policy-within-governance-bounds",
+  "deletion":"not-automatic",
+  "legal_authorization_claim":false
+}

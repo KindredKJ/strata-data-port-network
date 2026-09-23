@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0.0",
+  "source_basis": [
+    "founder directives",
+    "local repository history",
+    "public BRAINSTEM metadata"
+  ],
+  "limitations": [
+    "private repositories unavailable",
+    "no inference treated as discovered implementation"
+  ],
+  "authorities": {
+    "BRAINSTEM": "protected cross-domain cognition and Adaptive Orchestration Intelligence",
+    "Kindred One": "B2B intelligence enablement",
+    "KINDRED-WATT": "bounded energy-domain intelligence",
+    "Strata Data Port": "governed transport, not intelligence",
+    "Emit Core": "reconciliation and operational truth",
+    "WATT-BLOCK": "immutable record only"
+  },
+  "preserved_ambition": [
+    "adaptive cross-domain orchestration",
+    "governed learning",
+    "energy observation-prediction-optimization",
+    "bounded autonomy",
+    "partner enablement"
+  ],
+  "systems": [
+    {
+      "name": "BRAINSTEM",
+      "intent": "Adaptive Orchestration Intelligence",
+      "status": "partially implemented",
+      "authority": "kindred-brainstem public repository; integration blocked"
+    },
+    {
+      "name": "Kindred One",
+      "intent": "B2B intelligence enablement",
+      "status": "architectural only"
+    },
+    {
+      "name": "Kindred WATT",
+      "intent": "adaptive energy intelligence",
+      "status": "repository authority unresolved",
+      "blocker": "credentials and hardware"
+    },
+    {
+      "name": "OmniFlywheel",
+      "intent": "outcome optimization",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "Memory Fabric",
+      "intent": "protected memory",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "Proof Engine",
+      "intent": "evidence verification",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "Governance Kernel",
+      "intent": "policy enforcement",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "Ceramic",
+      "intent": "memory/data capability",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "Mesh",
+      "intent": "network routing",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "IAMIX",
+      "intent": "identity composition",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "BORG",
+      "intent": "security",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "KAS",
+      "intent": "capability composition",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "Genesis",
+      "intent": "creation system",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "Dot AI",
+      "intent": "intent and outcome layer",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "K1",
+      "intent": "assistant/domain capability",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "Agent-00DT",
+      "intent": "agent capability",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "AI Lab",
+      "intent": "model development environment",
+      "status": "repository authority unresolved"
+    },
+    {
+      "name": "Swarm Core",
+      "intent": "multi-agent coordination",
+      "status": "repository authority unresolved"
+    }
+  ]
+}

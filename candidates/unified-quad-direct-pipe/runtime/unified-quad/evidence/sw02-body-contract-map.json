@@ -1,0 +1,3621 @@
+{
+  "schema": "kindred.sw02.body-contract-map.v1",
+  "wave": "SW02A-BODY-CONTRACT-DISCOVERY",
+  "generatedAt": "2026-09-01T20:28:01.2602725-06:00",
+  "repository": "D:\\KindredLabs\\kindred-labs-superstructure",
+  "runtime": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad",
+  "sourceFilesScanned": 7,
+  "priorNerveMap": {
+    "path": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\evidence\\process-intelligence-nerve-map.json",
+    "sha256": "8B2B861AFD66C6456727E3E38785F47EBFE2A649AB798973AE4D12050D7B297F"
+  },
+  "evidenceBoundary": {
+    "sourceHitsAreRuntimeProof": false,
+    "processIntelligenceRewritten": false,
+    "newBoundaryAdapterCreated": false,
+    "realCognitivePortConnectionClaimed": false,
+    "realDcmlConnectionClaimed": false,
+    "realSynaptizerConnectionClaimed": false
+  },
+  "categoryCounts": {
+    "INTENT_PORT": 0,
+    "COGNITIVE_PORT": 0,
+    "DCML": 0,
+    "CAPABILITY_SELECTION": 5,
+    "PROCESS_BOUNDARY": 9,
+    "SYNAPTIZER": 1,
+    "VERIFICATION": 16,
+    "EVENT_SYSTEM": 5,
+    "STRATA": 19,
+    "TESSERACT": 0,
+    "DIRECT_PIPE": 1
+  },
+  "requiredAttachmentCategories": [
+    "COGNITIVE_PORT",
+    "DCML",
+    "CAPABILITY_SELECTION",
+    "VERIFICATION",
+    "EVENT_SYSTEM",
+    "PROCESS_BOUNDARY"
+  ],
+  "missingRequiredCategories": [
+    "COGNITIVE_PORT",
+    "DCML"
+  ],
+  "rankedFiles": [
+    {
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "hitCount": 53,
+      "categoryCount": 7,
+      "categories": [
+        "CAPABILITY_SELECTION",
+        "DIRECT_PIPE",
+        "EVENT_SYSTEM",
+        "PROCESS_BOUNDARY",
+        "STRATA",
+        "SYNAPTIZER",
+        "VERIFICATION"
+      ]
+    },
+    {
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "hitCount": 3,
+      "categoryCount": 1,
+      "categories": [
+        "VERIFICATION"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "relativeFile": "src\\companion-memory-proposal.mjs",
+      "line": 32,
+      "text": "\"verification\","
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "relativeFile": "src\\companion-memory-proposal.mjs",
+      "line": 133,
+      "text": "value.verification !== \"unverified\" ||"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "relativeFile": "src\\companion-memory-proposal.mjs",
+      "line": 185,
+      "text": "verification: \"unverified\","
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 15,
+      "text": "\"kindred.process-intelligence-event.v1\";"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 17,
+      "text": "\"kindred.strata-process-commitment-adapter.v1\";"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 46,
+      "text": "\"VERIFIED\","
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 93,
+      "text": "export function stateRoot(label, value) {"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 293,
+      "text": "verified: input.verified === true,"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 326,
+      "text": "(record) => record.success && record.verified,"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 350,
+      "text": ": selected.filter((record) => record.verified).length / count,"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 367,
+      "text": ": record.contribution === \"VERIFICATION\""
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 369,
+      "text": ": record.verified"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 414,
+      "text": "return { ...delta, result_fitness_root: stateRoot(\"process-fitness\", delta) };"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 468,
+      "text": "genome_ref: stateRoot(\"process-genome\", genome),"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 526,
+      "text": "return stateRoot(\"capability-composition-cache-key\", { intentClass, contextRoot });"
+    },
+    {
+      "category": "CAPABILITY_SELECTION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 604,
+      "text": "return { capability: candidate, cache_hit: false, discovery_count: skills.length };"
+    },
+    {
+      "category": "CAPABILITY_SELECTION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 609,
+      "text": "if (!capabilityStates.has(candidate.status) || candidate.status !== \"CANDIDATE\") {"
+    },
+    {
+      "category": "CAPABILITY_SELECTION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 610,
+      "text": "reject(\"capability_not_candidate\");"
+    },
+    {
+      "category": "CAPABILITY_SELECTION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 626,
+      "text": "candidate_capability_id: candidate.capability_id,"
+    },
+    {
+      "category": "SYNAPTIZER",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 630,
+      "text": "synaptic_evidence: clone(evidence.synaptic_evidence ?? []),"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 641,
+      "text": "synthesis_receipt_ref: stateRoot(\"prosynthesine-receipt\", receipt),"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 643,
+      "text": "const commitment = {"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 653,
+      "text": "receipt.resulting_state_root = stateRoot(\"prosynthesized-capability\", commitment);"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 683,
+      "text": "input_state_root: stateRoot(\"edge-input\", before),"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 684,
+      "text": "output_state_root: stateRoot(\"edge-output\", state),"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 688,
+      "text": "verified: output.verified,"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 705,
+      "text": "verified: input.verify(state) === true,"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 706,
+      "text": "outcome_state_root: stateRoot(\"verified-outcome\", state),"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 706,
+      "text": "outcome_state_root: stateRoot(\"verified-outcome\", state),"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 730,
+      "text": "const graphRoot = stateRoot(\"post-synthesis-graph\", graph);"
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 752,
+      "text": "event: \"RECOMPILED\","
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 756,
+      "text": "graph_root: stateRoot(\"post-synthesis-graph\", graph),"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 773,
+      "text": "input_state_root: stateRoot(\"edge-input\", before),"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 774,
+      "text": "output_state_root: stateRoot(\"edge-output\", input.state),"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 778,
+      "text": "verified: output.verified,"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 805,
+      "text": "state_root: stateRoot(\"post-synthesis-working-set\", input.state),"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 810,
+      "text": "verified: input.verify(input.state) === true,"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 825,
+      "text": "materialized_at_port: nonEmpty(options.port, \"failover_port_invalid\"),"
+    },
+    {
+      "category": "CAPABILITY_SELECTION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 831,
+      "text": "export function selectExecutionComplexity(input) {"
+    },
+    {
+      "category": "PROCESS_BOUNDARY",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 843,
+      "text": "export class ProcessIntelligenceBoundaryAdapter {"
+    },
+    {
+      "category": "PROCESS_BOUNDARY",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 856,
+      "text": "this.publish(this.toSynaptizerEvent(record));"
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 856,
+      "text": "this.publish(this.toSynaptizerEvent(record));"
+    },
+    {
+      "category": "PROCESS_BOUNDARY",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 860,
+      "text": "mapPort(componentClass) {"
+    },
+    {
+      "category": "PROCESS_BOUNDARY",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 866,
+      "text": "discoverProcessSkills({ outcome_class, context }) {"
+    },
+    {
+      "category": "PROCESS_BOUNDARY",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 874,
+      "text": "discoverProsynthesizedCapability({ intent_class, context_root }) {"
+    },
+    {
+      "category": "PROCESS_BOUNDARY",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 891,
+      "text": "requestCandidate(payload) {"
+    },
+    {
+      "category": "PROCESS_BOUNDARY",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 895,
+      "text": "executeCapability(payload) {"
+    },
+    {
+      "category": "PROCESS_BOUNDARY",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 899,
+      "text": "requestRecomposition(payload) {"
+    },
+    {
+      "category": "PROCESS_BOUNDARY",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 903,
+      "text": "toSynaptizerEvent(record) {"
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 903,
+      "text": "toSynaptizerEvent(record) {"
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 917,
+      "text": "verification_contribution: record.contribution === \"VERIFICATION\","
+    },
+    {
+      "category": "VERIFICATION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 919,
+      "text": "verified: record.verified,"
+    },
+    {
+      "category": "EVENT_SYSTEM",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 927,
+      "text": "state_root: stateRoot(\"process-intelligence-event\", record),"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 927,
+      "text": "state_root: stateRoot(\"process-intelligence-event\", record),"
+    },
+    {
+      "category": "STRATA",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 938,
+      "text": "state_root: stateRoot(`strata-${kind.toLowerCase()}`, value),"
+    },
+    {
+      "category": "DIRECT_PIPE",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "relativeFile": "src\\process-intelligence.mjs",
+      "line": 941,
+      "text": "direct_pipe: false,"
+    }
+  ],
+  "declarations": [
+    {
+      "kind": "DECLARATION",
+      "symbol": "AGENT_IDENTITY_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1,
+      "text": "export const AGENT_IDENTITY_CONTRACT_VERSION = \"kindred.agent.identity.v1\";"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "CAPABILITY_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 2,
+      "text": "export const CAPABILITY_CONTRACT_VERSION = \"kindred.agent.capability.v1\";"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "AUTHORITY_GRANT_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 3,
+      "text": "export const AUTHORITY_GRANT_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "MESSAGE_ENVELOPE_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 5,
+      "text": "export const MESSAGE_ENVELOPE_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROTOCOL_RECEIPT_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 7,
+      "text": "export const PROTOCOL_RECEIPT_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "REVOCATION_NOTICE_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 9,
+      "text": "export const REVOCATION_NOTICE_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "REVOCATION_RECEIPT_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 11,
+      "text": "export const REVOCATION_RECEIPT_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "RUNTIME_COMPONENTS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 14,
+      "text": "export const RUNTIME_COMPONENTS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "AGENT_CLASSES",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 20,
+      "text": "export const AGENT_CLASSES = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "AUTHORITY_LEVELS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 26,
+      "text": "export const AUTHORITY_LEVELS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "MESSAGE_TYPES",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 32,
+      "text": "export const MESSAGE_TYPES = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "DATA_CLASSIFICATIONS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 53,
+      "text": "export const DATA_CLASSIFICATIONS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "IDENTITY_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 60,
+      "text": "export const IDENTITY_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "CAPABILITY_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 86,
+      "text": "export const CAPABILITY_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "AUTHORITY_GRANT_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 104,
+      "text": "export const AUTHORITY_GRANT_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "ENVELOPE_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 122,
+      "text": "export const ENVELOPE_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROTOCOL_RECEIPT_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 142,
+      "text": "export const PROTOCOL_RECEIPT_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "REVOCATION_NOTICE_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 150,
+      "text": "export const REVOCATION_NOTICE_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "REVOCATION_RECEIPT_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 166,
+      "text": "export const REVOCATION_RECEIPT_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "componentSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 189,
+      "text": "const componentSet = new Set(RUNTIME_COMPONENTS);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "agentClassSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 190,
+      "text": "const agentClassSet = new Set(AGENT_CLASSES);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "authoritySet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 191,
+      "text": "const authoritySet = new Set(AUTHORITY_LEVELS);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "authorityOrder",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 192,
+      "text": "const authorityOrder = new Map("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "messageTypeSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 195,
+      "text": "const messageTypeSet = new Set(MESSAGE_TYPES);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "classificationSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 196,
+      "text": "const classificationSet = new Set(DATA_CLASSIFICATIONS);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "lifecycleSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 197,
+      "text": "const lifecycleSet = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "healthSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 205,
+      "text": "const healthSet = new Set([\"healthy\", \"degraded\", \"unavailable\", \"unknown\"]);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "actionTypeSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 206,
+      "text": "const actionTypeSet = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "riskSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 213,
+      "text": "const riskSet = new Set([\"low\", \"medium\", \"high\", \"critical\"]);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "executionModeSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 214,
+      "text": "const executionModeSet = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grantStatusSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 219,
+      "text": "const grantStatusSet = new Set([\"active\", \"suspended\", \"revoked\"]);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "forbiddenPayloadKeys",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 220,
+      "text": "const forbiddenPayloadKeys = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "agentIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 231,
+      "text": "const agentIdPattern = /^kindred-agent-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "tenantIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 232,
+      "text": "const tenantIdPattern = /^kindred-tenant-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grantIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 233,
+      "text": "const grantIdPattern = /^kindred-grant-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capabilityIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 234,
+      "text": "const capabilityIdPattern = /^kindred\\.capability\\.[a-z0-9_.-]{3,96}\\.v[0-9]+$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "messageIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 235,
+      "text": "const messageIdPattern = /^kindred-message-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "opaqueReferencePattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 236,
+      "text": "const opaqueReferencePattern = /^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "noncePattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 237,
+      "text": "const noncePattern = /^[A-Za-z0-9_-]{16,128}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "revocationIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 238,
+      "text": "const revocationIdPattern = /^kindred-revocation-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "authenticationReferencePattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 239,
+      "text": "const authenticationReferencePattern ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "versionPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 241,
+      "text": "const versionPattern = /^[0-9]+\\.[0-9]+\\.[0-9]+$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "revocationReasonSet",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 242,
+      "text": "const revocationReasonSet = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capabilityMessageTypes",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 249,
+      "text": "const capabilityMessageTypes = new Set("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "directAgentExecutionTypes",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 255,
+      "text": "const directAgentExecutionTypes = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "MAX_ENVELOPE_TTL_MS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 260,
+      "text": "const MAX_ENVELOPE_TTL_MS = 15 * 60 * 1000;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "MAX_FUTURE_SKEW_MS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 261,
+      "text": "const MAX_FUTURE_SKEW_MS = 5 * 60 * 1000;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "MAX_PAYLOAD_BYTES",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 262,
+      "text": "const MAX_PAYLOAD_BYTES = 32 * 1024;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "MAX_PAYLOAD_DEPTH",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 263,
+      "text": "const MAX_PAYLOAD_DEPTH = 8;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "AgentProtocolError",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 265,
+      "text": "export class AgentProtocolError extends Error {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 266,
+      "text": "constructor(reasonClass, retryable = false) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "reject",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 275,
+      "text": "function reject(reasonClass, retryable = false) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "isRecord",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 279,
+      "text": "function isRecord(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "exactKeys",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 283,
+      "text": "function exactKeys(value, fields, reasonClass) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "actual",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 285,
+      "text": "const actual = Object.keys(value).sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expected",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 286,
+      "text": "const expected = [...fields].sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "boundedString",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 296,
+      "text": "function boundedString(value, minimum, maximum) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "timestamp",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 305,
+      "text": "function timestamp(value, reasonClass) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "uniqueStrings",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 312,
+      "text": "function uniqueStrings(value, maximum = 64, minimum = 0) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateNullableReference",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 322,
+      "text": "function validateNullableReference(value, pattern = null) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validatePayload",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 329,
+      "text": "function validatePayload(value, depth = 0) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validatePrincipal",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 359,
+      "text": "function validatePrincipal(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateAgentIdentity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 376,
+      "text": "export function validateAgentIdentity(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 377,
+      "text": "const identity = exactKeys(value, IDENTITY_FIELDS, \"identity_fields_invalid\");"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateCapability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 494,
+      "text": "export function validateCapability(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 495,
+      "text": "const capability = exactKeys("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateAuthorityGrant",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 537,
+      "text": "export function validateAuthorityGrant(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grant",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 538,
+      "text": "const grant = exactKeys("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "issuedAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 564,
+      "text": "const issuedAt = timestamp(grant.issued_at, \"authority_grant_timestamp_invalid\");"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expiresAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 565,
+      "text": "const expiresAt = timestamp("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateEnvelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 579,
+      "text": "export function validateEnvelope(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 580,
+      "text": "const envelope = exactKeys(value, ENVELOPE_FIELDS, \"envelope_fields_invalid\");"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "sentAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 606,
+      "text": "const sentAt = timestamp(envelope.timestamp, \"envelope_timestamp_invalid\");"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expiresAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 607,
+      "text": "const expiresAt = timestamp("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "payloadBytes",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 616,
+      "text": "let payloadBytes;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateProtocolReceipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 626,
+      "text": "export function validateProtocolReceipt(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "receipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 627,
+      "text": "const receipt = exactKeys("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateRevocationNotice",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 645,
+      "text": "export function validateRevocationNotice(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "notice",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 646,
+      "text": "const notice = exactKeys("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "targetValid",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 651,
+      "text": "const targetValid ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateRevocationReceipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 675,
+      "text": "export function validateRevocationReceipt(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "receipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 676,
+      "text": "const receipt = exactKeys("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "targetValid",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 681,
+      "text": "const targetValid ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "effectiveAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 685,
+      "text": "const effectiveAt = timestamp("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "recordedAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 689,
+      "text": "const recordedAt = timestamp("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "ReplayGuard",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 722,
+      "text": "export class ReplayGuard {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 723,
+      "text": "constructor(options = {}) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "prune",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 732,
+      "text": "prune(now = this.now()) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "has",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 738,
+      "text": "has(senderKey, nonce, now = this.now()) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "consume",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 743,
+      "text": "consume(senderKey, nonce, expiresAt) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "now",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 744,
+      "text": "const now = this.now();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "key",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 746,
+      "text": "const key = senderKey + \":\" + nonce;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "AgentProtocolGateway",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 755,
+      "text": "export class AgentProtocolGateway {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 756,
+      "text": "constructor(options = {}) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "registerIdentity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 784,
+      "text": "registerIdentity(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 785,
+      "text": "const identity = validateAgentIdentity(value);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "existing",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 786,
+      "text": "const existing = this.identities.get(identity.agent_id);"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "registerCapability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 794,
+      "text": "registerCapability(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 795,
+      "text": "const capability = validateCapability(value);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "existing",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 796,
+      "text": "const existing = this.capabilities.get(capability.capability_id);"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "registerAuthorityGrant",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 804,
+      "text": "registerAuthorityGrant(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grant",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 805,
+      "text": "const grant = validateAuthorityGrant(value);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 806,
+      "text": "const identity = this.identities.get(grant.subject_agent_id);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "parent",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 827,
+      "text": "const parent = this.grants.get(grant.parent_grant_ref);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "existing",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 847,
+      "text": "const existing = this.grants.get(grant.grant_id);"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "requireActiveAgent",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 855,
+      "text": "requireActiveAgent(agentId) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 856,
+      "text": "const identity = this.identities.get(agentId);"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "authorizeAgentEnvelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 864,
+      "text": "authorizeAgentEnvelope(envelope, now) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 865,
+      "text": "const identity = this.requireActiveAgent(envelope.sender.id);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grant",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 884,
+      "text": "const grant = this.grants.get(envelope.authority_ref);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 912,
+      "text": "const capability = this.capabilities.get(envelope.requested_capability);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grant",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 930,
+      "text": "const grant = this.grants.get(envelope.authority_ref);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "parent",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 957,
+      "text": "const parent = this.grants.get(grant.parent_grant_ref);"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "authorizeComponentEnvelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 976,
+      "text": "authorizeComponentEnvelope(envelope) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "sender",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 977,
+      "text": "const sender = envelope.sender.id;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "recipient",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 978,
+      "text": "const recipient = envelope.recipient;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 987,
+      "text": "const capability ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "sentAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1058,
+      "text": "const sentAt = Date.parse(envelope.timestamp);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expiresAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1059,
+      "text": "const expiresAt = Date.parse(envelope.expires_at);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expiresAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1074,
+      "text": "const expiresAt = Date.parse(envelope.expires_at);"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "acceptEnvelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1090,
+      "text": "acceptEnvelope(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1091,
+      "text": "const envelope = validateEnvelope(value);"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "applyRevocation",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1098,
+      "text": "applyRevocation(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1099,
+      "text": "const envelope = validateEnvelope(value);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "now",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1100,
+      "text": "const now = this.now();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "notice",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1111,
+      "text": "const notice = validateRevocationNotice(envelope.payload);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identityUpdate",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1135,
+      "text": "let identityUpdate = null;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "affectedGrantIds",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1136,
+      "text": "const affectedGrantIds = new Set();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1138,
+      "text": "const identity = this.identities.get(notice.target_id);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grant",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1155,
+      "text": "const grant = this.grants.get(notice.target_id);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "changed",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1161,
+      "text": "let changed = true;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grantUpdates",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1179,
+      "text": "const grantUpdates = [...affectedGrantIds].map((grantId) =>"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "revocationReceipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1186,
+      "text": "const revocationReceipt = validateRevocationReceipt({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "createLivingCompanionIdentity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1219,
+      "text": "export function createLivingCompanionIdentity(options) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "companion",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1220,
+      "text": "const companion = options?.companion;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "accountId",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1221,
+      "text": "const accountId = options?.accountId;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "tenantId",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1222,
+      "text": "const tenantId = options?.tenantId;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capabilities",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1239,
+      "text": "const capabilities = options.capabilities ?? [];"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grantRefs",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1240,
+      "text": "const grantRefs = options.grantRefs ?? [];"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "budgetRefs",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1241,
+      "text": "const budgetRefs = options.budgetRefs ?? [];"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "suffix",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\agent-protocol.mjs",
+      "line": 1242,
+      "text": "const suffix = companion.id.replace(/^local-companion-/, \"\");"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "BRAINSTEM_COMPANION_DECISION_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 12,
+      "text": "export const BRAINSTEM_COMPANION_DECISION_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "BRAINSTEM_COMPANION_DECISION_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 14,
+      "text": "export const BRAINSTEM_COMPANION_DECISION_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "decisionIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 33,
+      "text": "const decisionIdPattern = /^brainstem-decision-[A-Za-z0-9_-]{20,48}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "messageIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 34,
+      "text": "const messageIdPattern = /^kindred-message-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "referencePattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 35,
+      "text": "const referencePattern = /^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "denialReasons",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 36,
+      "text": "const denialReasons = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "exactKeys",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 45,
+      "text": "function exactKeys(value, fields) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "actual",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 47,
+      "text": "const actual = Object.keys(value).sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expected",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 48,
+      "text": "const expected = [...fields].sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "digest",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 55,
+      "text": "function digest(label, ...values) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "reject",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 62,
+      "text": "function reject(reasonClass = \"decision_invalid\") {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "error",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 63,
+      "text": "const error = new Error(\"Brainstem companion decision rejected.\");"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateAdmissionReceipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 71,
+      "text": "function validateAdmissionReceipt(value, envelope, now) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "receipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 72,
+      "text": "let receipt;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "fallbackReferences",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 90,
+      "text": "function fallbackReferences(input = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "message",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 91,
+      "text": "const message = messageIdPattern.test(input?.envelope?.message_id ?? \"\")"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "correlation",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 94,
+      "text": "const correlation = referencePattern.test(input?.envelope?.correlation_id ?? \"\")"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "inspect",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 100,
+      "text": "function inspect(input, now) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 101,
+      "text": "let envelope;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 124,
+      "text": "let identity;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateBrainstemCompanionDecision",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 155,
+      "text": "export function validateBrainstemCompanionDecision(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "approved",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 179,
+      "text": "const approved = value.decision === \"approved\";"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "decideCompanionCommunication",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 195,
+      "text": "export function decideCompanionCommunication(input = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "now",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 196,
+      "text": "const now = Number(input.now);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "inspected",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 198,
+      "text": "const inspected = inspect(input, now);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "fallback",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 199,
+      "text": "const fallback = fallbackReferences(input);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 200,
+      "text": "const envelope = inspected.envelope;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "approved",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 201,
+      "text": "const approved = inspected.reason === \"local_acknowledgement_allowed\";"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "proposalMessageId",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 202,
+      "text": "const proposalMessageId = envelope?.message_id ?? fallback.message;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "correlationId",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 203,
+      "text": "const correlationId = envelope?.correlation_id ?? fallback.correlation;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "evidenceRefs",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-companion-decision.mjs",
+      "line": 204,
+      "text": "const evidenceRefs = approved"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "BRAINSTEM_MEMORY_DECISION_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 12,
+      "text": "export const BRAINSTEM_MEMORY_DECISION_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "BRAINSTEM_MEMORY_DECISION_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 14,
+      "text": "export const BRAINSTEM_MEMORY_DECISION_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "decisionIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 35,
+      "text": "const decisionIdPattern = /^brainstem-decision-[A-Za-z0-9_-]{20,48}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "messageIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 36,
+      "text": "const messageIdPattern = /^kindred-message-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "referencePattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 37,
+      "text": "const referencePattern = /^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "namespacePattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 38,
+      "text": "const namespacePattern = /^companion:local-companion-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "denialReasons",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 39,
+      "text": "const denialReasons = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "exactKeys",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 48,
+      "text": "function exactKeys(value, fields) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "actual",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 50,
+      "text": "const actual = Object.keys(value).sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expected",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 51,
+      "text": "const expected = [...fields].sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "digest",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 58,
+      "text": "function digest(label, ...values) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "reject",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 65,
+      "text": "function reject(reasonClass = \"memory_decision_invalid\") {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "error",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 66,
+      "text": "const error = new Error(\"Brainstem memory decision rejected.\");"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateAdmissionReceipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 74,
+      "text": "function validateAdmissionReceipt(value, envelope, now) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "receipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 75,
+      "text": "let receipt;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "fallbackReferences",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 90,
+      "text": "function fallbackReferences(input = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "message",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 91,
+      "text": "const message = messageIdPattern.test(input?.envelope?.message_id ?? \"\")"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "correlation",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 94,
+      "text": "const correlation = referencePattern.test(input?.envelope?.correlation_id ?? \"\")"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "inspect",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 100,
+      "text": "function inspect(input, now) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 101,
+      "text": "let envelope;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 126,
+      "text": "let identity;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateBrainstemMemoryDecision",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 161,
+      "text": "export function validateBrainstemMemoryDecision(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "approved",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 185,
+      "text": "const approved = value.decision === \"approved\";"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "decideCompanionMemory",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 208,
+      "text": "export function decideCompanionMemory(input = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "now",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 209,
+      "text": "const now = Number(input.now);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "inspected",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 211,
+      "text": "const inspected = inspect(input, now);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "fallback",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 212,
+      "text": "const fallback = fallbackReferences(input);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 213,
+      "text": "const envelope = inspected.envelope;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "approved",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 214,
+      "text": "const approved ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "proposalMessageId",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 216,
+      "text": "const proposalMessageId = envelope?.message_id ?? fallback.message;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "correlationId",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 217,
+      "text": "const correlationId = envelope?.correlation_id ?? fallback.correlation;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "evidenceRefs",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\brainstem-memory-decision.mjs",
+      "line": 218,
+      "text": "const evidenceRefs = approved"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "CAPABILITY_DISCOVERY_QUERY_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 13,
+      "text": "export const CAPABILITY_DISCOVERY_QUERY_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "CAPABILITY_DISCOVERY_RESULT_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 15,
+      "text": "export const CAPABILITY_DISCOVERY_RESULT_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "CAPABILITY_DISCOVERY_QUERY_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 17,
+      "text": "export const CAPABILITY_DISCOVERY_QUERY_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "CAPABILITY_DISCOVERY_RESULT_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 32,
+      "text": "export const CAPABILITY_DISCOVERY_RESULT_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "CAPABILITY_DISCOVERY_PROJECTION_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 49,
+      "text": "export const CAPABILITY_DISCOVERY_PROJECTION_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "actionTypes",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 63,
+      "text": "const actionTypes = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "classifications",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 70,
+      "text": "const classifications = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "riskLevels",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 76,
+      "text": "const riskLevels = Object.freeze([\"low\", \"medium\", \"high\", \"critical\"]);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "riskOrder",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 77,
+      "text": "const riskOrder = new Map(riskLevels.map((risk, index) => [risk, index]));"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "agentIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 78,
+      "text": "const agentIdPattern = /^kindred-agent-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "messageIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 79,
+      "text": "const messageIdPattern = /^kindred-message-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "referencePattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 80,
+      "text": "const referencePattern = /^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capabilityIdPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 81,
+      "text": "const capabilityIdPattern = /^kindred\\.capability\\.[a-z0-9_.-]{3,96}\\.v[0-9]+$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "versionPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 82,
+      "text": "const versionPattern = /^[0-9]+\\.[0-9]+\\.[0-9]+$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "DISCOVERY_TTL_MS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 83,
+      "text": "const DISCOVERY_TTL_MS = 2 * 60 * 1000;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "CapabilityDiscoveryError",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 85,
+      "text": "export class CapabilityDiscoveryError extends Error {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 86,
+      "text": "constructor(reasonClass) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "reject",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 95,
+      "text": "function reject(reasonClass) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "exactKeys",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 99,
+      "text": "function exactKeys(value, fields) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "actual",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 101,
+      "text": "const actual = Object.keys(value).sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expected",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 102,
+      "text": "const expected = [...fields].sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "uniqueEnum",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 109,
+      "text": "function uniqueEnum(value, allowed, maximum) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "digest",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 118,
+      "text": "function digest(label, ...values) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateCapabilityDiscoveryQuery",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 125,
+      "text": "export function validateCapabilityDiscoveryQuery(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateProjection",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 149,
+      "text": "function validateProjection(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateCapabilityDiscoveryResult",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 179,
+      "text": "export function validateCapabilityDiscoveryResult(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "projections",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 208,
+      "text": "const projections = value.capabilities.map(validateProjection);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "createCapabilityDiscoveryArtifacts",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 218,
+      "text": "export function createCapabilityDiscoveryArtifacts(input = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 219,
+      "text": "const identity = validateAgentIdentity(input.identity);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "now",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 228,
+      "text": "const now = Number(input.now);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "query",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 233,
+      "text": "const query = validateCapabilityDiscoveryQuery({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "seed",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 248,
+      "text": "const seed = digest(\"capability-discovery\", identity.agent_id, input.correlationId);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "issuedAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 249,
+      "text": "const issuedAt = new Date(now).toISOString();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expiresAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 250,
+      "text": "const expiresAt = new Date(now + DISCOVERY_TTL_MS).toISOString();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grant",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 251,
+      "text": "const grant = validateAuthorityGrant({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "scopedIdentity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 269,
+      "text": "const scopedIdentity = validateAgentIdentity({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 276,
+      "text": "const envelope = validateEnvelope({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "executeCapabilityDiscovery",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 299,
+      "text": "export function executeCapabilityDiscovery(input = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "artifacts",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 310,
+      "text": "const artifacts = createCapabilityDiscoveryArtifacts(input);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "gateway",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 311,
+      "text": "const gateway = new AgentProtocolGateway({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "admissionReceipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 317,
+      "text": "const admissionReceipt = gateway.acceptEnvelope(artifacts.envelope);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "result",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 318,
+      "text": "const result = input.catalog.discover({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "CapabilityDiscoveryCatalog",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 330,
+      "text": "export class CapabilityDiscoveryCatalog {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 331,
+      "text": "constructor(options = {}) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "registerCapability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 344,
+      "text": "registerCapability(value, options = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 345,
+      "text": "const capability = validateCapability(value);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "available",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 346,
+      "text": "const available = options.available ?? true;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "existing",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 348,
+      "text": "const existing = this.entries.get(capability.capability_id);"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "setAvailability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 359,
+      "text": "setAvailability(capabilityId, available) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "entry",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 360,
+      "text": "const entry = this.entries.get(capabilityId);"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "discover",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 366,
+      "text": "discover(input = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "now",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 367,
+      "text": "const now = Number(input.now ?? this.now());"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 369,
+      "text": "let envelope;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "receipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 370,
+      "text": "let receipt;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 371,
+      "text": "let identity;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "query",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 372,
+      "text": "let query;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "eligible",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 404,
+      "text": "const eligible = [...this.entries.values()]"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capabilities",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\capability-discovery.mjs",
+      "line": 416,
+      "text": "const capabilities = eligible.slice(0, query.result_limit).map(({ capability }) =>"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "COMPANION_COMMUNICATION_PROPOSAL_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 13,
+      "text": "export const COMPANION_COMMUNICATION_PROPOSAL_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "COMPANION_COMMUNICATION_CAPABILITY_ID",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 15,
+      "text": "export const COMPANION_COMMUNICATION_CAPABILITY_ID ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "COMPANION_COMMUNICATION_PROPOSAL_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 18,
+      "text": "export const COMPANION_COMMUNICATION_PROPOSAL_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "consentReceiptPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 34,
+      "text": "const consentReceiptPattern = /^consent-receipt-[A-Za-z0-9_-]{20,48}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "companionPrincipalPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 35,
+      "text": "const companionPrincipalPattern = /^kindred-agent-companion-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "userMessagePattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 36,
+      "text": "const userMessagePattern = /^chat-message-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "clientMessagePattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 37,
+      "text": "const clientMessagePattern = /^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "unsafeContentPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 38,
+      "text": "const unsafeContentPattern = /[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROPOSAL_TTL_MS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 39,
+      "text": "const PROPOSAL_TTL_MS = 2 * 60 * 1000;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "reject",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 41,
+      "text": "function reject(reasonClass) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "error",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 42,
+      "text": "const error = new Error(\"Companion communication proposal rejected.\");"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "exactKeys",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 50,
+      "text": "function exactKeys(value, expected) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "actual",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 54,
+      "text": "const actual = Object.keys(value).sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "orderedExpected",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 55,
+      "text": "const orderedExpected = [...expected].sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "digest",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 64,
+      "text": "function digest(label, ...values) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "communicationCapability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 71,
+      "text": "function communicationCapability() {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateCompanionCommunicationProposal",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 93,
+      "text": "export function validateCompanionCommunicationProposal(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "createCompanionCommunicationArtifacts",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 120,
+      "text": "export function createCompanionCommunicationArtifacts(input = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 121,
+      "text": "const identity = validateAgentIdentity(input.identity);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "proposal",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 133,
+      "text": "const proposal = validateCompanionCommunicationProposal({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "now",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 148,
+      "text": "const now = Number(input.now);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "issuedAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 150,
+      "text": "const issuedAt = new Date(now).toISOString();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expiresAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 151,
+      "text": "const expiresAt = new Date(now + PROPOSAL_TTL_MS).toISOString();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "seed",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 152,
+      "text": "const seed = digest("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 158,
+      "text": "const capability = communicationCapability();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grant",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 159,
+      "text": "const grant = validateAuthorityGrant({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "scopedIdentity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 177,
+      "text": "const scopedIdentity = validateAgentIdentity({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-communication.mjs",
+      "line": 190,
+      "text": "const envelope = validateEnvelope({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "COMPANION_MEMORY_PROPOSAL_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 13,
+      "text": "export const COMPANION_MEMORY_PROPOSAL_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "COMPANION_MEMORY_PROPOSAL_CAPABILITY_ID",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 15,
+      "text": "export const COMPANION_MEMORY_PROPOSAL_CAPABILITY_ID ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "COMPANION_MEMORY_PROPOSAL_FIELDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 17,
+      "text": "export const COMPANION_MEMORY_PROPOSAL_FIELDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "categories",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 41,
+      "text": "const categories = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "retentions",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 51,
+      "text": "const retentions = new Set([\"session\", \"until_revoked\", \"user_managed\"]);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "consentReceiptPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 52,
+      "text": "const consentReceiptPattern = /^consent-receipt-[A-Za-z0-9_-]{20,48}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "companionPrincipalPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 53,
+      "text": "const companionPrincipalPattern = /^kindred-agent-companion-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "clientRequestPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 54,
+      "text": "const clientRequestPattern = /^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "namespacePattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 55,
+      "text": "const namespacePattern = /^companion:local-companion-[A-Za-z0-9_-]{8,96}$/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "unsafeContentPattern",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 56,
+      "text": "const unsafeContentPattern = /[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]/;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROPOSAL_TTL_MS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 57,
+      "text": "const PROPOSAL_TTL_MS = 2 * 60 * 1000;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "reject",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 59,
+      "text": "function reject(reasonClass) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "error",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 60,
+      "text": "const error = new Error(\"Companion memory proposal rejected.\");"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "exactKeys",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 68,
+      "text": "function exactKeys(value, fields) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "actual",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 72,
+      "text": "const actual = Object.keys(value).sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expected",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 73,
+      "text": "const expected = [...fields].sort();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "digest",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 82,
+      "text": "function digest(label, ...values) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "memoryProposalCapability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 89,
+      "text": "function memoryProposalCapability() {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateCompanionMemoryProposal",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 111,
+      "text": "export function validateCompanionMemoryProposal(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "suffix",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 143,
+      "text": "const suffix = value.companion_principal_id.replace("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "createCompanionMemoryProposalArtifacts",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 153,
+      "text": "export function createCompanionMemoryProposalArtifacts(input = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "identity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 154,
+      "text": "const identity = validateAgentIdentity(input.identity);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "proposal",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 170,
+      "text": "const proposal = validateCompanionMemoryProposal({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "now",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 193,
+      "text": "const now = Number(input.now);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "issuedAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 195,
+      "text": "const issuedAt = new Date(now).toISOString();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "expiresAt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 196,
+      "text": "const expiresAt = new Date(now + PROPOSAL_TTL_MS).toISOString();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "seed",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 197,
+      "text": "const seed = digest("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 205,
+      "text": "const capability = memoryProposalCapability();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "grant",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 206,
+      "text": "const grant = validateAuthorityGrant({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "scopedIdentity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 224,
+      "text": "const scopedIdentity = validateAgentIdentity({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "envelope",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\companion-memory-proposal.mjs",
+      "line": 237,
+      "text": "const envelope = validateEnvelope({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROCESS_GENOME_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 3,
+      "text": "export const PROCESS_GENOME_CONTRACT_VERSION = \"kindred.process-genome.v1\";"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "EDGE_SUCCESS_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 4,
+      "text": "export const EDGE_SUCCESS_CONTRACT_VERSION = \"kindred.process-edge-success.v1\";"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROCESS_SKILL_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 5,
+      "text": "export const PROCESS_SKILL_CONTRACT_VERSION = \"kindred.process-skill.v1\";"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROSYNTHESIZED_CAPABILITY_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 6,
+      "text": "export const PROSYNTHESIZED_CAPABILITY_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "SYNTHESIS_RECEIPT_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 8,
+      "text": "export const SYNTHESIS_RECEIPT_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROCESS_FITNESS_DELTA_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 10,
+      "text": "export const PROCESS_FITNESS_DELTA_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROCESS_INTELLIGENCE_BOUNDARY_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 12,
+      "text": "export const PROCESS_INTELLIGENCE_BOUNDARY_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROCESS_INTELLIGENCE_EVENT_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 14,
+      "text": "export const PROCESS_INTELLIGENCE_EVENT_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "STRATA_PROCESS_COMMITMENT_CONTRACT_VERSION",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 16,
+      "text": "export const STRATA_PROCESS_COMMITMENT_CONTRACT_VERSION ="
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROCESS_PORT_TYPES",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 19,
+      "text": "export const PROCESS_PORT_TYPES = Object.freeze({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PROCESS_INTELLIGENCE_REQUEST_TYPES",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 26,
+      "text": "export const PROCESS_INTELLIGENCE_REQUEST_TYPES = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "STRATA_PROCESS_COMMITMENT_KINDS",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 34,
+      "text": "export const STRATA_PROCESS_COMMITMENT_KINDS = Object.freeze(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capabilityStates",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 43,
+      "text": "const capabilityStates = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "compositionKinds",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 51,
+      "text": "const compositionKinds = new Set(["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "ProcessIntelligenceError",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 64,
+      "text": "export class ProcessIntelligenceError extends Error {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 65,
+      "text": "constructor(reasonClass, message = \"Process intelligence operation rejected.\") {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "reject",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 74,
+      "text": "function reject(reasonClass, message) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "clone",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 78,
+      "text": "function clone(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "canonical",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 82,
+      "text": "function canonical(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "stateRoot",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 93,
+      "text": "export function stateRoot(label, value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "iso",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 99,
+      "text": "function iso(value, reasonClass) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "nonEmpty",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 106,
+      "text": "function nonEmpty(value, reasonClass) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "stringArray",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 111,
+      "text": "function stringArray(value, reasonClass, maximum = 128) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "validateProcessGenome",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 123,
+      "text": "export function validateProcessGenome(value) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "requiredObjects",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 127,
+      "text": "const requiredObjects = ["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "createProcessGenome",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 181,
+      "text": "export function createProcessGenome(input) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "now",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 182,
+      "text": "const now = input.created_at ?? new Date().toISOString();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "evolveProcessGenome",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 227,
+      "text": "export function evolveProcessGenome(current, changes) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "genome",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 228,
+      "text": "const genome = validateProcessGenome(current);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "safeExecutionId",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 248,
+      "text": "function safeExecutionId(prefix) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "ProcessEdgeObserver",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 252,
+      "text": "export class ProcessEdgeObserver {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 253,
+      "text": "constructor(options = {}) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "subscribe",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 259,
+      "text": "subscribe(listener) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "observe",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 265,
+      "text": "observe(input) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "start",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 266,
+      "text": "const start = Number(input.start_time ?? this.now());"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "end",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 267,
+      "text": "const end = Number(input.end_time ?? this.now());"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "record",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 274,
+      "text": "const record = Object.freeze({"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "fitness",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 320,
+      "text": "fitness(filter = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "selected",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 321,
+      "text": "const selected = this.records.filter((record) =>"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "count",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 324,
+      "text": "const count = selected.length;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "verifiedSuccesses",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 325,
+      "text": "const verifiedSuccesses = selected.filter("
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "failures",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 328,
+      "text": "const failures = selected.filter((record) => !record.success).length;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "recovered",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 329,
+      "text": "const recovered = selected.filter("
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "credit",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 355,
+      "text": "credit(correlationId) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "ProcessFitnessTracker",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 377,
+      "text": "export class ProcessFitnessTracker {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 378,
+      "text": "constructor(observer) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "profile",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 383,
+      "text": "profile(processId, contextRef = undefined) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "filter",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 384,
+      "text": "const filter = { process_id: processId };"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "delta",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 389,
+      "text": "delta(processId, baseFitnessRoot, priorProfile = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "profile",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 390,
+      "text": "const profile = this.profile(processId);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "delta",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 391,
+      "text": "const delta = {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "ProcessSkillGraduationPolicy",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 418,
+      "text": "export class ProcessSkillGraduationPolicy {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 419,
+      "text": "constructor(thresholds = {}) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "evaluate",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 430,
+      "text": "evaluate(evidence) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "reasons",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 431,
+      "text": "const reasons = [];"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "checks",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 432,
+      "text": "const checks = ["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "ProcessSkillRegistry",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 454,
+      "text": "export class ProcessSkillRegistry {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 455,
+      "text": "constructor(policy = new ProcessSkillGraduationPolicy()) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "graduate",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 460,
+      "text": "graduate(genomeInput, evidence) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "genome",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 461,
+      "text": "const genome = validateProcessGenome(genomeInput);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "decision",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 462,
+      "text": "const decision = this.policy.evaluate(evidence);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "skill",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 464,
+      "text": "const skill = Object.freeze({"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "get",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 491,
+      "text": "get(skillId) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "skill",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 492,
+      "text": "const skill = this.skills.get(skillId);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "ProcessSkillCache",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 498,
+      "text": "export class ProcessSkillCache {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 499,
+      "text": "constructor(registry) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "get",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 506,
+      "text": "get(skillId) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "skill",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 508,
+      "text": "const skill = this.registry.get(skillId);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "CapabilityCompositionCache",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 518,
+      "text": "export class CapabilityCompositionCache {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 519,
+      "text": "constructor() {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "key",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 525,
+      "text": "key(intentClass, contextRoot) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "get",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 529,
+      "text": "get(intentClass, contextRoot) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "entry",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 530,
+      "text": "const entry = this.entries.get(this.key(intentClass, contextRoot));"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "set",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 539,
+      "text": "set(intentClass, contextRoot, capability) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "ProSynthesine",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 544,
+      "text": "export class ProSynthesine {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 545,
+      "text": "constructor(options = {}) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "synthesize",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 551,
+      "text": "synthesize(input) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "cached",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 552,
+      "text": "const cached = this.cache.get(input.intent_class, input.context_root);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "skills",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 560,
+      "text": "const skills = input.skill_ids.map((skillId) => this.registry.get(skillId));"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "graph",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 563,
+      "text": "const graph = {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "candidate",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 575,
+      "text": "const candidate = {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "promote",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 607,
+      "text": "promote(candidateInput, evidence) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "candidate",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 608,
+      "text": "const candidate = clone(candidateInput);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "required",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 612,
+      "text": "const required = ["
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "receipt",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 623,
+      "text": "const receipt = {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "promoted",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 638,
+      "text": "const promoted = {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "commitment",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 643,
+      "text": "const commitment = {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "executeProsynthesizedCapability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 659,
+      "text": "export function executeProsynthesizedCapability(input) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "capability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 660,
+      "text": "const capability = clone(input.capability);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "state",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 666,
+      "text": "let state = clone(input.state);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "completed",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 667,
+      "text": "const completed = [];"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "implementation",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 669,
+      "text": "const implementation = input.skills[node.skill_id];"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "before",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 671,
+      "text": "const before = clone(state);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "output",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 672,
+      "text": "const output = implementation(state);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "PostSynthesizedRuntime",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 710,
+      "text": "export class PostSynthesizedRuntime {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 711,
+      "text": "constructor(options = {}) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "execute",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 717,
+      "text": "execute(input) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "started",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 719,
+      "text": "const started = Number(input.now());"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "deadline",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 720,
+      "text": "const deadline = started + input.deadline_ms;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "graph",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 721,
+      "text": "let graph = [...input.initial_graph];"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "visitedGraphs",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 722,
+      "text": "const visitedGraphs = new Set();"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "events",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 723,
+      "text": "const events = [];"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "completed",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 724,
+      "text": "const completed = [];"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "cursor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 725,
+      "text": "let cursor = 0;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "recompositions",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 726,
+      "text": "let recompositions = 0;"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "graphRoot",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 730,
+      "text": "const graphRoot = stateRoot(\"post-synthesis-graph\", graph);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "selected",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 733,
+      "text": "const selected = graph[cursor];"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "observation",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 734,
+      "text": "const observation = input.observe({ selected, cursor, graph: [...graph] });"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "replacement",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 739,
+      "text": "const replacement = input.recompose({"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "before",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 761,
+      "text": "const before = clone(input.state);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "output",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 762,
+      "text": "const output = input.skills[selected](input.state, observation);"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "checkpoint",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 793,
+      "text": "const checkpoint = {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "resumePostSynthesis",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 819,
+      "text": "export function resumePostSynthesis(checkpoint, options = {}) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "selectExecutionComplexity",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 831,
+      "text": "export function selectExecutionComplexity(input) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "ProcessIntelligenceBoundaryAdapter",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 843,
+      "text": "export class ProcessIntelligenceBoundaryAdapter {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "constructor",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 844,
+      "text": "constructor(options = {}) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "mapPort",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 860,
+      "text": "mapPort(componentClass) {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "portType",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 861,
+      "text": "const portType = PROCESS_PORT_TYPES[componentClass];"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "discoverProcessSkills",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 866,
+      "text": "discoverProcessSkills({ outcome_class, context }) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "discoverProsynthesizedCapability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 874,
+      "text": "discoverProsynthesizedCapability({ intent_class, context_root }) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "request",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 878,
+      "text": "request(requestType, payload = {}) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "requestCandidate",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 891,
+      "text": "requestCandidate(payload) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "executeCapability",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 895,
+      "text": "executeCapability(payload) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "requestRecomposition",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 899,
+      "text": "requestRecomposition(payload) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "toSynaptizerEvent",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 903,
+      "text": "toSynaptizerEvent(record) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "createStrataCommitment",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 931,
+      "text": "createStrataCommitment(kind, value) {"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "cacheEvidence",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 945,
+      "text": "cacheEvidence() {"
+    },
+    {
+      "kind": "DECLARATION",
+      "symbol": "cache",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 946,
+      "text": "const cache = this.prosynthesine.cache;"
+    },
+    {
+      "kind": "METHOD_CANDIDATE",
+      "symbol": "close",
+      "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+      "line": 955,
+      "text": "close() {"
+    }
+  ],
+  "baselineTest": {
+    "attempted": true,
+    "passed": true,
+    "exitCode": 0,
+    "test": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\process-intelligence.test.mjs"
+  }
+}

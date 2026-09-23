@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "kindred.superwave.sw06-c-r1.v1",
+  "wave": {
+    "id": "SW06-C-R1-20260906-185045",
+    "predecessor": "SW06-B-20260906-180330"
+  },
+  "lineage": {
+    "contractAuthority": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\process-intelligence.mjs",
+    "contractSha256": "A3F8B2B9842AB791A5BF80628CBDB08F7D0A557F633D180E0A17854E5ED6FF58",
+    "benchmarkAuthority": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\process-intelligence.test.mjs",
+    "benchmarkSha256": "D7F7B3C70F0ACB933623ABF33246DA65953F99533A0EB476BFADB24B9F07E02D",
+    "runtime": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\src\\direct-pipe-runtime.v1.mjs",
+    "runtimeSha256": "057151F7A598A63102035F46E30004CB8222F016202282C1EDE3FA23EF263AD4",
+    "test": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\direct-pipe-runtime.v1.test.mjs",
+    "testSha256": "DC816D94E2A3EA962BBF28D61A75D32F5166DD9A7ACA23C211F37332BB1EF258",
+    "measurement": "D:\\KindredLabs\\kindred-labs-superstructure\\evidence\\direct-pipe-measurement-v1.json",
+    "measurementSha256": "82E64184DAD413F1492A2D1FD84CB9787ECF88EAB6EA0299AB3ACEE015DE70EE"
+  },
+  "proof": {
+    "directPipeBenchmark": true,
+    "measurementFresh": true,
+    "measurementValid": true,
+    "measuredClass": "PORTABLE_BUFFERED",
+    "regressionFloor": true
+  },
+  "truthBoundary": {
+    "softwareExplicitCopyMeasured": true,
+    "hardwareBusTransferMeasured": false,
+    "zeroCopyClaimAuthorized": false
+  },
+  "preserved": {
+    "existingAuthorities": "UNCHANGED"
+  },
+  "classification": "DIRECT_PIPE_EXECUTABLE_RUNTIME_BENCHMARK_PROVEN_LOCAL",
+  "nextAction": "SW06D_ATTACH_VERSIONED_DIRECT_PIPE_TO_PROCESS_INTELLIGENCE_BOUNDARY"
+}

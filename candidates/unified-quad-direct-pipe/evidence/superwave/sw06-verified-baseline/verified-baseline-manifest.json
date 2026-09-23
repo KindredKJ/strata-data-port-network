@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "kindred.github.verified-baseline.v1",
+  "organization": "Kindred Labs",
+  "founder": "Kindred Jermaine Cox",
+  "repository": "KindredKJ/kindred-labs-superstructure",
+  "branch": "milestone/sw06-verified-direct-pipe-20260906-220240",
+  "generatedAtUtc": "2026-09-07T04:02:41.7529372Z",
+  "source": {
+    "localRepository": "D:\\KindredLabs\\kindred-labs-superstructure",
+    "originalBranch": "codex/whitepaper-superstructure-completion",
+    "originalHead": "21f8b2693aaa99f6a6f63242b8709cf349d8dd5b",
+    "remoteMain": "99658b30c2eafa354cd58438c2d1067802dd1a42",
+    "sourceRuntime": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad",
+    "finalSuperWave": "SW06-D2-R2B-20260906-214932"
+  },
+  "proofBoundary": {
+    "processIntelligence": "PROVEN_LOCAL",
+    "cognitiveBodyAttachment": "PROVEN_LOCAL",
+    "dcmlProcessCapabilityPath": "PROVEN_LOCAL",
+    "synaptizerFeedback": "PROVEN_LOCAL",
+    "endToEndVerifiedCognitiveLoop": "PROVEN_LOCAL",
+    "strataTesseractAttachment": "PROVEN_LOCAL",
+    "directPipeExecutableRuntime": "PROVEN_LOCAL",
+    "directPipeProcessBoundaryAttachment": "PROVEN_LOCAL",
+    "directPipeMeasuredClass": "PORTABLE_BUFFERED",
+    "reducedCopy": "UNPROVEN",
+    "zeroCopy": "UNPROVEN"
+  },
+  "preservation": {
+    "sourceWorktreeMutated": false,
+    "remoteMainForceUpdated": false,
+    "resetHardUsed": false,
+    "gitCleanUsed": false,
+    "forcePushUsed": false,
+    "promotionMode": "ISOLATED_WORKTREE_FROM_ORIGIN_MAIN"
+  }
+}

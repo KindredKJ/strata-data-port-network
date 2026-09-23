@@ -1,0 +1,63 @@
+{
+  "schema": "kindred.closed-adaptive-cognition-proof.v1",
+  "generatedAt": "2026-09-01T21:49:39.0679287-06:00",
+  "classification": {
+    "processIntelligence": "INTEGRATED",
+    "prosynthesizedCapabilityViaBody": "LOCAL_RUNTIME_PROVEN",
+    "synaptizerLearning": "LOCAL_RUNTIME_PROVEN",
+    "synapticEvidenceUsedByDcml": "LOCAL_RUNTIME_PROVEN",
+    "adaptiveDcmlSelection": "LOCAL_RUNTIME_PROVEN",
+    "closedAdaptiveCognitionLoop": "LOCAL_RUNTIME_PROVEN"
+  },
+  "causalProof": {
+    "selectionWithoutLearning": "process.a-baseline",
+    "selectionWithLearning": "process.z-learned",
+    "learnedSynapticScore": 3.25,
+    "baselineSynapticScore": 0,
+    "decisionChangedBecauseOfEvidence": true,
+    "secondExecutionVerified": true,
+    "processEdgesAfterTwoCycles": 6,
+    "relationshipsAfterTwoCycles": 3,
+    "learnedEventsAfterTwoCycles": 6,
+    "totalReinforcementAfterTwoCycles": 6.5
+  },
+  "truthBoundary": {
+    "sameRuntimeSubsequentCycleAdaptation": "LOCAL_RUNTIME_PROVEN",
+    "persistentSynapticMemory": "UNPROVEN",
+    "restartRecovery": "UNPROVEN",
+    "crossProcessLearningPersistence": "UNPROVEN",
+    "realCognitizer": "UNPROVEN",
+    "fullDcmlProviderModelResourceOptimization": "UNPROVEN",
+    "realStrata": "UNPROVEN",
+    "realDirectPipe": "UNPROVEN",
+    "productionReady": false
+  },
+  "sources": {
+    "processIntelligence": {
+      "unchanged": true,
+      "sha256": "A3F8B2B9842AB791A5BF80628CBDB08F7D0A557F633D180E0A17854E5ED6FF58"
+    },
+    "cognitiveBody": {
+      "modified": true,
+      "sha256Before": "EBA111D87919ADBB4A08D35629603078554733C188AADE05389016BFB20EA818",
+      "sha256After": "382D271E95A2E5F4C35A2C5E2040DD1E976DF8DED45356382AF692F0994AA16A"
+    },
+    "synaptizer": {
+      "unchanged": true,
+      "sha256": "AD1F2E64A53923EBD2B375AD996BD183C7CFCD9982918D6CF6A84750B89D91A4"
+    }
+  },
+  "integrationTest": {
+    "file": "D:\\KindredLabs\\kindred-labs-superstructure\\runtime\\unified-quad\\test\\cognitive-body-adaptive-loop.integration.test.mjs",
+    "sha256": "461D6FF31FD2534824DF6BFAA2CF63E95A4B43ABFD6EEEBD8934D72CD6ACF56D",
+    "passed": true,
+    "log": "C:\\KindredLabs\\SuperWave\\checkpoints\\SW04-CLOSED-ADAPTIVE-COGNITION-LOOP-20260901-214932\\adaptive-loop-test.txt"
+  },
+  "regressions": {
+    "Process Intelligence": true,
+    "Cognitive Body": true,
+    "Real PI Attachment": true,
+    "Real Capability Via Body": true,
+    "Real Synaptizer Feedback": true
+  }
+}
