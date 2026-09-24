@@ -8,7 +8,7 @@ Strata Data Port Network is Kindred Labs' engineering research into permissioned
 
 **Sole founder and creator: Kindred Jermaine Cox.**
 
-The public repository contains separately identified Python network and Unified Quad / Direct Pipe candidates, lineage, and a verification record. The candidates are not yet one production runtime. The current Direct Pipe baseline is portable and buffered; reduced-copy, zero-copy, a two-device production proof, and a generally available service are not established.
+The public repository contains separately identified Python network and Unified Quad / Direct Pipe candidates, lineage, and a verification record. The candidates are not yet one production runtime. The inherited Direct Pipe baseline is portable and buffered; the newer SW06-E candidate demonstrates reduced explicit copies across a local Node worker boundary. Physical zero-copy, a two-device production proof, and a generally available service are not established.
 
 Review the work:
 - Public launch: https://stratadataportnetwork.vercel.app

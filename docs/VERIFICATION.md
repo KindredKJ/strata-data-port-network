@@ -20,6 +20,8 @@ The same checks passed in a clean local clone with Python 3.12.14 and Node 24.19
 
 ## Scope and limits
 
+On 2026-09-24, the new SW06-E worker transfer candidate passed three local Node 24 tests: source detachment and digest integrity, input boundary rejection, and capacity/close behavior. `npm run measure` completed 16 transfers of 4 MiB per path and printed a machine-specific JSON result. The buffered baseline counted one explicit payload copy per transfer; the worker transfer counted zero explicit JavaScript payload copies while confirming detachment and matching digests. This is a local worker-thread boundary result, not proof of zero physical copies, a second device, or production operation. See [SW06-E](SW06-E-WORKER-TRANSFER.md). GitHub Actions will independently check the committed version.
+
 PR #5 reports a portable buffered Direct Pipe result and expressly leaves reduced-copy and zero-copy unproven. Its review identified missing versioned schemas, helper files discovered as tests, unconfigured evidence output paths, writes to tracked historical receipts, workstation-specific absolute paths, and security or correctness issues in mandate validation, authorization, consent, activation plans, event integrity, state concurrency, fencing and process metrics. Those findings require reproduction and repairs.
 
 PR #3 provides a separate Python control plane and Strata network candidate. It has not been merged with PR #5 or verified together as one system. The import does not verify a physical two-machine network result, ZPS SW03 reconstruction hardening, or local-only machine changes outside the two pinned Git commits.

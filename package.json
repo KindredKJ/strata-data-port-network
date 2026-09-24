@@ -1,0 +1,14 @@
+{
+  "name": "@kindred-labs/strata-data-port-network",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "measure": "node scripts/measure-worker-transfer.mjs"
+  },
+  "exports": {
+    "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs"
+  }
+}

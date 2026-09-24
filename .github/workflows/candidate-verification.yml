@@ -38,3 +38,16 @@ jobs:
         env:
           KINDRED_DIRECT_PIPE_EVIDENCE: ${{ runner.temp }}/direct-pipe-evidence.json
         run: node --test test/direct-pipe-runtime.v1.test.mjs
+
+  worker-transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Verify worker ownership transfer
+        run: npm test
+      - name: Measure buffered and worker boundaries
+        run: npm run measure
