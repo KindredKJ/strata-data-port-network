@@ -13,11 +13,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+REPOSITORY_ROOT = ROOT.parent.parent
 REQUIRED_DIRS = ("architecture", "registry", "contracts", "integration", "governance", "evidence", "scripts", "templates")
 
 
 def git(*args: str, cwd: Path = ROOT, check: bool = True) -> str:
-    result = subprocess.run(["git", *args], cwd=cwd, text=True, capture_output=True)
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={REPOSITORY_ROOT}", *args],
+        cwd=cwd,
+        text=True,
+        capture_output=True,
+    )
     if check and result.returncode:
         raise RuntimeError(result.stderr.strip() or "git command failed")
     return result.stdout.strip()

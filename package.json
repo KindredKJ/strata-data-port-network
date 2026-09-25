@@ -6,8 +6,10 @@
   "engines": { "node": ">=22" },
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "measure": "node scripts/measure-worker-transfer.mjs"
+    "measure": "node scripts/measure-worker-transfer.mjs",
+    "verify:release": "node scripts/verify-release.mjs"
   },
+  "files": ["src/", "README.md", "LICENSE.md", "package.json"],
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs"
   }

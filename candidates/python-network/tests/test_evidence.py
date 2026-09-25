@@ -1,5 +1,6 @@
 import json
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -10,7 +11,7 @@ TOOL = ROOT / "evidence" / "verification" / "world_tools.py"
 
 class EvidenceToolTests(unittest.TestCase):
     def run_tool(self, *args):
-        return subprocess.run(["python3", str(TOOL), *args], cwd=ROOT, text=True, capture_output=True)
+        return subprocess.run([sys.executable, str(TOOL), *args], cwd=ROOT, text=True, capture_output=True)
 
     def test_update_lock_pins_exact_commit(self):
         with tempfile.TemporaryDirectory() as directory:

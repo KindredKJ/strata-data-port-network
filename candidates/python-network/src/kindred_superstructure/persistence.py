@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 import shutil
 import sqlite3
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from dataclasses import asdict
 from pathlib import Path
 from typing import Iterator, Sequence
@@ -147,8 +147,9 @@ class SQLiteState:
     def backup(self, destination: str | Path) -> Path:
         target = Path(destination)
         target.parent.mkdir(parents=True, exist_ok=True)
-        with sqlite3.connect(target) as backup:
+        with closing(sqlite3.connect(target)) as backup:
             self.connection.backup(backup)
+            backup.commit()
         return target
 
     @classmethod
