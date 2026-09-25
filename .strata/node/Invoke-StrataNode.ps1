@@ -105,7 +105,10 @@ switch ($Operation) {
             status = 'GREEN'
             nodeId = $identityBefore
             canonicalCommit = $Commit
+            testedCommit = $Commit
+            implementationCommit = $Commit
             branch = $Branch
+            trackedSourceDirtyAtStart = $false
             timestampUtc = [DateTime]::UtcNow.ToString('o')
             host = '127.0.0.1'
             port = $Port
