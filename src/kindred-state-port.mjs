@@ -3,26 +3,21 @@ import { DirectPipeWorkerTransfer } from "./direct-pipe-worker-transfer.mjs";
 
 export const KINDRED_STATE_PORT_SCHEMA = "kindred.sdpn.state-port.v1";
 
-function normalize(value) {
-  if (Array.isArray(value)) return value.map(normalize);
-  if (value && typeof value === "object") {
-    return Object.fromEntries(
-      Object.keys(value).sort().map((key) => [key, normalize(value[key])])
-    );
+function toBytes(serialized) {
+  if (typeof serialized === "string") return Buffer.from(serialized, "utf8");
+  if (serialized instanceof Uint8Array) {
+    return Buffer.from(serialized.buffer, serialized.byteOffset, serialized.byteLength);
   }
-  return value;
-}
-
-function canonicalBytes(value) {
-  return Buffer.from(JSON.stringify(normalize(value)), "utf8");
+  if (serialized instanceof ArrayBuffer) return Buffer.from(serialized);
+  throw new TypeError("canonical payload must be a string, Uint8Array, or ArrayBuffer");
 }
 
 function sha256(bytes) {
   return createHash("sha256").update(bytes).digest("hex");
 }
 
-export function stateHash(value) {
-  return sha256(canonicalBytes(value));
+export function payloadDigest(serialized) {
+  return sha256(toBytes(serialized));
 }
 
 export class KindredStatePort {
@@ -83,33 +78,46 @@ export class KindredStatePort {
       classification: "PORTABLE_BUFFERED",
       physicalZeroCopyProven: false,
       twoMachineTransportProven: false,
-      reason: "Remote path falls back to portable buffered transport until proven otherwise."
+      reason: "Remote path is only classified; no two-machine executor is established."
     };
   }
 
-  async transfer({ candidate, destination, payload, supportsReference = true, local = true }) {
+  async transfer({
+    candidate,
+    destination,
+    canonicalPayload,
+    expectedIntegrityHash,
+    supportsReference = true,
+    local = true
+  }) {
     const plan = this.plan({ candidate, destination, supportsReference, local });
+
     if (plan.mode === "reference") {
       return {
         ...plan,
+        executed: true,
         locator: candidate.locator,
         payloadMoved: false
       };
     }
 
-    const bytes = canonicalBytes(payload);
+    if (!expectedIntegrityHash) {
+      throw new Error("expectedIntegrityHash is required for payload transfer");
+    }
+    const bytes = toBytes(canonicalPayload);
     const digest = sha256(bytes);
-    if (digest !== candidate.state_hash) {
-      throw new Error("payload hash does not match candidate state hash");
+    if (digest !== expectedIntegrityHash) {
+      throw new Error("canonical payload integrity hash mismatch");
     }
 
     if (plan.classification !== "REDUCED_COPY") {
       return {
         ...plan,
-        payloadMoved: true,
-        payloadBytes: bytes.length,
+        executed: false,
+        payloadMoved: false,
+        plannedPayloadBytes: bytes.length,
         payloadSha256: digest,
-        boundary: "BUFFERED_FALLBACK_NOT_EXECUTED"
+        boundary: "BUFFERED_FALLBACK_NOT_IMPLEMENTED"
       };
     }
 
@@ -119,6 +127,7 @@ export class KindredStatePort {
 
     return {
       ...plan,
+      executed: true,
       payloadMoved: true,
       payloadBytes: output.byteLength,
       payloadSha256: digest,
