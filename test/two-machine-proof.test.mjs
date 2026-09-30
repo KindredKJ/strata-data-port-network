@@ -1,8 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
+import { createHash, createHmac } from "node:crypto";
 import {
   TWO_HOST_CIPHER,
+  receiptTranscript,
   startProofReceiver,
   sendTwoHostProof
 } from "../src/two-machine-proof.mjs";
@@ -84,5 +85,41 @@ test("sender refuses payload that does not match Kindred state hash", async (t) 
       generation: 3
     }),
     /payload SHA-256/
+  );
+});
+
+
+test("receipt transcript matches the Kindred cross-language MAC vector", () => {
+  const vector = {
+    schemaVersion: "kindred.sdpn.two-host-proof.v2",
+    sessionId: "00000000-0000-4000-8000-000000000001",
+    stateId: "kindred-state:7:aaaaaaaaaaaaaaaa",
+    stateHash: "a".repeat(64),
+    generation: 7,
+    payloadSha256: "a".repeat(64),
+    receivedSha256: "a".repeat(64),
+    payloadBytes: 123,
+    ciphertextBytes: 123,
+    sourceHostFingerprint: "b".repeat(64),
+    destinationHostFingerprint: "c".repeat(64),
+    distinctHostFingerprints: true,
+    loopbackObserved: false,
+    authenticationVerified: true,
+    integrityVerified: true,
+    encryptedOnWire: true,
+    cipher: "AES-256-GCM",
+    transportClass: "HTTP_TCP_AES_256_GCM_BUFFERED",
+    twoHostNetworkProofSatisfied: true,
+    physicalMachineAttestationProven: false,
+    productionReadyClaim: false,
+    observedAt: "2026-09-30T18:15:00.000Z"
+  };
+  const mac = createHmac(
+    "sha256",
+    "kindred-cross-language-proof-vector-secret-32"
+  ).update(receiptTranscript(vector)).digest("hex");
+  assert.equal(
+    mac,
+    "e65c784a2abb57a613690c3c5eb5811e49e6477961a487090af63cc8b154ae44"
   );
 });
