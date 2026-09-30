@@ -14,6 +14,7 @@ const port = Number(required("port"));
 const payloadPath = required("payload");
 const stateId = required("state-id");
 const stateHash = required("state-hash");
+const generation = Number(required("generation"));
 const receiptPath = required("receipt");
 const secret = process.env.KINDRED_SDPN_PROOF_SECRET;
 
@@ -24,7 +25,8 @@ const receipt = await sendTwoHostProof({
   secret,
   canonicalPayload,
   stateId,
-  stateHash
+  stateHash,
+  generation
 });
 await writeFile(receiptPath, JSON.stringify(receipt, null, 2));
 process.stdout.write(`${JSON.stringify(receipt, null, 2)}\n`);
