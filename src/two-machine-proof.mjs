@@ -39,6 +39,10 @@ function requireSecret(secret) {
   return secret;
 }
 
+function validSha256(value) {
+  return typeof value === "string" && /^[0-9a-f]{64}$/i.test(value);
+}
+
 function isLoopback(address = "") {
   const normalized = address.replace(/^::ffff:/, "");
   return normalized === "127.0.0.1" || normalized === "::1";
@@ -67,6 +71,8 @@ function transcript({
   challenge,
   sourceHostFingerprint,
   destinationHostFingerprint,
+  stateId,
+  stateHash,
   payloadSha256,
   payloadBytes
 }) {
@@ -76,6 +82,8 @@ function transcript({
     challenge,
     sourceHostFingerprint,
     destinationHostFingerprint,
+    stateId,
+    stateHash,
     payloadSha256,
     String(payloadBytes)
   ].join("|");
@@ -108,11 +116,11 @@ export async function startProofReceiver({
   host = "0.0.0.0",
   port = 47900,
   secret,
-  maxBytes = DEFAULT_MAX_BYTES,
-  destinationHostFingerprint = hostFingerprint()
+  maxBytes = DEFAULT_MAX_BYTES
 } = {}) {
   requireSecret(secret);
   positiveInteger(maxBytes, "maxBytes");
+  const destinationHostFingerprint = hostFingerprint();
   const sessions = new Map();
 
   const server = createServer(async (request, response) => {
@@ -123,10 +131,19 @@ export async function startProofReceiver({
         if (hello.schemaVersion !== TWO_HOST_PROOF_SCHEMA) {
           return sendJson(response, 400, { error: "schema_mismatch" });
         }
-        if (!hello.sourceHostFingerprint || !hello.payloadSha256 || !hello.payloadBytes) {
+        if (
+          !hello.sourceHostFingerprint ||
+          !hello.stateId ||
+          !validSha256(hello.stateHash) ||
+          !validSha256(hello.payloadSha256)
+        ) {
           return sendJson(response, 400, { error: "invalid_hello" });
         }
-        if (!Number.isSafeInteger(hello.payloadBytes) || hello.payloadBytes < 1 || hello.payloadBytes > maxBytes) {
+        if (
+          !Number.isSafeInteger(hello.payloadBytes) ||
+          hello.payloadBytes < 1 ||
+          hello.payloadBytes > maxBytes
+        ) {
           return sendJson(response, 413, { error: "payload_size_rejected" });
         }
 
@@ -137,9 +154,9 @@ export async function startProofReceiver({
           createdAt: Date.now(),
           sourceHostFingerprint: hello.sourceHostFingerprint,
           destinationHostFingerprint,
-          stateId: hello.stateId ?? "",
-          stateHash: hello.stateHash ?? "",
-          payloadSha256: hello.payloadSha256,
+          stateId: hello.stateId,
+          stateHash: hello.stateHash.toLowerCase(),
+          payloadSha256: hello.payloadSha256.toLowerCase(),
           payloadBytes: hello.payloadBytes
         });
 
@@ -249,12 +266,15 @@ export async function sendTwoHostProof({
   canonicalPayload,
   stateId,
   stateHash,
-  sourceHostFingerprint = hostFingerprint(),
   timeoutMs = DEFAULT_TIMEOUT_MS
 }) {
   requireSecret(secret);
   positiveInteger(port, "port");
   positiveInteger(timeoutMs, "timeoutMs");
+  if (!stateId) throw new Error("stateId is required");
+  if (!validSha256(stateHash)) throw new Error("stateHash must be a SHA-256 hex digest");
+
+  const sourceHostFingerprint = hostFingerprint();
   const payload = Buffer.isBuffer(canonicalPayload)
     ? canonicalPayload
     : Buffer.from(canonicalPayload);
@@ -268,7 +288,7 @@ export async function sendTwoHostProof({
       schemaVersion: TWO_HOST_PROOF_SCHEMA,
       sourceHostFingerprint,
       stateId,
-      stateHash,
+      stateHash: stateHash.toLowerCase(),
       payloadSha256,
       payloadBytes: payload.length
     }),
@@ -284,6 +304,8 @@ export async function sendTwoHostProof({
     challenge: challenge.challenge,
     sourceHostFingerprint,
     destinationHostFingerprint: challenge.destinationHostFingerprint,
+    stateId,
+    stateHash: stateHash.toLowerCase(),
     payloadSha256,
     payloadBytes: payload.length
   }));
@@ -310,8 +332,13 @@ export async function sendTwoHostProof({
   if (!safeEqualHex(receivedMac, expectedMac)) {
     throw new Error("proof receipt MAC verification failed");
   }
-  if (!receipt.integrityVerified || receipt.receivedSha256 !== payloadSha256) {
-    throw new Error("proof receipt integrity verification failed");
+  if (
+    !receipt.integrityVerified ||
+    receipt.receivedSha256 !== payloadSha256 ||
+    receipt.stateId !== stateId ||
+    receipt.stateHash !== stateHash.toLowerCase()
+  ) {
+    throw new Error("proof receipt identity or integrity verification failed");
   }
 
   return receipt;
