@@ -9,6 +9,7 @@
     "measure": "node scripts/measure-worker-transfer.mjs"
   },
   "exports": {
-    "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs"
+    "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
+    "./state-port": "./src/kindred-state-port.mjs"
   }
 }
