@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "strata.release.receipt.v1",
+  "project": "Strata Data Port Network",
+  "founder": "Kindred Jermaine Cox",
+  "organization": "Kindred Labs",
+  "repository": "https://github.com/KindredKJ/strata-data-port-network",
+  "commit": "25c3b5aff912cd14b71c7abf49050be1b60722d0",
+  "branch": "codex/strata-release-node-20260925",
+  "timestampUtc": "2026-09-25T07:25:18.059Z",
+  "machine": "KINDREDLABSASI",
+  "powershellVersion": "PowerShell 7.6.6",
+  "nodeVersion": "v22.23.2",
+  "npmVersion": "12.1.0",
+  "pythonExecutable": "C:\\Users\\Kindred KJ Cox\\KindredLabs\\strata-data-port-network\\candidates\\python-network\\.venv\\Scripts\\python.exe",
+  "pythonVersion": "Python 3.11.9",
+  "nodeTests": {
+    "status": "GREEN",
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  "sw06eMeasurement": {
+    "classification": "REDUCED_COPY",
+    "bytesPerTransfer": 4194304,
+    "iterations": 32,
+    "warmupIterations": 4,
+    "explicitPayloadCopiesPerTransfer": 0,
+    "sourceDetached": true,
+    "integrityVerified": true,
+    "meanBoundaryLatencyMs": 76.59555937499998,
+    "p50BoundaryLatencyMs": 73.4566,
+    "p95BoundaryLatencyMs": 103.9691,
+    "setupCosts": {
+      "payloadAllocationAndFillExcludedFromTimedSamples": true,
+      "workerStartupExcludedFromTimedSamples": true
+    }
+  },
+  "pythonVerification": {
+    "status": "GREEN",
+    "passed": 60,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 2,
+    "subtests": 26,
+    "durationSeconds": 5.77
+  },
+  "contractVerification": {
+    "status": "GREEN"
+  },
+  "packageVerification": {
+    "status": "GREEN",
+    "private": true,
+    "name": "@kindred-labs/strata-data-port-network",
+    "version": "0.1.0",
+    "localTarballInstall": true
+  },
+  "checks": [
+    {
+      "name": "node tests",
+      "command": "C:\\Users\\Kindred KJ Cox\\AppData\\Local\\fnm_multishells\\15808_1790309037288\\node.exe C:\\Users\\Kindred KJ Cox\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js test",
+      "exitCode": 0
+    },
+    {
+      "name": "python contract validation",
+      "command": "C:\\Users\\Kindred KJ Cox\\KindredLabs\\strata-data-port-network\\candidates\\python-network\\.venv\\Scripts\\python.exe scripts/generate_contracts.py --check",
+      "exitCode": 0
+    },
+    {
+      "name": "python tests",
+      "command": "C:\\Users\\Kindred KJ Cox\\KindredLabs\\strata-data-port-network\\candidates\\python-network\\.venv\\Scripts\\python.exe -m pytest -q",
+      "exitCode": 0
+    },
+    {
+      "name": "fair benchmark",
+      "command": "C:\\Users\\Kindred KJ Cox\\AppData\\Local\\fnm_multishells\\15808_1790309037288\\node.exe scripts/measure-worker-transfer.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "npm package contents",
+      "command": "C:\\Users\\Kindred KJ Cox\\AppData\\Local\\fnm_multishells\\15808_1790309037288\\node.exe C:\\Users\\Kindred KJ Cox\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js pack --dry-run --json",
+      "exitCode": 0
+    },
+    {
+      "name": "npm local tarball creation",
+      "command": "C:\\Users\\Kindred KJ Cox\\AppData\\Local\\fnm_multishells\\15808_1790309037288\\node.exe C:\\Users\\Kindred KJ Cox\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js pack --json --pack-destination C:\\Users\\KINDRE~1\\AppData\\Local\\Temp\\strata-release-package-uX3P9p",
+      "exitCode": 0
+    },
+    {
+      "name": "npm local tarball install",
+      "command": "C:\\Users\\Kindred KJ Cox\\AppData\\Local\\fnm_multishells\\15808_1790309037288\\node.exe C:\\Users\\Kindred KJ Cox\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js install --offline --ignore-scripts --no-audit --no-fund C:\\Users\\KINDRE~1\\AppData\\Local\\Temp\\strata-release-package-uX3P9p\\kindred-labs-strata-data-port-network-0.1.0.tgz",
+      "exitCode": 0
+    },
+    {
+      "name": "npm local tarball smoke test",
+      "command": "C:\\Users\\Kindred KJ Cox\\AppData\\Local\\fnm_multishells\\15808_1790309037288\\node.exe --input-type=module -e import { DirectPipeWorkerTransfer } from '@kindred-labs/strata-data-port-network/worker-transfer'; const pipe = new DirectPipeWorkerTransfer(); await pipe.close();",
+      "exitCode": 0
+    },
+    {
+      "name": "git diff check",
+      "command": "git -c safe.directory=C:\\Users\\Kindred KJ Cox\\KindredLabs\\strata-data-port-network diff --check",
+      "exitCode": 0
+    },
+    {
+      "name": "PowerShell metadata",
+      "command": "pwsh --version",
+      "exitCode": 0
+    },
+    {
+      "name": "npm metadata",
+      "command": "npm --version",
+      "exitCode": 0
+    },
+    {
+      "name": "Python metadata",
+      "command": "C:\\Users\\Kindred KJ Cox\\KindredLabs\\strata-data-port-network\\candidates\\python-network\\.venv\\Scripts\\python.exe --version",
+      "exitCode": 0
+    },
+    {
+      "name": "commit metadata",
+      "command": "git rev-parse HEAD",
+      "exitCode": 0
+    },
+    {
+      "name": "branch metadata",
+      "command": "git branch --show-current",
+      "exitCode": 0
+    }
+  ],
+  "knownLimitations": {
+    "hardwarePhysicalTransferMeasured": false,
+    "twoMachineTransportProven": false,
+    "zeroCopyClaimAuthorized": false,
+    "productionReadinessProven": false,
+    "speedupClaim": false
+  },
+  "overall": {
+    "status": "GREEN",
+    "allRequiredGatesPassed": true
+  }
+}

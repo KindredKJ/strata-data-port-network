@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "strata.node.transfer.receipt.v1",
+  "receiptId": "41912eff-96e5-45db-baa3-e0557bf7939f",
+  "timestampUtc": "2026-09-25T07:46:41.417Z",
+  "nodeId": "784cab48-4b08-4fe9-8845-7339ad7b53a4",
+  "canonicalCommit": "25c3b5aff912cd14b71c7abf49050be1b60722d0",
+  "operation": "port-zero.local-transfer",
+  "bytes": 50,
+  "classification": "REDUCED_COPY",
+  "explicitPayloadCopies": 0,
+  "sourceDetached": true,
+  "integrityVerified": true,
+  "outputSha256": "0785173c4e26295093dd493a848feee2ed9fbbd41240aeb4ee6acba215eb6381",
+  "externalEffects": false
+}

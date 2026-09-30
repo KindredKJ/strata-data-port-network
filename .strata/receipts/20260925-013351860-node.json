@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "strata.node.receipt.v1",
+  "project": "Strata Data Port Network",
+  "founder": "Kindred Jermaine Cox",
+  "organization": "Kindred Labs",
+  "node": "Strata Node",
+  "status": "GREEN",
+  "nodeId": "784cab48-4b08-4fe9-8845-7339ad7b53a4",
+  "canonicalCommit": "25c3b5aff912cd14b71c7abf49050be1b60722d0",
+  "branch": "codex/strata-release-node-20260925",
+  "timestampUtc": "2026-09-25T07:33:51.8522721Z",
+  "host": "127.0.0.1",
+  "port": 8787,
+  "checks": [
+    {
+      "name": "health",
+      "status": true
+    },
+    {
+      "name": "readiness",
+      "status": true
+    },
+    {
+      "name": "canonical_commit",
+      "status": true
+    },
+    {
+      "name": "port_zero_identity",
+      "status": true
+    },
+    {
+      "name": "safe_local_transfer",
+      "status": true
+    },
+    {
+      "exitCode": 0,
+      "name": "restart_command",
+      "status": true
+    },
+    {
+      "name": "process_after_restart",
+      "status": true
+    },
+    {
+      "name": "ready_after_restart",
+      "status": true
+    },
+    {
+      "name": "identity_persisted",
+      "status": true
+    },
+    {
+      "name": "post_restart_integrity",
+      "status": true
+    }
+  ],
+  "limitations": {
+    "hardwarePhysicalTransferMeasured": false,
+    "twoMachineTransportProven": false,
+    "zeroCopyClaimAuthorized": false,
+    "productionReadinessProven": false
+  },
+  "overall": {
+    "status": "GREEN",
+    "allRequiredNodeGatesPassed": true
+  }
+}

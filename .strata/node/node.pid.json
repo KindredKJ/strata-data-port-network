@@ -1,0 +1,9 @@
+{
+  "pid": 18180,
+  "host": "127.0.0.1",
+  "port": 8787,
+  "startedAtUtc": "2026-09-25T07:59:50.045Z",
+  "commit": "ab740c208fa4fed4516ee789f6f7242d2ab338e3",
+  "branch": "codex/strata-release-node-20260925",
+  "runtimeVersion": "strata-node.v1"
+}
