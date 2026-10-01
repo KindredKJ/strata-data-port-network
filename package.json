@@ -16,6 +16,7 @@
     "./two-machine-proof": "./src/two-machine-proof.mjs",
     "./interface-routing": "./src/interface-session-routing.mjs",
     "./production-scheduler": "./src/production-capability-scheduler.mjs",
-    "./verification-scheduler": "./src/verification-proof-scheduler.mjs"
+    "./verification-scheduler": "./src/verification-proof-scheduler.mjs",
+    "./repair-scheduler": "./src/repair-experiment-scheduler.mjs"
   }
 }
