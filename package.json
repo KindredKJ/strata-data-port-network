@@ -6,10 +6,13 @@
   "engines": { "node": ">=22" },
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "measure": "node scripts/measure-worker-transfer.mjs"
+    "measure": "node scripts/measure-worker-transfer.mjs",
+    "proof:receive": "node scripts/two-machine-receiver.mjs",
+    "proof:send": "node scripts/two-machine-sender.mjs"
   },
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
-    "./state-port": "./src/kindred-state-port.mjs"
+    "./state-port": "./src/kindred-state-port.mjs",
+    "./two-machine-proof": "./src/two-machine-proof.mjs"
   }
 }
