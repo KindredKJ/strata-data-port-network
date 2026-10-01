@@ -1,64 +1,55 @@
-# SW06-F: two-host transport proof harness
+# SW06-F: secure two-host transport proof gate
 
-This harness makes the next SDPN gate executable without claiming it has already passed.
+This harness makes the physical two-host SDPN gate executable without claiming the gate has
+already passed.
 
-## What it does
+## Wire security
 
-The receiver and sender establish a challenge/response session over HTTP/TCP, authenticate the
-proof exchange with an HMAC secret, transfer the exact canonical payload bytes, verify byte count
-and SHA-256 at the destination, and return a MAC-protected receipt.
+The challenge request contains only proof metadata. The canonical Kindred state payload is
+encrypted before it crosses the network.
 
-The receipt records:
+The sender and receiver derive a per-session key from the one-time pairing secret, random
+challenge, and session ID using HKDF-SHA-256. The payload is protected with AES-256-GCM and the
+full state/proof transcript is authenticated as associated data.
 
-- source and destination host fingerprints;
-- whether those fingerprints differ;
-- whether the TCP peer was loopback;
-- authentication result;
-- payload byte count and SHA-256 result;
-- state identity supplied by Kindred;
-- transport classification;
-- whether the software evidence satisfies the two-host network criterion.
+The receiver therefore accepts plaintext only after challenge/response authentication,
+AES-256-GCM authentication, byte-count verification, and SHA-256 verification all succeed.
 
-`twoHostNetworkProofSatisfied` can become true only when all of the following are observed in the
-same run:
+The pairing secret is ephemeral. It must never be committed to Git or reused as a long-term Kindred
+authority key.
 
-1. payload integrity passes;
-2. challenge/response authentication passes;
-3. source and destination host fingerprints differ;
-4. the receiver does not observe a loopback peer.
+## Evidence
 
-Even then, the receipt keeps `physicalMachineAttestationProven=false`. The harness does not
-provide TPM/hardware attestation and should not be described as proof of physical zero-copy.
+The receipt records state ID, canonical state hash, generation, exact payload hashes, source and
+destination host fingerprints, loopback status, encryption status, cipher, transport class, and the
+two-host result.
 
-## Run on two machines
+`twoHostNetworkProofSatisfied` becomes true only when authentication and integrity pass, host
+fingerprints differ, and the receiver observes a non-loopback peer.
 
-Set the same temporary proof secret on both machines. Do not commit the secret.
+Even a successful receipt keeps `physicalMachineAttestationProven=false` and
+`productionReadyClaim=false`: this gate is network/software evidence, not TPM attestation or
+physical zero-copy proof.
+
+## Windows launchers
 
 Receiver:
 
-```bash
-KINDRED_SDPN_PROOF_SECRET="<temporary-secret>" \
-node scripts/two-machine-receiver.mjs --host 0.0.0.0 --port 47900
+```powershell
+pwsh ./scripts/Start-SW06FReceiver.ps1
 ```
 
 Sender:
 
-```bash
-KINDRED_SDPN_PROOF_SECRET="<temporary-secret>" \
-node scripts/two-machine-sender.mjs \
-  --host <receiver-ip> \
-  --port 47900 \
-  --payload <canonical-state-file> \
-  --state-id <state-id> \
-  --state-hash <kindred-state-hash> \
-  --receipt evidence/two-host-proof.json
+```powershell
+pwsh ./scripts/Invoke-SW06FProof.ps1 -ReceiverIp <receiver-ip> -PairingSecret <one-time-secret>
 ```
 
-The canonical payload file should be the exact `kindred-canonical-json-v1` bytes emitted by
-Kindred root.
+The sender uses the local Kindred Root proof-export endpoint, sends the exact canonical bytes,
+stores the returned receipt, and asks Kindred Root to verify/import it.
 
 ## Current status
 
-The committed automated test exercises the complete protocol on loopback and must keep
-`twoHostNetworkProofSatisfied=false`. A real two-host receipt is not created by CI and remains a
-separate physical-network gate.
+CI proves protocol behavior on loopback and must keep `twoHostNetworkProofSatisfied=false`.
+The physical gate changes only after two real authorized hosts complete the run and Kindred verifies
+the receipt.
