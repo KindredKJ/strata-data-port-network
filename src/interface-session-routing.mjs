@@ -1,7 +1,24 @@
 import { createHash } from "node:crypto";
 
-export const INTERFACE_ROUTE_SCHEMA = "kindred.sdpn.interface-route.v1";
+export const INTERFACE_ROUTE_SCHEMA = "kindred.sdpn.interface-route.v2";
 export const INTERFACE_FRAME_SCHEMA = "kindred.interface.frame.v1";
+
+export const CONTROL_FRAME_TYPES = new Set([
+  "ack",
+  "cancel",
+  "error",
+  "ping",
+  "pong",
+  "response.start",
+  "response.cancelled"
+]);
+
+export const STREAM_FRAME_TYPES = new Set([
+  "input.delta",
+  "audio.input.chunk",
+  "output.delta",
+  "audio.output.chunk"
+]);
 
 function normalize(value) {
   if (Array.isArray(value)) return value.map(normalize);
@@ -51,6 +68,55 @@ export function decodeInterfaceFrame(bytes) {
   return validateInterfaceFrame(value);
 }
 
+export function framePriority(frame) {
+  validateInterfaceFrame(frame);
+  if (CONTROL_FRAME_TYPES.has(frame.type)) return 0;
+  if (STREAM_FRAME_TYPES.has(frame.type)) return 2;
+  return 1;
+}
+
+export class SessionPriorityQueue {
+  #queues = [[], [], []];
+  #maxDepth;
+
+  constructor({ maxDepth = 512 } = {}) {
+    if (!Number.isSafeInteger(maxDepth) || maxDepth < 1) {
+      throw new RangeError("maxDepth must be a positive integer");
+    }
+    this.#maxDepth = maxDepth;
+  }
+
+  get depth() {
+    return this.#queues.reduce((sum, queue) => sum + queue.length, 0);
+  }
+
+  enqueue(frame) {
+    const priority = framePriority(frame);
+    if (this.depth >= this.#maxDepth && priority !== 0) {
+      throw new Error("realtime stream queue is full");
+    }
+    this.#queues[priority].push(frame);
+    return { priority, depth: this.depth };
+  }
+
+  dequeue() {
+    for (const queue of this.#queues) {
+      if (queue.length) return queue.shift();
+    }
+    return null;
+  }
+
+  status() {
+    return {
+      depth: this.depth,
+      maxDepth: this.#maxDepth,
+      control: this.#queues[0].length,
+      interactive: this.#queues[1].length,
+      stream: this.#queues[2].length
+    };
+  }
+}
+
 export class SessionSequencer {
   #lastBySource = new Map();
   #pending = new Map();
@@ -72,7 +138,10 @@ export class SessionSequencer {
     }
     this.#lastBySource.set(key, frame.sequence);
 
-    if (!["ack", "pong"].includes(frame.type)) {
+    const control = CONTROL_FRAME_TYPES.has(frame.type);
+    const noAck = ["ack", "pong"].includes(frame.type);
+
+    if (!control && !noAck) {
       if (this.#pending.size >= this.#maxInFlight) {
         throw new Error("interface session backpressure window is full");
       }
@@ -82,8 +151,11 @@ export class SessionSequencer {
         sequence: frame.sequence
       });
     }
+
     return {
       accepted: true,
+      priority: framePriority(frame),
+      control,
       pending: this.#pending.size,
       lastSequence: frame.sequence
     };
@@ -123,6 +195,7 @@ export class SDPNInterfaceRoutePlanner {
       throw new Error("interface route endpoint identity is incomplete");
     }
 
+    const priority = framePriority(frame);
     const common = {
       schemaVersion: INTERFACE_ROUTE_SCHEMA,
       sessionId: frame.session_id,
@@ -133,6 +206,7 @@ export class SDPNInterfaceRoutePlanner {
       destination: endpoint.locator,
       frameType: frame.type,
       sequence: frame.sequence,
+      priority,
       physicalZeroCopyProven: false,
       physicalMachineAttestationProven: false
     };
@@ -140,6 +214,7 @@ export class SDPNInterfaceRoutePlanner {
     if (frame.state_ref && endpoint.supportsReference !== false) {
       return {
         ...common,
+        lane: "REFERENCE",
         classification: "REFERENCE",
         transportMode: "reference",
         stateRef: frame.state_ref,
@@ -154,23 +229,32 @@ export class SDPNInterfaceRoutePlanner {
     const digest = createHash("sha256").update(bytes).digest("hex");
 
     if (endpoint.supportsStreaming && bytes.length <= this.inlineLimitBytes) {
+      const control = CONTROL_FRAME_TYPES.has(frame.type);
+      const stream = STREAM_FRAME_TYPES.has(frame.type);
       return {
         ...common,
-        classification: "INTERACTIVE_BUFFERED",
+        lane: control ? "CONTROL" : stream ? "STREAM" : "INTERACTIVE",
+        classification: control
+          ? "INTERACTIVE_CONTROL"
+          : stream
+            ? "INTERACTIVE_STREAM"
+            : "INTERACTIVE_BUFFERED",
         transportMode: "frame",
         stateRef: null,
         payloadBytes: bytes.length,
         payloadSha256: digest,
         executed: false,
-        reason: (
-          "Small realtime interface frame is eligible for the persistent " +
-          "interactive session lane."
-        )
+        reason: control
+          ? "Control frame receives the highest-priority persistent session lane."
+          : stream
+            ? "Streaming delta/chunk uses the bulk realtime lane behind control traffic."
+            : "Interactive frame uses the persistent realtime session lane."
       };
     }
 
     return {
       ...common,
+      lane: "BUFFERED",
       classification: "PORTABLE_BUFFERED",
       transportMode: "frame",
       stateRef: null,
