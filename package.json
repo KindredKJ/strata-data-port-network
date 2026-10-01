@@ -14,6 +14,7 @@
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
     "./state-port": "./src/kindred-state-port.mjs",
     "./two-machine-proof": "./src/two-machine-proof.mjs",
-    "./interface-routing": "./src/interface-session-routing.mjs"
+    "./interface-routing": "./src/interface-session-routing.mjs",
+    "./production-scheduler": "./src/production-capability-scheduler.mjs"
   }
 }
