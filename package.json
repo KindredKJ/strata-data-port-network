@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "test": "node --test test/*.test.mjs",
     "measure": "node scripts/measure-worker-transfer.mjs",
@@ -14,5 +16,8 @@
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
     "./state-port": "./src/kindred-state-port.mjs",
     "./two-machine-proof": "./src/two-machine-proof.mjs"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
   }
 }
