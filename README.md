@@ -16,6 +16,12 @@ The Strata Data Port Network is Kindred Labs' research into permissioned data po
 
 Both source pull requests were open and unmerged when imported on 2026-09-23. Their original paths, blob IDs and sizes appear in [`lineage/source-manifest.json`](lineage/source-manifest.json). The candidates have not been reconciled into one default network runtime. The authoritative topology and founder approval record remain in the Superstructure; its historical classification and approval text are not altered by the import.
 
+## Browser Workspace v1
+
+The [browser workspace](https://stratadataportnetwork.vercel.app/app.html) is an additive, general-public file handoff: seal a file up to 16 MiB with a unique passphrase, move the resulting `.strata` package using a channel of your choice, then open and verify it in another browser. It uses Web Crypto AES-256-GCM, PBKDF2-SHA256 (310,000 iterations), and SHA-256 integrity checks. File bytes, filename, and passphrase are processed locally; the package contains encrypted data and public cryptographic parameters. No account or founder credential is required. Run `node test/browser-package.test.mjs` for the focused package checks.
+
+This is **PORTABLE_BUFFERED_ENCRYPTED_PACKAGE** execution, not a live Strata network transfer. The site does not upload, host, or deliver packages. It has no remote revocation after a recipient possesses the package and passphrase. Keep the passphrase in a separate channel. It does not establish Port Zero production authorization, SW02/SW06-F two-physical-machine proof, or ZPS SW03 completion.
+
 ## Run the imported candidates
 
 The Python candidate requires Python 3.11 or newer. From this repository root:
