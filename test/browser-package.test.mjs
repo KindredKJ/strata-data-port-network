@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { sealFile, openPackage, MAX_FILE_BYTES } from './app-core.mjs';
+import { sealFile, openPackage, MAX_FILE_BYTES } from '../public/app-core.mjs';
 
 const file = (bytes, name = 'report.txt') => ({ name, type: 'text/plain', size: bytes.length, arrayBuffer: async () => Uint8Array.from(bytes).buffer });
 
