@@ -47,7 +47,42 @@ jobs:
         with:
           node-version: '24'
           package-manager-cache: false
-      - name: Verify worker ownership transfer
-        run: npm test
+      - name: Verify worker ownership transfer and hardened transport
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p evidence/ci
+          npm test 2>&1 | tee evidence/ci/node-tests.log
       - name: Measure buffered and worker boundaries
         run: npm run measure
+
+      - name: Retain scoped protocol evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdpn-protocol-${{ github.sha }}
+          path: evidence/ci/
+          if-no-files-found: error
+
+  windows-verification-gate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Parse launchers and reject invalid verification results
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Force evidence/ci | Out-Null
+          Get-ChildItem scripts/*.ps1 | ForEach-Object {
+            $tokens = $null; $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$tokens, [ref]$parseErrors) | Out-Null
+            if ($parseErrors.Count) { throw ($parseErrors | Out-String) }
+          }
+          & ./test/verification-gate.test.ps1 | Tee-Object evidence/ci/powershell-gate.log
+      - name: Retain Windows gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdpn-windows-gate-${{ github.sha }}
+          path: evidence/ci/
+          if-no-files-found: error
