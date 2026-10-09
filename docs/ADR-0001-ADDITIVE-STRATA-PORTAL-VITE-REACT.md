@@ -12,6 +12,20 @@ Adopt **Vite + React + TypeScript for a new, opt-in Strata Portal browser applic
 
 Vite is a build/development tool, React is an interactive UI library. **Neither is a data transport, device attestation system, authorization authority, nor evidence of zero-copy transfer.** All security decisions and external effects remain enforced by backend services. Existing APIs, receipts, cryptography, and release gates remain authoritative.
 
+## Founder decision: federated identity, independent rendering, shared interoperability
+
+**Confirmed 2026-10-09:** Kindred Labs is a **federation of distinct products**, not a universal command center, monolithic portal, or single global application. The portal described in this ADR belongs **only to Strata Data Port Network**; it must never become the mandatory home or required entry point for any other Kindred project.
+
+- **Each product remains itself:** its own name, brand, repository, URL, runtime, UI/UX, navigation, data ownership, release cadence, and monetization surface. StrataCast renders StrataCast, AI Crawl renders AI Crawl, Brainstem renders Brainstem, and SDPN renders SDPN.
+- **Visible and rendered independently:** each system exposes its own real, user-facing representations, with meaningful status, activity, content, and capabilities rendered in that system's own interface. Headless services may expose an optional separately deployed observability view; they must not be forced into a new frontend.
+- **Connected, not centralized:** versioned contracts, optional SDKs, authorized cross-service links and event interfaces allow projects to discover or interoperate with one another only where explicitly enabled. No forced shared shell, global navigation, aggregated operator dashboard, or dependency on another project's uptime.
+- **No replacement or forced migration:** neither Vite/React nor shared packages replace Next.js, Babylon.js, Unreal, Python, native services, existing frontend assets, existing routes, current authentication, or project-specific responsibilities.
+- **Separate trust and release boundaries:** services retain their authorization authority, audit logs, and independent CI/deployment gates. Cross-product operations are opt-in, authenticated, least-privilege, revocable and independently testable.
+- **Graceful isolation:** when one integration is offline, disabled, or unauthenticated, the others remain usable and communicate unavailability truthfully.
+- **Acceptance gate:** a PR is not compliant if it centralizes distinct products by default, silently changes their output/behavior, hides or substitutes their existing experiences, or makes integration mandatory for core function. Project-level UI must actually render; design-only mockups do not count as production proof.
+
+This clarifies and supersedes any earlier language implying a **universal command center** for all Kindred products.
+
 ## Observed repository facts at decision time
 
 - SDPN `public/app.html` and `public/app-core.mjs`: a 16 MiB local AES-256-GCM encrypted-package workflow, with `connect-src 'none'` CSP for `/app.html`; it cannot upload or transmit packages through a remote network. Preserve this unchanged.
