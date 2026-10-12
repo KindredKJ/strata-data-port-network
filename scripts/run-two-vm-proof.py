@@ -108,6 +108,9 @@ if(!crypto.verify(null,Buffer.from(e.payloadJson),key,Buffer.from(e.signatureBas
         artifacts={p.name:digest(p) for p in out.iterdir()
             if p.is_file() and p.name in {"sender.log","receiver.log","sender.pcap","receiver.pcap"}})
     (out/"run.json").write_text(json.dumps(result,indent=2)+"\n")
+    exported=out/"sender-receipts";exported.mkdir(exist_ok=True)
+    for index,receipt in enumerate(result["receipts"]):
+        (exported/(str(index).zfill(3)+".json")).write_text(json.dumps(receipt,indent=2)+"\n")
     print("TWO_VM_NETWORK_PROOF_PASS")
 finally:
     for proc,log in processes:

@@ -24,5 +24,15 @@ payload bytes, remote host identity, physical execution or production authority.
 The parser can accept an explicitly supplied local secret and payload path for
 MAC/hash verification; the GUI intentionally performs metadata inspection only.
 
+The two-VM runner exports each authenticated transfer receipt under
+`evidence/two-vm/<run>/sender-receipts/`. Choose one of those JSON files in the
+native inspector. The parent `run.json` contains reciprocal guest signatures
+and topology evidence; it is a separate proof package, not a transfer receipt.
+
+The native CI gate retains a WebKit pixel-render snapshot, exact pixel hash,
+ephemeral-profile state and enabled sandbox state. The controlled QEMU test uses
+an X11 software renderer; it does not establish GPU performance or full web
+compatibility. Page JavaScript stays disabled during the snapshot.
+
 No sync, remote index, search service or live Port Zero authority is impersonated.
 Follow ADR 0001/0002 for later approved capability integrations.

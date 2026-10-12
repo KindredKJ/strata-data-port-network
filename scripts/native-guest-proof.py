@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Execute a sandboxed native DOM proof in a disposable Linux guest; no uplink."""
-import argparse, hashlib, json, os, pathlib, re, shutil, subprocess, tempfile
+import argparse, base64, hashlib, json, os, pathlib, re, shutil, subprocess, tempfile
 parser=argparse.ArgumentParser()
 for name in ("base-guest","kernel","qemu","firmware","bios","out"):parser.add_argument("--"+name,required=True)
 args=parser.parse_args()
@@ -79,6 +79,9 @@ echo NATIVE_EXIT=$?
 echo NATIVE_RESULT_BEGIN
 cat /tmp/native.json
 echo NATIVE_RESULT_END
+echo NATIVE_SNAPSHOT_BEGIN
+base64 /tmp/native.png
+echo NATIVE_SNAPSHOT_END
 poweroff -f
 """
     (root/"init").write_text(init);(root/"init").chmod(0o755)
@@ -97,12 +100,17 @@ poweroff -f
     if "NATIVE_EXIT=0" not in text:raise RuntimeError("Native guest render failed; inspect retained log")
     body=text.split("NATIVE_RESULT_BEGIN",1)[1].split("NATIVE_RESULT_END",1)[0].strip()
     result=json.loads(body)
+    encoded=text.split("NATIVE_SNAPSHOT_BEGIN",1)[1].split("NATIVE_SNAPSHOT_END",1)[0]
+    snapshot=base64.b64decode("".join(encoded.split()),validate=True)
+    if not snapshot.startswith(b"\x89PNG\r\n\x1a\n"):raise RuntimeError("Native snapshot is not PNG")
+    (out/"native-render.png").write_bytes(snapshot)
     if not result["subprocess_sandbox_enabled"] or not result["ephemeral_profile"] or not result["native_page_load_finished"] or result["snapshot_width"]<200:
         raise RuntimeError("Native proof boundary rejected")
     result.update(classification="NATIVE_WEBKIT_QEMU_GUEST_X11_SOFTWARE_PROOF",
         kernelSha256=hashlib.sha256(pathlib.Path(args.kernel).read_bytes()).hexdigest(),
         browserSourceSha256=hashlib.sha256((repo/"interconnect/browser.py").read_bytes()).hexdigest(),
-        logSha256=hashlib.sha256((out/"guest.log").read_bytes()).hexdigest())
+        logSha256=hashlib.sha256((out/"guest.log").read_bytes()).hexdigest(),
+        snapshotSha256=hashlib.sha256(snapshot).hexdigest())
     (out/"native-render.json").write_text(json.dumps(result,indent=2)+"\n")
     print("INTERCONNECT_NATIVE_SANDBOXED_DOM_PASS")
 finally:shutil.rmtree(private)

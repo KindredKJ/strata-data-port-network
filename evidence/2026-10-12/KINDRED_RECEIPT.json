@@ -18,8 +18,27 @@
     "twoVmTransferCount": 7,
     "reciprocalSignaturesVerified": true,
     "nativePolicyTestsPassed": 9,
-    "nativeRenderLocal": "BLOCKED_NO_GRAPHICAL_DISPLAY_CONNECTION",
-    "ordinaryNodeHostTests": "11/20 passed; nine blocked by interface enumeration; unmodified host fingerprint fail-closed behavior retained"
+    "nativeRenderLocal": "HOST DISPLAY BLOCKED; ACTUAL CLEAN CI GUEST RENDER PASS",
+    "ordinaryNodeHostTests": "11/20 passed; nine blocked by interface enumeration; unmodified host fingerprint fail-closed behavior retained",
+    "cleanGitHubCandidateRun": {
+      "id": 38191107184,
+      "status": "PASS"
+    },
+    "twoVmCiRun": {
+      "id": 38191107240,
+      "status": "PASS",
+      "artifactId": 11721127897,
+      "digest": "sha256:f820e8456c8af6fdf0e1b1276860127db9c1b752a9d5ef5ff1cef197b78bacc0"
+    },
+    "nativePixelRenderCiRun": {
+      "id": 38191107198,
+      "status": "PASS",
+      "artifactId": 11721672991,
+      "digest": "sha256:fc5b86210285376b493f257674135d44fee6786b6f1e976cc011e06ee6a93ea8",
+      "engine": "WebKitGTK 2.52.6",
+      "sandboxEnabled": true,
+      "pageJavascriptEnabled": false
+    }
   },
   "external_effects": {
     "status": "approved",
