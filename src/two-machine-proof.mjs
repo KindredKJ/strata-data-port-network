@@ -176,12 +176,16 @@ export async function startProofReceiver({
   secret,
   maxBytes = DEFAULT_MAX_BYTES,
   maxSessions = 128,
-  challengeTtlMs = CHALLENGE_TTL_MS
+  challengeTtlMs = CHALLENGE_TTL_MS,
+  onReceipt
 } = {}) {
   requireSecret(secret);
   positiveInteger(maxBytes, "maxBytes");
   positiveInteger(maxSessions, "maxSessions");
   positiveInteger(challengeTtlMs, "challengeTtlMs");
+  if (onReceipt !== undefined && typeof onReceipt !== "function") {
+    throw new TypeError("onReceipt must be a function");
+  }
   const destinationHostFingerprint = hostFingerprint();
   const sessions = new Map();
   const expireSessions = () => {
@@ -342,11 +346,15 @@ export async function startProofReceiver({
         };
         const receiptMac = hmac(secret, receiptTranscript(receiptCore));
         sessions.delete(sessionId);
+        const receipt = { ...receiptCore, receiptMac };
+        // Optional audit sink must succeed before a success receipt is returned.
+        try {
+          await onReceipt?.(Object.freeze({ ...receipt }));
+        } catch {
+          return sendJson(response, 503, { error: "proof_receipt_persistence_failed" });
+        }
 
-        return sendJson(response, integrityVerified ? 200 : 422, {
-          ...receiptCore,
-          receiptMac
-        });
+        return sendJson(response, integrityVerified ? 200 : 422, receipt);
       }
 
       sendJson(response, 404, { error: "not_found" });

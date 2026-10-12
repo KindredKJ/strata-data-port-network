@@ -1,0 +1,26 @@
+name: INTERCONNECT native proof
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  local-policy-and-render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install distribution-native WebKit dependencies
+        run: sudo apt-get update -qq && sudo apt-get install -y python3-gi gir1.2-webkit2-4.1 xvfb
+      - name: Local navigation and receipt security tests
+        run: python3 -m unittest discover -s interconnect/tests -v
+      - name: Render with mandatory WebKit sandbox and ephemeral profile
+        run: xvfb-run -a /usr/bin/python3 interconnect/browser.py --smoke-output evidence/interconnect/native-render.json
+      - name: Preserve exact native proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: interconnect-native-${{ github.sha }}
+          path: evidence/interconnect/
+          if-no-files-found: error

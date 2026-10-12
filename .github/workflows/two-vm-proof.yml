@@ -1,0 +1,40 @@
+name: SW06-F two actual VMs
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  two-guest-private-network:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install local emulation dependencies
+        run: sudo apt-get update -qq && sudo apt-get install -y qemu-system-x86 busybox-static cpio
+      - name: Retrieve and pin guest kernel and initramfs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/sw06f-assets"
+          cd "$RUNNER_TEMP/sw06f-assets"
+          curl --fail --location --retry 2 https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/netboot/vmlinuz-virt -o vmlinuz
+          curl --fail --location --retry 2 https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/netboot/initramfs-virt -o initramfs
+          echo "6b58e5d779e44e57c9efa20232da18650415eceb9d4f544e5c165c1f392c5d51  vmlinuz" | sha256sum --check
+          echo "1f878a079d9c2260765e89b227b16f06747965deb612f2cc265b28941561a992  initramfs" | sha256sum --check
+      - name: Prepare bounded disposable guests
+        run: python3 scripts/prepare-two-vm-guest.py --initramfs "$RUNNER_TEMP/sw06f-assets/initramfs" --busybox /usr/bin/busybox --out "$RUNNER_TEMP/sw06f-guest"
+      - name: Execute reciprocal signed private-network transport
+        run: python3 scripts/run-two-vm-proof.py --qemu /usr/bin/qemu-system-x86_64 --firmware /usr/share/qemu --bios /usr/share/seabios/bios-256k.bin --kernel "$RUNNER_TEMP/sw06f-assets/vmlinuz" --guest-root "$RUNNER_TEMP/sw06f-guest" --cpio /usr/bin/cpio --out evidence/two-vm/ci
+      - name: Preserve receipts, host identities and packet captures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sw06f-two-vm-${{ github.sha }}
+          path: evidence/two-vm/ci/
+          if-no-files-found: error
+          retention-days: 30
