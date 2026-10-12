@@ -110,3 +110,27 @@ test("corrupt audit, missing approval and false proof claims fail closed", async
     }), /integrity failure/);
   } finally { await h.cleanup(); }
 });
+
+test("concurrent dispatch and privileged mutation cannot bypass the single writer", async () => {
+  let release;
+  const gate = new Promise((resolve) => { release = resolve; });
+  const h = await harness(async (request) => {
+    await gate;
+    return { accepted: true, transferId: request.transferId,
+      destinationId: request.destinationId, stateId: request.stateId,
+      payloadSha256: request.payloadSha256, integrityVerified: true };
+  });
+  try {
+    await h.coordinator.registerPort({ actor: "operator", port: h.port("a", ["transfer:send"], ["b"]) });
+    await h.coordinator.registerPort({ actor: "operator", port: h.port("b", ["transfer:receive"]) });
+    const args = { actor: "operator", sourceId: "a", destinationIds: ["b"],
+      stateId: "test", payload: Uint8Array.of(2), idempotencyKey: "single-writer" };
+    const first = h.coordinator.dispatch(args);
+    await assert.rejects(h.coordinator.dispatch(args), /single-writer/);
+    await assert.rejects(h.coordinator.revokePort({ actor: "operator", portId: "b" }), /single-writer/);
+    release();
+    await first;
+    await h.coordinator.revokePort({ actor: "operator", portId: "b" });
+    assert.equal(h.coordinator.snapshot().ports.find((p) => p.id === "b").health, "revoked");
+  } finally { release(); await h.cleanup(); }
+});
