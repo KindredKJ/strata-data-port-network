@@ -119,3 +119,12 @@ flowchart TB
 
 ## Design integrity
 The above is an additive architecture decision, not a retroactive reclassification of existing measurements, claimed ownership, or public production. Do not overwrite original Genesis white papers or source ledgers. Never reclassify a compatibility rendering interface as an operative public network.
+
+## Direct white-paper alignment (public doctrine, not production evidence)
+
+- Kindred white paper overview: https://whitepaper.kindredlabs.ai/ — long-term goal is one persistent, trusted, companion-first interface replacing a fragmented set of application experiences. This is Genesis's intended **app replacement at the interaction layer**, not permission to impersonate existing services or ignore platform constraints.
+- Kindred's Mind / Body / Soul companion doctrine: https://whitepaper.kindredlabs.ai/the-solution/what-are-kindreds — cognition and memory, cross-device presence, and ethical relationship policy remain explicit and distinct.
+- Genesis Beta roadmap: https://whitepaper.kindredlabs.ai/product-roadmap/phase-1-genesis-beta — early Chrome-extension entrypoint is historical product-phase evidence, not a mandate that the independent future SDPN INTERCONNECT browser use Chromium.
+- Advanced AI ecosystem roadmap: https://whitepaper.kindredlabs.ai/product-roadmap/phase-2-advanced-ai-ecosystem — comprehensive task execution, cross-device continuity, A2A and unified services are intended product requirements.
+
+**Boundary clarification:** SDPN's first-party browser is native to SDPN's intended next-generation internet; Genesis is the companion that can inhabit and orchestrate it. SDPN does not subsume the companion's cognition or personality, while Genesis does not subsume SDPN's encrypted port/commitment/materialization protocols. Both remain subject to independently verified trust, capability and runtime policy.
