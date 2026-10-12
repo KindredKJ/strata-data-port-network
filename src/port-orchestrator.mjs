@@ -145,24 +145,33 @@ export class SDPNPortOrchestrator {
     this.#active();
     const checked = checkPort(port);
     if (checked.expiresAt <= this.#clock()) throw new Error("Port consent has expired");
-    await this.#permit(actor, "port.register", { portId: checked.id, ownerId: checked.ownerId });
-    if (this.#ports.has(checked.id)) throw new Error("Existing port must be explicitly revoked before re-registration");
-    await this.#record("port.registered", { port: checked });
-    return checked.id;
+    this.#busy = true;
+    try {
+      await this.#permit(actor, "port.register", { portId: checked.id, ownerId: checked.ownerId });
+      if (this.#ports.has(checked.id)) throw new Error("Port ID is already registered");
+      await this.#record("port.registered", { port: checked });
+      return checked.id;
+    } finally { this.#busy = false; }
   }
   async updateHealth({ actor, portId, health }) {
     this.#active();
     if (!identifier(portId) || !HEALTH.has(health) || !this.#ports.has(portId)) {
       throw new TypeError("Invalid health update");
     }
-    await this.#permit(actor, "port.health", { portId, health });
-    await this.#record("port.health", { id: portId, health });
+    this.#busy = true;
+    try {
+      await this.#permit(actor, "port.health", { portId, health });
+      await this.#record("port.health", { id: portId, health });
+    } finally { this.#busy = false; }
   }
   async revokePort({ actor, portId }) {
     this.#active();
     if (!this.#ports.has(portId)) throw new Error("Unknown port");
-    await this.#permit(actor, "port.revoke", { portId });
-    await this.#record("port.revoked", { id: portId });
+    this.#busy = true;
+    try {
+      await this.#permit(actor, "port.revoke", { portId });
+      await this.#record("port.revoked", { id: portId });
+    } finally { this.#busy = false; }
   }
   #active() {
     if (this.#closed) throw new Error("Orchestrator closed");
@@ -179,18 +188,18 @@ export class SDPNPortOrchestrator {
         !(payload instanceof Uint8Array) || payload.byteLength < 1 ||
         payload.byteLength > 16 * 1024 * 1024) throw new TypeError("Invalid bounded transfer request");
     if (this.#usedKeys.has(idempotencyKey)) throw new Error("Replay or previous indeterminate transfer");
-    const source = this.#requirePort(sourceId, "transfer:send");
-    const digest = sha256(payload);
-    await this.#permit(actor, "transfer.dispatch", {
-      sourceId, destinationIds, stateId, payloadSha256: digest, payloadBytes: payload.byteLength
-    });
-    const permitted = destinationIds.map((id) => {
-      const destination = this.#requirePort(id, "transfer:receive");
-      if (!source.allowedDestinations.includes(id)) throw new Error("Source destination not approved");
-      return destination;
-    });
     this.#busy = true;
     try {
+      const source = this.#requirePort(sourceId, "transfer:send");
+      const digest = sha256(payload);
+      await this.#permit(actor, "transfer.dispatch", {
+        sourceId, destinationIds, stateId, payloadSha256: digest, payloadBytes: payload.byteLength
+      });
+      const permitted = destinationIds.map((id) => {
+        const destination = this.#requirePort(id, "transfer:receive");
+        if (!source.allowedDestinations.includes(id)) throw new Error("Source destination not approved");
+        return destination;
+      });
       const transferId = randomUUID();
       await this.#record("transfer.reserved", {
         transferId, idempotencyKey, sourceId, destinationIds, stateId,
