@@ -29,3 +29,10 @@ The workflow triggers on pull requests, main pushes, daily schedule and manual d
 Real Port Zero identity signatures, mTLS transport and peer pins, server-side deduplication, distributed leases, remote recovery, encrypted backups with verified restore, live node health/observability, access revocation propagation, protected release approvals, verified render assets and physical two-host attestation remain unverified.
 
 Commands: `npm test` and `node scripts/measure-orchestrator.mjs`.
+
+## End-to-end local visual path (no live transport)
+
+1. Start from a locally retained, append-only SDPN orchestrator journal produced by an authorized service.
+2. Export a **new**, strictly local file with `node scripts/export-topology-frame.mjs --journal <existing-absolute-journal> --output <new-absolute-json> --acknowledge-local-topology`. No journal data is overwritten; destination must not already exist. The resulting file contains only normalized node IDs, status-derived asset selectors, and topology positions.
+3. Build the separate StrataCast PR #24 and open its opt-in `/sdpn-topology.html` Babylon 3D observatory. Import the output JSON there. The viewer uses browser File API only and has no network authority. It does not assert physical transfer, physical zero-copy, signed source attestation or live operational status.
+4. Real-time remote topology observability remains gated on mutually authenticated, least-privilege, read-only API with per-tenant authorization and explicit disclosure controls. No unauthenticated public topology endpoint is approved.
