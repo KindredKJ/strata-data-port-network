@@ -2,6 +2,7 @@
 """Native GTK/WebKit INTERCONNECT proof. No founder identity or credential embedding."""
 import argparse
 import json
+import hashlib
 import os
 import sys
 from pathlib import Path
@@ -113,13 +114,17 @@ def main():
                 return
             def checked(view, result, _data):
                 try:
-                    native_result = view.evaluate_javascript_finish(result)
-                    if native_result.to_string() != "INTERCONNECT":
-                        raise ValueError("Native DOM proof failed")
+                    surface = view.get_snapshot_finish(result)
+                    width, height = surface.get_width(), surface.get_height()
+                    pixels = bytes(surface.get_data())
+                    if width < 200 or height < 100 or len(set(pixels)) < 8:
+                        raise ValueError("Native pixel rendering is empty")
                     evidence = {
                         "schema": "kindred.interconnect.native-render.v1",
                         "founder": "Kindred Jermaine Cox", "organization": "Kindred Labs",
-                        "engine": "WebKitGTK", "native_dom_heading": native_result.to_string(),
+                        "engine": "WebKitGTK", "native_page_load_finished": True,
+                        "snapshot_width": width, "snapshot_height": height,
+                        "pixel_sha256": hashlib.sha256(pixels).hexdigest(),
                         "engine_version": ".".join(str(x()) for x in (WebKit2.get_major_version, WebKit2.get_minor_version, WebKit2.get_micro_version)),
                         "subprocess_sandbox_enabled": context.get_sandbox_enabled(),
                         "ephemeral_profile": manager.is_ephemeral(),
@@ -130,13 +135,17 @@ def main():
                     }
                     path = Path(args.smoke_output)
                     path.parent.mkdir(parents=True, exist_ok=True)
+                    surface.write_to_png(str(path.with_suffix(".png")))
                     path.write_text(json.dumps(evidence, indent=2) + "\n")
                 except Exception as error:
                     result_code[0] = 1
                     print("NATIVE_RENDER_FAILED " + str(error), file=sys.stderr)
                 GLib.source_remove(timeout_id)
                 Gtk.main_quit()
-            web.evaluate_javascript("document.querySelector('h1').textContent", -1, None, None, None, checked, None)
+            gi.require_foreign("cairo")
+            # The native snapshot API works while page JavaScript remains disabled.
+            GLib.timeout_add(300, lambda: (web.get_snapshot(WebKit2.SnapshotRegion.VISIBLE,
+                WebKit2.SnapshotOptions.NONE, None, checked, None), False)[1])
         web.connect("load-changed", finished)
     web.load_html("""<!doctype html><html lang="en"><head><meta charset="utf-8">
       <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">

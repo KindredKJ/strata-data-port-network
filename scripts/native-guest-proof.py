@@ -14,7 +14,7 @@ try:
               "/usr/bin/timeout","/usr/bin/Xvfb","/usr/bin/xkbcomp","/usr/bin/xdg-dbus-proxy",
               "/usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0","/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0",
               "/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so"]
-    folders=["/usr/lib/python3.12","/usr/lib/python3/dist-packages/gi",
+    folders=["/usr/lib/python3.12","/usr/lib/python3/dist-packages/gi","/usr/lib/python3/dist-packages/cairo",
              "/usr/lib/x86_64-linux-gnu/girepository-1.0","/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1",
              "/usr/share/X11/xkb","/usr/share/fonts","/usr/share/dbus-1","/usr/share/glib-2.0/schemas",
              "/etc/fonts","/etc/dbus-1","/usr/share/glvnd/egl_vendor.d"]
@@ -30,7 +30,7 @@ try:
     for folder in folders:
         shutil.copytree(folder,root/folder.lstrip("/"),symlinks=True,dirs_exist_ok=True)
     # Resolve every native GI/WebKit dependency, including dependencies of dependencies.
-    pending=binaries+[str(p) for folder in folders[:4] for p in pathlib.Path(folder).rglob("*")
+    pending=binaries+[str(p) for folder in folders[:5] for p in pathlib.Path(folder).rglob("*")
         if p.is_file() and (".so" in p.name or os.access(p,os.X_OK))]
     seen=set()
     while pending:
@@ -97,7 +97,7 @@ poweroff -f
     if "NATIVE_EXIT=0" not in text:raise RuntimeError("Native guest render failed; inspect retained log")
     body=text.split("NATIVE_RESULT_BEGIN",1)[1].split("NATIVE_RESULT_END",1)[0].strip()
     result=json.loads(body)
-    if not result["subprocess_sandbox_enabled"] or not result["ephemeral_profile"] or result["native_dom_heading"]!="INTERCONNECT":
+    if not result["subprocess_sandbox_enabled"] or not result["ephemeral_profile"] or not result["native_page_load_finished"] or result["snapshot_width"]<200:
         raise RuntimeError("Native proof boundary rejected")
     result.update(classification="NATIVE_WEBKIT_QEMU_GUEST_X11_SOFTWARE_PROOF",
         kernelSha256=hashlib.sha256(pathlib.Path(args.kernel).read_bytes()).hexdigest(),

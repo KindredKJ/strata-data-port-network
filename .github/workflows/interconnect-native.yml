@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Install distribution-native WebKit dependencies
-        run: sudo apt-get update -qq && sudo apt-get install -y python3-gi gir1.2-webkit2-4.1 xvfb qemu-system-x86 busybox-static cpio dbus-x11
+        run: sudo apt-get update -qq && sudo apt-get install -y python3-gi python3-cairo python3-gi-cairo gir1.2-webkit2-4.1 xvfb qemu-system-x86 busybox-static cpio dbus-x11
       - name: Local navigation and receipt security tests
         run: python3 -m unittest discover -s interconnect/tests -v
       - name: Prepare pinned isolated Linux guest
