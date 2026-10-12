@@ -49,6 +49,18 @@
       "releaseVersion": "1.0.0",
       "schemaId": "stratacast.kindred/v1",
       "schemaVersion": "1.0.0"
+    },
+    {
+      "id": "sdpn.local-topology-export",
+      "releaseVersion": "1.0.0",
+      "schemaId": "kindred.sdpn.local-topology-export.v1",
+      "schemaVersion": "1.0.0",
+      "compatibleWith": [
+        {
+          "component": "sdpn.stratacast-topology-bridge",
+          "major": 1
+        }
+      ]
     }
   ],
   "releasePolicy": {
