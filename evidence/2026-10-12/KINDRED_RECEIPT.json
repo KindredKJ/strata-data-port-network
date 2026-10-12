@@ -1,0 +1,55 @@
+{
+  "receipt_id": "KND-FORGE-20261012T005500Z-7e414296",
+  "plugin": "kindred-forge",
+  "objective": "Actual two-VM SW06-F execution with reciprocal signed receipts plus native INTERCONNECT proof and CI",
+  "founder": "Kindred Jermaine Cox",
+  "organization": "Kindred Labs",
+  "state_before": {
+    "main": "68a9cbfd1b1eb92d08cc01c0e0f97d3514b3f5d6",
+    "physicalTransport": "unproven"
+  },
+  "evidence": [
+    "evidence/two-vm/2026-10-12/run.json"
+  ],
+  "changes": [
+    "Actual two-VM SW06-F execution with reciprocal signed receipts plus native INTERCONNECT proof and CI"
+  ],
+  "verification": {
+    "twoVmTransferCount": 7,
+    "reciprocalSignaturesVerified": true,
+    "nativePolicyTestsPassed": 9,
+    "nativeRenderLocal": "HOST DISPLAY BLOCKED; ACTUAL CLEAN CI GUEST RENDER PASS",
+    "ordinaryNodeHostTests": "11/20 passed; nine blocked by interface enumeration; unmodified host fingerprint fail-closed behavior retained",
+    "cleanGitHubCandidateRun": {
+      "id": 38191107184,
+      "status": "PASS"
+    },
+    "twoVmCiRun": {
+      "id": 38191107240,
+      "status": "PASS",
+      "artifactId": 11721127897,
+      "digest": "sha256:f820e8456c8af6fdf0e1b1276860127db9c1b752a9d5ef5ff1cef197b78bacc0"
+    },
+    "nativePixelRenderCiRun": {
+      "id": 38191107198,
+      "status": "PASS",
+      "artifactId": 11721672991,
+      "digest": "sha256:fc5b86210285376b493f257674135d44fee6786b6f1e976cc011e06ee6a93ea8",
+      "engine": "WebKitGTK 2.52.6",
+      "sandboxEnabled": true,
+      "pageJavascriptEnabled": false
+    }
+  },
+  "external_effects": {
+    "status": "approved",
+    "items": [
+      "Additive GitHub branch and PR integration requested by founder; no production deployment"
+    ]
+  },
+  "risk": [
+    "Original Core/Protocol unavailable",
+    "Physical-machine transport and production authorization unproven"
+  ],
+  "handoff": [],
+  "next_action": "Obtain passing exact GitHub CI artifacts and preserve additive lineage"
+}
