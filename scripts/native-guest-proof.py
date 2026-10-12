@@ -11,11 +11,13 @@ try:
     root=private/"root"
     shutil.copytree(args.base_guest,root,symlinks=True)
     binaries=["/usr/bin/python3.12","/usr/bin/bwrap","/usr/bin/dbus-daemon","/usr/bin/dbus-run-session",
-              "/usr/bin/timeout","/usr/bin/Xvfb","/usr/bin/xkbcomp"]
+              "/usr/bin/timeout","/usr/bin/Xvfb","/usr/bin/xkbcomp","/usr/bin/xdg-dbus-proxy",
+              "/usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0","/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0",
+              "/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so"]
     folders=["/usr/lib/python3.12","/usr/lib/python3/dist-packages/gi",
              "/usr/lib/x86_64-linux-gnu/girepository-1.0","/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1",
              "/usr/share/X11/xkb","/usr/share/fonts","/usr/share/dbus-1","/usr/share/glib-2.0/schemas",
-             "/etc/fonts","/etc/dbus-1"]
+             "/etc/fonts","/etc/dbus-1","/usr/share/glvnd/egl_vendor.d"]
     copied=[]
     def copy_file(source):
         target=root/source.lstrip("/")
@@ -70,6 +72,7 @@ export PYTHONPATH=/usr/lib/python3/dist-packages
 export GI_TYPELIB_PATH=/usr/lib/x86_64-linux-gnu/girepository-1.0
 Xvfb :99 -screen 0 1100x760x24 >/tmp/xvfb.log 2>&1 &
 export DISPLAY=:99
+export LIBGL_ALWAYS_SOFTWARE=1
 sleep 2
 WEBKIT_DISABLE_DMABUF_RENDERER=1 timeout 150 dbus-run-session -- /usr/bin/python3.12 /app/interconnect/browser.py --smoke-output /tmp/native.json
 echo NATIVE_EXIT=$?

@@ -125,6 +125,7 @@ def main():
                         "ephemeral_profile": manager.is_ephemeral(),
                         "network_enabled": args.network, "javascript_enabled": settings.get_enable_javascript(),
                         "renderer_mode": "X11_FALLBACK_TEST_ONLY" if os.environ.get("WEBKIT_DISABLE_DMABUF_RENDERER") == "1" else "DEFAULT",
+                        "software_gl_requested": os.environ.get("LIBGL_ALWAYS_SOFTWARE") == "1",
                         "production_authorized": False,
                     }
                     path = Path(args.smoke_output)
