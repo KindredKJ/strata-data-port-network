@@ -3,14 +3,42 @@ package ai.kindredlabs.sdpn.mobile
 /**
  * Four-cloud SDPN CloudSignal connection-quality classification.
  *
- * This is NOT cellular RSSI or Wi-Fi bars. There must be a verified, operating
- * SDPN packet-forwarding gateway before any clouds are illuminated. An
- * authenticated SW06-F application proof is insufficient.
+ * Native SDPN requires verified direct bidirectional materialization without
+ * IP or routing. GatewayHealth/level remains a legacy compatibility classifier.
+ * A one-off local proof cannot promote a live mobile session.
  *
  * Thresholds are preliminary UX policy, not contractual quality-of-service.
  */
 object CloudSignal {
     const val MAX_AGE_MS = 15000L
+
+    data class NativeMaterializationHealth(
+        val authenticatedPorts: Boolean,
+        val coordinatorGrantVerified: Boolean,
+        val activeSessionVerified: Boolean,
+        val forwardReconstructionVerified: Boolean,
+        val reverseReconstructionVerified: Boolean,
+        val durableReceiptsVerified: Boolean,
+        val usesIp: Boolean,
+        val usesRouting: Boolean,
+        val observedAtEpochMs: Long,
+        val grantExpiresAtEpochMs: Long,
+        val failedMaterializationsPercent: Double,
+        val p95MaterializationMs: Double,
+        val jitterMs: Double,
+        val reconstructionGoodputMbps: Double
+    )
+
+    fun nativeLevel(sample: NativeMaterializationHealth?, nowEpochMs: Long): Int {
+        if (sample == null || !sample.authenticatedPorts ||
+            !sample.coordinatorGrantVerified || !sample.activeSessionVerified ||
+            !sample.forwardReconstructionVerified || !sample.reverseReconstructionVerified ||
+            !sample.durableReceiptsVerified || sample.usesIp || sample.usesRouting ||
+            nowEpochMs < 0 || sample.grantExpiresAtEpochMs <= nowEpochMs) return 0
+        if (!fresh(sample.observedAtEpochMs, nowEpochMs)) return 0
+        return score(sample.failedMaterializationsPercent, sample.p95MaterializationMs,
+            sample.jitterMs, sample.reconstructionGoodputMbps)
+    }
 
     data class GatewayHealth(
         val authenticated: Boolean,
@@ -26,13 +54,15 @@ object CloudSignal {
     fun level(sample: GatewayHealth?, nowEpochMs: Long): Int {
         if (sample == null || !sample.authenticated ||
             !sample.routeForwardingVerified || !sample.peerReachable) return 0
-        if (sample.observedAtEpochMs > nowEpochMs ||
-            sample.observedAtEpochMs < 0 ||
-            nowEpochMs - sample.observedAtEpochMs > MAX_AGE_MS) return 0
-        val loss = sample.packetLossPercent
-        val p95 = sample.p95RoundTripMs
-        val jitter = sample.jitterMs
-        val goodput = sample.applicationGoodputMbps
+        if (!fresh(sample.observedAtEpochMs, nowEpochMs)) return 0
+        return score(sample.packetLossPercent, sample.p95RoundTripMs,
+            sample.jitterMs, sample.applicationGoodputMbps)
+    }
+
+    private fun fresh(observed: Long, now: Long): Boolean =
+        now >= 0 && observed >= 0 && observed <= now && now - observed <= MAX_AGE_MS
+
+    private fun score(loss: Double, p95: Double, jitter: Double, goodput: Double): Int {
         if (!loss.isFinite() || !p95.isFinite() || !jitter.isFinite() ||
             !goodput.isFinite() || loss !in 0.0..100.0 ||
             p95 < 0.0 || jitter < 0.0 || goodput < 0.0) return 0
@@ -83,10 +113,11 @@ object CloudSignal {
 }
 
 /**
- * The packet gateway and network-health sampler DO NOT EXIST YET.
- * The only legitimate data source is a verified, actively forwarding gateway.
- * Do not read RSSI, run a one-shot proof, or mark a VPN registered as active.
+ * No native phone carrier or authenticated continuous health source has been
+ * qualified. Keep native clouds disconnected until those actual receipts exist.
+ * A local PC proof, Wi-Fi RSSI, or a legacy IP gateway must not fill native clouds.
  */
 object SdpnNetworkHealthSource {
+    fun currentNativeHealth(): CloudSignal.NativeMaterializationHealth? = null
     fun currentGatewayHealth(): CloudSignal.GatewayHealth? = null
 }

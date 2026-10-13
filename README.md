@@ -48,6 +48,13 @@ The full Unified Quad `npm test` command in the source commit has open review fi
 
 ## Verification and roadmap
 
+The current founder requirement for native SDPN is **no routing and no IP addresses,
+including the carrier**, with global availability as an unproven product gate.
+See [SW09 native materialization and Strata Cloud coordination](docs/SW09-NATIVE-NO-IP-MATERIALIZATION.md).
+The existing TCP/IP candidates remain historical and optional compatibility paths.
+The new direct non-IP ZPS candidate is retained in the canonical private Superstructure;
+its same-host proof does not establish global reach or a production native network.
+
 The inherited SW06 baseline reports **PORTABLE_BUFFERED** transport. SW06-E adds a locally tested **REDUCED_COPY** worker ownership boundary. It does not establish physical **ZERO_COPY**, two-machine transport, or production readiness. See [verification status](docs/VERIFICATION.md).
 
 For the next two-physical-machine performance gate, use the additive [SW06-F encrypted application-goodput benchmark](docs/SW06-F-PHYSICAL-HOST-BENCHMARK.md). It records p50/p95 latency, goodput and verified per-transfer receipts, but cannot itself attest distinct physical machines or production readiness.

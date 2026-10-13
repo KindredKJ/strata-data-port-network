@@ -18,15 +18,18 @@ test("four-cloud vector resources have consistent progressive illuminated signal
   }
 });
 
-test("cloud signal never confuses one-shot proof with an active packet gateway", () => {
+test("native cloud signal requires live non-IP bidirectional materialization", () => {
   const quality = read("java/ai/kindredlabs/sdpn/mobile/CloudSignal.kt");
   const tile = read("java/ai/kindredlabs/sdpn/mobile/StrataNetworkTileService.kt");
   const vpn = read("java/ai/kindredlabs/sdpn/mobile/StrataVpnService.kt");
   const manifest = read("AndroidManifest.xml");
   assert.match(quality, /routeForwardingVerified/);
   assert.match(quality, /authenticated/);
+  assert.match(quality, /nativeLevel/);
+  assert.match(quality, /sample\.usesIp \|\| sample\.usesRouting/);
+  assert.match(quality, /currentNativeHealth\(\): CloudSignal\.NativeMaterializationHealth\? = null/);
   assert.match(quality, /currentGatewayHealth\(\): CloudSignal\.GatewayHealth\? = null/);
-  assert.match(tile, /CloudSignal\.level\(/);
+  assert.match(tile, /CloudSignal\.nativeLevel\(/);
   assert.match(tile, /CloudSignal\.iconResource\(level\)/);
   assert.match(manifest, /android:icon="@drawable\/sdpn_cloud_0"/);
   assert.match(manifest, /VpnService\.SUPPORTS_ALWAYS_ON/);

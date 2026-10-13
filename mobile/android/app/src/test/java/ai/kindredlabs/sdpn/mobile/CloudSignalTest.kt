@@ -5,6 +5,31 @@ import org.junit.Test
 
 class CloudSignalTest {
     private val now = 100_000L
+    private fun native(
+        ip: Boolean = false, routing: Boolean = false, live: Boolean = true,
+        reverse: Boolean = true, grant: Boolean = true, durable: Boolean = true,
+        expires: Long = now + 1000L, seen: Long = now
+    ) = CloudSignal.NativeMaterializationHealth(
+        true, grant, live, true, reverse, durable, ip, routing, seen, expires,
+        0.0, 30.0, 3.0, 50.0
+    )
+
+    @Test fun nativeMaterializationDoesNotRequireIpRouting() {
+        assertEquals(4, CloudSignal.nativeLevel(native(), now))
+        assertEquals(0, CloudSignal.nativeLevel(native(ip = true), now))
+        assertEquals(0, CloudSignal.nativeLevel(native(routing = true), now))
+    }
+
+    @Test fun nativeSignalRequiresLiveBidirectionalAuthorizedEvidence() {
+        assertEquals(0, CloudSignal.nativeLevel(null, now))
+        assertEquals(0, CloudSignal.nativeLevel(native(live = false), now))
+        assertEquals(0, CloudSignal.nativeLevel(native(reverse = false), now))
+        assertEquals(0, CloudSignal.nativeLevel(native(grant = false), now))
+        assertEquals(0, CloudSignal.nativeLevel(native(durable = false), now))
+        assertEquals(0, CloudSignal.nativeLevel(native(expires = now), now))
+        assertEquals(0, CloudSignal.nativeLevel(native(seen = now - 15_001L), now))
+        assertEquals(0, CloudSignal.nativeLevel(native(seen = now + 1L), now))
+    }
     private fun healthy(
         authenticated: Boolean = true,
         forwarding: Boolean = true,
