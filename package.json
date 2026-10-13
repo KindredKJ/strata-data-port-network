@@ -15,7 +15,9 @@
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
     "./state-port": "./src/kindred-state-port.mjs",
-    "./two-machine-proof": "./src/two-machine-proof.mjs"
+    "./two-machine-proof": "./src/two-machine-proof.mjs",
+    "./native-identity": "./src/native-port-identity.mjs",
+    "./native-session": "./src/native-session.mjs"
   },
   "dependencies": {
     "@vercel/speed-insights": "^2.0.0"

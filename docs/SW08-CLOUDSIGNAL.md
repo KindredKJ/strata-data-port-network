@@ -2,6 +2,13 @@
 
 Kindred Labs / Strata Data Port Network
 
+**Superseded native requirement (2026-10-13):** the founder master directive requires
+no conventional routing/IP inside SDPN's logical protocol and explicit substrate
+disclosure. [SW09](SW09-NATIVE-NO-IP-MATERIALIZATION.md) governs native
+CloudSignal. The IP gateway design below is retained historical/optional compatibility
+scope; it is not a prerequisite for native materialization. Native Android health
+remains unqualified and disconnected.
+
 ## Founder design requirement
 
 SDPN must be an **actual bidirectionally functioning network**. Its recognizable identity uses **four ascending clouds instead of conventional signal bars**. Each cloud lights up in succession when verified packet-routing service quality improves. All clouds outlined means **not connected**, including during pairing or standalone one-off payload proof.

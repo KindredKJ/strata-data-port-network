@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.text.method.PasswordTransformationMethod
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
@@ -36,8 +37,9 @@ class MainActivity : Activity() {
             gravity = Gravity.CENTER_HORIZONTAL
         }
         layout.addView(titleText)
-        val cloudLevel = CloudSignal.level(
-            SdpnNetworkHealthSource.currentGatewayHealth(),
+        val nativeHealth = SdpnNetworkHealthSource.currentNativeHealth()
+        val cloudLevel = CloudSignal.nativeLevel(
+            nativeHealth,
             System.currentTimeMillis()
         )
         val cloudIcon = ImageView(this).apply {
@@ -52,20 +54,39 @@ class MainActivity : Activity() {
         ))
         layout.addView(TextView(this).apply {
             text = "Strata CloudSignal · " + cloudLevel + "/4 · " +
-                CloudSignal.label(cloudLevel) + "\nClouds light only when verified SDPN routing is active."
+                CloudSignal.label(cloudLevel) + "\nClouds light only for verified bidirectional native materialization."
             textSize = 15f
         })
         val info = TextView(this).apply {
-            text = "Mobile endpoint • SW07\nEncrypted private-LAN proof, Wi-Fi discovery and OS VPN registration.\n" +
-                "A real Wi-Fi radio must broadcast Strata's SSID. VPN routing stays disabled until a verified gateway exists."
+            text = "Native Strata Data Port Network\nCryptographic port identity • Tesseract reconstruction • no logical IP routing.\n" +
+                "Native phone carrier qualification is pending. No live global connection is claimed.\n" +
+                "Each adapter must disclose its communications substrate.\n" +
+                "Founded by Kindred Jermaine Cox / Kindred Labs."
             textSize = 15f
         }
         layout.addView(info)
+        nativeHealth?.let { health ->
+            layout.addView(TextView(this).apply {
+                text = "Adapter: " + health.adapterId + "\nUnderlying IP: " + health.underlyingIp +
+                    " · underlying routing: " + health.underlyingRouting
+                textSize = 14f
+            })
+        }
+        val legacy = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            visibility = View.GONE
+        }
+        val showLegacy = Button(this).apply { text = "Show legacy IP compatibility test" }
+        showLegacy.setOnClickListener {
+            legacy.visibility = if (legacy.visibility == View.GONE) View.VISIBLE else View.GONE
+        }
+        layout.addView(showLegacy)
+        layout.addView(legacy)
         val wifi = Button(this).apply { text = "Find Strata in Wi-Fi settings" }
         wifi.setOnClickListener {
             startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
         }
-        layout.addView(wifi)
+        legacy.addView(wifi)
 
         val systemVpn = Button(this).apply {
             text = "Network Settings → SDPN VPN (gateway pending)"
@@ -77,28 +98,28 @@ class MainActivity : Activity() {
                 startActivity(Intent(Settings.ACTION_SETTINGS))
             }
         }
-        layout.addView(systemVpn)
+        legacy.addView(systemVpn)
 
         val receiver = EditText(this).apply {
             hint = "Computer private IP, e.g. 192.168.1.20"
             inputType = InputType.TYPE_CLASS_PHONE
             isSingleLine = true
         }
-        layout.addView(receiver)
+        legacy.addView(receiver)
         val secret = EditText(this).apply {
             hint = "One-time pairing secret"
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             transformationMethod = PasswordTransformationMethod.getInstance()
             isSingleLine = true
         }
-        layout.addView(secret)
+        legacy.addView(secret)
         val status = TextView(this).apply {
             text = "Disconnected • no network profile installed"
             textSize = 15f
         }
         val action = Button(this).apply { text = "Verify encrypted phone → PC transfer" }
-        layout.addView(action)
-        layout.addView(status)
+        legacy.addView(action)
+        legacy.addView(status)
         action.setOnClickListener {
             val host = receiver.text.toString().trim()
             val pairingSecret = secret.text.toString()

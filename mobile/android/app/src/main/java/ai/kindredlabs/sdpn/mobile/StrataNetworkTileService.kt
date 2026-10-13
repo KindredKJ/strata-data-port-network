@@ -9,15 +9,15 @@ import android.service.quicksettings.TileService
 
 /**
  * Entry in Android's Quick Settings network/connectivity workflow.
- * Remains INACTIVE until a genuine system tunnel and routing gateway exist.
+ * Remains INACTIVE until a qualified native materialization session exists.
  */
 class StrataNetworkTileService : TileService() {
     override fun onStartListening() {
         super.onStartListening()
-        // No authenticated packet-forwarding gateway exists in SW07/SW08.
+        // No native Android non-IP carrier is qualified yet.
         // A successful application-level proof MUST NOT promote the network icon.
-        val level = CloudSignal.level(
-            SdpnNetworkHealthSource.currentGatewayHealth(),
+        val level = CloudSignal.nativeLevel(
+            SdpnNetworkHealthSource.currentNativeHealth(),
             System.currentTimeMillis()
         )
         qsTile?.let {

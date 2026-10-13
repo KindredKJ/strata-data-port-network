@@ -1,0 +1,82 @@
+{
+  "receipt_id": "KND-PROTOCOL-20261013T213100Z-7dc40156",
+  "plugin": "kindred-protocol",
+  "founder": "Kindred Jermaine Cox",
+  "organization": "Kindred Labs",
+  "objective": "Reconcile founder master directive; implement native cryptographic discovery/session foundations without replacing Tesseract.",
+  "state_before": {
+    "main": "605d1d28a0588f57f121fe6f5b599b83cd831771",
+    "directive": "Founder Master Architecture Directive 2026-10-13",
+    "original_components": "preserved; see inventory"
+  },
+  "evidence": {
+    "source_sha256": {
+      "src/native-port-identity.mjs": "d21b22b6f038be09e456011339a308ecdefcf42e28cf4dad99fd8a15c23a1738",
+      "src/native-session.mjs": "4405990603c57926a37c60094f570ce4fdffdf0c734410cb2f10f506149f62e8",
+      "test/native-protocol.test.mjs": "01831912619d8b233d6c637ade15f80140d5b2ee492eb04ed593bc00b34f81b0",
+      "evidence/native-protocol/deterministic-peer-record-v1.json": "582b4739acc10d097e261a551a255fb4e46a716fcb5fa2f50990391a6a5fcf2f",
+      "docs/MASTER-ARCHITECTURE-RECONCILIATION-2026-10-13.md": "3d3a6bd699b2a1ee8793119f581be51ccc852c246695eb74d904b50291b8f484"
+    },
+    "commands": [
+      "node --test test/native-protocol.test.mjs",
+      "node --test test/native-protocol.test.mjs test/sw08-cloud-signal.test.mjs test/sw07-network-presence.test.mjs test/kindred-state-port.test.mjs test/direct-pipe-worker-transfer.test.mjs test/browser-package.test.mjs"
+    ],
+    "deterministic_vector_sha256": "1728e4deac743fb1fe9f5b20b374a70e9ab84a1d34e5f8a454c86c98c7a8728d",
+    "prior_candidate_ci": 38470386324,
+    "direct_carrier_ci": 38468025125,
+    "direct_carrier_archive_sha256": "bf851555906edcd5213d20f4a93868590ad6715f50f3462f497e34eab0159302",
+    "tesseract_recovery": {
+      "pr": 15,
+      "head": "83353307e5863453bc88de8135faa73635842b16",
+      "generator_sha256": "3814de525258f9ad96c18a78f3d2dafd46e4bae1d20283bdd021ed4190456ec2",
+      "preserved_core_files": 7,
+      "local_checks_passed": 25,
+      "sealed_lineage_confirmed": false
+    }
+  },
+  "changes": [
+    "Cryptographic port IDs and signed declared-component advertisements",
+    "Bounded signed peer directory with revision/expiry/revocation",
+    "Mutual signed offers/acceptances, ephemeral X25519 and direction-specific AES-GCM",
+    "Explicit owner consent and state policy protected from worker-supplied overrides",
+    "Optional Strata Cloud and explicit underlying adapter metadata",
+    "Native CloudSignal dependency disclosure; legacy compatibility preserved",
+    "Complete component/sequence diagrams and source inventory",
+    "Owner policy pins permitted adapter descriptors and rejects unadvertised materialization capabilities"
+  ],
+  "verification": {
+    "new_protocol_cases": 11,
+    "focused_cases": 26,
+    "local_build": "Node tests PASS; Android requires CI",
+    "final_head_ci": "PENDING at receipt creation",
+    "native_session_scope": "LOCAL_CRYPTOGRAPHIC_FOUNDATION_NO_GLOBAL_CARRIER",
+    "direct_no_ip_adapter": "11/11 executed with zero networking attempts",
+    "component_evidence_status": "DECLARED_ONLY_SELF_SIGNED; actual execution requires separate receipts"
+  },
+  "external_effects": {
+    "state": "executed",
+    "items": [
+      "PR #27 created and updated; PR #13 created"
+    ],
+    "production_deployment": false
+  },
+  "risk": [
+    "Original Tesseract/Core/Protocol not integrated",
+    "Actual model binding/worker isolation/federated learning pending",
+    "Process-local native handshake replay; crash/durable rotation/PQ/device custody pending",
+    "Global adapter composition and geography-separated qualification pending",
+    "No production readiness or physical teleportation claim"
+  ],
+  "handoff": [
+    {
+      "to": "kindred-forge",
+      "reason": "Compose original engine and actual model runtime with tested contracts",
+      "inputs": [
+        "master reconciliation",
+        "native identity/session modules",
+        "direct carrier receipt"
+      ]
+    }
+  ],
+  "next_action": "Finish qualified CI/integration, recover original engine, and measure actual remote bidirectional Tesseract transport on a disclosed adapter."
+}
