@@ -36,8 +36,8 @@ class MainActivity : Activity() {
         }
         layout.addView(titleText)
         val info = TextView(this).apply {
-            text = "Mobile endpoint • SW07\nPrivate LAN encrypted transfer proof.\n" +
-                "This preview does not establish a device-wide VPN or replace Wi-Fi."
+            text = "Mobile endpoint • SW07\nEncrypted private-LAN proof, Wi-Fi discovery and OS VPN registration.\n" +
+                "A real Wi-Fi radio must broadcast Strata's SSID. VPN routing stays disabled until a verified gateway exists."
             textSize = 15f
         }
         layout.addView(info)
@@ -46,6 +46,18 @@ class MainActivity : Activity() {
             startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
         }
         layout.addView(wifi)
+
+        val systemVpn = Button(this).apply {
+            text = "Network Settings → SDPN VPN (gateway pending)"
+        }
+        systemVpn.setOnClickListener {
+            try {
+                startActivity(Intent(Settings.ACTION_VPN_SETTINGS))
+            } catch (error: Exception) {
+                startActivity(Intent(Settings.ACTION_SETTINGS))
+            }
+        }
+        layout.addView(systemVpn)
 
         val receiver = EditText(this).apply {
             hint = "Computer private IP, e.g. 192.168.1.20"
