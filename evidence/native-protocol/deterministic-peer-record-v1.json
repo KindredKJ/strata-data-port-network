@@ -1,0 +1,28 @@
+{
+  "classification": "DETERMINISTIC_PUBLIC_TEST_VECTOR_NOT_DEPLOYED_PORT",
+  "record": {
+    "body": {
+      "boundWorker": {
+        "evidenceStatus": "DECLARED",
+        "id": "kindred-port-worker",
+        "version": "1.0.0"
+      },
+      "capabilities": [
+        "native.materialize.v1"
+      ],
+      "expiresAt": 1060000,
+      "issuedAt": 1000000,
+      "portId": "strata:port:ed25519:324be2dea8bc44461b0233e51fa48902ed6b1cc671e7739af2551e0bfe68f54e",
+      "publicKey": "MCowBQYDK2VwAyEA6kpsY+KcUgq+9VB7Ey7F+ZVHdq6+vnuSQh7qaRRG0iw=",
+      "revision": 1,
+      "schema": "kindred.sdpn.peer-record.v1",
+      "tesseractEngine": {
+        "evidenceStatus": "DECLARED",
+        "id": "strata-tesseract-1",
+        "version": "1.0.0"
+      }
+    },
+    "signature": "i76NdwPn4AEnbEjGjKgNbW+Dk6XbuqEAOAvh0Z8W4YHDU/RxmP0Jcjf+kmifi7HnEKM/Y4XxlL/TQM0jPZ/yDw=="
+  },
+  "canonicalEnvelopeSha256": "1728e4deac743fb1fe9f5b20b374a70e9ab84a1d34e5f8a454c86c98c7a8728d"
+}

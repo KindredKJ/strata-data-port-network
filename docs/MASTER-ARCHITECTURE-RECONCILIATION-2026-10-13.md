@@ -177,3 +177,5 @@ and recovery must be composed with the existing orchestrator or a qualified pers
 store before production. Node KeyObjects provide software keys, not verified secure
 hardware key custody or guaranteed memory erasure. Post-quantum suites, key rotation,
 model poisoning defenses and global/federated measurements are not implemented here.
+Self-signed v1 discovery component bindings accept only `DECLARED` status; they cannot
+self-promote Tesseract or worker execution to locally/independently verified evidence.

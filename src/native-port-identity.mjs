@@ -65,7 +65,7 @@ function assertRecord(body, now) {
   for (const field of ['tesseractEngine', 'boundWorker']) {
     exactFields(body[field], ['id', 'version', 'evidenceStatus']);
     if (!/^[a-z][a-z0-9.-]{0,63}$/.test(body[field].id) || !/^\d+\.\d+\.\d+$/.test(body[field].version) ||
-        !['DECLARED', 'LOCALLY_VERIFIED', 'INDEPENDENTLY_VERIFIED'].includes(body[field].evidenceStatus)) throw new Error('Component binding rejected');
+        body[field].evidenceStatus !== 'DECLARED') throw new Error('Component binding rejected');
   }
   decodePublicKey(body.publicKey, 'ed25519');
 }

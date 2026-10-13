@@ -37,6 +37,9 @@ test('signed discovery rejects tampering, impersonation, expiry and undocumented
   assert.throws(() => verifyPeerRecord(ar, now + 60_001), /lifetime/);
   const unknown = structuredClone(ar); unknown.body.ip = '127.0.0.1';
   assert.throws(() => verifyPeerRecord(unknown, now));
+  const selfPromotion = structuredClone(metadata);
+  selfPromotion.tesseractEngine.evidenceStatus = 'INDEPENDENTLY_VERIFIED';
+  assert.throws(() => signPeerRecord(createPortIdentity(), { now, ...selfPromotion }), /binding rejected/);
 });
 test('directory bounds, revocation and revision rollback are deterministic', () => {
   const { a, ar, br } = pair();
@@ -116,5 +119,5 @@ test('expiry, revocation, quotas and caller mutation cannot bypass policy', () =
 test('native protocol suite reports deterministic public record vector', () => {
   const seed = Buffer.alloc(32, 7), identity = createPortIdentity({ testSeed: seed });
   const record = signPeerRecord(identity, { now, ...metadata });
-  assert.equal(digest(canonicalBytes(record)), digest(canonicalBytes(signPeerRecord(createPortIdentity({ testSeed: seed }), { now, ...metadata }))));
+  assert.equal(digest(canonicalBytes(record)), '1728e4deac743fb1fe9f5b20b374a70e9ab84a1d34e5f8a454c86c98c7a8728d');
 });
