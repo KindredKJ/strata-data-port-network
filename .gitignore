@@ -1,0 +1,5 @@
+.local-evidence/
+evidence/local/
+evidence/sw06g-physical/
+node_modules/
+*.log
