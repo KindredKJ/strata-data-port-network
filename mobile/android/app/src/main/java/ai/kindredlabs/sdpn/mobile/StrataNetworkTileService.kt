@@ -2,6 +2,7 @@ package ai.kindredlabs.sdpn.mobile
 
 import android.app.PendingIntent
 import android.content.Intent
+import android.graphics.drawable.Icon
 import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
@@ -13,10 +14,18 @@ import android.service.quicksettings.TileService
 class StrataNetworkTileService : TileService() {
     override fun onStartListening() {
         super.onStartListening()
+        // No authenticated packet-forwarding gateway exists in SW07/SW08.
+        // A successful application-level proof MUST NOT promote the network icon.
+        val level = CloudSignal.level(
+            SdpnNetworkHealthSource.currentGatewayHealth(),
+            System.currentTimeMillis()
+        )
         qsTile?.let {
-            it.label = "Strata Network"
-            it.state = Tile.STATE_INACTIVE
-            it.contentDescription = "Open Strata Data Port Network mobile connection"
+            it.label = "Strata CloudSignal"
+            it.icon = Icon.createWithResource(this, CloudSignal.iconResource(level))
+            it.state = if (level > 0) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
+            it.contentDescription = "Strata network: " + CloudSignal.label(level) +
+                ", " + level + " of four clouds. Tap to open SDPN."
             it.updateTile()
         }
     }
