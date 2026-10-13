@@ -1,6 +1,8 @@
 package ai.kindredlabs.sdpn.mobile
 
 import android.app.Activity
+import android.content.Intent
+import android.provider.Settings
 import android.os.Bundle
 import android.text.InputType
 import android.text.method.PasswordTransformationMethod
@@ -39,6 +41,11 @@ class MainActivity : Activity() {
             textSize = 15f
         }
         layout.addView(info)
+        val wifi = Button(this).apply { text = "Find Strata in Wi-Fi settings" }
+        wifi.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
+        }
+        layout.addView(wifi)
 
         val receiver = EditText(this).apply {
             hint = "Computer private IP, e.g. 192.168.1.20"
