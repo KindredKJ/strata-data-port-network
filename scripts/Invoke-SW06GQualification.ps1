@@ -19,6 +19,17 @@ try {
   if ($LASTEXITCODE -ne 0) { throw 'Local tests failed' }
   $commit=(& git rev-parse --verify HEAD).Trim()
   if ($LASTEXITCODE -ne 0 -or $commit -notmatch '^[0-9a-f]{40}$') { throw 'Git HEAD unavailable' }
+  $parsedIp = $null
+  if (-not [System.Net.IPAddress]::TryParse($ReceiverIp,[ref]$parsedIp) -or
+      $parsedIp.AddressFamily -ne [System.Net.Sockets.AddressFamily]::InterNetwork) {
+    throw 'Receiver must be a private IPv4 literal (not hostname)'
+  }
+  $octets=$parsedIp.GetAddressBytes()
+  $private=($octets[0] -eq 10) -or
+    ($octets[0] -eq 172 -and $octets[1] -ge 16 -and $octets[1] -le 31) -or
+    ($octets[0] -eq 192 -and $octets[1] -eq 168)
+  if (-not $private) { throw 'Public or loopback receiver not allowed in SW06-G' }
+  $ReceiverIp=$parsedIp.ToString()
   if (-not (Test-NetConnection -ComputerName $ReceiverIp -Port $Port -InformationLevel Quiet -WarningAction SilentlyContinue)) {
     throw 'Receiver unavailable on specified TCP port'
   }
