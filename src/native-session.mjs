@@ -16,20 +16,25 @@ export function validateAdapterDescriptor(adapter) {
 
 // Independent owner policy. A worker/discovery record cannot authorize itself.
 export class NativeSessionPolicy {
-  #peers; #revoked = new Set(); #used = new Map();
-  constructor({ authorizedPeers, permittedStates, replayCapacity = 256 }) {
+  #peers; #adapters; #revoked = new Set(); #used = new Map();
+  constructor({ authorizedPeers, permittedStates, permittedAdapters, replayCapacity = 256 }) {
     if (!Array.isArray(authorizedPeers) || !Array.isArray(permittedStates) ||
         authorizedPeers.length > 4096 || permittedStates.length > 4096 ||
         authorizedPeers.some(id => typeof id !== 'string' || !/^strata:port:ed25519:[a-f0-9]{64}$/.test(id)) ||
         permittedStates.some(id => typeof id !== 'string' || !/^[a-f0-9]{64}$/.test(id)) ||
+        !Array.isArray(permittedAdapters) || permittedAdapters.length < 1 || permittedAdapters.length > 16 ||
         !Number.isInteger(replayCapacity) || replayCapacity < 1 || replayCapacity > 4096) throw new Error('Explicit owner policy required');
+    for (const adapter of permittedAdapters) validateAdapterDescriptor(adapter);
+    this.#adapters = new Set(permittedAdapters.map(a => digest(canonicalBytes(a))));
     this.#peers = new Set(authorizedPeers); this.states = Object.freeze([...permittedStates]);
     this.capacity = replayCapacity;
     Object.freeze(this);
   }
-  authorize(peer, state) {
+  authorize(peer, state, adapter) {
     scope(state);
-    if (!this.#peers.has(peer) || this.#revoked.has(peer) || !this.states.includes(state.stateSha256)) throw new Error('Deterministic owner policy denied');
+    validateAdapterDescriptor(adapter);
+    if (!this.#peers.has(peer) || this.#revoked.has(peer) || !this.states.includes(state.stateSha256) ||
+        !this.#adapters.has(digest(canonicalBytes(adapter)))) throw new Error('Deterministic owner policy denied');
   }
   revoke(peer) { if (!this.#peers.has(peer)) throw new Error('Unknown policy peer'); this.#revoked.add(peer); }
   consume(id, expiresAt, now) {
@@ -68,7 +73,7 @@ function connected(privateKey, peerKey, offer, accept, policy, local, peer) {
   const sessionId = offer.body.sessionId;
   function active(now) {
     if (closed || now >= Math.min(offer.body.expiresAt, accept.body.expiresAt)) throw new Error('Native session closed/expired');
-    policy.authorize(peer, offer.body.scope);
+    policy.authorize(peer, offer.body.scope, offer.body.adapter);
   }
   function nonce(n) { const bytes = Buffer.alloc(12); bytes.writeBigUInt64BE(BigInt(n), 4); return bytes; }
   function aad(from, to, sequence) { return canonicalBytes({ schema: 'kindred.sdpn.native-frame.v1', sessionId, from, to, sequence, stateSha256: offer.body.scope.stateSha256 }); }
@@ -99,7 +104,9 @@ function connected(privateKey, peerKey, offer, accept, policy, local, peer) {
 
 export function offerNativeSession(identity, peerRecord, state, adapter, policy, now = Date.now()) {
   deterministicPolicy(policy);
-  const peer = verifyPeerRecord(peerRecord, now); policy.authorize(peer.portId, state); validateAdapterDescriptor(adapter);
+  const peer = verifyPeerRecord(peerRecord, now);
+  if (!peer.capabilities.includes('native.materialize.v1')) throw new Error('Native capability not advertised');
+  policy.authorize(peer.portId, state, adapter); validateAdapterDescriptor(adapter);
   let key = ephemeral();
   const envelope = identity.sign({ schema: 'kindred.sdpn.session-offer.v1', suite, sessionId: randomBytes(16).toString('hex'),
     fromPort: identity.id, toPort: peer.portId, issuedAt: now, expiresAt: now + 30_000, ephemeralKey: key.publicKey, scope: state, adapter });
@@ -111,7 +118,7 @@ export function offerNativeSession(identity, peerRecord, state, adapter, policy,
       if (body.fromPort !== peer.portId || body.toPort !== identity.id || body.sessionId !== envelope.body.sessionId ||
           body.offerSha256 !== digest(canonicalBytes(envelope)) || body.expiresAt !== envelope.body.expiresAt ||
           digest(canonicalBytes(body.scope)) !== digest(canonicalBytes(state)) || digest(canonicalBytes(body.adapter)) !== digest(canonicalBytes(adapter))) throw new Error('Native acceptance binding rejected');
-      policy.authorize(peer.portId, state); finished = true;
+      policy.authorize(peer.portId, state, adapter); finished = true;
       try { return connected(key.privateKey, body.ephemeralKey, envelope, accept, policy, identity.id, peer.portId); }
       finally { key = undefined; }
     },
@@ -121,9 +128,10 @@ export function offerNativeSession(identity, peerRecord, state, adapter, policy,
 export function acceptNativeSession(identity, offer, peerRecord, policy, adapter, now = Date.now()) {
   deterministicPolicy(policy);
   const peer = verifyPeerRecord(peerRecord, now);
+  if (!peer.capabilities.includes('native.materialize.v1')) throw new Error('Native capability not advertised');
   const body = verifyEnvelope(offer, peer.portId, peer.publicKey); control(body, now, 'offer');
   if (body.fromPort !== peer.portId || body.toPort !== identity.id || digest(canonicalBytes(body.adapter)) !== digest(canonicalBytes(adapter))) throw new Error('Native destination/adapter binding rejected');
-  policy.authorize(peer.portId, body.scope); policy.consume(body.sessionId, body.expiresAt, now);
+  policy.authorize(peer.portId, body.scope, adapter); policy.consume(body.sessionId, body.expiresAt, now);
   const key = ephemeral();
   const envelope = identity.sign({ ...body, schema: 'kindred.sdpn.session-accept.v1', fromPort: identity.id, toPort: peer.portId,
     issuedAt: now, ephemeralKey: key.publicKey, offerSha256: digest(canonicalBytes(offer)) });

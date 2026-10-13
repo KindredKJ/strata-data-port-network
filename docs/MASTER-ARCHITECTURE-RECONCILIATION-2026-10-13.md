@@ -150,7 +150,8 @@ sequenceDiagram
 | SW09 direct non-IP adapter | Private Superstructure PR #13; workflow `38468025125` | 11/11 checks; kernel socket denial and traced zero networking attempts. Local pipe carrier only; no physical/global or original Tesseract integration. |
 | Native cryptographic identity/discovery | `src/native-port-identity.mjs` and `test/native-protocol.test.mjs` | Ed25519-derived port IDs; signed expiring records, bounded directory, revocation/revision checks. Advertisements do not prove device control or component execution. |
 | Native peer-session foundation | `src/native-session.mjs` and executable tests | Signed mutual offers/acceptances, X25519 ephemeral keys, direction-bound AES-GCM, deterministic consent, expiry/replay/frame bounds. Local cryptographic tests; no deployed global data plane. |
-| Original STRATA-TESSERACT-1 | Historical founder Library records and prior receipt lineage | Preserve; original state engine source/receipt integration has not been recovered and verified in the inspected source slice. New metadata is not a replacement. |
+| Existing Tesseract V2 core | Library `10-Build-KindredStrataTesseractV2-v6.ps1`; generator SHA-256 `3814de525258f9ad96c18a78f3d2dafd46e4bae1d20283bdd021ed4190456ec2`; Superstructure [PR #15](https://github.com/KindredKJ/kindred-labs-superstructure/pull/15), head `83353307e5863453bc88de8135faa73635842b16` | Seven Contracts/Core source files recovered unchanged; .NET 10 build and 25 local checks pass. Eleven-field coordinate and nine-check planner are real; complete binary reconstruction is not established. |
+| Original sealed STRATA-TESSERACT-1 | Historical founder receipts; recovered V2 relationship remains unconfirmed | Preserve; require receipt/source/seal matching before canonical integration. V2 namespaces differ from ZPS's required original dependencies. |
 | Bound AI worker / federation | Declared contract; existing Unified Quad/UMR work preserved | Actual model binding, sandbox, signed training/aggregation/distribution and poisoning/rollout tests are pending. A Node worker thread is not proof of AI/federated learning. |
 | Orchestration/recovery / topology | Existing SDPN draft PR #18, head `51d9862be3286a077b00d395cb96139c2d19ea3e` | Separate unmerged work; single-writer coordinator is not a required global Strata Cloud. Do not duplicate or silently replace it. |
 | Android / INTERCONNECT | SW07/SW08 source and CI | Debug apps/native rendering candidates; native phone carrier and continuous trusted health are not qualified. Native clouds remain disconnected. |
@@ -179,3 +180,7 @@ hardware key custody or guaranteed memory erasure. Post-quantum suites, key rota
 model poisoning defenses and global/federated measurements are not implemented here.
 Self-signed v1 discovery component bindings accept only `DECLARED` status; they cannot
 self-promote Tesseract or worker execution to locally/independently verified evidence.
+The recovered legacy signature helpers verify keys supplied by the envelope/receipt;
+expected-peer trust pinning must be enforced before accepting untrusted transitions.
+The current native policy separately pins permitted peer IDs, state hashes and exact
+adapter descriptors; workers cannot select an undeclared adapter or absent capability.

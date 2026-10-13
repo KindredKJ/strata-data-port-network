@@ -12,10 +12,10 @@
   "evidence": {
     "source_sha256": {
       "src/native-port-identity.mjs": "d21b22b6f038be09e456011339a308ecdefcf42e28cf4dad99fd8a15c23a1738",
-      "src/native-session.mjs": "7dc40156d2eddd0cb13d1198ba442dd246b0e540fb2d3d039410a7740277c500",
-      "test/native-protocol.test.mjs": "58d4c6385cf0c2e07e9cfacb45e5dc43e852846818ebbfd9480c505d96e55bb7",
+      "src/native-session.mjs": "4405990603c57926a37c60094f570ce4fdffdf0c734410cb2f10f506149f62e8",
+      "test/native-protocol.test.mjs": "01831912619d8b233d6c637ade15f80140d5b2ee492eb04ed593bc00b34f81b0",
       "evidence/native-protocol/deterministic-peer-record-v1.json": "582b4739acc10d097e261a551a255fb4e46a716fcb5fa2f50990391a6a5fcf2f",
-      "docs/MASTER-ARCHITECTURE-RECONCILIATION-2026-10-13.md": "afb3899b29a57351bee8b4de0624347e2984469add7a3675e8ffed0ff9d16cee"
+      "docs/MASTER-ARCHITECTURE-RECONCILIATION-2026-10-13.md": "1877a114e828e1a56fa0287a348188d9084c003fc45100b81e150c596eef7f37"
     },
     "commands": [
       "node --test test/native-protocol.test.mjs",
@@ -24,7 +24,15 @@
     "deterministic_vector_sha256": "1728e4deac743fb1fe9f5b20b374a70e9ab84a1d34e5f8a454c86c98c7a8728d",
     "prior_candidate_ci": 38470386324,
     "direct_carrier_ci": 38468025125,
-    "direct_carrier_archive_sha256": "bf851555906edcd5213d20f4a93868590ad6715f50f3462f497e34eab0159302"
+    "direct_carrier_archive_sha256": "bf851555906edcd5213d20f4a93868590ad6715f50f3462f497e34eab0159302",
+    "tesseract_recovery": {
+      "pr": 15,
+      "head": "83353307e5863453bc88de8135faa73635842b16",
+      "generator_sha256": "3814de525258f9ad96c18a78f3d2dafd46e4bae1d20283bdd021ed4190456ec2",
+      "preserved_core_files": 7,
+      "local_checks_passed": 25,
+      "sealed_lineage_confirmed": false
+    }
   },
   "changes": [
     "Cryptographic port IDs and signed declared-component advertisements",
@@ -33,11 +41,12 @@
     "Explicit owner consent and state policy protected from worker-supplied overrides",
     "Optional Strata Cloud and explicit underlying adapter metadata",
     "Native CloudSignal dependency disclosure; legacy compatibility preserved",
-    "Complete component/sequence diagrams and source inventory"
+    "Complete component/sequence diagrams and source inventory",
+    "Owner policy pins permitted adapter descriptors and rejects unadvertised materialization capabilities"
   ],
   "verification": {
-    "new_protocol_cases": 10,
-    "focused_cases": 25,
+    "new_protocol_cases": 11,
+    "focused_cases": 26,
     "local_build": "Node tests PASS; Android requires CI",
     "final_head_ci": "PENDING at receipt creation",
     "native_session_scope": "LOCAL_CRYPTOGRAPHIC_FOUNDATION_NO_GLOBAL_CARRIER",

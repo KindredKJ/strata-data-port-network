@@ -12,8 +12,8 @@ const metadata = { capabilities: ['native.materialize.v1'],
 function pair(selectedAdapter = adapter) {
   const a = createPortIdentity(), b = createPortIdentity();
   const ar = signPeerRecord(a, { now, ...metadata }), br = signPeerRecord(b, { now, ...metadata });
-  const ap = new NativeSessionPolicy({ authorizedPeers: [b.id], permittedStates: [state.stateSha256] });
-  const bp = new NativeSessionPolicy({ authorizedPeers: [a.id], permittedStates: [state.stateSha256] });
+  const ap = new NativeSessionPolicy({ authorizedPeers: [b.id], permittedStates: [state.stateSha256], permittedAdapters: [selectedAdapter] });
+  const bp = new NativeSessionPolicy({ authorizedPeers: [a.id], permittedStates: [state.stateSha256], permittedAdapters: [selectedAdapter] });
   const offer = offerNativeSession(a, br, state, selectedAdapter, ap, now);
   const accept = acceptNativeSession(b, offer.envelope, ar, bp, selectedAdapter, now);
   return { a, b, ar, br, ap, bp, offer, accept, as: offer.finish(accept.envelope, now), bs: accept.session };
@@ -75,12 +75,12 @@ test('internet adapter dependencies are explicit without changing native port id
 });
 test('self-signed advertisements do not grant authorization', () => {
   const { a, br } = pair();
-  const denied = new NativeSessionPolicy({ authorizedPeers: [], permittedStates: [state.stateSha256] });
+  const denied = new NativeSessionPolicy({ authorizedPeers: [], permittedStates: [state.stateSha256], permittedAdapters: [adapter] });
   assert.throws(() => offerNativeSession(a, br, state, adapter, denied, now), /policy denied/);
   assert.throws(() => new NativeSessionPolicy({ authorizedPeers: ['127.0.0.1'], permittedStates: [] }), /owner policy/);
   assert.throws(() => offerNativeSession(a, br, state, adapter, { authorize() {} }, now), /deterministic policy/);
   class WorkerOverride extends NativeSessionPolicy { authorize() {} }
-  const override = new WorkerOverride({ authorizedPeers: [], permittedStates: [] });
+  const override = new WorkerOverride({ authorizedPeers: [], permittedStates: [], permittedAdapters: [adapter] });
   assert.throws(() => offerNativeSession(a, br, state, adapter, override, now), /deterministic policy/);
 });
 test('offer replay, signature corruption and adapter substitution are rejected', () => {
@@ -92,6 +92,14 @@ test('offer replay, signature corruption and adapter substitution are rejected',
   const wrongAdapter = { ...adapter, underlyingIp: true };
   assert.throws(() => acceptNativeSession(p.b, fresh.envelope, p.ar, p.bp, wrongAdapter, now), /adapter binding/);
   fresh.cancel(); p.as.close(); p.bs.close();
+});
+test('owner policy rejects worker-selected adapters and unadvertised capabilities', () => {
+  const p = pair();
+  const unauthorized = { ...adapter, id: 'unapproved.radio/v1' };
+  assert.throws(() => offerNativeSession(p.a, p.br, state, unauthorized, p.ap, now), /policy denied/);
+  const noCapability = signPeerRecord(p.b, { now, ...metadata, capabilities: ['native.observe.v1'] });
+  assert.throws(() => offerNativeSession(p.a, noCapability, state, adapter, p.ap, now), /capability/);
+  p.as.close(); p.bs.close();
 });
 test('frame corruption, replay, reordering and cross-session frames fail closed', () => {
   const p = pair(); const frame = p.as.seal(Buffer.from('protected'), now);
