@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -35,6 +36,25 @@ class MainActivity : Activity() {
             gravity = Gravity.CENTER_HORIZONTAL
         }
         layout.addView(titleText)
+        val cloudLevel = CloudSignal.level(
+            SdpnNetworkHealthSource.currentGatewayHealth(),
+            System.currentTimeMillis()
+        )
+        val cloudIcon = ImageView(this).apply {
+            setImageResource(CloudSignal.iconResource(cloudLevel))
+            contentDescription = "CloudSignal: " + CloudSignal.label(cloudLevel) +
+                ", " + cloudLevel + " of four clouds"
+            setBackgroundColor(0xFF173454.toInt())
+            setPadding(padding, padding / 2, padding, padding / 2)
+        }
+        layout.addView(cloudIcon, LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT, (78 * resources.displayMetrics.density).toInt()
+        ))
+        layout.addView(TextView(this).apply {
+            text = "Strata CloudSignal · " + cloudLevel + "/4 · " +
+                CloudSignal.label(cloudLevel) + "\nClouds light only when verified SDPN routing is active."
+            textSize = 15f
+        })
         val info = TextView(this).apply {
             text = "Mobile endpoint • SW07\nEncrypted private-LAN proof, Wi-Fi discovery and OS VPN registration.\n" +
                 "A real Wi-Fi radio must broadcast Strata's SSID. VPN routing stays disabled until a verified gateway exists."
