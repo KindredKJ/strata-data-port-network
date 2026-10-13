@@ -24,5 +24,14 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
         </service>
+        <service
+            android:name=".StrataVpnService"
+            android:label="Strata Data Port Network"
+            android:permission="android.permission.BIND_VPN_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.VpnService"/>
+            </intent-filter>
+        </service>
     </application>
 </manifest>
