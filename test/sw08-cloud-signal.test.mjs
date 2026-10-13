@@ -26,7 +26,8 @@ test("native cloud signal requires live non-IP bidirectional materialization", (
   assert.match(quality, /routeForwardingVerified/);
   assert.match(quality, /authenticated/);
   assert.match(quality, /nativeLevel/);
-  assert.match(quality, /sample\.usesIp \|\| sample\.usesRouting/);
+  assert.match(quality, /sample\.logicalUsesIp \|\| sample\.logicalUsesRouting/);
+  assert.match(quality, /substrateDeclared/);
   assert.match(quality, /currentNativeHealth\(\): CloudSignal\.NativeMaterializationHealth\? = null/);
   assert.match(quality, /currentGatewayHealth\(\): CloudSignal\.GatewayHealth\? = null/);
   assert.match(tile, /CloudSignal\.nativeLevel\(/);

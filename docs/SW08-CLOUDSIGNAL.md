@@ -2,8 +2,9 @@
 
 Kindred Labs / Strata Data Port Network
 
-**Superseded native requirement (2026-10-13):** the founder requires no routing and
-no IP in native SDPN. [SW09](SW09-NATIVE-NO-IP-MATERIALIZATION.md) governs native
+**Superseded native requirement (2026-10-13):** the founder master directive requires
+no conventional routing/IP inside SDPN's logical protocol and explicit substrate
+disclosure. [SW09](SW09-NATIVE-NO-IP-MATERIALIZATION.md) governs native
 CloudSignal. The IP gateway design below is retained historical/optional compatibility
 scope; it is not a prerequisite for native materialization. Native Android health
 remains unqualified and disconnected.

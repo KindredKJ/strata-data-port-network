@@ -2,10 +2,12 @@
 
 Founder and origin authority: **Kindred Jermaine Cox / Kindred Labs**.
 
-The founder's current native acceptance requirement supersedes SW07/SW08's proposal
-that bidirectional IP packet routing is a universal prerequisite. Native Strata Data
-Port Network must use **no routing and no IP addresses, including its carrier**.
-Global availability is required for the eventual product and remains unproven.
+The founder's **Master Architecture Directive** supersedes earlier wording that
+required every underlying carrier to be IP-free. Native Strata Data Port Network
+must use **cryptographic identities and no conventional IP/routing in its logical
+protocol**. Each adapter must disclose its actual substrate, including underlying
+IP/routing when present. Genuine elimination remains a research target. Global
+availability is required for the eventual product and remains unproven.
 
 ## Preserved roles
 
@@ -16,7 +18,9 @@ Global availability is required for the eventual product and remains unproven.
 | Tesseract | Existing vector-state container for placing and retrieving data |
 | Zero Point Architecture | Existing decomposition/materialization architecture and frozen kernel |
 | Zero-Point Storage | Existing authenticated encrypted-object collapse and exact reconstruction |
-| Strata Cloud | Proposed coordination layer for grants, session timing, revocation and receipt records; no payload forwarding |
+| Strata Cloud | Optional bootstrap, model distribution/aggregation, observability and recovery; never mandatory for pre-discovered authorized reachable peers |
+| Port-bound AI worker | Mandatory per-port intelligent coordinator; independent deterministic policy remains the authority |
+| Federated port intelligence | Separate training, signed model distribution, discovery, authorized synchronization and signed policy distribution mechanisms |
 
 No component is renamed, replaced, or repackaged into a universal shell. Vector-state
 representation is a software model; access to another physical dimension is unproven.
@@ -24,10 +28,11 @@ representation is a software model; access to another physical dimension is unpr
 ## Coordination contract
 
 The proposed `kindred.strata-cloud.coordination-grant.v1` binds exactly two port
-identities and authorized state hashes, expiry, quotas and a fresh session. Native
-coordination must not depend on HTTP/TCP/IP, routed messaging, or payload relays.
-Selecting, forwarding or relaying signals to destinations would itself introduce a
-coordination dispatch/routing function and must not be disguised as route-free.
+identities and authorized state hashes, expiry, quotas and a fresh session. It is an
+optional local grant-issuer candidate, not a mandatory online Strata Cloud. Native
+workers authenticate one another; their control messages require an explicit adapter.
+An Internet-based adapter must declare underlying IP/routing dependencies. A directory
+or coordinator must not be misrepresented as eliminating those dependencies.
 
 The executed candidate issues a signed grant locally. Ports receive it through
 preprovisioned local files, establish direction-bound encrypted direct frames and
@@ -51,9 +56,10 @@ teleportation, original canonical Tesseract integration, or physical two-machine
 
 `CloudSignal.nativeLevel` now requires fresh evidence of:
 
-- authenticated ports, a verified coordination grant and active native session;
+- authenticated ports, independently verified authorization and active native session;
 - exact forward and reverse reconstruction and durable receipts;
-- no IP addressing and no routing in that native session;
+- no IP addressing and no conventional routing inside the logical native session;
+- a named, explicitly disclosed physical/logical transport adapter;
 - valid unexpired grant, bounded sample age and measured reconstruction quality.
 
 `GatewayHealth/level` is preserved for the inherited IP compatibility classifier.
@@ -64,13 +70,15 @@ phone displays **0/4 disconnected**. A successful local PC test cannot light it.
 
 ## Global implementation gate
 
-We must specify, build and measure a real distribution mechanism for fresh state and
-coordination information between physically separated destinations without IP/routing.
+We must specify, build and measure real distribution for fresh state and coordination
+information between physically separated destinations. The initial global candidate
+may use declared Internet infrastructure while native logical identities remain IP-free.
+Dedicated non-IP physical mechanisms remain separate research/qualification work.
 Pre-existing state can be recalled locally; unavailable arbitrary state cannot be
 reconstructed from its hash alone. Strata Cloud permissions and Tesseract vector
 coordinates do not establish the missing physical propagation mechanism.
 
-Do not launch an Internet-hosted/IP-routed solution under this native classification.
-Global claims require independent physical carrier, no-routing/no-IP inspection,
+Do not label an Internet adapter as physically IP-free or route-free. Global claims
+require independent physical carrier/dependency inspection,
 bidirectional reconstruction, adverse-condition/recovery and production receipts.
 The original TCP/IP candidates remain preserved historical/compatibility capabilities.

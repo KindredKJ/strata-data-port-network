@@ -37,8 +37,9 @@ class MainActivity : Activity() {
             gravity = Gravity.CENTER_HORIZONTAL
         }
         layout.addView(titleText)
+        val nativeHealth = SdpnNetworkHealthSource.currentNativeHealth()
         val cloudLevel = CloudSignal.nativeLevel(
-            SdpnNetworkHealthSource.currentNativeHealth(),
+            nativeHealth,
             System.currentTimeMillis()
         )
         val cloudIcon = ImageView(this).apply {
@@ -57,12 +58,20 @@ class MainActivity : Activity() {
             textSize = 15f
         })
         val info = TextView(this).apply {
-            text = "Native Strata Data Port Network\nPort identities • Zero Point reconstruction • no IP or routing.\n" +
+            text = "Native Strata Data Port Network\nCryptographic port identity • Tesseract reconstruction • no logical IP routing.\n" +
                 "Native phone carrier qualification is pending. No live global connection is claimed.\n" +
+                "Each adapter must disclose its communications substrate.\n" +
                 "Founded by Kindred Jermaine Cox / Kindred Labs."
             textSize = 15f
         }
         layout.addView(info)
+        nativeHealth?.let { health ->
+            layout.addView(TextView(this).apply {
+                text = "Adapter: " + health.adapterId + "\nUnderlying IP: " + health.underlyingIp +
+                    " · underlying routing: " + health.underlyingRouting
+                textSize = 14f
+            })
+        }
         val legacy = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             visibility = View.GONE

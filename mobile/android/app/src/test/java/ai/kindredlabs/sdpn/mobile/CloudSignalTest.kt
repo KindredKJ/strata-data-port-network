@@ -8,9 +8,11 @@ class CloudSignalTest {
     private fun native(
         ip: Boolean = false, routing: Boolean = false, live: Boolean = true,
         reverse: Boolean = true, grant: Boolean = true, durable: Boolean = true,
-        expires: Long = now + 1000L, seen: Long = now
+        expires: Long = now + 1000L, seen: Long = now,
+        declared: Boolean = true, underlyingIp: Boolean = false, underlyingRouting: Boolean = false
     ) = CloudSignal.NativeMaterializationHealth(
-        true, grant, live, true, reverse, durable, ip, routing, seen, expires,
+        true, grant, live, true, reverse, durable, ip, routing,
+        "direct.pipe/v1", declared, underlyingIp, underlyingRouting, seen, expires,
         0.0, 30.0, 3.0, 50.0
     )
 
@@ -18,6 +20,8 @@ class CloudSignalTest {
         assertEquals(4, CloudSignal.nativeLevel(native(), now))
         assertEquals(0, CloudSignal.nativeLevel(native(ip = true), now))
         assertEquals(0, CloudSignal.nativeLevel(native(routing = true), now))
+        assertEquals(0, CloudSignal.nativeLevel(native(declared = false), now))
+        assertEquals(4, CloudSignal.nativeLevel(native(underlyingIp = true, underlyingRouting = true), now))
     }
 
     @Test fun nativeSignalRequiresLiveBidirectionalAuthorizedEvidence() {

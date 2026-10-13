@@ -3,8 +3,9 @@ package ai.kindredlabs.sdpn.mobile
 /**
  * Four-cloud SDPN CloudSignal connection-quality classification.
  *
- * Native SDPN requires verified direct bidirectional materialization without
- * IP or routing. GatewayHealth/level remains a legacy compatibility classifier.
+ * Native SDPN requires verified bidirectional materialization without logical
+ * IP/routing; underlying adapters disclose their own dependencies separately.
+ * GatewayHealth/level remains a legacy compatibility classifier.
  * A one-off local proof cannot promote a live mobile session.
  *
  * Thresholds are preliminary UX policy, not contractual quality-of-service.
@@ -14,15 +15,19 @@ object CloudSignal {
 
     data class NativeMaterializationHealth(
         val authenticatedPorts: Boolean,
-        val coordinatorGrantVerified: Boolean,
+        val authorizationVerified: Boolean,
         val activeSessionVerified: Boolean,
         val forwardReconstructionVerified: Boolean,
         val reverseReconstructionVerified: Boolean,
         val durableReceiptsVerified: Boolean,
-        val usesIp: Boolean,
-        val usesRouting: Boolean,
+        val logicalUsesIp: Boolean,
+        val logicalUsesRouting: Boolean,
+        val adapterId: String,
+        val substrateDeclared: Boolean,
+        val underlyingIp: Boolean,
+        val underlyingRouting: Boolean,
         val observedAtEpochMs: Long,
-        val grantExpiresAtEpochMs: Long,
+        val authorizationExpiresAtEpochMs: Long,
         val failedMaterializationsPercent: Double,
         val p95MaterializationMs: Double,
         val jitterMs: Double,
@@ -31,10 +36,11 @@ object CloudSignal {
 
     fun nativeLevel(sample: NativeMaterializationHealth?, nowEpochMs: Long): Int {
         if (sample == null || !sample.authenticatedPorts ||
-            !sample.coordinatorGrantVerified || !sample.activeSessionVerified ||
+            !sample.authorizationVerified || !sample.activeSessionVerified ||
             !sample.forwardReconstructionVerified || !sample.reverseReconstructionVerified ||
-            !sample.durableReceiptsVerified || sample.usesIp || sample.usesRouting ||
-            nowEpochMs < 0 || sample.grantExpiresAtEpochMs <= nowEpochMs) return 0
+            !sample.durableReceiptsVerified || sample.logicalUsesIp || sample.logicalUsesRouting ||
+            !sample.substrateDeclared || !sample.adapterId.matches(Regex("[a-z][a-z0-9./-]{0,63}")) ||
+            nowEpochMs < 0 || sample.authorizationExpiresAtEpochMs <= nowEpochMs) return 0
         if (!fresh(sample.observedAtEpochMs, nowEpochMs)) return 0
         return score(sample.failedMaterializationsPercent, sample.p95MaterializationMs,
             sample.jitterMs, sample.reconstructionGoodputMbps)

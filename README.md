@@ -48,10 +48,15 @@ The full Unified Quad `npm test` command in the source commit has open review fi
 
 ## Verification and roadmap
 
-The current founder requirement for native SDPN is **no routing and no IP addresses,
-including the carrier**, with global availability as an unproven product gate.
+The current founder master directive requires **cryptographic native port identity,
+no IP addresses or conventional routing in the logical protocol**, mandatory Tesseract
+state engines and bound AI workers, and explicit communications substrates. Strata
+Cloud is optional. Global availability remains an unproven production gate.
 See [SW09 native materialization and Strata Cloud coordination](docs/SW09-NATIVE-NO-IP-MATERIALIZATION.md).
-The existing TCP/IP candidates remain historical and optional compatibility paths.
+The [master directive reconciliation](docs/MASTER-ARCHITECTURE-RECONCILIATION-2026-10-13.md)
+contains the complete component/sequence diagrams, inspected inventory and production gates.
+Existing TCP/IP candidates may supply explicitly disclosed underlying adapters;
+they do not establish elimination of routing on that substrate.
 The new direct non-IP ZPS candidate is retained in the canonical private Superstructure;
 its same-host proof does not establish global reach or a production native network.
 
