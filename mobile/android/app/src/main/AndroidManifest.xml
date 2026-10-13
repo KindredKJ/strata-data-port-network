@@ -17,7 +17,7 @@
         <service
             android:name=".StrataNetworkTileService"
             android:label="Strata Network"
-            android:icon="@android:drawable/ic_menu_share"
+            android:icon="@drawable/sdpn_cloud_0"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:exported="true">
             <intent-filter>
