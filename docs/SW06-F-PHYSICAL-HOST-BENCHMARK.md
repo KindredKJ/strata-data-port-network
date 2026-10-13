@@ -27,6 +27,18 @@ pwsh ./scripts/Start-SW06FReceiver.ps1 -Port 47900
 
 The receiver prints its private LAN IPv4 address and a one-time secret. Transfer that secret privately to the sender. The Windows launcher creates and later removes a Private/LocalSubnet-only firewall rule when run elevated. Stop the listener after the test. On another supported platform, use the existing scripts/two-machine-receiver.mjs, setting KINDRED_SDPN_PROOF_SECRET in its environment and applying a scoped local firewall.
 
+### SW06-G repeatability launcher (recommended)
+
+On the **separate sender computer**, using the same repository revision as the receiver, run from the repository root:
+
+~~~powershell
+pwsh ./scripts/Invoke-SW06GQualification.ps1 -ReceiverIp (Read-Host 'Receiver private IPv4')
+~~~
+
+This script runs the existing Node test suite, verifies that the receiver TCP port is reachable, prompts for the short-lived pairing secret **without echoing typed characters**, and executes three independent benchmark runs. Every run measures 1/4/16 MiB encrypted transfers with 12 measured trials per size. The script verifies the existing software proof/claim boundaries and creates SHA-256-indexed, uniquely named JSON receipts and a manifest under \`.local-evidence/sw06g/\`. The directory is excluded from Git through the repository \`.gitignore\`.
+
+Do not copy private raw manifests or receipts into public issues or pull requests: LAN IPs and software host fingerprints are preserved for operator review. A passing script result means **software two-host evidence only**. An operator still needs to independently confirm that the devices are physically separate, and compare against network baselines. Reverse the sender and receiver roles to measure the other direction.
+
 ### Sender: Windows / PowerShell 7
 
 Run on the **other computer**, using the same Git commit:
