@@ -15,7 +15,7 @@
       "src/native-session.mjs": "4405990603c57926a37c60094f570ce4fdffdf0c734410cb2f10f506149f62e8",
       "test/native-protocol.test.mjs": "01831912619d8b233d6c637ade15f80140d5b2ee492eb04ed593bc00b34f81b0",
       "evidence/native-protocol/deterministic-peer-record-v1.json": "582b4739acc10d097e261a551a255fb4e46a716fcb5fa2f50990391a6a5fcf2f",
-      "docs/MASTER-ARCHITECTURE-RECONCILIATION-2026-10-13.md": "1877a114e828e1a56fa0287a348188d9084c003fc45100b81e150c596eef7f37"
+      "docs/MASTER-ARCHITECTURE-RECONCILIATION-2026-10-13.md": "3d3a6bd699b2a1ee8793119f581be51ccc852c246695eb74d904b50291b8f484"
     },
     "commands": [
       "node --test test/native-protocol.test.mjs",
