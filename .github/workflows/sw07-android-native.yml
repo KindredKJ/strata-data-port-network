@@ -1,0 +1,43 @@
+name: SW07 Android native network entry
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  android-unit-and-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.6.0'
+          cache-read-only: true
+      - name: Install SDK using preinstalled Android command-line tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -type f -name sdkmanager | sort -V | tail -1)
+          test -x "$SDKMANAGER"
+          yes | "$SDKMANAGER" --licenses >/dev/null || true
+          "$SDKMANAGER" "platforms;android-36" "build-tools;36.0.0"
+      - name: Verify native Android sender and build debug APK
+        run: gradle -p mobile/android --no-daemon :app:assembleDebug :app:testDebugUnitTest
+      - name: Preserve unsigned debug APK and test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sw07-android-native-${{ github.sha }}
+          path: |
+            mobile/android/app/build/outputs/apk/debug/
+            mobile/android/app/build/reports/tests/
+            mobile/android/app/build/test-results/
+          if-no-files-found: warn
+          retention-days: 14
