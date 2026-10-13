@@ -19,6 +19,13 @@
 5. \`scripts/run-sw07-android-termux.sh\` provides a secondary Android/Termux path for repeatable 1/4/16 MiB tests. It is an optional engineering harness, not the end-user onboarding flow.
 6. CI builds the Android debug APK and runs unit tests. No production VPN, global network, user-chat backend, push service, SSID deployment, or physical-device benchmark is claimed.
 
+## Immediate pilot: discover SDPN in a phone's Wi-Fi list
+
+On a Windows computer supporting Mobile Hotspot, open **Settings → Network & internet → Mobile hotspot → Properties → Edit**. Set the broadcast name to **Strata Data Port Network**, choose a unique strong Wi-Fi password, and enable the hotspot. On the phone, open **Settings → Wi-Fi** and choose **Strata Data Port Network**. Then test the existing SW06-F Node receiver on the computer using the Android client and an independent pairing secret.
+
+This is a **real SSID**, because an access point actually broadcasts it. It does **not** mean device-wide SDPN routing, global reach, permanent chat, or replacement for spectrum-based connectivity is operational. The host/router remains responsible for actual link, DHCP and routing. Never publish the Wi-Fi password or ephemeral SW06-F secret in GitHub.
+
+An attacker can impersonate the visible SSID. SDPN must verify the receiver identity cryptographically; never trust the Wi-Fi name alone.
 ## Next engineering gate: usable system networking
 
 ### Android VPN transport
