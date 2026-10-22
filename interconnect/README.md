@@ -36,3 +36,13 @@ compatibility. Page JavaScript stays disabled during the snapshot.
 
 No sync, remote index, search service or live Port Zero authority is impersonated.
 Follow ADR 0001/0002 for later approved capability integrations.
+
+## SDPN PORT scheme (additive, offline)
+
+The independent INTERCONNECT native proof recognizes `port://` addresses when a signed local `port-names.json` record has been supplied. Generate operator-controlled names using `node scripts/port-domain.mjs init` at the SDPN repository root, then use:
+
+```bash
+python3 interconnect/browser.py --port-manifest "$HOME/.sdpn/port-names.json" --port-uri '<GENERATED_PORT_URI>'
+```
+
+Paste an actual URI returned by the domain CLI above. The browser verifies the Ed25519 namespace through the local Node resolver and displays an offline signed-name view with JavaScript disabled. It does not open peer sessions, contact DNS, upgrade to a remote service, or grant access. For the complete contract see [PORT/1](../docs/PORT-URI-AND-NATIVE-NAMES.md).
