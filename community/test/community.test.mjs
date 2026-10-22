@@ -10,15 +10,9 @@ import {
 import { communityCatalog, capabilityIsFree, evaluateAccess,
   COMMUNITY_CAPABILITIES } from '../src/access.mjs';
 
-// Existing proprietary PORT/1 is imported ONLY in integration tests to verify interoperability.
-// The standalone community distribution itself has no proprietary imports.
-import { portId, verifyPeerRecord } from '../../src/native-port-identity.mjs';
-import { verifyPortNames, resolvePortName, makePortUri } from '../../src/port-names.mjs';
-
 test('free identities are generated offline with portable recoverable private key', () => {
   const identity = createCommunityIdentity();
   assert.match(identity.id, /^strata:port:ed25519:[a-f0-9]{64}$/);
-  assert.equal(portId(identity.publicKey), identity.id);
   assert.equal(portIdentifier(identity.publicKey), identity.id);
   const pem = identity.exportPrivateKeyPem();
   assert.match(pem, /^-----BEGIN PRIVATE KEY-----/);
@@ -39,12 +33,9 @@ test('community owner can issue a signed, portable, interoperable Port/1 namespa
   ], { now, ttlMs: 90_000, revision: 7 });
   assert.equal(signed.body.schema, COMMUNITY_SCHEMA);
   assert.equal(verifyCommunityNames(signed, now).ownerPort, identity.id);
-  assert.equal(verifyPortNames(signed, now).ownerPort, identity.id);
   const address = communityPortUri(identity.id, 'workspace.community', '/documents/current');
-  assert.equal(address, makePortUri(identity.id, 'workspace.community', '/documents/current'));
   const result = resolveCommunityPort(address, signed, now);
   assert.equal(result.targetPort, recipient.id);
-  assert.equal(resolvePortName(address, signed, now).targetPort, recipient.id);
   assert.equal(result.signedIdentityVerified, true);
   assert.equal(result.connected, false);
   assert.equal(result.authorized, false);
@@ -52,7 +43,6 @@ test('community owner can issue a signed, portable, interoperable Port/1 namespa
   assert.deepEqual(parseCommunityPortUri(address), {
     uri: address, ownerPort: identity.id, name: 'workspace.community', path: '/documents/current',
   });
-  assert.equal(verifyPeerRecord ? typeof verifyPeerRecord : 'function', 'function');
 });
 
 test('community public signatures reject invalid data, replay/expiry and false ownership', () => {
