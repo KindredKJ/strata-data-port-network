@@ -92,3 +92,17 @@ node scripts/port-domain.mjs renew
 ```
 
 On Windows, register the custom URI handler explicitly with `scripts/Install-SDPNPortProtocol.ps1`. INTERCONNECT Linux can independently verify a generated `port://` name against the local manifest using `--port-uri` and `--port-manifest`, displaying a secure offline status view. **Read the full installation, security and integration contract in [PORT/1 native naming](docs/PORT-URI-AND-NATIVE-NAMES.md).**
+
+## PORTAL/1 — search, practical local AI and owned PORT websites
+
+[Founder's complete PORTAL release and runbook](docs/PORTAL-FOUNDERS-RELEASE.md)
+
+PORTAL is an independent, dependency-free Node.js user-facing application with real first-party SDPN document search, guided local AI model access (if a compatible local model is actually running), and durable user-created web pages. An authorized local operator can sign a saved site as a `port://` alias and open it as a real offline native website inside INTERCONNECT. It never silently uploads files, transfers keys, activates network authority or claims global web search.
+
+```bash
+node apps/portal/server.mjs
+# Open http://127.0.0.1:8790
+node --test apps/portal/test/*.test.mjs
+```
+
+The local native service requires neither a Vercel/Cloudflare deployment nor the Genesis domain. Creating a worldwide alternative discovery network and monetized managed PORT platform is an explicit future production program, not a current deployment claim.
