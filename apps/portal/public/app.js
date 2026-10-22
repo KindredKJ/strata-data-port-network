@@ -140,6 +140,10 @@ async function loadCommunityPlans() {
         appendText(benefits, 'li', capability.replaceAll('.', ' · '));
       }
       box.append(benefits);
+      if (plan.plannedFreeCapabilities?.length) {
+        appendText(box, 'small', 'Also free when implemented: ' +
+          plan.plannedFreeCapabilities.join(', '), 'hint');
+      }
       target.append(box);
     }
   } catch (error) {
