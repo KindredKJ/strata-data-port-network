@@ -1,15 +1,17 @@
 // Copyright 2026 Kindred Jermaine Cox and Kindred Labs.
 // SPDX-License-Identifier: Apache-2.0
-// Free network primitives are never subscription-gated. Managed services must
-// verify their own actual entitlements; this catalog does not accept payments.
+// Free protocol capabilities never require a Kindred subscription. Distinguish
+// functions available in this SDK from free functions planned for later releases.
 export const COMMUNITY_CAPABILITIES = Object.freeze([
   'identity.generate', 'identity.import', 'identity.export',
   'port.alias.sign', 'port.alias.verify', 'port.alias.resolve',
+]);
+export const PLANNED_FREE_CAPABILITIES = Object.freeze([
   'port.peer.discover', 'port.session.establish', 'port.data.transfer',
   'port.community.client', 'port.self_host',
 ]);
-
-const communitySet = new Set(COMMUNITY_CAPABILITIES);
+const implemented = new Set(COMMUNITY_CAPABILITIES);
+const plannedFree = new Set(PLANNED_FREE_CAPABILITIES);
 const managedServices = Object.freeze([
   Object.freeze({
     id: 'creator',
@@ -24,7 +26,7 @@ const managedServices = Object.freeze([
     label: 'Portal Business',
     availability: 'planned',
     priceUsdMonthly: null,
-    description: 'Optional multiuser teams, paid business services, verified business profile and usage insights.',
+    description: 'Optional multiuser teams, paid business services, verified business profiles and usage insights.',
     services: Object.freeze(['team.managed', 'business.analytics', 'business.verification']),
   }),
   Object.freeze({
@@ -46,9 +48,10 @@ export function communityCatalog() {
       {
         id: 'community', label: 'SDPN Community', priceUsdMonthly: 0,
         availability: 'open-source-software',
-        description: 'Create and control Port identities and names; run compatible clients; communicate over your own authorized network.',
+        description: 'Create and control Port identities and signed names today. Further independently hosted network modules will also be free when implemented.',
         capabilities: [...COMMUNITY_CAPABILITIES],
-        limitations: 'Network hardware, electricity, mobile access or an outside ISP are not supplied at no cost.',
+        plannedFreeCapabilities: [...PLANNED_FREE_CAPABILITIES],
+        limitations: 'Internet access, hardware, electricity and outside ISP fees are not supplied for free.',
       },
       ...managedServices.map(item => ({
         ...item, services: [...item.services],
@@ -58,12 +61,19 @@ export function communityCatalog() {
 }
 
 export function capabilityIsFree(capability) {
-  return typeof capability === 'string' && communitySet.has(capability);
+  return typeof capability === 'string' &&
+    (implemented.has(capability) || plannedFree.has(capability));
 }
 export function evaluateAccess(capability) {
-  if (capabilityIsFree(capability)) {
+  if (implemented.has(capability)) {
     return Object.freeze({
       capability, allowed: true, basis: 'free-open-protocol',
+      subscriptionRequired: false, paymentRequired: false,
+    });
+  }
+  if (plannedFree.has(capability)) {
+    return Object.freeze({
+      capability, allowed: false, basis: 'planned-free-protocol',
       subscriptionRequired: false, paymentRequired: false,
     });
   }
