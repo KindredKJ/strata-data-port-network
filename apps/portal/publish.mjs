@@ -5,6 +5,7 @@ import { readFile, lstat } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { verifyPortNames, makePortUri, resolvePortName } from '../../src/port-names.mjs';
 
 const slugPattern = /^[a-z][a-z0-9-]{1,47}$/;
@@ -33,12 +34,18 @@ async function main() {
   }
   if (!beforeEntry) {
     // No shell expansion and no remote provider. The native operator signer enforces key permissions.
-    execFileSync(process.execPath, [new URL('../../scripts/port-domain.mjs', import.meta.url).pathname,
+    execFileSync(process.execPath, [fileURLToPath(new URL('../../scripts/port-domain.mjs', import.meta.url)),
       'bind', slug, before.ownerPort, '--dir', operatorRoot], { stdio: 'pipe', timeout: 10000 });
   }
-  const after = verifyPortNames(JSON.parse(await readFile(manifest, 'utf8')));
+  const signed = JSON.parse(await readFile(manifest, 'utf8'));
+  const after = verifyPortNames(signed);
   const uri = makePortUri(after.ownerPort, slug);
-  const mapped = resolvePortName(uri, { body: after, signature: '' }); // replaced by full saved signed record below
-  void mapped;
+  const mapped = resolvePortName(uri, signed);
+  if (mapped.targetPort !== after.ownerPort) throw new Error('Site alias points to another port');
+  process.stdout.write(JSON.stringify({
+    schema: 'kindred.sdpn.portal-publish.v1', slug, uri,
+    localPreview: '/p/' + slug, signedNamespace: true,
+    publiclyReachable: false, networkAuthorized: false
+  }, null, 2) + '\n');
 }
 main().catch(error => { process.stderr.write('PORTAL PUBLISH DENIED: ' + error.message + '\n'); process.exitCode = 2; });
