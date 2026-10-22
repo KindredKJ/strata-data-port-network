@@ -50,7 +50,7 @@ A subscription tier must have a measured `contribution margin = recognized reven
 
 ## 5. Tier firewall — implemented policy
 
-`community/src/access.mjs` is the executable source of the first capability catalog. Every free protocol primitive evaluates as allowed without payment; managed capabilities are explicitly **unavailable**, not secretly enabled, until real authenticated billing/entitlement infrastructure is deployed. Portal's `/api/plans` publishes that same catalog. Client UI cannot grant server privileges by changing a price or label.
+`community/src/access.mjs` is the executable source of the first capability catalog. Implemented identity and naming primitives evaluate as allowed without payment; future open-network peer/session/transport capabilities evaluate as **planned-free-protocol**, not live. Managed capabilities are explicitly **unavailable**, not secretly enabled, until real authenticated billing/entitlement infrastructure is deployed. Portal's `/api/plans` publishes that same catalog. Client UI cannot grant server privileges by changing a price or label.
 
 The tariff boundary must never cover free identity/key ownership, creating or resolving signed PORT aliases, self-hosted software, or authorized use of a user's own infrastructure. Operator-managed services may impose resource quotas, explicit contractual usage limits, fair abuse protection and payment requirements only on the services actually supplied by that operator.
 
@@ -65,7 +65,7 @@ The tariff boundary must never cover free identity/key ownership, creating or re
 
 ## 7. Launch-readiness levels
 
-1. **Implemented / Tested:** Community identity, signed aliases, verifiers and free service catalog with passing unit and native compatibility tests.
+1. **Implemented / Tested:** Community identity, signed aliases, verifiers and free service catalog with passing unit and native compatibility tests; free physical network transport remains future work.
 2. **Open-source published:** Apache-2.0 code and notices merged to public branch, independent checkout tests pass; this applies only to explicitly licensed source scope.
 3. **Interoperable deployment:** At least two independent implementations exchange real signed Port records and authorized data sessions on separate hardware, with adverse testing and evidence.
 4. **Managed preview:** User-consented hosted services, identity/tenant separation, metering and receipts, support and security controls validated; not production.
