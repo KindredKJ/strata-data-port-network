@@ -69,3 +69,15 @@ The next engineering gate is to repair the source test and authorization finding
 ## Rights and security
 
 Copyright © 2026 Kindred Jermaine Cox and Kindred Labs. All rights reserved. See [LICENSE.md](LICENSE.md). Repository visibility does not grant a license to use, redistribute or deploy the code. Please avoid putting secrets or private data into issues. Use GitHub private vulnerability reporting if available.
+
+## Standalone static workspace (no hosting provider)
+
+SDPN's existing encrypted browser workspace has a provider-independent, dependency-free Node.js host:
+
+```bash
+node scripts/serve-standalone.mjs
+# http://127.0.0.1:8787/ and /app.html
+node --test test/standalone-host.test.mjs
+```
+
+This serves static files only; it does **not** launch the native distributed protocol, establish a physical zero-copy transfer, or publish an authenticated Internet API. Vercel is an optional existing publication surface, not an SDPN runtime prerequisite. Project Genesis and `kindredlabs.ai` are not required to launch the standalone host. See [independence, security boundaries, Windows instructions and optional ChatGPT/Kindred AI adapters](docs/STANDALONE-INDEPENDENCE-AND-INTEGRATION.md).
