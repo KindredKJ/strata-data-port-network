@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08131c">
+  <meta name="description" content="Portal is the local-first SDPN workspace for evidence-backed search, AI assistance, and owned ports.">
+  <meta name="robots" content="noindex,nofollow">
+  <title>PORTAL / Search · AI · Create Ports</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <div class="shell">
+    <header class="top">
+      <a class="brand" href="/" aria-label="Portal home"><span class="symbol">P<span class="point">•</span></span><span><strong>PORTAL</strong><small>STRATA DATA PORT NETWORK</small></span></a>
+      <span class="status-tag" id="run-status" aria-live="polite">Checking local service…</span>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="headline">
+        <p class="eyebrow">DISCOVER / LEARN / MAKE</p>
+        <h1 id="headline">A more useful way <em>into everything.</em></h1>
+        <p class="lead">Find what you need, learn how to use AI, and create your own spaces. PORTAL is powered by SDPN's independent local workspace and signed PORT identities.</p>
+        <div class="facts"><span>Local-first</span><span>Owned port names</span><span>No mandatory subscription</span></div>
+      </section>
+      <div class="columns">
+        <section class="panel search-panel" aria-labelledby="search-label">
+          <div class="panel-head"><div><p class="eyebrow">01 · DISCOVER</p><h2 id="search-label">Search Portal</h2></div><span class="micro" id="coverage">Loading index</span></div>
+          <form id="search-form" class="search-form">
+            <label for="search-input">Search SDPN knowledge and your created ports</label>
+            <div class="input-row">
+              <input id="search-input" name="q" maxlength="120" minlength="2" required autocomplete="off" placeholder="What do you want to find?">
+              <button class="primary" type="submit">Search <span aria-hidden="true">↗</span></button>
+            </div>
+          </form>
+          <p class="hint">Results come from real locally indexed documents and saved sites. The worldwide web index is not active yet.</p>
+          <div class="results" id="search-results" role="region" aria-live="polite" aria-label="Search results"></div>
+          <div class="document-view" id="document-view" hidden><div class="document-toolbar"><strong id="document-title"></strong><button type="button" id="document-close" class="link-button">Close</button></div><pre id="document-text"></pre></div>
+        </section>
+        <section class="panel assist-panel" aria-labelledby="assist-label">
+          <div class="panel-head"><div><p class="eyebrow">02 · LEARN & DO</p><h2 id="assist-label">AI for real tasks</h2></div><span id="model-state" class="micro">Checking model…</span></div>
+          <p>Choose what you need help doing. Portal sends your question only to a model running on your own machine when one is configured.</p>
+          <form id="assist-form">
+            <label for="task">What do you want to accomplish?</label>
+            <select id="task" name="task" required>
+              <option value="learn">Learn something</option>
+              <option value="research">Research a decision</option>
+              <option value="create">Create content</option>
+              <option value="build">Build software or a product</option>
+              <option value="plan">Make a plan</option>
+            </select>
+            <label for="ask">Describe exactly what you need</label>
+            <textarea id="ask" name="prompt" rows="5" maxlength="3500" required minlength="3" placeholder="Describe the result you want."></textarea>
+            <button class="primary wide" type="submit">Ask Portal AI <span aria-hidden="true">✦</span></button>
+          </form>
+          <p class="hint">No simulated AI answers. A local model must be online for this feature to respond.</p>
+          <div id="ai-answer" class="ai-answer" aria-live="polite"></div>
+        </section>
+      </div>
+      <section class="panel builder" aria-labelledby="builder-label">
+        <div class="panel-head"><div><p class="eyebrow">03 · CREATE</p><h2 id="builder-label">Make your own PORT</h2></div><span class="micro">Owner-controlled publishing</span></div>
+        <div class="builder-grid">
+          <form id="site-form" class="site-form">
+            <p>Start with a real, saved webpage in your own SDPN workspace. Signed <code>port://</code> publishing is a separate owner-approved step.</p>
+            <label for="slug">Unique port site name</label><input id="slug" name="slug" pattern="[a-z][a-z0-9-]{1,47}" maxlength="48" required placeholder="my-project" autocomplete="off">
+            <label for="site-title">Website title</label><input id="site-title" name="title" minlength="2" maxlength="100" required>
+            <label for="description">Short description</label><textarea id="description" name="description" maxlength="250" rows="2"></textarea>
+            <label for="site-body">Site content</label><textarea id="site-body" name="body" maxlength="20000" minlength="1" rows="6" required placeholder="Write your actual site content here."></textarea>
+            <button class="primary" type="submit">Save site locally <span aria-hidden="true">→</span></button>
+            <div id="site-result" class="form-status" role="status"></div>
+          </form>
+          <div class="site-list"><h3>Your sites</h3><p class="hint">Real stored sites, not examples. Signed addresses appear only when you authorize and sign them.</p>
+            <div id="owned-sites" aria-live="polite"></div>
+            <div class="names"><strong>Signed SDPN namespace</strong><p id="namespace-state">Checking your local Port Zero names…</p><div id="names-list"></div></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer><span>PORTAL / Kindred Labs · Strata Data Port Network</span><span>Independent of Project Genesis · Local candidate / not global public search</span></footer>
+  </div>
+</body>
+</html>
