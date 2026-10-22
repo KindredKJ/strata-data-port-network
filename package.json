@@ -8,6 +8,8 @@
   },
   "scripts": {
     "test": "node --test test/*.test.mjs",
+    "test:standalone": "node --test test/standalone-host.test.mjs",
+    "serve:standalone": "node scripts/serve-standalone.mjs",
     "measure": "node scripts/measure-worker-transfer.mjs",
     "proof:receive": "node scripts/two-machine-receiver.mjs",
     "proof:send": "node scripts/two-machine-sender.mjs"
@@ -18,8 +20,5 @@
     "./two-machine-proof": "./src/two-machine-proof.mjs",
     "./native-identity": "./src/native-port-identity.mjs",
     "./native-session": "./src/native-session.mjs"
-  },
-  "dependencies": {
-    "@vercel/speed-insights": "^2.0.0"
   }
 }
