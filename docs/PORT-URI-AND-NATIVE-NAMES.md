@@ -32,12 +32,14 @@ To renew the short-lived manifest (one hour maximum per signature):
 node scripts/port-domain.mjs renew
 ```
 
-To bind a new name or subdomain to a real Port Zero ID from an authorized peer:
+To bind a new name to your **actual existing** locally generated Port Zero identity:
+
 ```bash
-node scripts/port-domain.mjs bind clients.enterprise strata:port:ed25519:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+OWNER_PORT=$(node -p "JSON.parse(require('node:fs').readFileSync(require('node:os').homedir()+'/.sdpn/port-names.json','utf8')).body.ownerPort")
+node scripts/port-domain.mjs bind clients.enterprise "$OWNER_PORT"
 ```
 
-The command shown illustrates **syntax only**; the 64-hex target above is not a real verified peer identity. For actual operation use a targetPort returned from another live key-owned Port Zero identity. No remote enrollment or owner consent is inferred by the binding.
+For a separately authorized peer, use the peer's real verified Port Zero identity in place of `$OWNER_PORT`. Binding is a signed namespace mapping, not remote enrollment or authorization.
 
 The local manifest lists seven root/service identifiers on initial issuance. They are actual **signed reservations** within your own namespace, not deployed applications. For stable live operation, a legitimate deployment must distribute refreshed signed manifests, trusted owner policy and revocation state via independently authorized channels. Each owner can operate a separate namespace (federation) with deterministic full-ID partitioning, without a mandatory global registry or DNS server.
 
