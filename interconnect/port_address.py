@@ -49,3 +49,25 @@ def offline_port_page(record: dict) -> str:
     physical zero-copy, DNS registration or production authorization is implied.
     Owner policy, peer consent, and an independently approved adapter are still required.</p>
     </body></html>"""
+
+def locally_published_site(uri: str) -> str | None:
+    """Render a site only if the current machine owns and has signed its PORT alias.
+
+    No DNS, HTTP, remote execution, WebKit scripts, or raw filesystem input from URI.
+    A missing local site is a normal state: the signed namespace still resolves.
+    """
+    program = Path(__file__).resolve().parents[1] / "apps" / "portal" / "open-port.mjs"
+    try:
+        result = subprocess.run(["node", str(program), uri],
+                                capture_output=True, text=True, timeout=5, check=False)
+        if result.returncode or len(result.stdout) > 50000:
+            return None
+        body = json.loads(result.stdout)
+        if (body.get("signedNameVerified") is not True or
+                body.get("authorizedNetworkTransport") is not False or
+                body.get("globalDnsRegistration") is not False or
+                not isinstance(body.get("html"), str)):
+            return None
+        return body["html"]
+    except (OSError, subprocess.TimeoutExpired, ValueError, TypeError):
+        return None
