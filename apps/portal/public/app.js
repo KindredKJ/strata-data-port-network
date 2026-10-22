@@ -120,8 +120,33 @@ async function submitSite(event) {
     appendText(result, 'p', 'PORT signing and internet publication require a separate owner-approved step.', 'hint');
     form.reset();
     await refreshStatus();
+    await loadCommunityPlans();
   } catch (error) { result.textContent = error.message; }
   finally { button.disabled = false; }
+}
+async function loadCommunityPlans() {
+  const target = byId('community-plans');
+  try {
+    const catalog = await readJson('/api/plans');
+    target.replaceChildren();
+    for (const plan of catalog.plans) {
+      const box = document.createElement('article');
+      box.className = 'plan';
+      appendText(box, 'strong', plan.label);
+      appendText(box, 'span', plan.priceUsdMonthly === 0 ? 'FREE · OPEN SOURCE' :
+        'PLANNED · NOT FOR SALE', 'plan-price');
+      appendText(box, 'p', plan.description);
+      const benefits = document.createElement('ul');
+      for (const capability of (plan.capabilities ?? plan.services ?? []).slice(0, 6)) {
+        appendText(benefits, 'li', capability.replaceAll('.', ' · '));
+      }
+      box.append(benefits);
+      target.append(box);
+    }
+  } catch (error) {
+    target.replaceChildren();
+    appendText(target, 'p', 'Community plan information unavailable: ' + error.message, 'hint');
+  }
 }
 async function initialize() {
   byId('search-form').addEventListener('submit', submitSearch);
