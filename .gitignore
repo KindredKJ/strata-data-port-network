@@ -3,3 +3,6 @@ evidence/local/
 evidence/sw06g-physical/
 node_modules/
 *.log
+.sdpn/
+port-owner-key.pem
+port-names.json
