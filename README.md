@@ -81,3 +81,14 @@ node --test test/standalone-host.test.mjs
 ```
 
 This serves static files only; it does **not** launch the native distributed protocol, establish a physical zero-copy transfer, or publish an authenticated Internet API. Vercel is an optional existing publication surface, not an SDPN runtime prerequisite. Project Genesis and `kindredlabs.ai` are not required to launch the standalone host. See [independence, security boundaries, Windows instructions and optional ChatGPT/Kindred AI adapters](docs/STANDALONE-INDEPENDENCE-AND-INTEGRATION.md).
+
+## PORT/1 — SDPN-native `port://` addresses
+
+SDPN now has a self-certifying, Ed25519-signed **custom URI overlay** and local founder-owned namespace issuer. This is independent of the Project Genesis DNS configuration; it does not require Vercel or Cloudflare. Native `port://` addresses have operator-signed domains and subdomains, real revision/expiry/revocation checks and explicit target Port Zero identifiers; **they do not grant remote access or replace Internet HTTPS**.
+
+```bash
+node scripts/port-domain.mjs init
+node scripts/port-domain.mjs renew
+```
+
+On Windows, register the custom URI handler explicitly with `scripts/Install-SDPNPortProtocol.ps1`. INTERCONNECT Linux can independently verify a generated `port://` name against the local manifest using `--port-uri` and `--port-manifest`, displaying a secure offline status view. **Read the full installation, security and integration contract in [PORT/1 native naming](docs/PORT-URI-AND-NATIVE-NAMES.md).**
