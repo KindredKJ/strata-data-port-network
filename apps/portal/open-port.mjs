@@ -4,13 +4,15 @@
 import { readFile, lstat } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { homedir } from 'node:os';
+
+const operatorRoot = resolve(process.env.SDPN_OPERATOR_DIR || join(homedir(), '.sdpn'));
 import { parsePortUri, resolvePortName } from '../../src/port-names.mjs';
 
 const escapeHtml = text => String(text).replace(/[&<>"']/g,
   c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
-export async function readPublishedPort(uri, { manifestPath = join(homedir(), '.sdpn', 'port-names.json'),
-  dataDirectory = join(homedir(), '.sdpn', 'portal') } = {}) {
+export async function readPublishedPort(uri, { manifestPath = join(operatorRoot, 'port-names.json'),
+  dataDirectory = process.env.PORTAL_DATA_DIR || join(operatorRoot, 'portal') } = {}) {
   const address = parsePortUri(uri);
   if (!/^[a-z][a-z0-9-]{1,47}$/.test(address.name) || address.path !== '/') {
     throw new Error('Native website requires a signed top-level PORT alias');
