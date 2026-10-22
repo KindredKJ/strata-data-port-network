@@ -8,7 +8,7 @@ import {
   parseCommunityPortUri,
 } from '../src/index.mjs';
 import { communityCatalog, capabilityIsFree, evaluateAccess,
-  COMMUNITY_CAPABILITIES } from '../src/access.mjs';
+  COMMUNITY_CAPABILITIES, PLANNED_FREE_CAPABILITIES } from '../src/access.mjs';
 
 test('free identities are generated offline with portable recoverable private key', () => {
   const identity = createCommunityIdentity();
@@ -82,12 +82,20 @@ test('community network is never paywalled and paid services are not falsely act
   const free = catalog.plans.find(plan => plan.id === 'community');
   assert.equal(free.priceUsdMonthly, 0);
   assert.equal(free.availability, 'open-source-software');
-  assert.ok(COMMUNITY_CAPABILITIES.length >= 9);
+  assert.ok(COMMUNITY_CAPABILITIES.length >= 6);
   for(const capability of COMMUNITY_CAPABILITIES){
     assert.equal(capabilityIsFree(capability), true);
     const verdict = evaluateAccess(capability);
     assert.deepEqual(verdict, { capability, allowed: true, basis: 'free-open-protocol',
       subscriptionRequired: false, paymentRequired: false });
+  }
+  assert.deepEqual(free.plannedFreeCapabilities, [...PLANNED_FREE_CAPABILITIES]);
+  for (const capability of PLANNED_FREE_CAPABILITIES) {
+    assert.equal(capabilityIsFree(capability), true);
+    assert.deepEqual(evaluateAccess(capability), {
+      capability, allowed: false, basis: 'planned-free-protocol',
+      subscriptionRequired: false, paymentRequired: false
+    });
   }
   for (const plan of catalog.plans.filter(plan => plan.id !== 'community')) {
     assert.equal(plan.availability, 'planned');
