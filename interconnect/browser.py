@@ -8,12 +8,17 @@ import sys
 from pathlib import Path
 from policy import navigation_allowed
 from evidence import read_receipt, inspect_receipt
+from port_address import resolve_port_uri, offline_port_page
 
 def main():
     parser = argparse.ArgumentParser(description="INTERCONNECT native browser proof")
     parser.add_argument("--network", action="store_true", help="Explicitly enable public HTTPS browsing for this session")
     parser.add_argument("--smoke-output", help="Write executed native-render evidence and exit")
+    parser.add_argument("--port-uri", help="Open an SDPN port:// URI as offline, signature-verified local metadata")
+    parser.add_argument("--port-manifest", help="Path to the signed SDPN namespace record; no remote lookup")
     args = parser.parse_args()
+    if args.port_uri and not args.port_manifest:
+        raise SystemExit("SDPN port:// navigation requires a signed namespace manifest")
     if os.environ.get("WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS"):
         raise SystemExit("INTERCONNECT refuses disabled WebKit sandbox")
     import gi
@@ -46,8 +51,9 @@ def main():
     layout = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
     bar = Gtk.Box(spacing=6)
     address = Gtk.Entry()
-    address.set_placeholder_text("Public HTTPS address" if args.network else "Local evidence mode · network disabled")
-    address.set_sensitive(args.network)
+    address.set_placeholder_text("PORT address (signed local namespace)" if args.port_manifest else
+                                 ("Public HTTPS address" if args.network else "Local evidence mode · network disabled"))
+    address.set_sensitive(args.network or bool(args.port_manifest))
     address.get_accessible().set_name("Website address")
     back, forward, reload = [Gtk.Button(label=name) for name in ("Back", "Forward", "Reload")]
     inspect = Gtk.Button(label="Inspect SDPN receipt")
@@ -69,15 +75,31 @@ def main():
                 return True
         return False
     web.connect("decide-policy", decide)
+    last_port = [None]
+    def show_port_uri(uri):
+        try:
+            resolution = resolve_port_uri(uri, args.port_manifest)
+            last_port[0] = resolution["address"]
+            web.load_html(offline_port_page(resolution), "interconnect://evidence")
+            status.set_text("PORT mode · signed namespace verified · transport not connected")
+        except (ValueError, OSError) as error:
+            status.set_text("PORT denied: " + str(error))
     def navigate(_):
         uri = address.get_text().strip()
-        if navigation_allowed(uri, args.network): web.load_uri(uri)
-        else: status.set_text("Enter a public HTTPS address; restricted schemes and credentials are rejected")
+        if uri.startswith("port://"):
+            show_port_uri(uri)
+        elif navigation_allowed(uri, args.network):
+            last_port[0] = None
+            web.load_uri(uri)
+        else:
+            status.set_text("Address blocked: only signed SDPN PORT or explicitly enabled public HTTPS")
     address.connect("activate", navigate)
     back.connect("clicked", lambda _: web.go_back())
     forward.connect("clicked", lambda _: web.go_forward())
     reload.connect("clicked", lambda _: web.reload())
-    web.connect("notify::uri", lambda *_: address.set_text(web.get_uri() or ""))
+    web.connect("notify::uri", lambda *_: address.set_text(
+        last_port[0] if web.get_uri() == "interconnect://evidence" and last_port[0] else (web.get_uri() or "")
+    ))
     def inspect_local(_):
         chooser = Gtk.FileChooserDialog(title="Choose a local SW06-F receipt", parent=window,
             action=Gtk.FileChooserAction.OPEN)
@@ -154,6 +176,8 @@ def main():
       <p>Founded by Kindred Jermaine Cox · Kindred Labs.</p>
       <p>Local proof build. Choose a receipt above. Public HTTPS browsing requires explicit session opt-in.
       Device sync, agents, private ports, and remote indexing require their own authorization gates.</p></body></html>""", "interconnect://home")
+    if args.port_uri:
+        show_port_uri(args.port_uri)
     Gtk.main()
     return result_code[0]
 

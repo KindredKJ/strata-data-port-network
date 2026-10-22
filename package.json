@@ -12,13 +12,17 @@
     "serve:standalone": "node scripts/serve-standalone.mjs",
     "measure": "node scripts/measure-worker-transfer.mjs",
     "proof:receive": "node scripts/two-machine-receiver.mjs",
-    "proof:send": "node scripts/two-machine-sender.mjs"
+    "proof:send": "node scripts/two-machine-sender.mjs",
+    "port:init": "node scripts/port-domain.mjs init",
+    "port:renew": "node scripts/port-domain.mjs renew",
+    "port:resolve": "node scripts/port-resolve.mjs"
   },
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
     "./state-port": "./src/kindred-state-port.mjs",
     "./two-machine-proof": "./src/two-machine-proof.mjs",
     "./native-identity": "./src/native-port-identity.mjs",
-    "./native-session": "./src/native-session.mjs"
+    "./native-session": "./src/native-session.mjs",
+    "./port-names": "./src/port-names.mjs"
   }
 }
