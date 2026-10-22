@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 from policy import navigation_allowed
 from evidence import read_receipt, inspect_receipt
-from port_address import resolve_port_uri, offline_port_page
+from port_address import resolve_port_uri, offline_port_page, locally_published_site
 
 def main():
     parser = argparse.ArgumentParser(description="INTERCONNECT native browser proof")
@@ -80,8 +80,11 @@ def main():
         try:
             resolution = resolve_port_uri(uri, args.port_manifest)
             last_port[0] = resolution["address"]
-            web.load_html(offline_port_page(resolution), "interconnect://evidence")
-            status.set_text("PORT mode · signed namespace verified · transport not connected")
+            site_html = locally_published_site(resolution["address"])
+            web.load_html(site_html if site_html else offline_port_page(resolution), "interconnect://evidence")
+            status.set_text("PORT mode · signed name verified · " +
+                ("local Portal site loaded" if site_html else "no locally published site") +
+                " · remote transport not connected")
         except (ValueError, OSError) as error:
             status.set_text("PORT denied: " + str(error))
     def navigate(_):
