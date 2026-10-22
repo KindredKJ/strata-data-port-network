@@ -70,7 +70,7 @@ export function createStandaloneServer() {
 if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) {
   const host = process.env.SDPN_HOST || '127.0.0.1';
   const portText = process.env.SDPN_PORT || '8787';
-  if (!/^\\d+$/.test(portText) || Number(portText) < 1 || Number(portText) > 65535) {
+  if (!/^\d+$/.test(portText) || Number(portText) < 1 || Number(portText) > 65535) {
     throw new Error('SDPN_PORT must be an integer from 1 to 65535');
   }
   const server = createStandaloneServer();
