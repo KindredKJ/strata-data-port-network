@@ -7,7 +7,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "node --test test/*.test.mjs",
+    "test": "node --test test/*.test.mjs apps/portal/test/*.test.mjs",
     "test:standalone": "node --test test/standalone-host.test.mjs",
     "serve:standalone": "node scripts/serve-standalone.mjs",
     "measure": "node scripts/measure-worker-transfer.mjs",
@@ -15,7 +15,9 @@
     "proof:send": "node scripts/two-machine-sender.mjs",
     "port:init": "node scripts/port-domain.mjs init",
     "port:renew": "node scripts/port-domain.mjs renew",
-    "port:resolve": "node scripts/port-resolve.mjs"
+    "port:resolve": "node scripts/port-resolve.mjs",
+    "portal:start": "node apps/portal/server.mjs",
+    "portal:test": "node --test apps/portal/test/*.test.mjs"
   },
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
