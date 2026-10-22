@@ -8,7 +8,7 @@ import {
   createHash, createPrivateKey, createPublicKey, generateKeyPairSync, sign, verify,
 } from 'node:crypto';
 
-export const COMMUNITY_SCHEMA = 'kindred.sdpn.community-names.v1';
+export const COMMUNITY_SCHEMA = 'kindred.sdpn.port-names.v1';
 const PORT_PREFIX = 'strata:port:ed25519:';
 const HEX64 = /^[0-9a-f]{64}$/;
 const NAME_ATOM = /^[a-z](?:[a-z0-9-]{0,30}[a-z0-9])?$/;
@@ -118,17 +118,17 @@ export function parseCommunityPortUri(uri) {
   return Object.freeze({ uri, ownerPort, name, path: parsed.pathname });
 }
 function validateBindings(body, now) {
-  assertExact(body, ['schema', 'ownerPort', 'ownerPublicKey', 'revision', 'issuedAt', 'expiresAt', 'bindings']);
+  assertExact(body, ['schema', 'ownerPort', 'ownerPublicKey', 'revision', 'issuedAt', 'expiresAt', 'entries']);
   if (body.schema !== COMMUNITY_SCHEMA || portIdentifier(body.ownerPublicKey) !== body.ownerPort ||
       !Number.isSafeInteger(body.revision) || body.revision < 1 ||
       !Number.isSafeInteger(body.issuedAt) || !Number.isSafeInteger(body.expiresAt) ||
       body.issuedAt > now || body.expiresAt <= now || body.expiresAt <= body.issuedAt ||
       body.expiresAt - body.issuedAt > 3600000) throw new Error('Invalid community namespace lifetime');
-  if (!Array.isArray(body.bindings) || body.bindings.length < 1 || body.bindings.length > 128) {
+  if (!Array.isArray(body.entries) || body.entries.length < 1 || body.entries.length > 128) {
     throw new Error('Community namespace binding quota');
   }
   const seen = new Set();
-  for (const binding of body.bindings) {
+  for (const binding of body.entries) {
     assertExact(binding, ['name', 'targetPort']);
     validateName(binding.name);
     validateId(binding.targetPort);
@@ -142,7 +142,7 @@ export function signCommunityNames(identity, bindings, { revision = 1, now = Dat
       identity.id !== portIdentifier(identity.publicKey)) throw new Error('Signing identity required');
   if (!Number.isSafeInteger(ttlMs) || ttlMs < 1 || ttlMs > 3600000) throw new Error('Invalid community namespace TTL');
   const body = { schema: COMMUNITY_SCHEMA, ownerPort: identity.id, ownerPublicKey: identity.publicKey,
-    revision, issuedAt: now, expiresAt: now + ttlMs, bindings };
+    revision, issuedAt: now, expiresAt: now + ttlMs, entries: bindings };
   validateBindings(body, now);
   return identity.signRecord(body);
 }
@@ -166,7 +166,7 @@ export function resolveCommunityPort(uri, envelope, now = Date.now()) {
   const address = parseCommunityPortUri(uri);
   const body = verifyCommunityNames(envelope, now);
   if (address.ownerPort !== body.ownerPort) throw new Error('Different Port Zero authority');
-  const match = body.bindings.find(x => x.name === address.name);
+  const match = body.entries.find(x => x.name === address.name);
   if (!match) throw new Error('Unassigned PORT alias');
   return Object.freeze({
     address: uri, ownerPort: body.ownerPort, targetPort: match.targetPort,
