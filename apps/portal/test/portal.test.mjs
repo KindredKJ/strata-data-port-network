@@ -64,6 +64,21 @@ test('Portal search uses real local source files, not an invented global web ind
   assert.ok(document.body.includes('Port') || document.body.includes('port'));
 });
 
+test('Portal free protocol plan is accessible without checkout or user accounts', async () => {
+  const result = await fetch(origin + '/api/plans');
+  assert.equal(result.status, 200);
+  const catalog = await result.json();
+  assert.equal(catalog.acceptsPayments, false);
+  const community = catalog.plans.find(x => x.id === 'community');
+  assert.equal(community.priceUsdMonthly, 0);
+  assert.ok(community.capabilities.includes('identity.generate'));
+  assert.ok(community.plannedFreeCapabilities.includes('port.data.transfer'));
+  for(const product of catalog.plans.filter(x => x.id !== 'community')) {
+    assert.equal(product.availability, 'planned');
+    assert.equal(product.priceUsdMonthly, null);
+  }
+});
+
 test('operator owns actual persisted sites; markup is rendered inert and searchable', async () => {
   const body = {
     slug: 'my-portal-site', title: 'My Port Website', description: 'Published locally',
