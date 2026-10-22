@@ -120,7 +120,6 @@ async function submitSite(event) {
     appendText(result, 'p', 'PORT signing and internet publication require a separate owner-approved step.', 'hint');
     form.reset();
     await refreshStatus();
-    await loadCommunityPlans();
   } catch (error) { result.textContent = error.message; }
   finally { button.disabled = false; }
 }
@@ -157,6 +156,7 @@ async function initialize() {
     const session = await readJson('/api/session');
     intentToken = session.intentToken;
     await refreshStatus();
+    await loadCommunityPlans();
   } catch (error) {
     byId('run-status').textContent = 'Local workspace unavailable';
     byId('coverage').textContent = error.message;
