@@ -68,7 +68,7 @@ The next engineering gate is to repair the source test and authorization finding
 
 ## Rights and security
 
-Copyright © 2026 Kindred Jermaine Cox and Kindred Labs. All rights reserved. See [LICENSE.md](LICENSE.md). Repository visibility does not grant a license to use, redistribute or deploy the code. Please avoid putting secrets or private data into issues. Use GitHub private vulnerability reporting if available.
+Copyright © 2026 Kindred Jermaine Cox and Kindred Labs. [LICENSE.md](LICENSE.md) distinguishes the **Apache-2.0 open-source `community/` distribution** from the separately proprietary remainder of the repository. Repository visibility alone does not grant permission to use the proprietary source. Please avoid putting secrets or private data into issues. Use GitHub private vulnerability reporting if available.
 
 ## Standalone static workspace (no hosting provider)
 
@@ -106,3 +106,16 @@ node --test apps/portal/test/*.test.mjs
 ```
 
 The local native service requires neither a Vercel/Cloudflare deployment nor the Genesis domain. Creating a worldwide alternative discovery network and monetized managed PORT platform is an explicit future production program, not a current deployment claim.
+
+## Community SDPN — free-to-use, open-source foundation
+
+SDPN now includes an independently distributable and usable [**Apache-2.0 Community SDK**](community/README.md). Anyone can generate/export/import a portable Ed25519 Port Zero identity, sign and resolve PORT/1-compatible aliases, and use or modify the Apache-licensed community code commercially without purchasing a subscription. Its module code has no private-runtime or cloud-service dependencies. [Founder governance and commercial boundary](docs/OPEN-CORE-FOUNDER-GOVERNANCE.md) define user-owned identity, optional managed services, and a clear distinction between features implemented today and free future network modules.
+
+```bash
+node --test community/test/*.test.mjs
+node --test test/community-interop.test.mjs
+node apps/portal/server.mjs
+# Inspect GET http://127.0.0.1:8790/api/plans
+```
+
+**Precise licensing:** only `community/` is newly open-source by this change. Other files in this repository, including preserved imported candidates, retain their own licenses and attribution until the necessary rights review and explicit further relicensing. A free protocol does not make electricity, public Internet access, hardware, or managed hosted AI free. Commercial Creator/Business/Enterprise tiers are cataloged as *planned*, not purchasable or activated. The full network and global discovery infrastructure remain separate release gates.
