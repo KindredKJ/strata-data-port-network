@@ -123,6 +123,34 @@ async function submitSite(event) {
   } catch (error) { result.textContent = error.message; }
   finally { button.disabled = false; }
 }
+async function loadCommunityPlans() {
+  const target = byId('community-plans');
+  try {
+    const catalog = await readJson('/api/plans');
+    target.replaceChildren();
+    for (const plan of catalog.plans) {
+      const box = document.createElement('article');
+      box.className = 'plan';
+      appendText(box, 'strong', plan.label);
+      appendText(box, 'span', plan.priceUsdMonthly === 0 ? 'FREE · OPEN SOURCE' :
+        'PLANNED · NOT FOR SALE', 'plan-price');
+      appendText(box, 'p', plan.description);
+      const benefits = document.createElement('ul');
+      for (const capability of (plan.capabilities ?? plan.services ?? []).slice(0, 6)) {
+        appendText(benefits, 'li', capability.replaceAll('.', ' · '));
+      }
+      box.append(benefits);
+      if (plan.plannedFreeCapabilities?.length) {
+        appendText(box, 'small', 'Also free when implemented: ' +
+          plan.plannedFreeCapabilities.join(', '), 'hint');
+      }
+      target.append(box);
+    }
+  } catch (error) {
+    target.replaceChildren();
+    appendText(target, 'p', 'Community plan information unavailable: ' + error.message, 'hint');
+  }
+}
 async function initialize() {
   byId('search-form').addEventListener('submit', submitSearch);
   byId('assist-form').addEventListener('submit', submitAI);
@@ -132,6 +160,7 @@ async function initialize() {
     const session = await readJson('/api/session');
     intentToken = session.intentToken;
     await refreshStatus();
+    await loadCommunityPlans();
   } catch (error) {
     byId('run-status').textContent = 'Local workspace unavailable';
     byId('coverage').textContent = error.message;

@@ -8,6 +8,7 @@ import { join, resolve, dirname } from 'node:path';
 import { homedir } from 'node:os';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { verifyPortNames, makePortUri } from '../../src/port-names.mjs';
+import { communityCatalog } from '../../community/src/access.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const assets = fileURLToPath(new URL('./public/', import.meta.url));
@@ -214,6 +215,9 @@ function siteHtml(site) {
 async function respondApi(req, res, url, opts, csrf) {
   if (req.method === 'GET' && url.pathname === '/api/session') {
     return reply(req, res, 200, { intentToken: csrf });
+  }
+  if (req.method === 'GET' && url.pathname === '/api/plans') {
+    return reply(req, res, 200, communityCatalog());
   }
   if (req.method === 'GET' && url.pathname === '/api/status') {
     const [sites, documents, names] = await Promise.all([listSites(opts.dataDirectory), docsIndex(),

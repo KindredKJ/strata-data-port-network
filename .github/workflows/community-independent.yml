@@ -1,0 +1,41 @@
+name: SDPN Community independent open-source verification
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  independent-community:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Verify explicit Apache-2.0 license and scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'Version 2.0' community/LICENSE
+          grep -q 'Apache-2.0' community/package.json
+          grep -q 'Copyright 2026 Kindred Jermaine Cox' community/NOTICE
+          grep -q 'community/' LICENSE.md
+      - name: Test community package extracted from all proprietary code
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/sdpn-community-only"
+          cp -a community/. "$RUNNER_TEMP/sdpn-community-only/"
+          cd "$RUNNER_TEMP/sdpn-community-only"
+          node --test test/*.test.mjs
+      - name: Verify PORT/1 interoperation and free-plan API
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test test/community-interop.test.mjs
+          node --test apps/portal/test/portal.test.mjs
