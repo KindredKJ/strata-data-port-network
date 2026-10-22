@@ -30,7 +30,7 @@ const staticAssets = Object.freeze({
   '/styles.css': ['styles.css', 'text/css; charset=utf-8'],
 });
 function reply(req, res, code, data, type = 'application/json; charset=utf-8', additional = {}) {
-  const bytes = Buffer.from(typeof data === 'string' ? data : JSON.stringify(data), 'utf8');
+  const bytes = Buffer.isBuffer(data) ? data : Buffer.from(typeof data === 'string' ? data : JSON.stringify(data), 'utf8');
   res.writeHead(code, { ...security, ...additional, 'Content-Type': type, 'Content-Length': String(bytes.length) });
   res.end(req.method === 'HEAD' ? undefined : bytes);
 }
@@ -75,7 +75,8 @@ async function listSites(directory) {
       const info = await stat(path);
       if (info.size > 25000) continue;
       const raw = JSON.parse(await readFile(path, 'utf8'));
-      const site = validateSite(raw);
+      const { createdAt, ...fields } = raw;
+      const site = validateSite(fields);
       if (site.slug === slug && typeof raw.createdAt === 'string') {
         sites.push({ ...site, createdAt: raw.createdAt });
       }
