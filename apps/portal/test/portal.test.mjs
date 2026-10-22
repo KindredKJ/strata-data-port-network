@@ -3,7 +3,7 @@ import { before, after, test } from 'node:test';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createServer } from 'node:http';
+import { createServer, request as rawRequest } from 'node:http';
 import { createPortalServer } from '../server.mjs';
 
 let server, origin, workspace, session, modelServer;
@@ -105,7 +105,13 @@ test('unsafe HTTP, unknown paths and hostile hosts cannot control Portal', async
   assert.equal((await fetch(origin + '/package.json')).status, 404);
   assert.equal((await fetch(origin + '/.sdpn/port-owner-key.pem')).status, 404);
   assert.equal((await fetch(origin + '/api/sites', { method: 'DELETE' })).status, 405);
-  assert.equal((await fetch(origin + '/api/sites', { headers: { Host: 'untrusted.example' } })).status, 403);
+  const deniedHostStatus = await new Promise((resolve, reject) => {
+    const req = rawRequest(origin + '/api/sites', { headers: { Host: 'untrusted.example' } }, res => {
+      res.resume(); res.on('end', () => resolve(res.statusCode));
+    });
+    req.on('error', reject); req.end();
+  });
+  assert.equal(deniedHostStatus, 403);
 });
 
 test('configured real local HTTP model response is returned without an external provider', async () => {
