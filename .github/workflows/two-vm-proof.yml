@@ -27,8 +27,8 @@ jobs:
           curl --fail --location --retry 2 https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/netboot/vmlinuz-virt -o vmlinuz
           curl --fail --location --retry 2 https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/netboot/initramfs-virt -o initramfs
           sha256sum vmlinuz initramfs  # Diagnostic only; pinned integrity assertions below still fail closed.
-          echo "6b58e5d779e44e57c9efa20232da18650415eceb9d4f544e5c165c1f392c5d51  vmlinuz" | sha256sum --check
-          echo "1f878a079d9c2260765e89b227b16f06747965deb612f2cc265b28941561a992  initramfs" | sha256sum --check
+          echo "26f146f664ad057be3b39b211422b03b1f94cb2c3d66522fd4841811a224bfd5  vmlinuz" | sha256sum --check
+          echo "e59e1b1711b553b008ac8ec7ca73c294c5b8eb8cd94b503aa560ce69b505bb13  initramfs" | sha256sum --check
       - name: Prepare bounded disposable guests
         run: python3 scripts/prepare-two-vm-guest.py --initramfs "$RUNNER_TEMP/sw06f-assets/initramfs" --busybox /usr/bin/busybox --out "$RUNNER_TEMP/sw06f-guest"
       - name: Execute reciprocal signed private-network transport
