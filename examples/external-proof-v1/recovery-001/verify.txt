@@ -1,0 +1,27 @@
+CAPSULE DIGEST.......... PASS
+CAPSULE CONTINUITY...... PASS
+RECOVERY ID............. PASS
+INPUT HASH.............. PASS
+BOOT CHANGED............ PASS
+CHECKPOINT BOOT......... PASS
+RECEIPT SIGNATURE....... PASS
+PINNED KEY.............. PASS
+STATE HASH.............. PASS
+RECEIVED HASH........... PASS
+AUTHENTICATION.......... PASS
+INTEGRITY............... PASS
+SOURCE NODE............. PASS
+DESTINATION NODE........ PASS
+NO ABRUPT CLAIM......... PASS
+NO AUTO FAILOVER CLAIM.. PASS
+NO PHYSICAL CLAIM....... PASS
+NO PRODUCTION CLAIM..... PASS
+
+recoveryId:     recovery-0c26b65a-7095-49e6-a256-ec5d33ed276c
+capsuleSha256:  1ce112f769af2aa3b046a3b7dad562895a73d2d1891658000bb4d249f232cbff
+checkpointBoot: boot-ab405d54-08e0-4cb9-b7dd-1bb521701cca
+resumedBoot:    boot-fad28493-7d47-4ce0-b857-72ea89b5709e
+jobId:          proof-job-5c63bd80-0120-4e6a-b9ea-a85d0882b0e9
+stateHash:      eca53b0a8078c489fb652730e0f2db8661bb5a5e14a6a4518a8b0eead528e9bb
+challengeId:    73aba59a-040b-454b-95fc-d4d4a8f05798
+keyId:          9cccc27fedfbdb987a3f2f442c550ee4c9978f1a29bc017831f81ff4d4439dd5
