@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#071412">
-<meta name="description" content="Public Kindred External Proof evidence for Strata Data Port Network: signed cross-provider execution, forced redeploy recovery, and measured external baseline.">
+<meta name="description" content="Public Kindred External Proof evidence for Strata Data Port Network: signed execution, forced redeploy recovery, verified cross-provider recovery, and measured external baseline.">
 <title>Strata Proof Record | Kindred Labs</title>
 <style>
 :root{color-scheme:dark;--bg:#071412;--panel:#0c1e1a;--line:#1f3b33;--text:#f1f7f3;--muted:#a9bcb3;--mint:#76f2c4;--lime:#d2f275;--red:#f59b9b;--max:1080px}
@@ -49,6 +49,24 @@
 </div>
 </section>
 
+
+<section class="section" id="cross-provider-recovery">
+<div class="eyebrow">Cross-Provider Recovery #001</div><h2>One preserved Render capsule resumed on Vercel</h2>
+<p class="muted">The existing Recovery #001 capsule was submitted unchanged to the production Strata Vercel recovery node. The signed recovery record was checked against the separately preserved Render checkpoint evidence. The output hash was recomputed from the signed output object.</p>
+<div class="kv">
+<div>Recovery ID</div><div><code>recovery-0c26b65a-7095-49e6-a256-ec5d33ed276c</code></div>
+<div>Operation</div><div><code>HASH_TEXT</code> — one bounded operation</div>
+<div>Capsule SHA-256</div><div><code>1ce112f769af2aa3b046a3b7dad562895a73d2d1891658000bb4d249f232cbff</code></div>
+<div>Checkpoint input SHA-256</div><div><code>78d26e8d56089c6d07c0648897990dd9eb8370079341af8e5436f85cd8849b76</code></div>
+<div>Recomputed output SHA-256</div><div><code>50096515f6071b3812ee4b5d60189aca39aa4bfd839530485a4abcb5fd947432</code></div>
+<div>Recovery node</div><div><code>strata-vercel-recovery-node-c</code> (distinct logical node)</div>
+<div>Verification</div><div><span class="pass">16 / 16 PASS</span> — third-environment verifier, pinned Ed25519 key</div>
+<div>Production deployment</div><div><code>dpl_HsjgbaDu7Dgo6eJGD1qMVtTPPX21</code> at commit <code>f4712945f5c40a91ea860cb386ca5beb8b169e59</code></div>
+<div>Public evidence</div><div><a href="https://github.com/KindredKJ/strata-data-port-network/tree/main/examples/external-proof-v1/cross-provider-recovery-001">Envelope, verifier output, and instructions ↗</a></div>
+</div>
+<p class="muted" style="margin-top:18px">This is one bounded recovery. It does not prove automatic failover, abrupt termination or power-loss recovery, physical-machine attestation, or wider production readiness.</p>
+</section>
+
 <section class="section" id="benchmark">
 <div class="eyebrow">External Benchmark #001</div><h2>12 sequential jobs, 12 independently verified receipts</h2>
 <div class="grid">
@@ -74,6 +92,7 @@
 <tr><td>Cross-provider state transfer</td><td class="pass">VERIFIED</td><td>Canonical state reached production Strata on Vercel with matching SHA-256.</td></tr>
 <tr><td>Independent signed receipt verification</td><td class="pass">VERIFIED</td><td>Ed25519 receipt verified outside source and destination services.</td></tr>
 <tr><td>Forced redeploy recovery</td><td class="pass">VERIFIED</td><td>Sealed state survived a deliberate Render process replacement and resumed.</td></tr>
+<tr><td>Cross-provider sealed-capsule recovery</td><td class="pass">VERIFIED — one bounded HASH_TEXT recovery</td><td>The preserved capsule was resumed on a distinct Vercel node; capsule/input hashes matched preserved checkpoint evidence and the output hash was recomputed.</td></tr>
 <tr><td>12-job external baseline</td><td class="pass">VERIFIED</td><td>12/12 sequential bounded jobs completed and independently verified.</td></tr>
 <tr><td>Automatic failover</td><td class="no">NOT YET PROVEN</td><td>Recovery still requires an external trigger.</td></tr>
 <tr><td>Abrupt power-loss recovery</td><td class="no">NOT YET PROVEN</td><td>No physical power interruption has been exercised.</td></tr>
@@ -90,6 +109,9 @@
 <p class="muted">The public Ed25519 verification key and verifier are committed to the repository. No private signing key or transport secret is required.</p>
 <pre class="code">node scripts/verify-external-receipt.mjs \
   --receipt examples/external-proof-v1/001/receipt.envelope.json</pre>
+<pre class="code">node scripts/verify-cross-provider-recovery.mjs \
+  --envelope examples/external-proof-v1/cross-provider-recovery-001/recovery.envelope.json \
+  --expected-evidence examples/external-proof-v1/recovery-001/recovery.summary.json</pre>
 <div class="actions"><a class="button primary" href="https://github.com/KindredKJ/strata-data-port-network/tree/main/examples/external-proof-v1">Open evidence repository ↗</a><a class="button" href="https://github.com/KindredKJ/strata-data-port-network/blob/main/docs/INDEPENDENT-VERIFICATION.md">Run your own proof ↗</a><a class="button" href="https://github.com/KindredKJ/strata-data-port-network/blob/main/docs/EXTERNAL-PROOF-THREAT-MODEL.md">Threat model ↗</a><a class="button" href="/">Back to Strata</a></div>
 </section>
 
