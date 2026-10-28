@@ -37,7 +37,7 @@ const [envelopeText, pem, evidenceText] = await Promise.all([
 const envelope = JSON.parse(envelopeText);
 const expected = JSON.parse(evidenceText);
 const trustedPublicKeySpkiBase64 = pem
-  .replace(/-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----|\\s+/g, "");
+  .replace(/-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----|\s+/g, "");
 const r = envelope?.recovery;
 
 if (expected?.schemaVersion !== "kindred.external-proof.recovery-evidence.v1") {
