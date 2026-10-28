@@ -17,6 +17,12 @@ export const EXTERNAL_PROOF_CHALLENGE_SCHEMA = "kindred.external-proof.challenge
 export const EXTERNAL_PROOF_RECEIPT_SCHEMA = "kindred.external-proof.receipt.v1";
 export const EXTERNAL_PROOF_CIPHER = "AES-256-GCM";
 export const EXTERNAL_PROOF_MAX_BYTES = 1024 * 1024;
+export const RECOVERY_CAPSULE_SCHEMA = "kindred.external-proof.recovery-capsule.v1";
+export const RECOVERY_STATE_SCHEMA = "kindred.external-proof.recovery-state.v1";
+export const CROSS_PROVIDER_RECOVERY_SCHEMA = "kindred.external-proof.cross-provider-recovery.v1";
+const RECOVERY_MAX_BYTES = 48 * 1024;
+const RECOVERY_TEXT_MAX_BYTES = 16 * 1024;
+const RECOVERY_JSON_MAX_BYTES = 32 * 1024;
 
 function boundedString(value, label, max = 512) {
   if (typeof value !== "string" || value.length < 1 || value.length > max || /[\r\n]/.test(value)) {
@@ -201,6 +207,204 @@ export function decryptExternalProofPayload({ secret, token, claims, ciphertextB
   const receivedSha256 = sha256(payload);
   if (receivedSha256 !== claims.payloadSha256) throw new Error("received payload SHA-256 mismatch");
   return { payload, receivedSha256, ciphertextBytes: ciphertext.length };
+}
+
+
+function requireRecoverySecret(secret) {
+  if (typeof secret !== "string" || secret.length < 32) {
+    throw new Error("KINDRED recovery capsule secret must be at least 32 characters");
+  }
+}
+
+function deriveRecoveryKey(secret, salt, recoveryId) {
+  requireRecoverySecret(secret);
+  return Buffer.from(hkdfSync(
+    "sha256",
+    Buffer.from(secret, "utf8"),
+    salt,
+    Buffer.from(`kindred-external-proof-recovery-v1|${recoveryId}`, "utf8"),
+    32
+  ));
+}
+
+export function openRecoveryCapsule({ secret, capsule }) {
+  requireRecoverySecret(secret);
+  if (!capsule || capsule.schemaVersion !== RECOVERY_CAPSULE_SCHEMA) throw new Error("recovery capsule schema mismatch");
+  boundedString(capsule.recoveryId, "recoveryId", 128);
+  boundedString(capsule.saltB64, "saltB64", 128);
+  boundedString(capsule.ivB64, "ivB64", 64);
+  boundedString(capsule.tagB64, "tagB64", 64);
+  boundedString(capsule.ciphertextB64, "ciphertextB64", 128 * 1024);
+  boundedString(capsule.capsuleSha256, "capsuleSha256", 64);
+
+  const unsigned = {
+    schemaVersion: capsule.schemaVersion,
+    recoveryId: capsule.recoveryId,
+    saltB64: capsule.saltB64,
+    ivB64: capsule.ivB64,
+    ciphertextB64: capsule.ciphertextB64,
+    tagB64: capsule.tagB64
+  };
+  if (sha256(canonicalBytes(unsigned)) !== capsule.capsuleSha256) {
+    throw new Error("recovery capsule digest mismatch");
+  }
+
+  const salt = Buffer.from(capsule.saltB64, "base64url");
+  const iv = Buffer.from(capsule.ivB64, "base64url");
+  const tag = Buffer.from(capsule.tagB64, "base64url");
+  const ciphertext = Buffer.from(capsule.ciphertextB64, "base64url");
+  if (salt.length !== 32 || iv.length !== 12 || tag.length !== 16 || ciphertext.length < 1 || ciphertext.length > RECOVERY_MAX_BYTES) {
+    throw new Error("recovery capsule cryptographic fields invalid");
+  }
+
+  const key = deriveRecoveryKey(secret, salt, capsule.recoveryId);
+  const decipher = createDecipheriv("aes-256-gcm", key, iv);
+  decipher.setAAD(Buffer.from(RECOVERY_CAPSULE_SCHEMA, "utf8"), { plaintextLength: ciphertext.length });
+  decipher.setAuthTag(tag);
+
+  let state;
+  try {
+    const plaintext = Buffer.concat([decipher.update(ciphertext), decipher.final()]);
+    state = JSON.parse(plaintext.toString("utf8"));
+  } catch {
+    throw new Error("recovery capsule authentication or decoding failed");
+  }
+
+  if (!state || state.schemaVersion !== RECOVERY_STATE_SCHEMA || state.recoveryId !== capsule.recoveryId) {
+    throw new Error("recovery state identity mismatch");
+  }
+  boundedString(state.sourceNodeId, "recovery sourceNodeId", 256);
+  boundedString(state.sourceBootId, "recovery sourceBootId", 256);
+  boundedString(state.checkpointedAt, "checkpointedAt", 128);
+  if (state.checkpointStage !== "VALIDATED_BEFORE_EXTERNAL_TRANSFER") {
+    throw new Error("recovery checkpoint stage mismatch");
+  }
+  if (!validSha256(state.validatedInputHash)) throw new Error("recovery validated input hash invalid");
+
+  const executed = executeRecoveredOperation(state.job);
+  if (executed.inputHash !== state.validatedInputHash) throw new Error("recovered input hash mismatch");
+  return { state, executed };
+}
+
+export function executeRecoveredOperation(job) {
+  if (!job || typeof job !== "object") throw new TypeError("recovery job is required");
+
+  if (job.operation === "HASH_TEXT") {
+    const text = job.input?.text;
+    if (typeof text !== "string") throw new TypeError("HASH_TEXT requires input.text");
+    const bytes = Buffer.byteLength(text, "utf8");
+    if (bytes > RECOVERY_TEXT_MAX_BYTES) throw new RangeError("HASH_TEXT input exceeds recovery limit");
+    const normalizedInput = { text };
+    const inputHash = sha256(canonicalBytes(normalizedInput));
+    const output = { sha256: sha256(text), utf8Bytes: bytes };
+    return { operation: job.operation, inputHash, output, outputHash: sha256(canonicalBytes(output)) };
+  }
+
+  if (job.operation === "CANONICALIZE_JSON") {
+    if (!job.input || typeof job.input !== "object" || !Object.prototype.hasOwnProperty.call(job.input, "value")) {
+      throw new TypeError("CANONICALIZE_JSON requires input.value");
+    }
+    const canonical = canonicalize(job.input.value);
+    const bytes = Buffer.byteLength(canonical, "utf8");
+    if (bytes > RECOVERY_JSON_MAX_BYTES) throw new RangeError("CANONICALIZE_JSON result exceeds recovery limit");
+    const normalizedInput = { value: job.input.value };
+    const inputHash = sha256(canonicalBytes(normalizedInput));
+    const output = { canonical, sha256: sha256(canonical), utf8Bytes: bytes };
+    return { operation: job.operation, inputHash, output, outputHash: sha256(canonicalBytes(output)) };
+  }
+
+  throw new Error("unsupported recovered proof operation");
+}
+
+export function createCrossProviderRecoveryRecord({
+  state,
+  executed,
+  capsuleSha256,
+  recoveryNodeId,
+  execution = {},
+  observedAt = new Date().toISOString()
+}) {
+  boundedString(recoveryNodeId, "recoveryNodeId", 256);
+  if (!validSha256(capsuleSha256)) throw new Error("capsuleSha256 must be SHA-256 hex");
+  return {
+    schemaVersion: CROSS_PROVIDER_RECOVERY_SCHEMA,
+    recoveryId: state.recoveryId,
+    capsuleSha256,
+    checkpointedAt: state.checkpointedAt,
+    originalSourceNodeId: state.sourceNodeId,
+    originalSourceBootId: state.sourceBootId,
+    checkpointStage: state.checkpointStage,
+    recoveryNodeId,
+    operation: executed.operation,
+    recoveredInputHash: executed.inputHash,
+    outputHash: executed.outputHash,
+    output: executed.output,
+    execution: {
+      provider: execution.provider ?? "vercel",
+      deploymentId: execution.deploymentId ?? null,
+      deploymentUrl: execution.deploymentUrl ?? null,
+      commitSha: execution.commitSha ?? null,
+      region: execution.region ?? null
+    },
+    claims: {
+      recoveredOutsideOriginalSourceRuntime: recoveryNodeId !== state.sourceNodeId,
+      automaticFailoverProven: false,
+      abruptTerminationRecoveryProven: false,
+      physicalMachineAttestationProven: false,
+      productionReadyClaim: false
+    },
+    observedAt
+  };
+}
+
+export function signCrossProviderRecovery({ recovery, privateKeyPkcs8Base64 }) {
+  boundedString(privateKeyPkcs8Base64, "privateKeyPkcs8Base64", 8192);
+  if (recovery?.schemaVersion !== CROSS_PROVIDER_RECOVERY_SCHEMA) throw new Error("cross-provider recovery schema mismatch");
+  const privateKey = createPrivateKey({
+    key: Buffer.from(privateKeyPkcs8Base64, "base64"),
+    format: "der",
+    type: "pkcs8"
+  });
+  const publicKey = createPublicKey(privateKey);
+  const publicDer = publicKey.export({ format: "der", type: "spki" });
+  return {
+    recovery,
+    signatureAlgorithm: "Ed25519",
+    keyId: sha256(publicDer),
+    publicKeySpkiBase64: publicDer.toString("base64"),
+    signature: cryptoSign(null, canonicalBytes(recovery), privateKey).toString("base64url")
+  };
+}
+
+export function verifyCrossProviderRecoveryEnvelope({ envelope, trustedPublicKeySpkiBase64 }) {
+  if (!envelope || envelope.signatureAlgorithm !== "Ed25519" || typeof envelope.signature !== "string") {
+    throw new Error("invalid cross-provider recovery envelope");
+  }
+  const recovery = envelope.recovery;
+  if (!recovery || recovery.schemaVersion !== CROSS_PROVIDER_RECOVERY_SCHEMA) throw new Error("cross-provider recovery schema mismatch");
+  const suppliedPublic = boundedString(envelope.publicKeySpkiBase64, "publicKeySpkiBase64", 4096);
+  if (trustedPublicKeySpkiBase64 && suppliedPublic !== trustedPublicKeySpkiBase64) {
+    throw new Error("cross-provider recovery signing key does not match trusted public key");
+  }
+  const publicDer = Buffer.from(trustedPublicKeySpkiBase64 ?? suppliedPublic, "base64");
+  if (sha256(publicDer) !== envelope.keyId) throw new Error("cross-provider recovery key fingerprint mismatch");
+  const publicKey = createPublicKey({ key: publicDer, format: "der", type: "spki" });
+  const ok = cryptoVerify(null, canonicalBytes(recovery), publicKey, Buffer.from(envelope.signature, "base64url"));
+  if (!ok) throw new Error("cross-provider recovery signature verification failed");
+  if (!validSha256(recovery.capsuleSha256) || !validSha256(recovery.recoveredInputHash) || !validSha256(recovery.outputHash)) {
+    throw new Error("cross-provider recovery hash fields invalid");
+  }
+  if (recovery.claims?.automaticFailoverProven !== false || recovery.claims?.physicalMachineAttestationProven !== false) {
+    throw new Error("cross-provider recovery contains unsupported maturity claim");
+  }
+  return {
+    verified: true,
+    recoveryId: recovery.recoveryId,
+    capsuleSha256: recovery.capsuleSha256,
+    recoveredInputHash: recovery.recoveredInputHash,
+    outputHash: recovery.outputHash,
+    keyId: envelope.keyId
+  };
 }
 
 export function createExternalProofReceipt({
