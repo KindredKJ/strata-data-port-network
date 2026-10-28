@@ -9,6 +9,7 @@ on:
       - "test/external-proof-v1.test.mjs"
       - "public/proof-public-key.pem"
       - "docs/EXTERNAL-PROOF-V1.md"
+      - "examples/external-proof-v1/**"
       - ".github/workflows/external-proof-v1.yml"
   workflow_dispatch:
 
@@ -28,3 +29,6 @@ jobs:
         run: node --test test/external-proof-v1.test.mjs
       - name: Confirm public verification key is parseable
         run: node -e "const {createPublicKey}=require('node:crypto');const fs=require('node:fs');const k=createPublicKey(fs.readFileSync('public/proof-public-key.pem'));console.log(k.asymmetricKeyType);if(k.asymmetricKeyType!=='ed25519')process.exit(1)"
+      - name: Verify published external proof receipt
+        if: ${{ hashFiles('examples/external-proof-v1/001/receipt.envelope.json') != '' }}
+        run: node scripts/verify-external-receipt.mjs --receipt examples/external-proof-v1/001/receipt.envelope.json
