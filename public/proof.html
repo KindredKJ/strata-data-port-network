@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071412">
+<meta name="description" content="Public Kindred External Proof evidence for Strata Data Port Network: signed cross-provider execution, forced redeploy recovery, and measured external baseline.">
+<title>Strata Proof Record | Kindred Labs</title>
+<style>
+:root{color-scheme:dark;--bg:#071412;--panel:#0c1e1a;--line:#1f3b33;--text:#f1f7f3;--muted:#a9bcb3;--mint:#76f2c4;--lime:#d2f275;--red:#f59b9b;--max:1080px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 78% 2%,#163a2e 0,transparent 37rem),var(--bg);color:var(--text);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{width:min(calc(100% - 36px),var(--max));margin:auto}.nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}a{color:var(--mint);text-underline-offset:4px}.brand{color:var(--text);text-decoration:none;font-weight:800}.hero{padding:74px 0 52px}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);font-weight:800}.hero h1{font-size:clamp(42px,7vw,74px);letter-spacing:-.055em;line-height:1;margin:15px 0 22px}.lead{font-size:20px;color:#c8d8d0;max-width:800px}.section{padding:50px 0;border-top:1px solid var(--line)}h2{font-size:32px;letter-spacing:-.035em;margin:0 0 16px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:linear-gradient(150deg,#10251f,#0a1915);border:1px solid var(--line);border-radius:18px;padding:22px}.card strong{color:var(--mint);display:block;margin-bottom:8px}.card p,.muted{color:var(--muted)}.pass{color:var(--lime);font-weight:800}.no{color:#f5c2c2;font-weight:800}.kv{display:grid;grid-template-columns:220px 1fr;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:20px}.kv div{padding:12px 16px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.kv div:nth-child(odd){color:var(--muted);background:#0a1915}.kv div:nth-last-child(-n+2){border-bottom:0}.ladder{width:100%;border-collapse:collapse;margin-top:20px}.ladder th,.ladder td{text-align:left;border-bottom:1px solid var(--line);padding:13px 10px}.ladder th{color:var(--muted);font-size:13px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}.button{display:inline-block;border:1px solid #406d5e;border-radius:999px;padding:11px 16px;text-decoration:none;font-weight:750}.button.primary{background:var(--mint);color:#052018}.code{background:#030b09;border:1px solid var(--line);border-radius:14px;padding:17px;overflow:auto;color:#d7e6df;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace}.footer{padding:30px 0 45px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}@media(max-width:760px){.grid{grid-template-columns:1fr}.kv{grid-template-columns:1fr}.kv div:nth-child(odd){font-weight:700}.nav{align-items:flex-start;gap:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a class="brand" href="/">STRATA / KINDRED LABS</a><a href="https://github.com/KindredKJ/strata-data-port-network">Public source ↗</a></nav>
+<header class="hero">
+<div class="eyebrow">External evidence record</div>
+<h1>Proof over claims.</h1>
+<p class="lead">This page records what the bounded Kindred External Proof path has actually demonstrated outside the founder's local machine. Every larger claim stays false until a separate evidence gate proves it.</p>
+<div class="actions"><a class="button primary" href="/api/proof/status">Live Strata proof status ↗</a><a class="button" href="https://github.com/KindredKJ/strata-data-port-network/tree/main/examples/external-proof-v1">Inspect evidence ↗</a></div>
+</header>
+
+<section class="section" id="execution">
+<div class="eyebrow">Proof #001</div><h2>Cross-provider signed execution</h2>
+<div class="grid">
+<div class="card"><strong>Independent caller</strong><p>Restricted Vercel cloud sandbox in <code>iad1</code>.</p></div>
+<div class="card"><strong>Source runtime</strong><p>Unified Quad canary on Render, logical node <code>genesis-render-node-a</code>.</p></div>
+<div class="card"><strong>Destination verifier</strong><p>Production Strata on Vercel, logical node <code>strata-vercel-node-b</code>.</p></div>
+</div>
+<div class="kv">
+<div>State SHA-256</div><div><code>5ca869c0b666c8c9b5621e368a226b69042f97e421b8f723207812b1f1e4bb15</code></div>
+<div>Receipt signature</div><div>Ed25519 — independently verified</div>
+<div>Transport</div><div>HTTPS + challenge-bound AES-256-GCM; HMAC-SHA256 challenge authentication</div>
+<div>Public evidence</div><div><a href="https://github.com/KindredKJ/strata-data-port-network/tree/main/examples/external-proof-v1/001">Proof #001 repository record ↗</a></div>
+</div>
+</section>
+
+<section class="section" id="recovery">
+<div class="eyebrow">Recovery Proof #001</div><h2>State recovered after a deliberate Render process replacement</h2>
+<p class="muted">A bounded job was validated and sealed into an authenticated encrypted recovery capsule. The capsule was retained outside Render, the Render service was deliberately redeployed from the same source commit, and the distinct new process recovered the capsule and completed a new signed Strata proof.</p>
+<div class="kv">
+<div>Recovery ID</div><div><code>recovery-0c26b65a-7095-49e6-a256-ec5d33ed276c</code></div>
+<div>Capsule SHA-256</div><div><code>1ce112f769af2aa3b046a3b7dad562895a73d2d1891658000bb4d249f232cbff</code></div>
+<div>Checkpoint boot</div><div><code>boot-ab405d54-08e0-4cb9-b7dd-1bb521701cca</code></div>
+<div>Resumed boot</div><div><code>boot-fad28493-7d47-4ce0-b857-72ea89b5709e</code></div>
+<div>Independent checks</div><div><span class="pass">18 / 18 PASS</span></div>
+<div>Public evidence</div><div><a href="https://github.com/KindredKJ/strata-data-port-network/tree/main/examples/external-proof-v1/recovery-001">Recovery #001 repository record ↗</a></div>
+</div>
+</section>
+
+<section class="section" id="benchmark">
+<div class="eyebrow">External Benchmark #001</div><h2>12 sequential jobs, 12 independently verified receipts</h2>
+<div class="grid">
+<div class="card"><strong>100%</strong><p>12 / 12 HTTP 201 jobs completed with independently verified receipts in this bounded run.</p></div>
+<div class="card"><strong>358.153 ms p50</strong><p>Client-observed end-to-end latency for the external proof path.</p></div>
+<div class="card"><strong>1,044.115 ms p95</strong><p>Small 12-job sample. This is a baseline—not a production SLO.</p></div>
+</div>
+<div class="kv">
+<div>Mean</div><div>427.988 ms</div>
+<div>Minimum</div><div>288.792 ms</div>
+<div>Maximum</div><div>1,044.115 ms</div>
+<div>Operations</div><div><code>HASH_TEXT</code> and <code>CANONICALIZE_JSON</code></div>
+<div>Evidence branch</div><div>Benchmark #001 is being promoted through repository verification with this proof page.</div>
+</div>
+</section>
+
+<section class="section">
+<div class="eyebrow">Claim ladder</div><h2>Current evidence boundary</h2>
+<table class="ladder">
+<thead><tr><th>Capability</th><th>Status</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>Externally hosted execution</td><td class="pass">VERIFIED</td><td>Independent caller reached Render-hosted Kindred execution.</td></tr>
+<tr><td>Cross-provider state transfer</td><td class="pass">VERIFIED</td><td>Canonical state reached production Strata on Vercel with matching SHA-256.</td></tr>
+<tr><td>Independent signed receipt verification</td><td class="pass">VERIFIED</td><td>Ed25519 receipt verified outside source and destination services.</td></tr>
+<tr><td>Forced redeploy recovery</td><td class="pass">VERIFIED</td><td>Sealed state survived a deliberate Render process replacement and resumed.</td></tr>
+<tr><td>12-job external baseline</td><td class="pass">VERIFIED</td><td>12/12 sequential bounded jobs completed and independently verified.</td></tr>
+<tr><td>Automatic failover</td><td class="no">NOT YET PROVEN</td><td>Recovery still requires an external trigger.</td></tr>
+<tr><td>Abrupt power-loss recovery</td><td class="no">NOT YET PROVEN</td><td>No physical power interruption has been exercised.</td></tr>
+<tr><td>Physical-machine attestation</td><td class="no">NOT YET PROVEN</td><td>Cloud service identities are verified; physical host identity is not.</td></tr>
+<tr><td>Physical zero-copy transport</td><td class="no">NOT YET PROVEN</td><td>The external proof uses encrypted network transport.</td></tr>
+<tr><td>Wider SDPN production readiness</td><td class="no">NOT YET PROVEN</td><td>The proof path is deliberately narrower than the full architecture.</td></tr>
+<tr><td>Commercial/customer use</td><td class="no">NOT YET PROVEN</td><td>No independent paying customer is claimed by this evidence.</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="section">
+<div class="eyebrow">Independent verification</div><h2>Verify the receipt yourself</h2>
+<p class="muted">The public Ed25519 verification key and verifier are committed to the repository. No private signing key or transport secret is required.</p>
+<pre class="code">node scripts/verify-external-receipt.mjs \
+  --receipt examples/external-proof-v1/001/receipt.envelope.json</pre>
+<div class="actions"><a class="button primary" href="https://github.com/KindredKJ/strata-data-port-network/tree/main/examples/external-proof-v1">Open evidence repository ↗</a><a class="button" href="https://github.com/KindredKJ/strata-data-port-network/blob/main/docs/INDEPENDENT-VERIFICATION.md">Run your own proof ↗</a><a class="button" href="https://github.com/KindredKJ/strata-data-port-network/blob/main/docs/EXTERNAL-PROOF-THREAT-MODEL.md">Threat model ↗</a><a class="button" href="/">Back to Strata</a></div>
+</section>
+
+<footer class="footer">Strata Data Port Network · Kindred Labs · Founded and created by Kindred Jermaine Cox · Evidence scope last updated 2026-10-28 UTC.</footer>
+</div>
+</body>
+</html>
