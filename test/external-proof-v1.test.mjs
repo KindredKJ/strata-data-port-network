@@ -1,14 +1,18 @@
 import assert from "node:assert/strict";
-import { generateKeyPairSync } from "node:crypto";
+import { createCipheriv, generateKeyPairSync, hkdfSync, randomBytes } from "node:crypto";
 import test from "node:test";
 import {
   canonicalBytes,
+  createCrossProviderRecoveryRecord,
   createExternalProofReceipt,
   decryptExternalProofPayload,
   encryptExternalProofPayload,
   issueExternalProofChallenge,
+  openRecoveryCapsule,
   sha256,
+  signCrossProviderRecovery,
   signExternalProofReceipt,
+  verifyCrossProviderRecoveryEnvelope,
   verifyExternalProofEnvelope,
   verifyExternalProofToken
 } from "../src/external-proof-v1.mjs";
@@ -105,3 +109,97 @@ test("expired challenge token is rejected", () => {
     /expired/
   );
 });
+
+
+function recoveryFixture(job = {
+  operation: "HASH_TEXT",
+  input: { text: "cross-provider-recovery" },
+  clientRequestId: "test-recovery"
+}) {
+  const recoveryId = "recovery-11111111-1111-4111-8111-111111111111";
+  const normalizedInput = job.operation === "HASH_TEXT"
+    ? { text: job.input.text }
+    : { value: job.input.value };
+  const validatedInputHash = sha256(canonicalBytes(normalizedInput));
+  const state = {
+    schemaVersion: "kindred.external-proof.recovery-state.v1",
+    recoveryId,
+    checkpointedAt: "2026-10-28T00:00:00.000Z",
+    sourceNodeId: "genesis-render-node-a",
+    sourceBootId: "boot-a",
+    checkpointStage: "VALIDATED_BEFORE_EXTERNAL_TRANSFER",
+    validatedInputHash,
+    job
+  };
+  const plaintext = canonicalBytes(state);
+  const salt = randomBytes(32);
+  const iv = randomBytes(12);
+  const key = Buffer.from(hkdfSync(
+    "sha256",
+    Buffer.from(secret, "utf8"),
+    salt,
+    Buffer.from(`kindred-external-proof-recovery-v1|${recoveryId}`, "utf8"),
+    32
+  ));
+  const cipher = createCipheriv("aes-256-gcm", key, iv);
+  cipher.setAAD(Buffer.from("kindred.external-proof.recovery-capsule.v1", "utf8"), {
+    plaintextLength: plaintext.length
+  });
+  const ciphertext = Buffer.concat([cipher.update(plaintext), cipher.final()]);
+  const unsigned = {
+    schemaVersion: "kindred.external-proof.recovery-capsule.v1",
+    recoveryId,
+    saltB64: salt.toString("base64url"),
+    ivB64: iv.toString("base64url"),
+    ciphertextB64: ciphertext.toString("base64url"),
+    tagB64: cipher.getAuthTag().toString("base64url")
+  };
+  return {
+    state,
+    capsule: {
+      ...unsigned,
+      capsuleSha256: sha256(canonicalBytes(unsigned))
+    }
+  };
+}
+
+test("opens a Genesis-compatible sealed recovery capsule and signs cross-provider recovery", () => {
+  const { capsule, state } = recoveryFixture();
+  const opened = openRecoveryCapsule({ secret, capsule });
+  assert.equal(opened.state.recoveryId, state.recoveryId);
+  assert.equal(opened.state.sourceNodeId, "genesis-render-node-a");
+  assert.equal(opened.executed.inputHash, state.validatedInputHash);
+
+  const recovery = createCrossProviderRecoveryRecord({
+    state: opened.state,
+    executed: opened.executed,
+    capsuleSha256: capsule.capsuleSha256,
+    recoveryNodeId: "strata-vercel-recovery-node-c",
+    execution: { provider: "vercel", commitSha: "test-recovery-commit" },
+    observedAt: "2026-10-28T00:01:00.000Z"
+  });
+  const envelope = signCrossProviderRecovery({ recovery, privateKeyPkcs8Base64 });
+  const verified = verifyCrossProviderRecoveryEnvelope({
+    envelope,
+    trustedPublicKeySpkiBase64: publicKeySpkiBase64
+  });
+  assert.equal(verified.verified, true);
+  assert.equal(verified.recoveryId, state.recoveryId);
+  assert.equal(recovery.originalSourceNodeId, "genesis-render-node-a");
+  assert.equal(recovery.recoveryNodeId, "strata-vercel-recovery-node-c");
+  assert.equal(recovery.claims.automaticFailoverProven, false);
+});
+
+test("rejects a tampered sealed recovery capsule", () => {
+  const { capsule } = recoveryFixture();
+  const tampered = {
+    ...capsule,
+    ciphertextB64: capsule.ciphertextB64.slice(0, -1) +
+      (capsule.ciphertextB64.endsWith("A") ? "B" : "A")
+  };
+  assert.throws(
+    () => openRecoveryCapsule({ secret, capsule: tampered }),
+    /digest mismatch/
+  );
+});
+
