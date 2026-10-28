@@ -1,0 +1,25 @@
+SIGNATURE................... PASS
+PINNED KEY.................. PASS
+RECOVERY ID................. PASS
+CAPSULE HASH................ PASS
+INPUT HASH.................. PASS
+ORIGINAL SOURCE............. PASS
+ORIGINAL BOOT............... PASS
+RECOVERY NODE............... PASS
+DISTINCT NODE............... PASS
+PROVIDER.................... PASS
+NO AUTO FAILOVER CLAIM...... PASS
+NO ABRUPT CLAIM............. PASS
+NO PHYSICAL CLAIM........... PASS
+NO PRODUCTION CLAIM......... PASS
+
+recoveryId: recovery-0c26b65a-7095-49e6-a256-ec5d33ed276c
+capsuleSha256: 1ce112f769af2aa3b046a3b7dad562895a73d2d1891658000bb4d249f232cbff
+originalSourceNodeId: genesis-render-node-a
+originalSourceBootId: boot-ab405d54-08e0-4cb9-b7dd-1bb521701cca
+recoveryNodeId: strata-vercel-recovery-node-c
+recoveredInputHash: 78d26e8d56089c6d07c0648897990dd9eb8370079341af8e5436f85cd8849b76
+outputHash: 50096515f6071b3812ee4b5d60189aca39aa4bfd839530485a4abcb5fd947432
+deploymentId: dpl_HsjgbaDu7Dgo6eJGD1qMVtTPPX21
+commitSha: f4712945f5c40a91ea860cb386ca5beb8b169e59
+keyId: 9cccc27fedfbdb987a3f2f442c550ee4c9978f1a29bc017831f81ff4d4439dd5
