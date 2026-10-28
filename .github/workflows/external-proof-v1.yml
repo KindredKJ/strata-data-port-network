@@ -1,0 +1,30 @@
+name: External Proof v1
+
+on:
+  pull_request:
+    paths:
+      - "src/external-proof-v1.mjs"
+      - "api/proof/**"
+      - "scripts/verify-external-receipt.mjs"
+      - "test/external-proof-v1.test.mjs"
+      - "public/proof-public-key.pem"
+      - "docs/EXTERNAL-PROOF-V1.md"
+      - ".github/workflows/external-proof-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof-v1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Run focused cryptographic proof tests
+        run: node --test test/external-proof-v1.test.mjs
+      - name: Confirm public verification key is parseable
+        run: node -e "const {createPublicKey}=require('node:crypto');const fs=require('node:fs');const k=createPublicKey(fs.readFileSync('public/proof-public-key.pem'));console.log(k.asymmetricKeyType);if(k.asymmetricKeyType!=='ed25519')process.exit(1)"
