@@ -31,7 +31,7 @@ jobs:
         run: python3 scripts/native-guest-proof.py --base-guest "$RUNNER_TEMP/interconnect-guest" --kernel "$RUNNER_TEMP/interconnect-assets/vmlinuz" --qemu /usr/bin/qemu-system-x86_64 --firmware /usr/share/qemu --bios /usr/share/seabios/bios-256k.bin --out evidence/interconnect/ci
       - name: Preserve exact native proof
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: interconnect-native-${{ github.sha }}
           path: evidence/interconnect/
