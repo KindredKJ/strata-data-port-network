@@ -35,7 +35,7 @@ jobs:
         run: python3 scripts/run-two-vm-proof.py --qemu /usr/bin/qemu-system-x86_64 --firmware /usr/share/qemu --bios /usr/share/seabios/bios-256k.bin --kernel "$RUNNER_TEMP/sw06f-assets/vmlinuz" --guest-root "$RUNNER_TEMP/sw06f-guest" --cpio /usr/bin/cpio --out evidence/two-vm/ci
       - name: Preserve receipts, host identities and packet captures
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sw06f-two-vm-${{ github.sha }}
           path: evidence/two-vm/ci/

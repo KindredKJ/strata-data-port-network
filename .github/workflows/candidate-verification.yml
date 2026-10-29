@@ -58,7 +58,7 @@ jobs:
 
       - name: Retain scoped protocol evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sdpn-protocol-${{ github.sha }}
           path: evidence/ci/
@@ -81,7 +81,7 @@ jobs:
           & ./test/verification-gate.test.ps1 | Tee-Object evidence/ci/powershell-gate.log
       - name: Retain Windows gate evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sdpn-windows-gate-${{ github.sha }}
           path: evidence/ci/
