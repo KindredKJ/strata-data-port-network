@@ -1,0 +1,34 @@
+name: Agent Economy V1
+on:
+  push:
+    branches:
+      - feat/agent-economy-durable-v1-20261030
+    paths:
+      - 'packages/agent-economy-v1/**'
+      - '.github/workflows/agent-economy-v1.yml'
+  pull_request:
+    paths:
+      - 'packages/agent-economy-v1/**'
+      - '.github/workflows/agent-economy-v1.yml'
+permissions:
+  contents: read
+jobs:
+  durable-economy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Compile package
+        run: python -m compileall -q packages/agent-economy-v1
+      - name: Test actor state and financial boundaries
+        run: python -m unittest discover -s packages/agent-economy-v1 -p 'test_*.py' -v
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Test legacy Brainstem grant bridge
+        run: node --test packages/agent-economy-v1/brainstem-adapter.test.mjs
