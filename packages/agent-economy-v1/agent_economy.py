@@ -189,7 +189,7 @@ class EconomyStore:
                       (budget_id,tenant_id,agent_id,asset,capacity))
             self._event(c,{"type":"budget.created","budget_id":budget_id,"capacity":capacity,"asset":asset})
 
-    def reserve(self, *, operation_id,grant_id,tenant_id,agent_id,capability,amount,request):
+    def reserve(self, *, operation_id,grant_id,tenant_id,agent_id,capability,amount,request,asset=None):
         nonnegative(amount)
         if amount == 0: raise ValueError("reservation must be positive")
         request_digest = digest(request)
@@ -206,6 +206,8 @@ class EconomyStore:
                  (grant_id,tenant_id,agent_id,capability)).fetchone()
             if not g or g["revoked_at"] is not None or g["expires_at"]<=time.time() or g["lifecycle"]!="active":
                 raise PermissionError("Brainstem authority denied")
+            if asset is not None and asset != g["asset"]:
+                raise PermissionError("budget asset mismatch")
             if amount>g["ceiling"] or amount>g["capacity"]-g["reserved"]-g["spent"]:
                 raise PermissionError("spending cap exceeded")
             c.execute("UPDATE budgets SET reserved=reserved+? WHERE budget_id=?",
