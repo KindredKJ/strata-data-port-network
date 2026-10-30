@@ -114,15 +114,18 @@ class StripeRails:
             "type":"account_onboarding"
         })
 
-    def transfer_to_connected_account(self,transfer_id,purchase_id,account_id,amount_cents):
+    def transfer_to_connected_account(self,transfer_id,purchase_id,account_id,amount_cents,source_transaction=None):
         """Requires actual available Stripe platform balance; not USDC balance."""
         if not account_id.startswith("acct_"): raise ValueError("invalid recipient")
         if nonnegative(amount_cents)<1: raise ValueError("invalid amount")
         account=self.connected_account(account_id)
         if account.get("payouts_enabled") is not True or account.get("charges_enabled") is not True:
             raise ProviderError("connected account not fully enabled")
+        if source_transaction is not None and not source_transaction.startswith("ch_"):
+            raise ValueError("invalid source Stripe charge")
         result=self._request("POST","/v1/transfers",{
             "amount":str(amount_cents),"currency":"usd",
+            **({"source_transaction":source_transaction} if source_transaction else {}),
             "destination":account_id,"transfer_group":purchase_id,
             "metadata[kindred_transfer_id]":transfer_id
         },idem="kindred:transfer:"+transfer_id)
