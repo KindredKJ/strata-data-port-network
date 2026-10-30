@@ -24,7 +24,10 @@ export function bridgeBrainstemGrant({
   const grant = validateAuthorityGrant(authorityGrant);
   const installedIdentity = gateway.identities?.get(agent.agent_id);
   const installedGrant = gateway.grants?.get(grant.grant_id);
-  if (!installedIdentity || !installedGrant ||
+  const installedCapability = gateway.capabilities?.get(capabilityId);
+  if (!installedIdentity || !installedGrant || !installedCapability ||
+      installedCapability.action_type !== "settlement" ||
+      installedCapability.owner_component !== "retrobank" ||
       canonical(installedIdentity) !== canonical(agent) ||
       canonical(installedGrant) !== canonical(grant)) {
     throw new Error("Brainstem registration and grant must exist");
@@ -33,7 +36,8 @@ export function bridgeBrainstemGrant({
       grant.issuer_component !== "brainstem" || grant.subject_agent_id !== agent.agent_id ||
       grant.revoked_at !== null || Date.parse(grant.expires_at) <= now ||
       Date.parse(grant.issued_at) > now || !grant.capability_ids.includes(capabilityId) ||
-      !agent.capabilities.includes(capabilityId) || !grant.budget_refs.includes(budgetId)) {
+      !agent.capabilities.includes(capabilityId) || !grant.budget_refs.includes(budgetId) ||
+      !grant.message_types.includes("settlement_request")) {
     throw new Error("Brainstem policy denied");
   }
   if (!Number.isSafeInteger(maxAtomic) || maxAtomic <= 0 ||
