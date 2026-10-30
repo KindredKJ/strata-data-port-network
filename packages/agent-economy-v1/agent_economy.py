@@ -92,6 +92,7 @@ class EconomyStore:
             CREATE TABLE IF NOT EXISTS evidence (
                 sequence INTEGER PRIMARY KEY AUTOINCREMENT, event TEXT NOT NULL, prev_hash TEXT NOT NULL,
                 event_hash TEXT UNIQUE NOT NULL, created_at INTEGER NOT NULL);
+            CREATE UNIQUE INDEX IF NOT EXISTS unique_payment_signature ON purchases(signature_digest) WHERE signature_digest IS NOT NULL;
             CREATE INDEX IF NOT EXISTS mailbox_pending ON mailboxes(tenant_id,agent_id,completed_at,seq);
             CREATE INDEX IF NOT EXISTS evidence_chain ON evidence(sequence);
             """)
@@ -165,7 +166,7 @@ class EconomyStore:
             budget=c.execute("SELECT 1 FROM budgets WHERE budget_id=? AND agent_id=? AND tenant_id=?",
                              (payload["budget_id"],payload["agent_id"],payload["tenant_id"])).fetchone()
             if not actor or not budget: raise PermissionError("agent or budget mismatched")
-            c.execute("INSERT INTO grants VALUES(?,?,?,?,?,?,?,?,NULL,?)",
+            c.execute("INSERT INTO grants VALUES(?,?,?,?,?,?,?,NULL,?)",
                       (*[payload[x] for x in keys],expected))
             self._event(c,{"type":"brainstem.grant","grant_id":payload["grant_id"]})
         return payload["grant_id"]
@@ -270,6 +271,9 @@ class EconomyStore:
                 raise StateConflict("stale worker lease")
             if not c.execute("SELECT 1 FROM agents WHERE tenant_id=? AND agent_id=? AND lifecycle='active'",
                              (tenant_id,agent_id)).fetchone(): raise PermissionError("tenant mismatch")
+            prior=c.execute("SELECT tenant_id,agent_id FROM checkpoints WHERE workflow_id=?",(workflow_id,)).fetchone()
+            if prior and (prior["tenant_id"]!=tenant_id or prior["agent_id"]!=agent_id):
+                raise StateConflict("workflow ownership conflict")
             c.execute("""INSERT INTO checkpoints VALUES(?,?,?,?,?,?,?)
                   ON CONFLICT(workflow_id) DO UPDATE SET state=excluded.state,
                   epoch=excluded.epoch,payload=excluded.payload,updated_at=excluded.updated_at""",
@@ -329,6 +333,22 @@ class EconomyStore:
                 canon(chain) if chain else r["chain_receipt"],tx_hash or r["tx_hash"],
                 int(time.time()),purchase_id))
             self._event(c,{"type":"payment."+status,"purchase_id":purchase_id,"tx_hash":tx_hash})
+
+    def attach_settlement_proof(self,purchase_id,settlement):
+        """Persist facilitator transaction before independent RPC confirmation."""
+        tx_hash=settlement.get("transaction","")
+        if not isinstance(tx_hash,str) or not tx_hash.startswith("0x") or len(tx_hash)!=66:
+            raise ValueError("invalid settlement transaction")
+        with self.tx() as c:
+            r=c.execute("SELECT status,tx_hash FROM purchases WHERE purchase_id=?",(purchase_id,)).fetchone()
+            if not r or r["status"]!="settlement_pending":
+                raise StateConflict("payment is not pending settlement")
+            if r["tx_hash"] and r["tx_hash"].lower()!=tx_hash.lower():
+                raise StateConflict("settlement transaction conflict")
+            c.execute("UPDATE purchases SET facilitator_receipt=?,tx_hash=?,updated_at=? WHERE purchase_id=?",
+                      (canon(settlement),tx_hash.lower(),int(time.time()),purchase_id))
+            self._event(c,{"type":"payment.chain_confirmation_pending","purchase_id":purchase_id,
+                          "tx_hash":tx_hash.lower()})
 
     def purchase(self,purchase_id):
         with self.connect() as c:
