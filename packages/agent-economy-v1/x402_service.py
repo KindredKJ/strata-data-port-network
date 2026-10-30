@@ -193,6 +193,7 @@ class PaidCapabilityService:
             self.store.payment_transition(purchase_id,"verified","settlement_pending")
             # Never retry /settle blindly after an ambiguous failure.
             settlement=self.facilitator.settle(payment,self.requirements)
+            self.store.attach_settlement_proof(purchase_id,settlement)
             chain=self.chain.verify(settlement["transaction"],BASE_USDC,self.merchant,self.amount)
             self.store.payment_transition(purchase_id,"settlement_pending","settled",
                     facilitator=settlement,chain=chain,tx_hash=settlement["transaction"].lower())
