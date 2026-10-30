@@ -25,3 +25,10 @@ jobs:
         run: python -m compileall -q packages/agent-economy-v1
       - name: Test actor state and financial boundaries
         run: python -m unittest discover -s packages/agent-economy-v1 -p 'test_*.py' -v
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Test legacy Brainstem grant bridge
+        run: node --test packages/agent-economy-v1/brainstem-adapter.test.mjs
