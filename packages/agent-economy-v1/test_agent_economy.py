@@ -94,7 +94,7 @@ class StoreTests(unittest.TestCase):
         self.assertGreater(newer,epoch)
         with self.assertRaises(StateConflict):
             restarted.checkpoint(TENANT,AGENT,"worker-1",epoch,"workflow-a","done",{})
-        with self.assertRaises(StateConflict):
+        with self.assertRaises(PermissionError):
             restarted.checkpoint(OTHER,AGENT,"worker-1",newer,"workflow-a","done",{})
         self.assertTrue(restarted.verify_evidence())
 
