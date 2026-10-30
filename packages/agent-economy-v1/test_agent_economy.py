@@ -95,7 +95,7 @@ class StoreTests(unittest.TestCase):
         with self.assertRaises(StateConflict):
             restarted.checkpoint(TENANT,AGENT,"worker-1",epoch,"workflow-a","done",{})
         with self.assertRaises(StateConflict):
-            restarted.checkpoint(TENANT,AGENT,"worker-1",newer,"workflow-a","done",{})
+            restarted.checkpoint(OTHER,AGENT,"worker-1",newer,"workflow-a","done",{})
         self.assertTrue(restarted.verify_evidence())
 
     def test_purchase_state_and_pending_reconcile(self):
