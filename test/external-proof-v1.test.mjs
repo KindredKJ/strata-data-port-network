@@ -95,11 +95,35 @@ test("tampered receipt fails signature verification", () => {
 
 test("tampered challenge token is rejected", () => {
   const { challenge } = fixture();
-  const token = challenge.token.slice(0, -1) + (challenge.token.endsWith("A") ? "B" : "A");
+  const [encoded, mac] = challenge.token.split(".");
+  const wrongMac = (mac.startsWith("A") ? "B" : "A") + mac.slice(1);
   assert.throws(
-    () => verifyExternalProofToken({ secret, token, nowMs: Date.parse("2026-10-27T00:01:00.000Z") }),
+    () => verifyExternalProofToken({
+      secret, token: encoded + "." + wrongMac, nowMs: Date.parse("2026-10-27T00:01:00.000Z")
+    }),
     /authentication failed/
   );
+});
+
+test("noncanonical challenge MAC aliases are rejected even when decoded bytes match", () => {
+  const { challenge } = fixture();
+  const [encoded, mac] = challenge.token.split(".");
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+  const lastIndex = alphabet.indexOf(mac.at(-1));
+  // A 32-byte HMAC ends with four unused base64url bits.
+  assert.equal(mac.length, 43);
+  assert.equal(lastIndex % 16, 0);
+  const alias = mac.slice(0, -1) + alphabet[lastIndex + 1];
+  assert.notEqual(alias, mac);
+  assert.deepEqual(Buffer.from(alias, "base64url"), Buffer.from(mac, "base64url"));
+  for (const suppliedMac of [alias, mac + "=", mac + "!"]) {
+    assert.throws(
+      () => verifyExternalProofToken({
+        secret, token: encoded + "." + suppliedMac, nowMs: Date.parse("2026-10-27T00:01:00.000Z")
+      }),
+      /authentication failed/
+    );
+  }
 });
 
 test("expired challenge token is rejected", () => {
