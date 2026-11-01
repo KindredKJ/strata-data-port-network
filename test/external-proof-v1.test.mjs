@@ -110,9 +110,9 @@ test("noncanonical challenge MAC aliases are rejected even when decoded bytes ma
   const [encoded, mac] = challenge.token.split(".");
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
   const lastIndex = alphabet.indexOf(mac.at(-1));
-  // A 32-byte HMAC ends with four unused base64url bits.
+  // A 32-byte HMAC ends with two unused base64url bits.
   assert.equal(mac.length, 43);
-  assert.equal(lastIndex % 16, 0);
+  assert.equal(lastIndex % 4, 0);
   const alias = mac.slice(0, -1) + alphabet[lastIndex + 1];
   assert.notEqual(alias, mac);
   assert.deepEqual(Buffer.from(alias, "base64url"), Buffer.from(mac, "base64url"));
