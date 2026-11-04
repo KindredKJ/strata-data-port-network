@@ -1,0 +1,40 @@
+{
+  "kind": "kindred.agent-economy-lineage.v1",
+  "recorded_date": "2026-10-30",
+  "founder": "Kindred Jermaine Cox",
+  "source_repository": "KindredKJ/strata-data-port-network",
+  "source_base_commit": "6f688a05f72955e49502a8d28a83a0fbee7e7126",
+  "pinned_historical_commit": "25c3b5aff912cd14b71c7abf49050be1b60722d0",
+  "preservation": "Additive files on a feature branch; no rewrites to archived ASP, candidate Strata runtimes or source evidence.",
+  "archived_blueprint": {
+    "filename": "Kindred-x402-Evidence-and-Port-Agent-Blueprint.md",
+    "sha256": "8c445ec31591ae4a6fc2dcfe1909dd15b402adfa6133330c3b46eb60be33afea",
+    "prepared": "2026-09-28 UTC",
+    "status": "historical evidence review, not production proof"
+  },
+  "historical_archive_records": [
+    {
+      "evidence_id": "E01",
+      "library_id": "libfile_6f4c95c05a808191a53a32392a7a97da",
+      "meaning": "April 17 archived ASP design; not x402 literal"
+    },
+    {
+      "evidence_id": "E02",
+      "library_id": "libfile_0a88f6cd38608191a3148f918f3845a0",
+      "meaning": "April 17 terminal transcript with errors"
+    },
+    {
+      "evidence_id": "E06",
+      "library_id": "libfile_faebab2538e08191bbcaad6ce28a45f9",
+      "meaning": "July 24 archived explicit x402 wording"
+    },
+    {
+      "evidence_id": "E07",
+      "library_id": "libfile_a07286f4f7988191bd1080e2681ae049",
+      "meaning": "August 3 scope-limited audit counterevidence"
+    }
+  ],
+  "legacy_protocol_path": "candidates/unified-quad-direct-pipe/runtime/unified-quad/src/agent-protocol.mjs",
+  "legacy_python_port_path": "candidates/python-network/src/kindred_superstructure/ports.py",
+  "immutability_warning": "A fresh artifact digest does not prove original invention date or independent prior publication."
+}
