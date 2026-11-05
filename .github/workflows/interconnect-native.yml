@@ -21,10 +21,10 @@ jobs:
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/interconnect-assets"
           cd "$RUNNER_TEMP/interconnect-assets"
-          curl --fail --location --retry 2 https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/netboot/vmlinuz-virt -o vmlinuz
-          curl --fail --location --retry 2 https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/netboot/initramfs-virt -o initramfs
-          echo "26f146f664ad057be3b39b211422b03b1f94cb2c3d66522fd4841811a224bfd5  vmlinuz" | sha256sum --check
-          echo "e59e1b1711b553b008ac8ec7ca73c294c5b8eb8cd94b503aa560ce69b505bb13  initramfs" | sha256sum --check
+          curl --fail --location --retry 2 https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/netboot-3.22.7/vmlinuz-virt -o vmlinuz
+          curl --fail --location --retry 2 https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/netboot-3.22.7/initramfs-virt -o initramfs
+          echo "8ce908a8cb28d55adcacacf8a16609fa400e07a8826f0084ae5b13b8cb91b9ab  vmlinuz" | sha256sum --check
+          echo "6dde230b0e49d80c54337e2854d7cff6e8c9aa8cfa37588eaf9df4dd325a87a9  initramfs" | sha256sum --check
       - name: Build guest base
         run: python3 scripts/prepare-two-vm-guest.py --initramfs "$RUNNER_TEMP/interconnect-assets/initramfs" --busybox /usr/bin/busybox --out "$RUNNER_TEMP/interconnect-guest"
       - name: Render with mandatory WebKit sandbox and ephemeral profile
