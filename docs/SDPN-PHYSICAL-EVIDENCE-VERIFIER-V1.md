@@ -45,6 +45,18 @@ The `performance.body` must exactly equal the unsigned window being evaluated. `
 
 Keep private signing keys outside the repository in an HSM, OS keystore, or dedicated signing service. Configure trust maps through deployment configuration. Store raw host-level receipts privately; do not publish LAN addresses, machine identifiers, certificates, or secrets in pull requests or public artifacts.
 
+## Native C++ verifier
+
+`native/sdpn-evidence` provides the C++20 verifier library and `sdpn-evidence-verify` CLI for a future native host adapter. It uses OpenSSL Ed25519 and SHA-256, reads trust maps as JSON objects keyed by public-key fingerprints, and accepts the same signed evidence envelope as the Node gate callback. Build it with CMake, OpenSSL 3, and `nlohmann-json` 3.11 or newer:
+
+~~~sh
+cmake -S native/sdpn-evidence -B build/sdpn-evidence -DCMAKE_BUILD_TYPE=Release
+cmake --build build/sdpn-evidence --parallel
+ctest --test-dir build/sdpn-evidence --output-on-failure
+~~~
+
+The CLI accepts `--evidence`, `--operator-trust`, and `--witness-trust` JSON file paths. Trust files contain only operator-managed public keys; signing keys are not read by the verifier. A successful invocation emits a versioned result with evidence digests and `routeTableChanges: false`.
+
 ## Current boundary
 
-The verifier code can validate evidence but does not create a hardware attestation, capture a physical network, produce a QUIC measurement, install an OS driver, or establish the 40% target. CI can verify the cryptographic logic with ephemeral test keys. Production qualification still requires two separately identified physical hosts, the versioned live transport, an independent witness, and three consecutive measured five-minute windows. The current SW06-F and INTERCONNECT QEMU receipts remain virtualized staging evidence.
+The verifier code can validate evidence but does not create a hardware attestation, capture a physical network, produce a QUIC measurement, install an OS driver, or establish the 40% target. CI can compile the native verifier and verify its cryptographic logic with ephemeral test keys. Production qualification still requires two separately identified physical hosts, the versioned live transport, an independent witness, and three consecutive measured five-minute windows. The current SW06-F and INTERCONNECT QEMU receipts remain virtualized staging evidence.
