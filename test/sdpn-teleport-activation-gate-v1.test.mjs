@@ -41,8 +41,9 @@ function makeWindow(sequence, {
   };
 }
 
-function makeGate(events) {
+function makeGate(events, verifyPerformanceWindow = async () => true) {
   return new SdpnTeleportActivationGate({
+    verifyPerformanceWindow,
     redirectLocally: async (target) => events.push({ kind: "redirect", target }),
     renewLocalRedirectLease: async (target) => events.push({ kind: "renew", target }),
     restoreLocalBaseline: async (target) => events.push({ kind: "restore", target })
@@ -117,6 +118,32 @@ test("candidate p99 and packet-loss regressions block activation", () => {
   }));
   assert.equal(lossRegression.packetLossGuardrailPassed, false);
   assert.equal(lossRegression.eligible, false);
+});
+
+test("unpaired transport successes cannot qualify as paired improvement evidence", () => {
+  assert.throws(() => evaluateSdpnTeleportWindow(makeWindow(1, {
+    samples: [
+      ...Array.from({ length: 60 }, () => ({
+        baselineLatencyUs: 100_000,
+        candidateLatencyUs: null
+      })),
+      ...Array.from({ length: 60 }, () => ({
+        baselineLatencyUs: null,
+        candidateLatencyUs: 60_000
+      }))
+    ]
+  })), /60 successful paired samples/);
+});
+test("unverified performance evidence never reaches the local redirect callback", async () => {
+  const events = [];
+  const gate = makeGate(events, async () => false);
+  for (let sequence = 1; sequence <= 3; sequence++) {
+    const result = await gate.observe(makeWindow(sequence));
+    assert.equal(result.action, "KEEP_BASELINE");
+    assert.equal(result.reason, "INVALID_OR_MISSING_PERFORMANCE_WINDOW");
+  }
+  assert.equal(events.length, 0);
+  assert.equal(gate.state, "BASELINE");
 });
 
 test("missing physical-host qualification never activates the local adapter", async () => {
