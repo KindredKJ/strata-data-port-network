@@ -26,6 +26,8 @@
     "./two-machine-proof": "./src/two-machine-proof.mjs",
     "./native-identity": "./src/native-port-identity.mjs",
     "./native-session": "./src/native-session.mjs",
-    "./port-names": "./src/port-names.mjs"
+    "./port-names": "./src/port-names.mjs",
+    "./quic-wire-v1": "./src/sdpn-quic-wire-v1.mjs",
+    "./teleport-activation-gate-v1": "./src/sdpn-teleport-activation-gate-v1.mjs"
   }
 }
