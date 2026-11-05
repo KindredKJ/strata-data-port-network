@@ -28,6 +28,7 @@
     "./native-session": "./src/native-session.mjs",
     "./port-names": "./src/port-names.mjs",
     "./quic-wire-v1": "./src/sdpn-quic-wire-v1.mjs",
-    "./teleport-activation-gate-v1": "./src/sdpn-teleport-activation-gate-v1.mjs"
+    "./teleport-activation-gate-v1": "./src/sdpn-teleport-activation-gate-v1.mjs",
+    "./signed-evidence-verifier-v1": "./src/sdpn-signed-evidence-verifier-v1.mjs"
   }
 }

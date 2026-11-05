@@ -6,7 +6,7 @@
 
 The versioned profile is [`kindred.sdpn.quic-wire.v1`](docs/SDPN-UDP-QUIC-WIRE-V1.md) (`sdpn/1`). SDPN has no logical route discovery, BGP, or transit. Global online reach still uses each endpoint's existing Internet connection and UDP/IP underlay; this work changes no DNS, host routes, default routes, or transit settings.
 
-The per-session gate keeps traffic on baseline until three consecutive five-minute windows each show at least 60 successful paired samples, at least 40% lower candidate p95 latency, no worse p99 or packet loss, and verified fresh physical-host evidence. The wire codec and gate are implemented and CI-tested on the feature branch. A live QUIC transport, OS adapter, physical-host receipt, and measured 40% result are not present, so no traffic is redirected.
+The per-session gate keeps traffic on baseline until three consecutive five-minute windows each show at least 60 successful paired samples, at least 40% lower candidate p95 latency, no worse p99 or packet loss, and verified fresh physical-host evidence. The wire codec, gate, and Ed25519-signed evidence verifier are implemented and CI-tested on the feature branch. The verifier requires separately pinned operator and physical-witness keys; a valid witness signature records who made a physical-host statement but does not independently prove that the machines are physical. A live QUIC transport, OS adapter, physical-host receipt, and measured 40% result are not present, so no traffic is redirected. See [physical evidence verifier v1](docs/SDPN-PHYSICAL-EVIDENCE-VERIFIER-V1.md).
 
 [Visit the public launch site](https://stratadataportnetwork.vercel.app) · [Read verification status](docs/VERIFICATION.md)
 

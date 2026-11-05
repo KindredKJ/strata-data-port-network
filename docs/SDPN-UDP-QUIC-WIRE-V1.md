@@ -105,7 +105,7 @@ The official profile defines latency, loss, throughput, and adapter-capability m
 
 ## Implementation status
 
-Repository code provides the binary record codec and deterministic activation-gate policy. The gate requires an injected evidence verifier and will remain on baseline without one. This branch does not yet provide a QUIC socket implementation, XDP/AF_XDP driver, Windows driver, production evidence verifier or activation callback, physical-host qualification receipt, or deployed telemetry endpoint. No network or domain configuration is changed by defining this profile.
+Repository code provides the binary record codec, deterministic activation-gate policy, and an Ed25519-signed evidence verifier that can be supplied as the gate callback. The verifier checks operator-configured measurement and independent-witness trust anchors, exact window binding, physical qualification claims, and freshness. This branch does not yet provide a QUIC socket implementation, XDP/AF_XDP driver, Windows driver, physical-host qualification receipt, or deployed telemetry endpoint. No network or domain configuration is changed by defining this profile.
 
 ## Standards
 
