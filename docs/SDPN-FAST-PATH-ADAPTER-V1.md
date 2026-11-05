@@ -35,6 +35,7 @@ The activation gate is per SDPN peer session and workload class. It compares pai
 - Each five-minute window must contain at least 60 successful paired samples.
 - The candidate p95 latency must be at least 40% lower than baseline p95 in each of three consecutive windows.
 - Candidate p99 latency and packet loss must be no worse than baseline.
+- Every window must pass a required evidence-verification callback that checks signed measurements, physical-host qualification, peer/session/workload binding, and freshness. Missing or invalid evidence keeps the session on baseline.
 - After all three windows pass, the adapter may redirect only that eligible SDPN session locally to AF_XDP. Unrelated traffic remains on the host’s existing path.
 - A failed active window restores that SDPN session to the baseline adapter. A process or adapter restart returns to baseline and requires fresh qualification.
 
@@ -59,6 +60,6 @@ Kindred Labs’ long-range aim is broad adoption through measured performance, a
 
 ## Status
 
-The profile codec and activation policy are reviewable source, not a live QUIC transport or OS adapter. No physical-host result currently proves the 40% target. No host routes, default routes, BGP settings, transit paths, domain DNS records, or telemetry endpoints have been changed.
+The profile codec and activation policy are reviewable source, not a live QUIC transport or OS adapter. The gate requires signed evidence verification and fails closed without an injected verifier. No production verifier, QUIC transport, adapter callback, or physical-host result currently proves the 40% target. No host routes, default routes, BGP settings, transit paths, domain DNS records, or telemetry endpoints have been changed.
 
 **Creator/control attribution:** Kindred Jermaine Cox is SDPN’s creator and founder; Kindred Labs is the project steward and controls the official SDPN release profile and infrastructure under his direction. The founder’s official project domain is kindredlabs.ai.
