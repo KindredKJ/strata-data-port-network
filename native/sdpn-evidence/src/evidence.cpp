@@ -108,15 +108,6 @@ std::vector<unsigned char> base64_decode(const std::string& encoded, std::string
   return decoded;
 }
 
-std::string base64_encode(const std::vector<unsigned char>& bytes) {
-  std::string encoded(4 * ((bytes.size() + 2) / 3), '\0');
-  const int size = EVP_EncodeBlock(reinterpret_cast<unsigned char*>(encoded.data()),
-      bytes.data(), static_cast<int>(bytes.size()));
-  if (size < 0) throw std::runtime_error("base64 encoding failed");
-  encoded.resize(static_cast<std::size_t>(size));
-  return encoded;
-}
-
 Json verify_signed_body(const Json& envelope, const Json& trust, std::string_view label) {
   exact_fields(envelope, {"body", "keyId", "signature"}, std::string(label) + " envelope");
   if (!trust.is_object()) throw std::runtime_error(std::string(label) + " trust map required");
@@ -313,7 +304,9 @@ EvidenceVerificationResult verify_signed_performance_evidence_v1(
     throw std::runtime_error("physical qualification claims rejected");
   }
   const auto qualification_hash = sha256_hex(canonical_json(qualification_envelope));
-  if (qualification_hash != window.at("qualificationReceiptSha256") ||
+  const auto& expected_qualification_hash = window.at("qualificationReceiptSha256");
+  if (!expected_qualification_hash.is_string() ||
+      qualification_hash != expected_qualification_hash.get<std::string>() ||
       window.at("operatorVerifiedPhysicalHosts") != true) {
     throw std::runtime_error("qualification receipt digest binding rejected");
   }
