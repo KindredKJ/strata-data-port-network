@@ -28,7 +28,7 @@ struct Signer {
   OpenSslPtr<EVP_PKEY, EVP_PKEY_free> private_key{nullptr, EVP_PKEY_free};
   std::vector<unsigned char> public_der;
   std::string key_id;
-  Json trust{Json::object()};
+  Json trust = Json::object();
 
   Signer() {
     OpenSslPtr<EVP_PKEY_CTX, EVP_PKEY_CTX_free> context(EVP_PKEY_CTX_new_id(EVP_PKEY_ED25519, nullptr), EVP_PKEY_CTX_free);
