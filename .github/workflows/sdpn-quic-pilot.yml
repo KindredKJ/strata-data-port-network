@@ -1,0 +1,44 @@
+name: SDPN QUIC pilot
+
+on:
+  pull_request:
+    paths:
+      - "native/sdpn-quic/**"
+      - "src/two-machine-proof.mjs"
+      - "scripts/two-machine-receiver.mjs"
+      - "scripts/benchmark-two-host.mjs"
+      - "test/two-machine-proof.test.mjs"
+  push:
+    branches:
+      - "design/sdpn-fast-path-adapter-v1-20261105"
+    paths:
+      - "native/sdpn-quic/**"
+      - "src/two-machine-proof.mjs"
+      - "scripts/two-machine-receiver.mjs"
+      - "scripts/benchmark-two-host.mjs"
+      - "test/two-machine-proof.test.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  native-msquic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes build-essential cmake libssl-dev perl
+      - name: Run Node proof regression suite
+        run: npm test
+      - name: Configure pinned MsQuic pilot
+        run: cmake -S native/sdpn-quic -B build/sdpn-quic -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+      - name: Build C++20 QUIC endpoint
+        run: cmake --build build/sdpn-quic --parallel 2
+      - name: Run mTLS loopback QUIC integration test
+        run: ctest --test-dir build/sdpn-quic --output-on-failure

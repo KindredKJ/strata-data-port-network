@@ -12,10 +12,11 @@ function arg(name, fallback) {
 
 const host = arg("host", "0.0.0.0");
 const port = Number(arg("port", "47900"));
+const requestTimeoutMs = Number(arg("timeout-ms", "120000"));
 const statusPath = arg("status", "");
 const secret = process.env.KINDRED_SDPN_PROOF_SECRET || generatePairingSecret();
 
-const receiver = await startProofReceiver({ host, port, secret });
+const receiver = await startProofReceiver({ host, port, secret, requestTimeoutMs });
 const status = {
   listening: true,
   host: receiver.host,
@@ -23,6 +24,7 @@ const status = {
   destinationHostFingerprint: receiver.destinationHostFingerprint,
   schemaVersion: TWO_HOST_PROOF_SCHEMA,
   cipher: receiver.cipher,
+  requestTimeoutMs,
   pairingSecret: secret,
   pairingSecretEphemeral: true,
   physicalMachineAttestationProven: false

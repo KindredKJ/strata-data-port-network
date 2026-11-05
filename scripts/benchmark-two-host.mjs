@@ -49,13 +49,13 @@ function boundedInteger(value, label, lower, upper) {
 
 export async function runSw06fBenchmark({
   host, port = 47900, secret, sizesMiB = [1, 4, 16], trials = 12,
-  warmup = 2, timeoutMs = 30000, requireNonloopback = false
+  warmup = 2, timeoutMs = 120000, requireNonloopback = false
 }) {
   const target = requirePrivateIpv4(host);
   boundedInteger(port, "port", 1, 65535);
   boundedInteger(trials, "trials", 1, 100);
   boundedInteger(warmup, "warmup", 0, 20);
-  boundedInteger(timeoutMs, "timeoutMs", 1000, 120000);
+  boundedInteger(timeoutMs, "timeoutMs", 30000, 120000);
   if (typeof secret !== "string" || secret.length < 32) {
     throw new Error("KINDRED_SDPN_PROOF_SECRET must be an ephemeral secret of at least 32 characters");
   }
@@ -116,6 +116,7 @@ export async function runSw06fBenchmark({
         mean: totalMs / durations.length,
         p50: percentile(durations, 0.5),
         p95: percentile(durations, 0.95),
+        p99: percentile(durations, 0.99),
         max: Math.max(...durations)
       },
       // Application goodput includes challenge, encryption, TCP and verified receipt.
@@ -178,7 +179,7 @@ function argumentsFromCli(argv) {
     sizesMiB,
     trials: Number(options.get("--trials") ?? "12"),
     warmup: Number(options.get("--warmup") ?? "2"),
-    timeoutMs: Number(options.get("--timeout-ms") ?? "30000"),
+    timeoutMs: Number(options.get("--timeout-ms") ?? "120000"),
     requireNonloopback: !options.has("--allow-loopback"),
     output: options.get("--output")
   };

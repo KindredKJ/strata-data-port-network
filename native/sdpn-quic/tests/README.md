@@ -1,0 +1,1 @@
+The `loopback-mtls.sh` test is a local integration check for a real MsQuic QUIC handshake, mutual TLS certificate validation, v1 record framing, and reliable stream echo. The test's local certificates and loopback endpoint do not represent physical-host performance or production evidence.

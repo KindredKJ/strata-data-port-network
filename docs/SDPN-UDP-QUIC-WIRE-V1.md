@@ -93,6 +93,17 @@ Each probe or echo is exactly 40 bytes:
 
 The echo returns the session UUID, sequence, and timestamp unchanged. The sender measures RTT with its own monotonic clock; peers do not need synchronized clocks. Receivers reject malformed, unknown-version, wrong-length, or unnegotiated datagrams.
 
+## Diagnostic reliable-stream probe
+
+The Linux transport pilot defines two diagnostic record types on reliable bidirectional QUIC streams. These records are for transport measurements only; they do not carry native session state, represent a Port, or satisfy the local activation gate.
+
+| Type | Body |
+|---|---|
+| `0x30` `TRANSPORT_PROBE` | 8-byte unsigned big-endian sequence followed by opaque diagnostic bytes; total body is 8 bytes to 32 MiB |
+| `0x31` `TRANSPORT_ECHO` | Exact probe body, with the response record type changed to `0x31` |
+
+The client requires an exact sequence and payload echo. It measures each fresh-connection handshake plus one reliable stream exchange and reports successful-sample p50/p95/p99 and failed exchanges. The pilot has no baseline comparison or packet-loss proof and sets all physical-attestation and 40% gate claims to false.
+
 ## Local activation gate
 
 The local adapter may redirect a provisioned SDPN session only after three consecutive five-minute windows, each with at least 60 successful paired end-to-end samples. For every window, p95 candidate latency must be 40% or more below the existing baseline; candidate p99 and packet loss must be no worse. A required injected evidence-verification callback must validate signed measurements, physical-host qualification, peer/session/workload binding, and freshness for every window; unavailable or invalid verification keeps the session on baseline. A failed active window immediately restores that session to the baseline adapter. A restarted process returns to baseline and must qualify again.
