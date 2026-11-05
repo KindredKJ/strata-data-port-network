@@ -103,6 +103,8 @@ function validateWindow(window) {
 
   const baseline = [];
   const candidate = [];
+  const pairedBaseline = [];
+  const pairedCandidate = [];
   for (const sample of window.samples) {
     exactObjectFields(sample, ["baselineLatencyUs", "candidateLatencyUs"], "paired sample");
     for (const [field, output] of [
@@ -116,18 +118,21 @@ function validateWindow(window) {
       }
       output.push(value);
     }
+    if (sample.baselineLatencyUs !== null && sample.candidateLatencyUs !== null) {
+      pairedBaseline.push(sample.baselineLatencyUs);
+      pairedCandidate.push(sample.candidateLatencyUs);
+    }
   }
-  if (baseline.length < SDPN_ACTIVATION_MIN_SUCCESSFUL_PAIRS ||
-      candidate.length < SDPN_ACTIVATION_MIN_SUCCESSFUL_PAIRS) {
-    throw new RangeError("at least 60 successful samples are required on both transports");
+  if (pairedBaseline.length < SDPN_ACTIVATION_MIN_SUCCESSFUL_PAIRS) {
+    throw new RangeError("at least 60 successful paired samples are required");
   }
 
   const baselineLosses = window.samples.length - baseline.length;
   const candidateLosses = window.samples.length - candidate.length;
-  const baselineP95Us = percentile(baseline, 0.95);
-  const candidateP95Us = percentile(candidate, 0.95);
-  const baselineP99Us = percentile(baseline, 0.99);
-  const candidateP99Us = percentile(candidate, 0.99);
+  const baselineP95Us = percentile(pairedBaseline, 0.95);
+  const candidateP95Us = percentile(pairedCandidate, 0.95);
+  const baselineP99Us = percentile(pairedBaseline, 0.99);
+  const candidateP99Us = percentile(pairedCandidate, 0.99);
   const p95ImprovedByFortyPercent =
     candidateP95Us * 100 <= baselineP95Us * 60;
   const p99GuardrailPassed = candidateP99Us <= baselineP99Us;
@@ -145,6 +150,7 @@ function validateWindow(window) {
     candidateP99Us,
     baselineLosses,
     candidateLosses,
+    successfulPairedSamples: pairedBaseline.length,
     successfulBaselineSamples: baseline.length,
     successfulCandidateSamples: candidate.length
   });
@@ -207,17 +213,19 @@ export class SdpnTeleportActivationGate {
   #redirectLocally;
   #renewLocalRedirectLease;
   #restoreLocalBaseline;
+  #verifyPerformanceWindow;
   #state = "BASELINE";
   #windows = [];
-  #series = null;
   #activeWindow = null;
 
   constructor({
     redirectLocally,
     renewLocalRedirectLease,
-    restoreLocalBaseline
+    restoreLocalBaseline,
+    verifyPerformanceWindow
   } = {}) {
     for (const [name, callback] of [
+      ["verifyPerformanceWindow", verifyPerformanceWindow],
       ["redirectLocally", redirectLocally],
       ["renewLocalRedirectLease", renewLocalRedirectLease],
       ["restoreLocalBaseline", restoreLocalBaseline]
@@ -226,6 +234,7 @@ export class SdpnTeleportActivationGate {
         throw new TypeError(`${name} callback is required`);
       }
     }
+    this.#verifyPerformanceWindow = verifyPerformanceWindow;
     this.#redirectLocally = redirectLocally;
     this.#renewLocalRedirectLease = renewLocalRedirectLease;
     this.#restoreLocalBaseline = restoreLocalBaseline;
@@ -239,6 +248,9 @@ export class SdpnTeleportActivationGate {
     let evaluation;
     try {
       evaluation = validateWindow(window);
+      if (await this.#verifyPerformanceWindow(window) !== true) {
+        throw new Error("signed performance evidence verification failed");
+      }
     } catch (error) {
       await this.#restoreIfActive("INVALID_OR_MISSING_PERFORMANCE_WINDOW");
       this.#resetQualification();
@@ -279,7 +291,6 @@ export class SdpnTeleportActivationGate {
           });
         }
         this.#activeWindow = window;
-        this.#windows.push(window);
         return Object.freeze({
           state: this.#state,
           action: "RENEW_LOCAL_REDIRECT_LEASE",
@@ -292,7 +303,6 @@ export class SdpnTeleportActivationGate {
     if (previous && !areConsecutive(previous, window)) {
       this.#resetQualification();
     }
-    this.#series = seriesKey(window);
     this.#windows.push(window);
     if (this.#windows.length > SDPN_ACTIVATION_REQUIRED_WINDOWS) {
       this.#windows.shift();
@@ -338,7 +348,6 @@ export class SdpnTeleportActivationGate {
 
   #resetQualification() {
     this.#windows = [];
-    this.#series = null;
     this.#activeWindow = null;
   }
 }
