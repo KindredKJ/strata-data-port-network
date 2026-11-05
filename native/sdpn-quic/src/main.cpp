@@ -349,6 +349,7 @@ struct ClientTrial {
   double exchangeMs{};
   std::size_t callbacksInFlight{};
   bool echoValid{false};
+  bool streamClosed{false};
   bool connectionClosed{false};
   std::string error;
 };
@@ -376,17 +377,11 @@ class ClientCallbackGuard {
 };
 
 void failClientTrial(ClientTrial* trial, const std::string& reason) {
-  bool shouldShutdown = false;
   {
     std::lock_guard lock(trial->mutex);
     if (!trial->echoValid && trial->error.empty()) trial->error = reason;
-    shouldShutdown = trial->connection != nullptr && !trial->connectionClosed;
   }
   trial->changed.notify_all();
-  if (shouldShutdown) {
-    trial->api->ConnectionShutdown(trial->connection,
-                                   QUIC_CONNECTION_SHUTDOWN_FLAG_NONE, 0x20U);
-  }
 }
 
 QUIC_STATUS QUIC_API clientStreamCallback(HQUIC stream, void* context,
@@ -435,8 +430,11 @@ QUIC_STATUS QUIC_API clientStreamCallback(HQUIC stream, void* context,
       break;
     case QUIC_STREAM_EVENT_SHUTDOWN_COMPLETE:
       trial->api->StreamClose(stream);
-      trial->api->ConnectionShutdown(trial->connection,
-                                     QUIC_CONNECTION_SHUTDOWN_FLAG_NONE, 0);
+      {
+        std::lock_guard lock(trial->mutex);
+        trial->streamClosed = true;
+      }
+      trial->changed.notify_all();
       break;
     default:
       break;
@@ -492,7 +490,6 @@ QUIC_STATUS QUIC_API clientConnectionCallback(HQUIC connection, void* context,
       trial->changed.notify_all();
       break;
     case QUIC_CONNECTION_EVENT_SHUTDOWN_COMPLETE:
-      trial->api->ConnectionClose(connection);
       {
         std::lock_guard lock(trial->mutex);
         trial->connectionClosed = true;
@@ -650,19 +647,35 @@ double runClientTrial(const QUIC_API_TABLE* api, const Options& options, HQUIC r
     completed = trial.changed.wait_for(
         lock, std::chrono::milliseconds(options.timeoutMs),
         [&trial] {
-          return trial.connectionClosed && trial.callbacksInFlight == 0;
+          return trial.streamClosed || trial.connectionClosed || !trial.error.empty();
         });
   }
   if (!completed) {
-    api->ConnectionShutdown(trial.connection, QUIC_CONNECTION_SHUTDOWN_FLAG_NONE, 0x21U);
+    failClientTrial(&trial, "QUIC exchange timed out");
+  }
+
+  // Keep shutdown and handle close on the caller thread. MsQuic callbacks may
+  // run concurrently on stream and connection workers, so wait for callbacks
+  // to return before initiating connection shutdown or releasing trial state.
+  bool shouldShutdown = false;
+  {
     std::unique_lock lock(trial.mutex);
-    completed = trial.changed.wait_for(lock, std::chrono::seconds(5),
-                                       [&trial] {
-                                         return trial.connectionClosed &&
-                                                trial.callbacksInFlight == 0;
-                                       });
-    lock.unlock();
-    if (!completed) api->ConnectionClose(trial.connection);
+    trial.changed.wait(lock, [&trial] { return trial.callbacksInFlight == 0; });
+    shouldShutdown = !trial.connectionClosed;
+  }
+  if (shouldShutdown) {
+    api->ConnectionShutdown(trial.connection, QUIC_CONNECTION_SHUTDOWN_FLAG_NONE, 0x21U);
+  }
+  {
+    std::unique_lock lock(trial.mutex);
+    trial.changed.wait(lock, [&trial] {
+      return trial.connectionClosed && trial.callbacksInFlight == 0;
+    });
+    completed = trial.connectionClosed;
+  }
+  if (trial.connection != nullptr) {
+    api->ConnectionClose(trial.connection);
+    trial.connection = nullptr;
   }
   std::string error;
   double elapsed = 0;
@@ -671,7 +684,7 @@ double runClientTrial(const QUIC_API_TABLE* api, const Options& options, HQUIC r
     error = trial.error;
     if (trial.echoValid) elapsed = trial.exchangeMs;
   }
-  if (!completed) throw std::runtime_error("QUIC exchange timed out");
+  if (!completed) throw std::runtime_error("QUIC connection shutdown did not quiesce");
   if (!error.empty()) throw std::runtime_error(error);
   if (elapsed <= 0) throw std::runtime_error("QUIC exchange produced no valid echo");
   return elapsed;
