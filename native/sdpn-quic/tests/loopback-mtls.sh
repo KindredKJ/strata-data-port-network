@@ -5,11 +5,22 @@ binary="${1:?path to sdpn-quic-pilot required}"
 tmp="$(mktemp -d)"
 server_pid=""
 cleanup() {
+  local status=$?
+  trap - EXIT
+  if [[ "$status" -ne 0 ]]; then
+    for log in server.log client.log report.json; do
+      if [[ -s "$tmp/$log" ]]; then
+        printf '\n===== %s =====\n' "$log" >&2
+        cat "$tmp/$log" >&2
+      fi
+    done
+  fi
   if [[ -n "$server_pid" ]]; then
     kill "$server_pid" 2>/dev/null || true
     wait "$server_pid" 2>/dev/null || true
   fi
   rm -rf "$tmp"
+  exit "$status"
 }
 trap cleanup EXIT
 
@@ -56,7 +67,8 @@ grep -q 'SDPN_QUIC_PILOT_READY' "$tmp/server.log" || { cat "$tmp/server.log"; ex
 
 "$binary" client --server-address 127.0.0.1 --allow-loopback --port 47901 \
   --cert "$tmp/client.crt" --key "$tmp/client.key" --ca "$tmp/ca.crt" \
-  --trials 3 --payload-bytes 4096 --timeout-ms 30000 > "$tmp/report.json"
+  --trials 3 --payload-bytes 4096 --timeout-ms 30000 \
+  > "$tmp/report.json" 2> "$tmp/client.log"
 grep -q '"classification": "DIAGNOSTIC_NOT_GATE_EVIDENCE"' "$tmp/report.json"
 grep -q '"successfulExchanges": 3' "$tmp/report.json"
 grep -q '"fortyPercentGatePassed": false' "$tmp/report.json"
