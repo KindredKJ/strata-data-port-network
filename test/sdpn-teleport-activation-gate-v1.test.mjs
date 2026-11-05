@@ -159,6 +159,15 @@ test("missing physical-host qualification never activates the local adapter", as
   assert.equal(gate.state, "BASELINE");
 });
 
+test("windows longer or shorter than five minutes are rejected", () => {
+  assert.throws(() => evaluateSdpnTeleportWindow(makeWindow(1, {
+    endMs: 300_001
+  })), /exactly five minutes/);
+  assert.throws(() => evaluateSdpnTeleportWindow(makeWindow(1, {
+    endMs: 299_999
+  })), /exactly five minutes/);
+});
+
 test("a broken five-minute sequence restarts qualification instead of redirecting", async () => {
   const events = [];
   const gate = makeGate(events);
