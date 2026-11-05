@@ -63,16 +63,16 @@ struct Signer {
       throw std::runtime_error("Ed25519 signing failed");
     }
     signature.resize(size);
-    return {{"body", body}, {"keyId", key_id}, {"signature", base64(signature.data(), signature.size())}};
+    return Json::object({{"body", body}, {"keyId", key_id}, {"signature", base64(signature.data(), signature.size())}});
   }
 };
 
 Json make_window(std::uint64_t start_ms) {
   Json samples = Json::array();
   for (int i = 0; i < 60; ++i) {
-    samples.push_back({{"baselineLatencyUs", 100'000}, {"candidateLatencyUs", 60'000}});
+    samples.push_back(Json::object({{"baselineLatencyUs", 100'000}, {"candidateLatencyUs", 60'000}}));
   }
-  return {
+  return Json::object({
     {"schema", "kindred.sdpn.teleport-performance-window.v1"},
     {"profileId", "kindred.sdpn.quic-wire.v1"},
     {"operatorNetworkId", "lab-network-01"},
@@ -88,11 +88,11 @@ Json make_window(std::uint64_t start_ms) {
     {"operatorVerifiedPhysicalHosts", true},
     {"qualificationReceiptSha256", std::string(64, '0')},
     {"samples", samples}
-  };
+  });
 }
 
 Json make_qualification(const Json& window, std::uint64_t issued_ms, std::uint64_t expires_ms) {
-  return {
+  return Json::object({
     {"schema", "kindred.sdpn.physical-host-qualification.v1"},
     {"profileId", "kindred.sdpn.quic-wire.v1"},
     {"operatorNetworkId", window.at("operatorNetworkId")},
@@ -110,7 +110,7 @@ Json make_qualification(const Json& window, std::uint64_t issued_ms, std::uint64
     {"networkPathSha256", std::string(64, '3')},
     {"routeTableChanges", false},
     {"publicExposure", false}
-  };
+  });
 }
 
 Json make_evidence(Json& window, const Signer& operator_signer, const Signer& witness_signer) {
@@ -118,11 +118,11 @@ Json make_evidence(Json& window, const Signer& operator_signer, const Signer& wi
       window.at("windowStartMs").get<std::uint64_t>() - 1'000,
       window.at("windowEndMs").get<std::uint64_t>() + 3'600'000));
   window["qualificationReceiptSha256"] = kindred::sdpn::sha256_hex(receipt.dump());
-  return {
+  return Json::object({
     {"schema", "kindred.sdpn.signed-performance-evidence.v1"},
     {"performance", operator_signer.sign(window)},
     {"physicalQualification", receipt}
-  };
+  });
 }
 
 template <typename F>
@@ -142,10 +142,12 @@ void require(bool condition, const char* label) {
 }  // namespace
 
 int main() {
+  std::cerr << "fixture\n";
   Signer operator_signer;
   Signer witness_signer;
   auto window = make_window(1'000'000);
   const auto evidence = make_evidence(window, operator_signer, witness_signer);
+  std::cerr << "valid evidence\n";
   const auto result = kindred::sdpn::verify_signed_performance_evidence_v1(
       evidence, operator_signer.trust, witness_signer.trust, 1'301'000);
   require(result.performance_key_id == operator_signer.key_id, "operator signer fingerprint");
@@ -154,6 +156,7 @@ int main() {
       "qualification receipt digest");
 
   auto tampered = evidence;
+  std::cerr << "tamper\n";
   tampered["performance"]["body"]["samples"][0]["candidateLatencyUs"] = 1;
   expect_rejection([&] {
     kindred::sdpn::verify_signed_performance_evidence_v1(
@@ -161,6 +164,7 @@ int main() {
   }, "tampered measurement");
 
   auto virtualized_window = make_window(1'000'000);
+  std::cerr << "virtualized fixture\n";
   auto virtualized_evidence = evidence;
   auto virtualized_body = make_qualification(virtualized_window, 999'000, 4'901'000);
   virtualized_body["virtualized"] = true;
