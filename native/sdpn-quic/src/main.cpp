@@ -347,9 +347,32 @@ struct ClientTrial {
   std::vector<std::uint8_t> response;
   std::chrono::steady_clock::time_point startedAt;
   double exchangeMs{};
+  std::size_t callbacksInFlight{};
   bool echoValid{false};
   bool connectionClosed{false};
   std::string error;
+};
+
+class ClientCallbackGuard {
+ public:
+  explicit ClientCallbackGuard(ClientTrial* trial) : trial_(trial) {
+    std::lock_guard lock(trial_->mutex);
+    ++trial_->callbacksInFlight;
+  }
+
+  ~ClientCallbackGuard() {
+    {
+      std::lock_guard lock(trial_->mutex);
+      --trial_->callbacksInFlight;
+    }
+    trial_->changed.notify_all();
+  }
+
+  ClientCallbackGuard(const ClientCallbackGuard&) = delete;
+  ClientCallbackGuard& operator=(const ClientCallbackGuard&) = delete;
+
+ private:
+  ClientTrial* trial_;
 };
 
 void failClientTrial(ClientTrial* trial, const std::string& reason) {
@@ -369,6 +392,7 @@ void failClientTrial(ClientTrial* trial, const std::string& reason) {
 QUIC_STATUS QUIC_API clientStreamCallback(HQUIC stream, void* context,
                                           QUIC_STREAM_EVENT* event) {
   auto* trial = static_cast<ClientTrial*>(context);
+  ClientCallbackGuard callbackGuard(trial);
   switch (event->Type) {
     case QUIC_STREAM_EVENT_RECEIVE: {
       const auto limit = kHeaderBytes + kMaxBodyBytes;
@@ -423,6 +447,7 @@ QUIC_STATUS QUIC_API clientStreamCallback(HQUIC stream, void* context,
 QUIC_STATUS QUIC_API clientConnectionCallback(HQUIC connection, void* context,
                                               QUIC_CONNECTION_EVENT* event) {
   auto* trial = static_cast<ClientTrial*>(context);
+  ClientCallbackGuard callbackGuard(trial);
   switch (event->Type) {
     case QUIC_CONNECTION_EVENT_CONNECTED: {
       HQUIC stream{};
@@ -624,13 +649,18 @@ double runClientTrial(const QUIC_API_TABLE* api, const Options& options, HQUIC r
     std::unique_lock lock(trial.mutex);
     completed = trial.changed.wait_for(
         lock, std::chrono::milliseconds(options.timeoutMs),
-        [&trial] { return trial.connectionClosed; });
+        [&trial] {
+          return trial.connectionClosed && trial.callbacksInFlight == 0;
+        });
   }
   if (!completed) {
     api->ConnectionShutdown(trial.connection, QUIC_CONNECTION_SHUTDOWN_FLAG_NONE, 0x21U);
     std::unique_lock lock(trial.mutex);
     completed = trial.changed.wait_for(lock, std::chrono::seconds(5),
-                                       [&trial] { return trial.connectionClosed; });
+                                       [&trial] {
+                                         return trial.connectionClosed &&
+                                                trial.callbacksInFlight == 0;
+                                       });
     lock.unlock();
     if (!completed) api->ConnectionClose(trial.connection);
   }
