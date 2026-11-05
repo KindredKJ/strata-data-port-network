@@ -54,6 +54,14 @@
     "changesHostRoutes": false,
     "changesDefaultRoute": false,
     "changesBGP": false,
-    "changesTransit": false
+    "changesTransit": false,
+    "requiresSignedEvidenceVerification": true,
+    "evidenceVerifierRequired": true,
+    "verifierMustCheck": [
+      "window_signature",
+      "physical_host_qualification",
+      "peer_session_workload_binding",
+      "freshness"
+    ]
   }
 }
