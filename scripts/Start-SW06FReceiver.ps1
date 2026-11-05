@@ -1,5 +1,6 @@
 param(
   [int]$Port = 47900,
+  [ValidateRange(30000,120000)][int]$TimeoutMs = 120000,
   [string]$HostAddress = "0.0.0.0",
   [string]$PairingSecret = "",
   [switch]$NoFirewall
@@ -57,7 +58,7 @@ try {
     }
   }
 
-  & node "$PSScriptRoot/two-machine-receiver.mjs" --host $HostAddress --port $Port
+  & node "$PSScriptRoot/two-machine-receiver.mjs" --host $HostAddress --port $Port --timeout-ms $TimeoutMs
 }
 finally {
   if ($firewallCreated) {

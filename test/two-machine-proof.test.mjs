@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash, createHmac } from "node:crypto";
+import { createServer } from "node:http";
 import {
   TWO_HOST_CIPHER,
   receiptTranscript,
@@ -18,6 +19,8 @@ test("loopback proof encrypts payload but refuses two-host claim", async (t) => 
     secret
   });
   t.after(() => receiver.close());
+  assert.equal(receiver.server.requestTimeout, 120000);
+  assert.equal(receiver.server.headersTimeout, 120000);
 
   const payload = Buffer.from('{"generation":1,"kindred":"state"}');
   const stateHash = digest(payload);
@@ -42,6 +45,33 @@ test("loopback proof encrypts payload but refuses two-host claim", async (t) => 
   assert.equal(receipt.productionReadyClaim, false);
 });
 
+
+test("sender fails closed instead of following an HTTP redirect", async (t) => {
+  let targetHits = 0;
+  const server = createServer((request, response) => {
+    if (request.url === "/proof/challenge") {
+      response.writeHead(302, { location: `http://127.0.0.1:${server.address().port}/redirect-target` });
+      response.end();
+      return;
+    }
+    if (request.url === "/redirect-target") targetHits += 1;
+    response.writeHead(200);
+    response.end("{}");
+  });
+  await new Promise((resolve, reject) => {
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", resolve);
+  });
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const payload = Buffer.from('{"redirect":"must-not-be-followed"}');
+  const stateHash = digest(payload);
+  await assert.rejects(sendTwoHostProof({
+    host: "127.0.0.1", port: server.address().port, secret,
+    canonicalPayload: payload, stateId: "redirect-regression",
+    stateHash, generation: 1
+  }));
+  assert.equal(targetHits, 0);
+});
 test("wrong proof secret is rejected before plaintext can be accepted", async (t) => {
   const receiver = await startProofReceiver({
     host: "127.0.0.1",

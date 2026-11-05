@@ -14,8 +14,10 @@ import os from "node:os";
 export const TWO_HOST_PROOF_SCHEMA = "kindred.sdpn.two-host-proof.v2";
 export const TWO_HOST_CIPHER = "AES-256-GCM";
 const DEFAULT_MAX_BYTES = 32 * 1024 * 1024;
-const DEFAULT_TIMEOUT_MS = 10_000;
-const CHALLENGE_TTL_MS = 30_000;
+const DEFAULT_TIMEOUT_MS = 120_000;
+const MIN_TIMEOUT_MS = 30_000;
+const MAX_TIMEOUT_MS = 120_000;
+const CHALLENGE_TTL_MS = 120_000;
 
 function sha256(bytes) {
   return createHash("sha256").update(bytes).digest("hex");
@@ -177,12 +179,16 @@ export async function startProofReceiver({
   maxBytes = DEFAULT_MAX_BYTES,
   maxSessions = 128,
   challengeTtlMs = CHALLENGE_TTL_MS,
+  requestTimeoutMs = DEFAULT_TIMEOUT_MS,
   onReceipt
 } = {}) {
   requireSecret(secret);
   positiveInteger(maxBytes, "maxBytes");
   positiveInteger(maxSessions, "maxSessions");
   positiveInteger(challengeTtlMs, "challengeTtlMs");
+  if (!Number.isSafeInteger(requestTimeoutMs) || requestTimeoutMs < MIN_TIMEOUT_MS || requestTimeoutMs > MAX_TIMEOUT_MS) {
+    throw new RangeError("requestTimeoutMs must be between 30000 and 120000");
+  }
   if (onReceipt !== undefined && typeof onReceipt !== "function") {
     throw new TypeError("onReceipt must be a function");
   }
@@ -365,8 +371,8 @@ export async function startProofReceiver({
       });
     }
   });
-  server.requestTimeout = DEFAULT_TIMEOUT_MS;
-  server.headersTimeout = DEFAULT_TIMEOUT_MS;
+  server.requestTimeout = requestTimeoutMs;
+  server.headersTimeout = requestTimeoutMs;
 
   await new Promise((resolve, reject) => {
     server.once("error", (error) => { clearInterval(expiryTimer); reject(error); });
@@ -406,7 +412,9 @@ export async function sendTwoHostProof({
 }) {
   requireSecret(secret);
   positiveInteger(port, "port");
-  positiveInteger(timeoutMs, "timeoutMs");
+  if (!Number.isSafeInteger(timeoutMs) || timeoutMs < MIN_TIMEOUT_MS || timeoutMs > MAX_TIMEOUT_MS) {
+    throw new RangeError("timeoutMs must be between 30000 and 120000");
+  }
   if (typeof stateId !== "string" || !stateId || stateId.length > 512 || /[|\r\n]/.test(stateId)) {
     throw new Error("stateId must be a bounded, unambiguous transcript field");
   }
@@ -428,6 +436,7 @@ export async function sendTwoHostProof({
 
   const challengeResponse = await fetch(`http://${host}:${port}/proof/challenge`, {
     method: "POST",
+    redirect: "error",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({
       schemaVersion: TWO_HOST_PROOF_SCHEMA,
@@ -473,6 +482,7 @@ export async function sendTwoHostProof({
 
   const transferResponse = await fetch(`http://${host}:${port}/proof/transfer`, {
     method: "POST",
+    redirect: "error",
     headers: {
       "content-type": "application/octet-stream",
       "x-kindred-session": challenge.sessionId,

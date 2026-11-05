@@ -1,6 +1,12 @@
 # Strata Data Port Network
 
-**Sole founder and creator: Kindred Jermaine Cox.** Strata Data Port Network is a Kindred Labs project.
+**Sole founder and creator: Kindred Jermaine Cox.** Strata Data Port Network is a Kindred Labs project. The official project domain is [kindredlabs.ai](https://kindredlabs.ai), retained under the founder's control. Kindred Labs governs the official SDPN profiles, reference implementations, and release policy under the founder's direction.
+
+## SDPN UDP/QUIC v1 and activation status
+
+The versioned profile is [`kindred.sdpn.quic-wire.v1`](docs/SDPN-UDP-QUIC-WIRE-V1.md) (`sdpn/1`). SDPN has no logical route discovery, BGP, or transit. Global online reach still uses each endpoint's existing Internet connection and UDP/IP underlay; this work changes no DNS, host routes, default routes, or transit settings.
+
+The per-session gate keeps traffic on baseline until three consecutive five-minute windows each show at least 60 successful paired samples, at least 40% lower candidate p95 latency, no worse p99 or packet loss, and verified fresh physical-host evidence. The wire codec, gate, and Ed25519-signed evidence verifier are implemented and CI-tested on the feature branch. A Linux C++20 MsQuic v2.6.3 pilot now provides mTLS-authenticated `sdpn/1` reliable-stream diagnostics on a specific RFC1918 address. Its probe records do not transport native state or qualify the gate. The verifier requires separately pinned operator and physical-witness keys; a valid witness signature records who made a physical-host statement but does not independently prove that the machines are physical. No OS adapter, independently witnessed physical-host receipt, measured 40% result, or traffic redirect exists. See the [native QUIC pilot](native/sdpn-quic/README.md) and [physical evidence verifier v1](docs/SDPN-PHYSICAL-EVIDENCE-VERIFIER-V1.md).
 
 [Visit the public launch site](https://stratadataportnetwork.vercel.app) · [Read verification status](docs/VERIFICATION.md)
 

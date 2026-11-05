@@ -77,6 +77,7 @@ function safeEqualEncoded(left, right, encoding = "base64url") {
   try {
     const a = Buffer.from(left, encoding);
     const b = Buffer.from(right, encoding);
+    if (a.toString(encoding) !== left || b.toString(encoding) !== right) return false;
     return a.length === b.length && timingSafeEqual(a, b);
   } catch {
     return false;

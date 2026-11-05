@@ -1,0 +1,34 @@
+name: SDPN native signed evidence verifier
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  linux-cxx20:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install compiler and verifier dependencies
+        run: sudo apt-get update -qq && sudo apt-get install -y cmake g++ libssl-dev nlohmann-json3-dev
+      - name: Configure native verifier
+        run: cmake -S native/sdpn-evidence -B build/sdpn-evidence -DCMAKE_BUILD_TYPE=Release
+      - name: Compile native verifier and CLI
+        run: cmake --build build/sdpn-evidence --parallel 2
+      - name: Run signed evidence verification tests
+        run: ctest --test-dir build/sdpn-evidence --output-on-failure
+      - name: Retain compiled candidate and checksum
+        run: |
+          mkdir -p evidence/ci/sdpn-native
+          cp build/sdpn-evidence/sdpn-evidence-verify evidence/ci/sdpn-native/
+          sha256sum evidence/ci/sdpn-native/sdpn-evidence-verify > evidence/ci/sdpn-native/SHA256SUMS
+      - uses: actions/upload-artifact@v7
+        with:
+          name: sdpn-native-evidence-verifier-${{ github.sha }}
+          path: evidence/ci/sdpn-native/
+          if-no-files-found: error

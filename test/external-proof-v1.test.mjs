@@ -93,9 +93,16 @@ test("tampered receipt fails signature verification", () => {
   );
 });
 
-test("tampered challenge token is rejected", () => {
+test("noncanonical base64url MAC aliases are rejected", () => {
   const { challenge } = fixture();
-  const token = challenge.token.slice(0, -1) + (challenge.token.endsWith("A") ? "B" : "A");
+  const [encoded, suppliedMac] = challenge.token.split(".");
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+  const lastIndex = alphabet.indexOf(suppliedMac.at(-1));
+  const aliasIndex = (lastIndex & 0b110000) | (((lastIndex & 0b001111) + 1) % 16);
+  const aliasMac = suppliedMac.slice(0, -1) + alphabet[aliasIndex];
+  assert.notEqual(aliasMac, suppliedMac);
+  assert.deepEqual(Buffer.from(aliasMac, "base64url"), Buffer.from(suppliedMac, "base64url"));
+  const token = `${encoded}.${aliasMac}`;
   assert.throws(
     () => verifyExternalProofToken({ secret, token, nowMs: Date.parse("2026-10-27T00:01:00.000Z") }),
     /authentication failed/

@@ -46,7 +46,7 @@ try {
   for ($n=1;$n -le $RunCount;$n++) {
     $path=Join-Path $folder ('sw06g-'+$batch+'-'+$n+'.json')
     $arguments=@('./scripts/benchmark-two-host.mjs','--host',$ReceiverIp,'--port',"$Port",
-      '--sizes-mib','1,4,16','--trials','12','--warmup','2','--timeout-ms','30000','--output',$path)
+      '--sizes-mib','1,4,16','--trials','12','--warmup','2','--timeout-ms','120000','--output',$path)
     & node @arguments
     if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $path)) { throw "SW06-G run $n failed" }
     $report=Get-Content -Raw -LiteralPath $path | ConvertFrom-Json -Depth 50
