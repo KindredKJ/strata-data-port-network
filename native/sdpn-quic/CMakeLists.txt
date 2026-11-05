@@ -34,6 +34,14 @@ target_link_libraries(sdpn-quic-pilot PRIVATE msquic::msquic)
 target_compile_options(sdpn-quic-pilot PRIVATE -Wall -Wextra -Werror)
 set_target_properties(sdpn-quic-pilot PROPERTIES BUILD_RPATH "$<TARGET_FILE_DIR:msquic>")
 
+option(SDPN_ENABLE_SANITIZERS "Instrument the pilot executable with ASan and UBSan" OFF)
+if(SDPN_ENABLE_SANITIZERS AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  target_compile_options(sdpn-quic-pilot PRIVATE
+    -fsanitize=address,undefined -fno-omit-frame-pointer -g
+  )
+  target_link_options(sdpn-quic-pilot PRIVATE -fsanitize=address,undefined)
+endif()
+
 include(CTest)
 if(BUILD_TESTING)
   add_test(

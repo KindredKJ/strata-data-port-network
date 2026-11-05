@@ -37,7 +37,7 @@ jobs:
       - name: Run Node proof regression suite
         run: npm test
       - name: Configure pinned MsQuic pilot
-        run: cmake -S native/sdpn-quic -B build/sdpn-quic -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+        run: cmake -S native/sdpn-quic -B build/sdpn-quic -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON -DSDPN_ENABLE_SANITIZERS=ON
       - name: Build C++20 QUIC endpoint
         run: cmake --build build/sdpn-quic --parallel 2
       - name: Run mTLS loopback QUIC integration test
