@@ -54,7 +54,7 @@ if "$binary" server --bind-address 0.0.0.0 --port 47901 \
 fi
 grep -q 'endpoint must be RFC1918 IPv4' "$tmp/wildcard.log"
 
-"$binary" server --bind-address 127.0.0.1 --allow-loopback --port 47901 \
+SDPN_QUIC_TRACE=1 "$binary" server --bind-address 127.0.0.1 --allow-loopback --port 47901 \
   --cert "$tmp/server.crt" --key "$tmp/server.key" --ca "$tmp/ca.crt" \
   >"$tmp/server.log" 2>&1 &
 server_pid=$!
@@ -65,7 +65,7 @@ for _ in $(seq 1 100); do
 done
 grep -q 'SDPN_QUIC_PILOT_READY' "$tmp/server.log" || { cat "$tmp/server.log"; exit 1; }
 
-"$binary" client --server-address 127.0.0.1 --allow-loopback --port 47901 \
+SDPN_QUIC_TRACE=1 "$binary" client --server-address 127.0.0.1 --allow-loopback --port 47901 \
   --cert "$tmp/client.crt" --key "$tmp/client.key" --ca "$tmp/ca.crt" \
   --trials 3 --payload-bytes 4096 --timeout-ms 30000 \
   > "$tmp/report.json" 2> "$tmp/client.log"

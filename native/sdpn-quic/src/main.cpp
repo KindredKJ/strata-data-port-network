@@ -11,6 +11,7 @@
 #include <condition_variable>
 #include <cmath>
 #include <cstdint>
+#include <cstdlib>
 #include <cstring>
 #include <iomanip>
 #include <iostream>
@@ -41,6 +42,13 @@ constexpr std::uint32_t kMinClientTimeoutMs = 30'000;
 constexpr std::uint32_t kMaxClientTimeoutMs = 120'000;
 
 std::atomic<bool> gRunning{true};
+
+void trace(const std::string& message) {
+  const auto* enabled = std::getenv("SDPN_QUIC_TRACE");
+  if (enabled != nullptr && std::string(enabled) == "1") {
+    std::cerr << "[sdpn-quic] " << message << std::endl;
+  }
+}
 
 void onSignal(int) { gRunning.store(false); }
 
@@ -250,6 +258,7 @@ struct ServerStreamState {
 QUIC_STATUS QUIC_API serverStreamCallback(HQUIC stream, void* context,
                                           QUIC_STREAM_EVENT* event) {
   auto* state = static_cast<ServerStreamState*>(context);
+  trace("server stream event=" + std::to_string(event->Type));
   switch (event->Type) {
     case QUIC_STREAM_EVENT_RECEIVE: {
       const auto limit = kHeaderBytes + kMaxBodyBytes;
@@ -305,6 +314,7 @@ QUIC_STATUS QUIC_API serverStreamCallback(HQUIC stream, void* context,
 QUIC_STATUS QUIC_API serverConnectionCallback(HQUIC connection, void* context,
                                               QUIC_CONNECTION_EVENT* event) {
   auto* state = static_cast<ServerState*>(context);
+  trace("server connection event=" + std::to_string(event->Type));
   switch (event->Type) {
     case QUIC_CONNECTION_EVENT_PEER_STREAM_STARTED: {
       auto* streamState = new (std::nothrow) ServerStreamState{state->api, {}, {}};
@@ -329,11 +339,15 @@ QUIC_STATUS QUIC_API serverListenerCallback(HQUIC, void* context,
                                             QUIC_LISTENER_EVENT* event) {
   auto* state = static_cast<ServerState*>(context);
   if (event->Type != QUIC_LISTENER_EVENT_NEW_CONNECTION) return QUIC_STATUS_SUCCESS;
+  trace("server listener accepted a connection");
   state->api->SetCallbackHandler(event->NEW_CONNECTION.Connection,
                                  reinterpret_cast<void*>(serverConnectionCallback), state);
   state->activeConnections.fetch_add(1);
   const auto status = state->api->ConnectionSetConfiguration(
       event->NEW_CONNECTION.Connection, state->configuration);
+  if (QUIC_FAILED(status)) {
+    trace("server ConnectionSetConfiguration status=" + std::to_string(status));
+  }
   return status;
 }
 
@@ -388,6 +402,7 @@ QUIC_STATUS QUIC_API clientStreamCallback(HQUIC stream, void* context,
                                           QUIC_STREAM_EVENT* event) {
   auto* trial = static_cast<ClientTrial*>(context);
   ClientCallbackGuard callbackGuard(trial);
+  trace("client stream event=" + std::to_string(event->Type));
   switch (event->Type) {
     case QUIC_STREAM_EVENT_RECEIVE: {
       const auto limit = kHeaderBytes + kMaxBodyBytes;
@@ -446,6 +461,7 @@ QUIC_STATUS QUIC_API clientConnectionCallback(HQUIC connection, void* context,
                                               QUIC_CONNECTION_EVENT* event) {
   auto* trial = static_cast<ClientTrial*>(context);
   ClientCallbackGuard callbackGuard(trial);
+  trace("client connection event=" + std::to_string(event->Type));
   switch (event->Type) {
     case QUIC_CONNECTION_EVENT_CONNECTED: {
       HQUIC stream{};
@@ -636,6 +652,7 @@ double runClientTrial(const QUIC_API_TABLE* api, const Options& options, HQUIC r
                                 QUIC_ADDRESS_FAMILY_INET,
                                 options.serverAddress.c_str(),
                                 static_cast<std::uint16_t>(options.port));
+  if (QUIC_FAILED(status)) trace("client ConnectionStart status=" + std::to_string(status));
   if (QUIC_FAILED(status)) {
     api->ConnectionClose(trial.connection);
     throw std::runtime_error("MsQuic ConnectionStart failed");
