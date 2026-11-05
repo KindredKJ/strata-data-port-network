@@ -95,7 +95,7 @@ The echo returns the session UUID, sequence, and timestamp unchanged. The sender
 
 ## Local activation gate
 
-The local adapter may redirect a provisioned SDPN session only after three consecutive five-minute windows, each with at least 60 successful paired end-to-end samples. For every window, p95 candidate latency must be 40% or more below the existing baseline; candidate p99 and packet loss must be no worse. A failed active window immediately restores that session to the baseline adapter. A restarted process returns to baseline and must qualify again.
+The local adapter may redirect a provisioned SDPN session only after three consecutive five-minute windows, each with at least 60 successful paired end-to-end samples. For every window, p95 candidate latency must be 40% or more below the existing baseline; candidate p99 and packet loss must be no worse. A required injected evidence-verification callback must validate signed measurements, physical-host qualification, peer/session/workload binding, and freshness for every window; unavailable or invalid verification keeps the session on baseline. A failed active window immediately restores that session to the baseline adapter. A restarted process returns to baseline and must qualify again.
 
 This gate changes only local delivery of that SDPN session. It does not change host/default routes, BGP, transit, or unrelated traffic. A per-session 40% result is not a universal claim about other peers, workloads, or networks.
 
@@ -105,7 +105,7 @@ The official profile defines latency, loss, throughput, and adapter-capability m
 
 ## Implementation status
 
-Repository code will provide the binary record codec and deterministic activation-gate policy. It does not yet provide a QUIC socket implementation, XDP/AF_XDP driver, Windows driver, production activation callback, physical-host qualification receipt, or deployed telemetry endpoint. No network or domain configuration is changed by defining this profile.
+Repository code provides the binary record codec and deterministic activation-gate policy. The gate requires an injected evidence verifier and will remain on baseline without one. This branch does not yet provide a QUIC socket implementation, XDP/AF_XDP driver, Windows driver, production evidence verifier or activation callback, physical-host qualification receipt, or deployed telemetry endpoint. No network or domain configuration is changed by defining this profile.
 
 ## Standards
 
