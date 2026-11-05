@@ -83,8 +83,8 @@ function validateWindow(window) {
   }
   if (!Number.isSafeInteger(window.windowStartMs) ||
       !Number.isSafeInteger(window.windowEndMs) ||
-      window.windowEndMs - window.windowStartMs < SDPN_ACTIVATION_WINDOW_MS) {
-    throw new RangeError("performance window must span at least five minutes");
+      window.windowEndMs - window.windowStartMs !== SDPN_ACTIVATION_WINDOW_MS) {
+    throw new RangeError("performance window must span exactly five minutes");
   }
   if (window.baselineTransport !== BASELINE_TRANSPORT ||
       window.candidateTransport !== CANDIDATE_TRANSPORT) {
