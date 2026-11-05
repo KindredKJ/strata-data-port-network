@@ -1,0 +1,59 @@
+{
+  "profileId": "kindred.sdpn.quic-wire.v1",
+  "profileVersion": 1,
+  "creator": "Kindred Jermaine Cox",
+  "founder": "Kindred Jermaine Cox",
+  "organization": "Kindred Labs",
+  "officialProjectDomain": "kindredlabs.ai",
+  "governance": "Kindred Labs controls the official SDPN profile registry and releases under the founder's direction",
+  "alpn": "sdpn/1",
+  "quicVersion": "1",
+  "tlsMinimumVersion": "1.3",
+  "onlineCarrier": "UDP/IP",
+  "logicalRouting": false,
+  "routeTableChanges": false,
+  "forwardingOrTransit": false,
+  "streamRecord": {
+    "magic": "SDPN",
+    "version": 1,
+    "headerBytes": 12,
+    "maximumCiphertextBytes": 33554432,
+    "nativeFramePrefixBytes": 40,
+    "maximumBodyBytes": 33554472,
+    "types": {
+      "PORT_BIND": 1,
+      "SESSION_OFFER": 2,
+      "SESSION_ACCEPT": 3,
+      "NATIVE_FRAME": 16,
+      "RECEIPT": 32
+    },
+    "reservedFlags": 0
+  },
+  "datagramProbe": {
+    "extension": "RFC 9221",
+    "magic": "SDPN",
+    "version": 1,
+    "headerBytes": 40,
+    "types": {
+      "PROBE": 64,
+      "ECHO": 65
+    },
+    "reservedFlags": 0,
+    "payloadPolicy": "Probe and echo only; state data uses reliable QUIC streams"
+  },
+  "localActivation": {
+    "action": "redirect_matching_sdpn_session_to_local_adapter",
+    "minimumP95ImprovementPercent": 40,
+    "consecutiveWindows": 3,
+    "windowDurationMs": 300000,
+    "minimumSuccessfulPairedSamplesPerWindow": 60,
+    "candidateP99MustNotExceedBaseline": true,
+    "candidateLossMustNotExceedBaseline": true,
+    "deactivateOnFirstFailedWindow": true,
+    "processRestartState": "baseline",
+    "changesHostRoutes": false,
+    "changesDefaultRoute": false,
+    "changesBGP": false,
+    "changesTransit": false
+  }
+}
