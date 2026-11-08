@@ -24,7 +24,9 @@
     "port:install": "node scripts/assimilate-native-host.mjs",
     "port:presence:test": "node --test test/port-presence-proof.test.mjs",
     "cdc:benchmark": "node scripts/benchmark-tesseract-cdc.mjs",
-    "cdc:test": "node --test test/tesseract-cdc-delta.test.mjs test/tesseract-cdc-benchmark.test.mjs test/tesseract-cdc-native-session.test.mjs"
+    "cdc:test": "node --test test/tesseract-cdc-delta.test.mjs test/tesseract-cdc-benchmark.test.mjs test/tesseract-cdc-native-session.test.mjs",
+    "zps:test": "node --test test/zps-durable-cas.test.mjs test/zps-signed-materialization.test.mjs test/zps-durable-benchmark.test.mjs",
+    "zps:benchmark": "node scripts/benchmark-zps-durability.mjs"
   },
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
@@ -41,6 +43,8 @@
     "./native-host-capability-bridge": "./src/native-host-capability-bridge.mjs",
     "./port-presence-proof": "./src/port-presence-proof.mjs",
     "./tesseract-cdc-delta": "./src/tesseract-cdc-delta.mjs",
-    "./tesseract-cdc-native-session": "./src/tesseract-cdc-native-session.mjs"
+    "./tesseract-cdc-native-session": "./src/tesseract-cdc-native-session.mjs",
+    "./zps-durable-cas": "./src/zps-durable-cas.mjs",
+    "./zps-signed-materialization": "./src/zps-signed-materialization.mjs"
   }
 }
