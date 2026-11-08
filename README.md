@@ -107,6 +107,10 @@ node --test apps/portal/test/*.test.mjs
 
 The local native service requires neither a Vercel/Cloudflare deployment nor the Genesis domain. Creating a worldwide alternative discovery network and monetized managed PORT platform is an explicit future production program, not a current deployment claim.
 
+## Founder Port Zero / numbered registry (candidate)
+
+The [additive founder-anchored numbered port registry](docs/FOUNDER-PORT-ZERO-NUMBERED-REGISTRY.md) reserves numeric **Port 0** for the explicitly pinned founder signing key and assigns Port 1, 2, 3, ... to independent cryptographic identities. It includes a local, durable, single-writer CLI and signed short-lived Tesseract presence records. Existing Port IDs, signed sessions, transport adapters, and Port Zero policy remain unchanged. This is **not** an online global presence service or proof of physically route-free transmission; adapters must disclose actual IP/routing dependencies.
+
 ## Community SDPN — free-to-use, open-source foundation
 
 SDPN now includes an independently distributable and usable [**Apache-2.0 Community SDK**](community/README.md). Anyone can generate/export/import a portable Ed25519 Port Zero identity, sign and resolve PORT/1-compatible aliases, and use or modify the Apache-licensed community code commercially without purchasing a subscription. Its module code has no private-runtime or cloud-service dependencies. [Founder governance and commercial boundary](docs/OPEN-CORE-FOUNDER-GOVERNANCE.md) define user-owned identity, optional managed services, and a clear distinction between features implemented today and free future network modules.
