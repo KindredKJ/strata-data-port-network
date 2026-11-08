@@ -1,0 +1,41 @@
+name: SDPN MORPH signed state transformation proof
+
+on:
+  pull_request:
+    paths:
+      - 'src/tesseract-state-morph.mjs'
+      - 'test/tesseract-state-morph*.test.mjs'
+      - 'scripts/benchmark-tesseract-morph.mjs'
+      - 'docs/TESSERACT-MORPH-STATE-ALGEBRA.md'
+      - '.github/workflows/sdpn-morph-benchmark.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  signed-morph:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test encrypted MORPH/1 reconstruction and signed receipts
+        run: npm run morph:test
+      - name: Record comparative MORPH CDC fixed baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/ci/morph
+          npm run morph:benchmark --silent | tee evidence/ci/morph/benchmark.json
+          node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("evidence/ci/morph/benchmark.json","utf8"));if(!r.exactFinalSha256Verified||r.morph1NovelInformationLogicalBytes!==173||!(r.morph1NovelInformationLogicalBytes<r.cdc1MissingLogicalBytes)||r.actualWireBytesMeasured||r.globalRouteFreePhysicalTransferProven)process.exit(1);'
+      - name: Archive measured MORPH evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdpn-morph-logical-data-evidence
+          path: evidence/ci/morph/benchmark.json
+          if-no-files-found: warn
+          retention-days: 30

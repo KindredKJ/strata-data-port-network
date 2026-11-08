@@ -26,7 +26,9 @@
     "cdc:benchmark": "node scripts/benchmark-tesseract-cdc.mjs",
     "cdc:test": "node --test test/tesseract-cdc-delta.test.mjs test/tesseract-cdc-benchmark.test.mjs test/tesseract-cdc-native-session.test.mjs",
     "zps:test": "node --test test/zps-durable-cas.test.mjs test/zps-signed-materialization.test.mjs test/zps-durable-benchmark.test.mjs",
-    "zps:benchmark": "node scripts/benchmark-zps-durability.mjs"
+    "zps:benchmark": "node scripts/benchmark-zps-durability.mjs",
+    "morph:test": "node --test test/tesseract-state-morph.test.mjs test/tesseract-state-morph-benchmark.test.mjs",
+    "morph:benchmark": "node scripts/benchmark-tesseract-morph.mjs"
   },
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
@@ -45,6 +47,7 @@
     "./tesseract-cdc-delta": "./src/tesseract-cdc-delta.mjs",
     "./tesseract-cdc-native-session": "./src/tesseract-cdc-native-session.mjs",
     "./zps-durable-cas": "./src/zps-durable-cas.mjs",
-    "./zps-signed-materialization": "./src/zps-signed-materialization.mjs"
+    "./zps-signed-materialization": "./src/zps-signed-materialization.mjs",
+    "./tesseract-state-morph": "./src/tesseract-state-morph.mjs"
   }
 }
