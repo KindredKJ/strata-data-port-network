@@ -23,7 +23,7 @@ function boundedStrings(values, max = 100) {
       values.some(x => typeof x !== 'string' || x.length < 1 || x.length > 4096)) {
     throw new Error('Invalid host capability path list');
   }
-  return [...new Set(values.map(resolve))];
+  return [...new Set(values.map(value => resolve(value)))];
 }
 function mountedSource(path, platform) {
   if (platform === 'win32') return /^[A-Z]:\\$/i.test(path);
