@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'src/tesseract-cdc-delta.mjs'
+      - 'src/tesseract-cdc-native-session.mjs'
       - 'test/tesseract-cdc-*.test.mjs'
       - 'scripts/benchmark-tesseract-cdc.mjs'
       - 'docs/TESSERACT-CDC-DELTA-V1.md'
@@ -23,7 +24,7 @@ jobs:
         with:
           node-version: '22'
       - name: Reproduce CDC/1 exactness and missing-state tests
-        run: node --test test/tesseract-cdc-delta.test.mjs test/tesseract-cdc-benchmark.test.mjs
+        run: npm run cdc:test
       - name: Capture measured logical payload bytes
         shell: bash
         run: |
