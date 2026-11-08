@@ -22,7 +22,9 @@
     "port:registry": "node scripts/numbered-port-registry.mjs",
     "port:assimilate": "node scripts/assimilate-native-host.mjs",
     "port:install": "node scripts/assimilate-native-host.mjs",
-    "port:presence:test": "node --test test/port-presence-proof.test.mjs"
+    "port:presence:test": "node --test test/port-presence-proof.test.mjs",
+    "cdc:benchmark": "node scripts/benchmark-tesseract-cdc.mjs",
+    "cdc:test": "node --test test/tesseract-cdc-delta.test.mjs test/tesseract-cdc-benchmark.test.mjs"
   },
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
@@ -37,6 +39,7 @@
     "./tesseract-reference-coordination": "./src/tesseract-reference-coordination.mjs",
     "./native-host-assimilation": "./src/native-host-assimilation.mjs",
     "./native-host-capability-bridge": "./src/native-host-capability-bridge.mjs",
-    "./port-presence-proof": "./src/port-presence-proof.mjs"
+    "./port-presence-proof": "./src/port-presence-proof.mjs",
+    "./tesseract-cdc-delta": "./src/tesseract-cdc-delta.mjs"
   }
 }
