@@ -60,8 +60,9 @@ Only **Port 0** is founder-authoritative. All other ports retain their
 independent `regular` and `admin` roles on **their own Port only**.
 
 The `NativeHostCapabilityBridge` exposes `discover()` and `invoke()`.
-A valid local role grant and a deliberately selected, local executable
-capability ID are required to invoke an installed utility. A program launch
+A valid **same-Port local admin** grant and a deliberately selected, local executable
+capability ID are required to invoke an installed utility. Regular Port roles may
+inspect capabilities, but cannot launch arbitrary installed binaries. A program launch
 uses direct OS process execution, **not an SDPN network route**.
 OS permissions remain in effect. A discovered application or PnP device
 is not automatically a working API or driver; OS-native device
