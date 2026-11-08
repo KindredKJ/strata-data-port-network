@@ -61,7 +61,7 @@ async function main() {
     schema: 'kindred.sdpn.cdc-delta-benchmark.v1',
     workload: '2MiB deterministic high-entropy binary with 173-byte insertion',
     baselineFullPayloadBytes: shifted.length,
-    fixed64kUniqueMissingBytes,
+    fixed64kUniqueMissingBytes: fixedUniqueMissingBytes,
     cdcUniqueMissingBytes: result.newlyDeliveredUniqueBytes,
     cdcLogicalPayloadSavingsBytes: saved,
     cdcLogicalPayloadSavingsPercent: result.payloadReductionPercent,
