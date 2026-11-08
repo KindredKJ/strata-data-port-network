@@ -117,7 +117,7 @@ The [split-plane architecture and executable reference tests](docs/TESSERACT-SPL
 
 ## Automatic native host assimilation (installer candidate)
 
-A new Port can [assimilate the installed machine](docs/NATIVE-MACHINE-ASSIMILATION.md) into a **private, local-only** capability catalog. It detects OS-visible disks, software, executable utilities, services and hardware classes. The existing Windows `port://` installer now invokes assimilation automatically; other SDPN installers can call `npm run port:install`, with `npm run port:assimilate` to refresh the catalog. Actual utility execution requires the Port's local regular/admin role, OS permissions and a selected executable allowlist. Discovery does **not** transfer files, establish remote access, use IP routing, create Port 0 founder credentials or prove global network connectivity.
+A new Port can [assimilate the installed machine](docs/NATIVE-MACHINE-ASSIMILATION.md) into a **private, local-only** capability catalog. It detects OS-visible disks, software, executable utilities, services and hardware classes. The existing Windows `port://` installer now invokes assimilation automatically; other SDPN installers can call `npm run port:install`, with `npm run port:assimilate` to refresh the catalog. Actual utility execution requires the Port's local **admin** role, OS permissions and a selected executable allowlist. Discovery does **not** transfer files, establish remote access, use IP routing, create Port 0 founder credentials or prove global network connectivity.
 
 ## Community SDPN — free-to-use, open-source foundation
 
