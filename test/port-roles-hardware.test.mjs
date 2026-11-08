@@ -84,7 +84,7 @@ test('direct hardware drivers are negotiated without any IP/routed fallback', as
   await result.link.close();
 
   const routed = { ...driver, id: 'example.ethernet-routed', underlyingRouting: true };
-  await assert.rejects(() => inspectDirectDrivers([routed], hardware), /non-routed direct/);
+  await assert.rejects(() => inspectDirectDrivers([routed], hardware), /Non-routed direct/);
   const noPermission = { ...driver, id: 'example.permission-denied',
     async probe() { return { available: true, permissionGranted: false }; } };
   assert.equal((await inspectDirectDrivers([noPermission], hardware))[0].readyForPeerAttempt, false);
