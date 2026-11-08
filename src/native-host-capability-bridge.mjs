@@ -117,6 +117,38 @@ function envSubset(env, platform) {
   }
   return result;
 }
+// Installer/bootstrap use: inspect the current machine WITHOUT generating a fake
+// Port 0 identity, joining a network, or executing a detected application.
+export async function inspectInstalledHost({
+  platform = osPlatform(), env = process.env, programPaths, volumePaths
+} = {}) {
+  const searchPath = platform === 'win32' ? ';' : delimiter;
+  const directories = programPaths === undefined ?
+    boundedStrings((env.PATH || env.Path || '').split(searchPath).filter(Boolean).slice(0, 64), 64) :
+    boundedStrings(programPaths, 64);
+  const discoveredRoots = volumePaths === undefined ?
+    await volumeRoots(platform, env) : boundedStrings(volumePaths, MAX_ROOTS);
+  const drives = [];
+  for (const root of boundedStrings(discoveredRoots.slice(0, MAX_ROOTS), MAX_ROOTS)) {
+    const drive = await inspectDrive(root);
+    if (drive) drives.push(drive);
+  }
+  const programs = await probePrograms(directories, platform);
+  return Object.freeze({
+    schema: 'kindred.sdpn.native-host-capabilities.v1',
+    platform, arch: arch(), cpuThreads: cpus().length,
+    totalMemoryBytes: totalmem(),
+    drives: Object.freeze(drives), programs: Object.freeze(programs),
+    hardware: inspectHostNativeHardware({ platform }),
+    appInventoryExhaustive: false,
+    hardwareDriverBindingsVerified: false,
+    installedProgramCountObserved: programs.length,
+    programExecutionEnabledAutomatically: false,
+    hostRoutesChanged: false, remoteControlEnabled: false,
+    globalConnectivityVerified: false
+  });
+}
+
 export class NativeHostCapabilityBridge {
   #registry; #founder; #portNumber; #grantedPrograms; #catalog = new Map();
   #platform; #env; #programPaths; #volumePaths;
@@ -142,28 +174,13 @@ export class NativeHostCapabilityBridge {
   }
 
   async discover() {
-    const rawRoots = this.#volumePaths || await volumeRoots(this.#platform, this.#env);
-    const roots = [];
-    for (const root of boundedStrings(rawRoots.slice(0, MAX_ROOTS), MAX_ROOTS)) {
-      const drive = await inspectDrive(root);
-      if (drive) roots.push(drive);
-    }
-    const programs = await probePrograms(this.#programPaths, this.#platform);
-    this.#catalog = new Map(programs.map(p => [p.id, p]));
-    const hardware = inspectHostNativeHardware({ platform: this.#platform });
-    return Object.freeze({
-      schema: 'kindred.sdpn.native-host-capabilities.v1',
-      portNumber: this.#portNumber, platform: this.#platform, arch: arch(),
-      cpuThreads: cpus().length, totalMemoryBytes: totalmem(),
-      drives: Object.freeze(roots), programs: Object.freeze(programs),
-      hardware,
-      appInventoryExhaustive: false,
-      hardwareDriverBindingsVerified: false,
-      installedProgramCountObserved: programs.length,
-      programExecutionEnabledAutomatically: false,
-      hostRoutesChanged: false, remoteControlEnabled: false,
-      globalConnectivityVerified: false
+    const snapshot = await inspectInstalledHost({
+      platform: this.#platform, env: this.#env,
+      programPaths: this.#programPaths,
+      volumePaths: this.#volumePaths === null ? undefined : this.#volumePaths
     });
+    this.#catalog = new Map(snapshot.programs.map(program => [program.id, program]));
+    return Object.freeze({ ...snapshot, portNumber: this.#portNumber });
   }
 
   // Only operate a program explicitly selected from the just-discovered catalog
