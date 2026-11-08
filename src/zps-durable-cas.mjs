@@ -17,6 +17,7 @@ const MAX_INDEX = 128 * 1024;
 const MIN_LIMIT = 256 * 1024;
 const MAX_LIMIT = 1024 * 1024 * 1024;
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
+const CONSTRUCTION_TOKEN = Symbol('SDPN-ZPS-private-constructor');
 
 function closedError() { throw new Error('ZPS Port store closed'); }
 async function ensurePrivateDir(dir) {
@@ -69,7 +70,7 @@ async function immutableFile(path, bytes) {
 
 export class DurablePortChunkStore {
   #root; #objects; #states; #key; #portId; #maxStoredBytes; #closed = false;
-  constructor() { throw new Error('Use DurablePortChunkStore.open(...)'); }
+  constructor(token) { if (token !== CONSTRUCTION_TOKEN) throw new Error('Use DurablePortChunkStore.open(...)'); }
   static async open({
     directory, portId, encryptionKey, maxStoredBytes = 64 * 1024 * 1024
   }) {
@@ -86,7 +87,7 @@ export class DurablePortChunkStore {
     await ensurePrivateDir(root);
     await ensurePrivateDir(objects);
     await ensurePrivateDir(states);
-    const instance = Object.create(DurablePortChunkStore.prototype);
+    const instance = new DurablePortChunkStore(CONSTRUCTION_TOKEN);
     instance.#root = root;
     instance.#objects = objects;
     instance.#states = states;
