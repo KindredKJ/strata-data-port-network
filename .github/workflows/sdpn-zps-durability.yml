@@ -1,0 +1,42 @@
+name: SDPN ZPS encrypted persistence and signed receipts
+
+on:
+  pull_request:
+    paths:
+      - 'src/zps-*.mjs'
+      - 'src/tesseract-cdc-native-session.mjs'
+      - 'test/zps-*.test.mjs'
+      - 'scripts/benchmark-zps-durability.mjs'
+      - 'docs/ZPS-DURABLE-CAS-SIGNED-RECEIPTS.md'
+      - '.github/workflows/sdpn-zps-durability.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-encrypted-disk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify encrypted filesystem and signed CDC receipts
+        run: npm run zps:test
+      - name: Capture real encrypted filesystem warm-cache measurements
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/ci/zps
+          npm run zps:benchmark --silent | tee evidence/ci/zps/benchmark.json
+          node -e 'const f=require("node:fs"); const r=JSON.parse(f.readFileSync("evidence/ci/zps/benchmark.json","utf8")); if(!r.validatedExactSha256 || !r.actualEncryptedDiskIO || r.actualPhysicalPowerInterruptionVerified || r.crossHostTransportVerified || r.physicallyRouteFreeGlobalConnectivityVerified) process.exit(1);'
+      - name: Archive exact ZPS filesystem benchmark
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdpn-zps-local-encrypted-filesystem
+          path: evidence/ci/zps/benchmark.json
+          if-no-files-found: warn
+          retention-days: 30
