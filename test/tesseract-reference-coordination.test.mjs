@@ -58,7 +58,7 @@ test('destination reconstructs exact binary bytes with signed coordination-only 
   assert.equal(result.newlyDeliveredPayloadBytes, 0);
   assert.equal(result.globallyRoutelessTransferProven, false);
   const receipt = verifyReferenceReconstructionReceipt({
-    offer, receipt: result.receipt, destinationRecord: br, now
+    offer, receipt: result.receipt, originRecord: ar, destinationRecord: br, now
   });
   assert.equal(receipt.exactReconstructionAcknowledged, true);
   assert.equal(receipt.deliveryMode, 'DESTINATION_PREEXISTING_STATE');
@@ -114,10 +114,10 @@ test('source, destination and control tampering or replay never grant reconstruc
     ...args, offer: base
   }), /replay/);
   assert.throws(() => verifyReferenceReconstructionReceipt({
-    offer: base, receipt: result.receipt, destinationRecord: signPeerRecord(C, { now, ...metadata }), now
+    offer: base, receipt: result.receipt, originRecord: ar, destinationRecord: signPeerRecord(C, { now, ...metadata }), now
   }), /identity/);
   assert.throws(() => verifyReferenceReconstructionReceipt({
-    offer: base, receipt: result.receipt, destinationRecord: br, now: now + 30_000
+    offer: base, receipt: result.receipt, originRecord: ar, destinationRecord: br, now: now + 30_000
   }), /expired|lifetime/);
 });
 
