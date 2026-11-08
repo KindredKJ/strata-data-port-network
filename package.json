@@ -19,7 +19,9 @@
     "portal:start": "node apps/portal/server.mjs",
     "portal:test": "node --test apps/portal/test/*.test.mjs",
     "community:test": "node --test community/test/*.test.mjs test/community-interop.test.mjs",
-    "port:registry": "node scripts/numbered-port-registry.mjs"
+    "port:registry": "node scripts/numbered-port-registry.mjs",
+    "port:assimilate": "node scripts/assimilate-native-host.mjs",
+    "port:install": "node scripts/assimilate-native-host.mjs"
   },
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
@@ -31,6 +33,8 @@
     "./numbered-registry": "./src/numbered-port-registry.mjs",
     "./port-local-roles": "./src/port-local-roles.mjs",
     "./native-hardware-adapters": "./src/native-hardware-adapters.mjs",
-    "./tesseract-reference-coordination": "./src/tesseract-reference-coordination.mjs"
+    "./tesseract-reference-coordination": "./src/tesseract-reference-coordination.mjs",
+    "./native-host-assimilation": "./src/native-host-assimilation.mjs",
+    "./native-host-capability-bridge": "./src/native-host-capability-bridge.mjs"
   }
 }
