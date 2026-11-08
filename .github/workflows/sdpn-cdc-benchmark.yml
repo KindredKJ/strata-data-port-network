@@ -1,0 +1,42 @@
+name: SDPN CDC measured delta benchmark
+
+on:
+  pull_request:
+    paths:
+      - 'src/tesseract-cdc-delta.mjs'
+      - 'src/tesseract-cdc-native-session.mjs'
+      - 'test/tesseract-cdc-*.test.mjs'
+      - 'scripts/benchmark-tesseract-cdc.mjs'
+      - 'docs/TESSERACT-CDC-DELTA-V1.md'
+      - '.github/workflows/sdpn-cdc-benchmark.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  measured-cdc:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reproduce CDC/1 exactness and missing-state tests
+        run: npm run cdc:test
+      - name: Capture measured logical payload bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/ci/cdc
+          node scripts/benchmark-tesseract-cdc.mjs | tee evidence/ci/cdc/benchmark.json
+          node -e 'const fs = require("fs"); const r=JSON.parse(fs.readFileSync("evidence/ci/cdc/benchmark.json","utf8")); if(!r.exactSha256Matched || !(r.cdcUniqueMissingBytes < r.fixed64kUniqueMissingBytes) || !(r.cdcUniqueMissingBytes < r.baselineFullPayloadBytes) || r.actualTransportBytesMeasured || r.actualPhysicalNoRoutingVerified) process.exit(1);'
+      - name: Save exact benchmark result and environmental evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdpn-cdc-logical-payload
+          path: evidence/ci/cdc/benchmark.json
+          if-no-files-found: warn
+          retention-days: 30
