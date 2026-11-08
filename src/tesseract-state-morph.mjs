@@ -229,7 +229,7 @@ export async function materializeMorphNative({
   }
 }
 export function verifyMorphReceipt({
-  receipt, coordinate, originRecord, destinationRecord,
+  receipt, coordinate, signedSessionOffer, originRecord, destinationRecord,
   expectedOriginPortId, expectedDestinationPortId, now = Date.now()
 }) {
   time(now);
@@ -243,6 +243,18 @@ export function verifyMorphReceipt({
     coordinate, originRecord, expectedOriginPortId, expectedDestinationPortId,
     now: body.issuedAt
   });
+  const source = verifyPeerRecord(originRecord, body.issuedAt, expectedOriginPortId);
+  const offer = verifyEnvelope(signedSessionOffer, source.portId, source.publicKey);
+  validateAdapterDescriptor(offer.adapter);
+  if (offer.schema !== 'kindred.sdpn.session-offer.v1' ||
+      offer.sessionId !== body.sessionId ||
+      offer.fromPort !== expectedOriginPortId ||
+      offer.toPort !== expectedDestinationPortId ||
+      offer.scope?.stateSha256 !== original.manifest.targetSha256 ||
+      offer.adapter.underlyingIp !== false ||
+      offer.adapter.underlyingRouting !== false) {
+    throw new Error('MORPH receipt not bound to signed native session or route-free adapter');
+  }
   const dest = verifyPeerRecord(destinationRecord, body.issuedAt, expectedDestinationPortId);
   const signed = verifyEnvelope(receipt, dest.portId, dest.publicKey);
   if (signed.schema !== MORPH_RECEIPT_SCHEMA ||
