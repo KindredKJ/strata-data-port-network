@@ -23,9 +23,9 @@ function runtime(extra = {}, events = registry) {
     ...extra
   });
 }
-function localGrant(identity = local, events = registry) {
+function localGrant(identity = local, events = registry, role = 'admin') {
   return signPortLocalRole(identity, events, founder.id, identity === other ? 2 : 1,
-    'regular', { now: Date.now(), ttlMs: 120000 });
+    role, { now: Date.now(), ttlMs: 120000 });
 }
 
 test('native port discovers real accessible disks and host binaries without executing them', async () => {
@@ -62,6 +62,10 @@ test('local port grants and explicit program allowlist are required to run insta
   }), /allowlisted/);
   const bridge = runtime({ allowedProgramIds: [program.id] });
   await bridge.discover();
+  await assert.rejects(bridge.invoke({
+    programId: program.id, grant: localGrant(local, registry, 'regular'),
+    args: ['--version']
+  }), /authorization denied/);
   const result = await bridge.invoke({
     programId: program.id, grant: localGrant(),
     args: ['-e', 'process.stdout.write("SDPN_NATIVE_HOST_OK")'],
