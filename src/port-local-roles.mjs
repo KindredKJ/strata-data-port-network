@@ -3,7 +3,8 @@ import { canonicalBytes, exactFields, verifyEnvelope } from './native-port-ident
 import { verifyNumberedRegistry } from './numbered-port-registry.mjs';
 
 export const LOCAL_PORT_ROLE_SCHEMA = 'kindred.sdpn.port-local-role.v1';
-const REGULAR = Object.freeze(['presence.publish', 'state.read', 'session.request']);
+const REGULAR = Object.freeze(['presence.publish', 'state.read', 'session.request',
+  'hardware.inspect', 'storage.inspect', 'utility.inspect', 'utility.invoke']);
 const ADMIN = Object.freeze([...REGULAR, 'state.write', 'adapter.configure',
   'worker.configure', 'local.policy.manage']);
 const ACTIONS = Object.freeze({ regular: REGULAR, admin: ADMIN });
