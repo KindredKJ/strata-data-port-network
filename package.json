@@ -28,6 +28,9 @@
     "./native-identity": "./src/native-port-identity.mjs",
     "./native-session": "./src/native-session.mjs",
     "./port-names": "./src/port-names.mjs",
-    "./numbered-registry": "./src/numbered-port-registry.mjs"
+    "./numbered-registry": "./src/numbered-port-registry.mjs",
+    "./port-local-roles": "./src/port-local-roles.mjs",
+    "./native-hardware-adapters": "./src/native-hardware-adapters.mjs",
+    "./tesseract-reference-coordination": "./src/tesseract-reference-coordination.mjs"
   }
 }
