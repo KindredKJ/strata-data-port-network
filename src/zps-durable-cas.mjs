@@ -214,7 +214,15 @@ export class DurablePortChunkStore {
     if (!(prepared.uniqueChunks instanceof Map)) {
       throw new Error('ZPS imported state requires local verified chunk map');
     }
+    const required = new Map(manifest.chunks.map(item => [item.sha256, item.bytes]));
+    if (prepared.uniqueChunks.size !== required.size) {
+      throw new Error('ZPS source chunk map must match the manifest exactly');
+    }
     for (const [hash, chunk] of prepared.uniqueChunks) {
+      if (!required.has(hash) || !(chunk instanceof Uint8Array) ||
+          required.get(hash) !== chunk.byteLength) {
+        throw new Error('ZPS source chunk map differs from the signed state manifest');
+      }
       await this.putChunk(chunk, hash);
     }
     return this.publishManifest(manifest);
