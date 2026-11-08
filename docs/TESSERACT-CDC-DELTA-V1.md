@@ -23,6 +23,37 @@ This module is designed to plug into the existing Native Port/Tesseract/ZPS runt
 
 STRICT mode rejects descriptors using IP or conventional routing. The descriptor check is a software policy check, **not a physical audit**. No protocol should advertise worldwide native route-free capability before audited, geographically separated physical receipts exist.
 
+## CDC/1 encrypted native Port request/response
+
+`src/tesseract-cdc-native-session.mjs` now integrates with the existing
+signed Ed25519/X25519/AES-256-GCM `native-session.mjs` implementation:
+
+- `makeCdcSourceResponder({manifest,sourceChunks,session,signedSessionOffer,originRecord})`:
+  Port A authenticates every inbound native encrypted request, checks that
+  the requested content hash/length belongs to the signed state manifest,
+  verifies its own stored source chunk and seals a response frame.
+- `reconstructCdcOverNativeSession({manifest,session,signedSessionOffer,originRecord,
+  readLocalChunk,exchangeEncryptedFrame})`: Port B checks the signed native
+  session origin/target and exact state SHA-256, reuses its own local chunks
+  and requests missing hashes using AEAD-sealed frames. The destination
+  verifies every response before reconstruction and signs/publishes nothing
+  until full SHA-256 matches.
+
+The native session's own consent/expiry/replay/order checks remain active.
+The source responder does not accept arbitrary file paths or execute remote
+commands. Its request is 37 binary plaintext bytes (inside AES-GCM); each
+response has a 33-byte chunk identifier header (inside AES-GCM) followed by
+only the required missing chunk. Actual carrier delivery is injected via
+`exchangeEncryptedFrame`; in unit tests it is explicitly **in-process**.
+The code measures ciphertext frame bytes at the encryption boundary but
+does not count external framing, radio/network overhead or global reachability.
+STRICT mode rejects existing TCP/IP adapters in both participants.
+
+The session offer, acceptance and encrypted frames must be delivered on a
+qualified underlying adapter, whose physical operation must be audited
+before claiming a non-routed physical connection. These APIs do **not**
+create such an adapter or automatically turn a Port globally online.
+
 ## Baselines and metric scope
 
 `npm run cdc:benchmark` runs the same deterministic 2 MiB binary payload with a 173-byte insertion near the start against:
@@ -49,7 +80,7 @@ A *unit-test or in-process callback benchmark does not measure Internet goodput*
 ## Commands
 
 ```bash
-node --test test/tesseract-cdc-delta.test.mjs test/tesseract-cdc-benchmark.test.mjs
+npm run cdc:test
 npm run cdc:benchmark
 npm test
 ```
