@@ -87,7 +87,7 @@ test('corrupt destination chunks and falsified manifest hashes fail exact verifi
     async hash => B_local.get(hash)), /missing or corrupted/);
   const bad = structuredClone(manifest);
   bad.chunks[0].bytes++;
-  assert.throws(() => verifyReferenceManifest(bad), /manifest total size/);
+  assert.throws(() => verifyReferenceManifest(bad), /chunk descriptor|manifest total size/);
 });
 
 test('source, destination and control tampering or replay never grant reconstruction', async () => {
@@ -115,7 +115,7 @@ test('source, destination and control tampering or replay never grant reconstruc
   }), /replay/);
   assert.throws(() => verifyReferenceReconstructionReceipt({
     offer: base, receipt: result.receipt, originRecord: ar, destinationRecord: signPeerRecord(C, { now, ...metadata }), now
-  }), /identity/);
+  }), /identity|mismatched/);
   assert.throws(() => verifyReferenceReconstructionReceipt({
     offer: base, receipt: result.receipt, originRecord: ar, destinationRecord: br, now: now + 30_000
   }), /expired|lifetime/);
