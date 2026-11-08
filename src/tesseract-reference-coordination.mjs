@@ -187,13 +187,28 @@ export async function fulfillReferenceCoordinationOffer({
 }
 
 export function verifyReferenceReconstructionReceipt({
-  offer, receipt, destinationRecord, now = Date.now()
+  offer, receipt, originRecord, destinationRecord, now = Date.now()
 }) {
   validateTime(now);
+  // Verify BOTH independently trusted identities before accepting any claimed receipt.
+  const origin = verifyPeerRecord(originRecord, now);
   const destination = verifyPeerRecord(destinationRecord, now);
+  const request = verifyEnvelope(offer, origin.portId, origin.publicKey);
+  exactFields(request, offerFields);
+  routeFreeAdapter(request.adapter);
+  verifyReferenceManifest(request.manifest);
+  if (request.schema !== STATE_COORDINATION_SCHEMA ||
+      request.fromPort !== origin.portId || request.toPort !== destination.portId ||
+      !sessionPattern.test(request.sessionId) ||
+      request.manifestSha256 !== digest(canonicalBytes(request.manifest)) ||
+      !Number.isSafeInteger(request.issuedAt) ||
+      !Number.isSafeInteger(request.expiresAt) ||
+      request.issuedAt > now || now >= request.expiresAt ||
+      request.expiresAt - request.issuedAt > 30_000) {
+    throw new Error('Signed coordination request absent, expired or mismatched');
+  }
   const body = verifyEnvelope(receipt, destination.portId, destination.publicKey);
   exactFields(body, receiptFields);
-  const request = offer?.body;
   if (!request || request.schema !== STATE_COORDINATION_SCHEMA ||
       body.schema !== STATE_RECEIPT_SCHEMA ||
       body.fromPort !== destination.portId || body.toPort !== request.fromPort ||
