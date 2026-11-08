@@ -18,7 +18,8 @@
     "port:resolve": "node scripts/port-resolve.mjs",
     "portal:start": "node apps/portal/server.mjs",
     "portal:test": "node --test apps/portal/test/*.test.mjs",
-    "community:test": "node --test community/test/*.test.mjs test/community-interop.test.mjs"
+    "community:test": "node --test community/test/*.test.mjs test/community-interop.test.mjs",
+    "port:registry": "node scripts/numbered-port-registry.mjs"
   },
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
@@ -26,6 +27,7 @@
     "./two-machine-proof": "./src/two-machine-proof.mjs",
     "./native-identity": "./src/native-port-identity.mjs",
     "./native-session": "./src/native-session.mjs",
-    "./port-names": "./src/port-names.mjs"
+    "./port-names": "./src/port-names.mjs",
+    "./numbered-registry": "./src/numbered-port-registry.mjs"
   }
 }
