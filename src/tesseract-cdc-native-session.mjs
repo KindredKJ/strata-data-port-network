@@ -72,11 +72,14 @@ export function makeCdcSourceResponder({
 export async function reconstructCdcOverNativeSession({
   manifest, session, signedSessionOffer, originRecord,
   readLocalChunk, exchangeEncryptedFrame, onReconstructed,
-  now = Date.now()
+  persistVerifiedChunk, now = Date.now()
 }) {
   const state = strict(session, manifest, signedSessionOffer, originRecord, 'destination', now);
   if (typeof exchangeEncryptedFrame !== 'function') {
     throw new TypeError('Real encrypted-frame exchange callback required');
+  }
+  if (persistVerifiedChunk !== undefined && typeof persistVerifiedChunk !== 'function') {
+    throw new TypeError('Verified chunk persistence callback required');
   }
   let requests = 0, ciphertextPayloadBytes = 0, ciphertextResponseBytes = 0;
   const fetch = async (hash, bytes) => {
@@ -99,8 +102,14 @@ export async function reconstructCdcOverNativeSession({
         data.subarray(1, 33).toString('hex') !== hash) {
       throw new Error('CDC encrypted chunk response does not match requested content');
     }
+    const verified = Buffer.from(data.subarray(DATA_PREFIX));
+    if (digest(verified) !== hash) {
+      verified.fill(0);
+      throw new Error('CDC authenticated response failed content digest verification');
+    }
+    if (persistVerifiedChunk) await persistVerifiedChunk(hash, verified);
     requests++;
-    return Buffer.from(data.subarray(DATA_PREFIX));
+    return verified;
   };
   const result = await reconstructCdcDelta({
     manifest: state, adapter: session.adapter,
