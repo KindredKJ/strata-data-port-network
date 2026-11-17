@@ -1,0 +1,28 @@
+name: G3TCONNECTED provisioning candidate
+on:
+  pull_request:
+    paths:
+      - 'src/telecom/**'
+      - 'test/telecom-*.test.mjs'
+      - '.github/workflows/g3tconnected-provisioning.yml'
+  push:
+    branches:
+      - 'feat/g3tconnected-mvno-control-plane'
+    paths:
+      - 'src/telecom/**'
+      - 'test/telecom-*.test.mjs'
+      - '.github/workflows/g3tconnected-provisioning.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  provisioning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test G3TCONNECTED provisioning
+        run: node --test test/telecom-subscriber-provisioning.test.mjs test/telecom-durable-provisioning.test.mjs
