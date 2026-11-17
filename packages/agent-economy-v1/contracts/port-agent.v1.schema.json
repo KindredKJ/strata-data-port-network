@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kindredlabs.ai/contracts/port-agent.v1.schema.json",
+  "title": "Kindred persistent port-agent v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "tenant_id",
+    "port_id",
+    "agent_id",
+    "owner_id",
+    "policy_version",
+    "memory_namespace",
+    "capability_grants",
+    "budget_account_ref",
+    "mailbox_cursor",
+    "workflow_checkpoints",
+    "payout_destination_ref",
+    "active_lease_epoch",
+    "receipt_head",
+    "lineage_parent"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "kindred.port-agent.v1"
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "port_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "agent_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "owner_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "memory_namespace": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capability_grants": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "budget_account_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "mailbox_cursor": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "workflow_checkpoints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "payout_destination_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active_lease_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "receipt_head": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "lineage_parent": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}
