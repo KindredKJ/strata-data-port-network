@@ -75,8 +75,11 @@ function hmac(secret, value, encoding = "base64url") {
 
 function safeEqualEncoded(left, right, encoding = "base64url") {
   try {
+    if (typeof left !== "string" || typeof right !== "string") return false;
     const a = Buffer.from(left, encoding);
     const b = Buffer.from(right, encoding);
+    // Reject noncanonical terminal bits, padding, and invalid alphabet.
+    if (a.toString(encoding) !== left || b.toString(encoding) !== right) return false;
     return a.length === b.length && timingSafeEqual(a, b);
   } catch {
     return false;
