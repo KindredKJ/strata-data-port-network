@@ -56,12 +56,15 @@ export class DurableProvisioning {
     await rename(temp,this.#path);
   }
   request(args) { return this.#queue(async()=>{
-    const old=this.#engine.get(args.subscriberId);
-    const result=this.#engine.request(args);
+    const candidate=new SubscriberProvisioning();
+    for(const op of this.operations) candidate[op.type](op.args);
+    const old=candidate.get(args.subscriberId);
+    const result=candidate.request(args);
     if(old) return result;
     const next=[...this.operations,{type:'request',args}];
     await this.#persist(next);
     this.operations=next;
+    this.#engine=candidate;
     return result;
   }); }
   transition(args) { return this.#queue(async()=>{
