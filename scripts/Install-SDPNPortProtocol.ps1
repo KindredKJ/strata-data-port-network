@@ -46,4 +46,27 @@ if ($PSCmdlet.ShouldProcess($root, 'Install SDPN port scheme handler')) {
     Set-Item -LiteralPath $commandPath -Value $launch
     Write-Output 'Registered port:// for this Windows user. It resolves signed name records only.'
     Write-Output ('Manifest: ' + $manifest)
+    # Automatic local host assimilation happens after installation, without routes,
+    # elevation, remote telemetry, application execution or changes to stored keys.
+    $assimilator = Join-Path $PSScriptRoot 'assimilate-native-host.mjs'
+    $oldNodeOptions = $env:NODE_OPTIONS
+    try {
+        # This installer may be run from a workstation with an unavailable
+        # global NODE_OPTIONS preload. Do not mutate the user's setting.
+        $env:NODE_OPTIONS = ''
+        & $node $assimilator --dir (Join-Path $HOME '.sdpn')
+        if ($LASTEXITCODE -ne 0) {
+            Write-Warning 'SDPN host assimilation did not complete; run npm run port:assimilate to retry.'
+        }
+    }
+    catch {
+        Write-Warning ('SDPN host assimilation needs a retry: ' + $_.Exception.Message)
+    }
+    finally {
+        if ($null -eq $oldNodeOptions) {
+            Remove-Item Env:NODE_OPTIONS -ErrorAction SilentlyContinue
+        } else {
+            $env:NODE_OPTIONS = $oldNodeOptions
+        }
+    }
 }

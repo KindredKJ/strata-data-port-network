@@ -107,6 +107,18 @@ node --test apps/portal/test/*.test.mjs
 
 The local native service requires neither a Vercel/Cloudflare deployment nor the Genesis domain. Creating a worldwide alternative discovery network and monetized managed PORT platform is an explicit future production program, not a current deployment claim.
 
+## Founder Port Zero / numbered registry (candidate)
+
+The [additive founder-anchored numbered port registry](docs/FOUNDER-PORT-ZERO-NUMBERED-REGISTRY.md) reserves numeric **Port 0** for the explicitly pinned founder signing key and assigns Port 1, 2, 3, ... to independent cryptographic identities. It includes a local, durable, single-writer CLI and signed short-lived Tesseract presence records. Existing Port IDs, signed sessions, transport adapters, and Port Zero policy remain unchanged. This is **not** an online global presence service or proof of physically route-free transmission; adapters must disclose actual IP/routing dependencies.
+
+## Tesseract split-plane, strict non-routed reference materialization (candidate)
+
+The [split-plane architecture and executable reference tests](docs/TESSERACT-SPLIT-PLANE-REFERENCE-MATERIALIZATION.md) make each destination port responsible for reconstruction using its own **pre-existing** content-addressed state. Port A sends signed *hash/reference-only* control messages, and Port B returns a signed exact-reconstruction receipt. This strict candidate rejects disclosed IP/routed adapters, does not transport object bytes, and cannot reconstruct unknown remote bytes from hashes alone. **It is not a global networking or new-data teleportation proof.** The package also exposes per-port regular/admin authority checks and a declared direct-hardware-driver boundary; physical radio connectivity and global reachability still require independent qualification.
+
+## Automatic native host assimilation (installer candidate)
+
+A new Port can [assimilate the installed machine](docs/NATIVE-MACHINE-ASSIMILATION.md) into a **private, local-only** capability catalog. It detects OS-visible disks, software, executable utilities, services and hardware classes. The existing Windows `port://` installer now invokes assimilation automatically; other SDPN installers can call `npm run port:install`, with `npm run port:assimilate` to refresh the catalog. Actual utility execution requires the Port's local **admin** role, OS permissions and a selected executable allowlist. Discovery does **not** transfer files, establish remote access, use IP routing, create Port 0 founder credentials or prove global network connectivity.
+
 ## Community SDPN — free-to-use, open-source foundation
 
 SDPN now includes an independently distributable and usable [**Apache-2.0 Community SDK**](community/README.md). Anyone can generate/export/import a portable Ed25519 Port Zero identity, sign and resolve PORT/1-compatible aliases, and use or modify the Apache-licensed community code commercially without purchasing a subscription. Its module code has no private-runtime or cloud-service dependencies. [Founder governance and commercial boundary](docs/OPEN-CORE-FOUNDER-GOVERNANCE.md) define user-owned identity, optional managed services, and a clear distinction between features implemented today and free future network modules.
