@@ -25,4 +25,4 @@ jobs:
         with:
           node-version: '22'
       - name: Test G3TCONNECTED provisioning
-        run: node --test test/telecom-subscriber-provisioning.test.mjs test/telecom-durable-provisioning.test.mjs
+        run: node --test test/telecom-*.test.mjs
