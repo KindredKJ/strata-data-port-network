@@ -1,74 +1,34 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#061711">
-<meta name="description" content="Strata lets you encrypt files and transfer them directly between browsers or share secure portable packages.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Strata — Secure transfer across your devices">
-<meta property="og:description" content="Connect two devices, encrypt a file, and send it securely. No file account required.">
-<meta property="og:url" content="https://stratadataportnetwork.vercel.app">
-<meta name="twitter:card" content="summary">
-<title>Strata — Secure File Transfer | Kindred Labs</title>
-<link rel="canonical" href="https://stratadataportnetwork.vercel.app">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07131a"><meta name="description" content="Strata by Kindred Labs. Correspond, connect, create, and call what you need.">
+<title>Strata — Correspond. Connect. Create. Call.</title>
 <style>
-:root{color-scheme:dark;--bg:#061711;--panel:#102b21;--panel2:#0b241a;--line:#27513d;--text:#f1fff6;--muted:#b7cfc0;--green:#8bf2b9;--yellow:#ddf594}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 84% 5%,#19583b 0,transparent 42rem),var(--bg);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text)}
-a{color:var(--green);text-underline-offset:4px}a:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
-.wrap{width:min(1180px,calc(100% - 36px));margin:auto}.nav{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:23px 0;border-bottom:1px solid var(--line)}
-.logo{display:inline-flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.03em;color:var(--text);text-decoration:none}.symbol{display:grid;place-items:center;width:38px;height:38px;border-radius:13px;background:var(--green);color:#052118;font-size:18px;font-weight:900}
-.links{display:flex;gap:25px;align-items:center;font-size:.92rem;flex-wrap:wrap}.links a{text-decoration:none;color:var(--muted)}.links a:hover{color:var(--green)}
-.hero{padding:105px 0 84px;max-width:940px}.eyebrow{color:var(--green);font-weight:850;text-transform:uppercase;letter-spacing:.15em;font-size:.77rem}
-h1{font-size:clamp(48px,8vw,95px);line-height:1.01;letter-spacing:-.07em;margin:22px 0 25px;font-weight:850}h1 span{color:var(--green)}
-.lead{font-size:clamp(18px,2.5vw,23px);color:#c5e0cf;max-width:760px;line-height:1.5}p{color:var(--muted)}
-.row{display:flex;flex-wrap:wrap;gap:14px}.actions{margin-top:34px}.button{display:inline-flex;padding:13px 20px;border:1px solid #5eae80;border-radius:999px;text-decoration:none;font-weight:800;align-items:center;justify-content:center;transition:transform .16s ease}.button.primary{background:var(--green);color:#042518;border-color:var(--green)}.button:hover{transform:translateY(-2px)}
-.hero-note{color:var(--muted);margin-top:22px;font-size:.9rem}.section{padding:72px 0;border-top:1px solid var(--line)}h2{font-size:clamp(33px,4vw,52px);letter-spacing:-.05em;line-height:1.11;margin:12px 0 18px}h3{font-size:21px;letter-spacing:-.02em;margin:8px 0}
-.intro{max-width:770px;margin-bottom:32px}.intro p{font-size:1.1rem}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.card{padding:27px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,var(--panel),var(--panel2));min-height:180px}.card p{margin:10px 0 0}.number{color:var(--green);letter-spacing:.13em;font-size:.75rem;font-weight:850}
-.primary-pane{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:center;padding:45px;border-radius:24px;border:1px solid #41765b;background:linear-gradient(120deg,#143929,#0b261b)}.primary-pane p{font-size:1.1rem;max-width:570px}.primary-pane .button{justify-self:end}
-.steps{counter-reset:steps}.steps .card{position:relative}.stepnum{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:99px;border:1px solid #5a9c76;color:var(--green);font-weight:800}
-.footer{border-top:1px solid var(--line);padding:32px 0 50px;color:var(--muted);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.88rem}.footer a{color:var(--muted)}
-@media(max-width:790px){.grid{grid-template-columns:1fr}.primary-pane{grid-template-columns:1fr;padding:27px}.primary-pane .button{justify-self:start}.hero{padding:71px 0 61px}.section{padding:54px 0}}
-@media(max-width:530px){.nav{align-items:flex-start;flex-direction:column}.links{gap:17px}.hero{padding-top:58px}.button{width:100%}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
-</style>
-</head>
-<body><div class="wrap">
-<header class="nav">
-<a class="logo" href="/" aria-label="Strata home"><span class="symbol" aria-hidden="true">S</span> STRATA <span style="color:#8bf2b9">/</span> KINDRED LABS</a>
-<nav class="links" aria-label="Primary navigation"><a href="#product">Product</a><a href="#how">How it works</a><a href="/app.html">Workspace</a><a href="/performance.html">Live operations</a></nav>
-</header>
-<main>
-<section class="hero">
-<div class="eyebrow">Strata Data Port Network · Now available in your browser</div>
-<h1>Your files.<br><span>Your devices. Your rules.</span></h1>
-<p class="lead">Send encrypted files directly between compatible browsers, or create secure packages that travel through any delivery service you choose. You control the passphrase. You verify the result.</p>
-<div class="row actions"><a class="button primary" href="/connect.html">Connect two devices</a><a class="button" href="/app.html">Protect a file</a></div>
-<p class="hero-note">No account required for these browser tools. Your file is encrypted on your device, not uploaded to Strata storage.</p>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#07131a;color:#eefcff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#144d59 0%,transparent 60%),#07131a;min-height:100vh}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #6be5e3;outline-offset:3px}.wrap{max-width:1120px;margin:auto;padding:0 24px}header{display:flex;align-items:center;justify-content:space-between;padding:23px 0;border-bottom:1px solid #294451;gap:12px}.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.06em}.mark{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,#8bf4c5,#3daec9);display:grid;place-items:center;color:#06242a;font-size:27px;font-weight:900;box-shadow:0 0 32px #36c7bf35}.sub{font-size:11px;color:#8daab7;letter-spacing:.12em}nav{display:flex;gap:20px;color:#c5dbe2;font-size:14px;flex-wrap:wrap}main{padding:72px 0 75px}.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:#7fe9ce;font-weight:750}.hero{text-align:center;margin:0 auto 45px;max-width:850px}h1{font-size:clamp(46px,7vw,85px);line-height:1.05;letter-spacing:-.065em;margin:17px 0 20px}h1 em{font-style:normal;color:#7fe9ce}.lead{font-size:clamp(16px,2vw,20px);color:#aec8d2;line-height:1.6}.actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.tile{display:flex;flex-direction:column;gap:13px;text-align:left;padding:25px;border:1px solid #315261;border-radius:23px;background:linear-gradient(145deg,#142e39,#0b1c26);min-height:228px;transition:transform .15s,border-color .15s}.tile:hover{transform:translateY(-3px);border-color:#75d8d4}.tile .glyph{font-size:30px;color:#83e8d0}.tile h2{font-size:26px;letter-spacing:-.035em;margin:0}.tile p{color:#aec7d0;font-size:14px;line-height:1.5;margin:0}.tile span:last-child{margin-top:auto;color:#8df2d7;font-size:13px;font-weight:750}.work{margin-top:25px;padding:26px;border:1px solid #315261;border-radius:24px;background:#0c202b}.work h3{font-size:23px;margin:0 0 8px}.work p{color:#b0c9d1;margin:0 0 18px}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.button{border:1px solid #6ee4d1;background:#73eacb;color:#062b31;border-radius:12px;padding:12px 17px;font-weight:750;display:inline-flex;align-items:center;justify-content:center}.button.secondary{background:transparent;color:#a4f1de}.field{width:100%;background:#06141d;border:1px solid #496675;border-radius:12px;color:white;padding:14px;min-height:90px;resize:vertical}.hidden{display:none}.drop{border:2px dashed #496b75;border-radius:16px;padding:24px;text-align:center;margin:16px 0;color:#c2dfe5;cursor:pointer}.drop.over{border-color:#7fe9ce;background:#16414b}input[type=file]{max-width:100%}.status{color:#7fe9ce;font-size:14px;min-height:23px;margin-top:13px}.details{margin:38px 0 0;border-top:1px solid #2c4752;padding-top:24px;color:#aac5ce}details summary{cursor:pointer;color:#d2e8eb;font-weight:650}footer{border-top:1px solid #294451;padding:25px 0 40px;color:#95b1bd;font-size:13px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}@media(max-width:850px){.actions{grid-template-columns:repeat(2,1fr)}main{padding-top:50px}}@media(max-width:520px){.actions{grid-template-columns:1fr}.tile{min-height:145px;padding:19px}.hero{text-align:left}header{align-items:flex-start;flex-direction:column}}
+</style></head><body><div class="wrap"><header><a href="/" class="brand" aria-label="Strata home"><span class="mark" aria-hidden="true">S</span><span>STRATA<div class="sub">BY KINDRED LABS</div></span></a><nav aria-label="Navigation"><a href="/connect.html">Connect devices</a><a href="/app.html">Workspace</a><a href="/performance.html">Activity</a></nav></header>
+<main><div class="hero"><div class="eyebrow">Your world, within reach</div><h1>What do you want <em>to do?</em></h1><p class="lead">Share something, reach someone, make something, or bring what you need right to you. Start here.</p></div>
+<section class="actions" aria-label="Choose an action">
+<button class="tile" type="button" data-mode="correspond"><span class="glyph" aria-hidden="true">↗</span><h2>Correspond</h2><p>Share files, messages, and ideas with another device.</p><span>Start sharing →</span></button>
+<button class="tile" type="button" data-mode="connect"><span class="glyph" aria-hidden="true">◎</span><h2>Connect</h2><p>Bring two devices together through a private connection.</p><span>Connect devices →</span></button>
+<button class="tile" type="button" data-mode="create"><span class="glyph" aria-hidden="true">✳</span><h2>Create</h2><p>Turn your files and ideas into something you can share.</p><span>Open workspace →</span></button>
+<button class="tile" type="button" data-mode="call"><span class="glyph" aria-hidden="true">↙</span><h2>Call</h2><p>Bring a shared file or connection into your workspace.</p><span>Call something in →</span></button>
 </section>
-<section class="section" id="product">
-<div class="intro"><div class="eyebrow">The product</div><h2>Make a secure handoff in minutes.</h2><p>Choose the transfer path that works for your situation. Both paths use browser-side AES-256-GCM file encryption and SHA-256 integrity verification.</p></div>
-<div class="grid">
-<article class="card"><div class="number">01 / DIRECT</div><h3>Connect two devices</h3><p>Exchange connection codes, open a WebRTC peer channel and send an encrypted file without uploading it to a file server.</p><p><a href="/connect.html">Start a device connection</a></p></article>
-<article class="card"><div class="number">02 / PORTABLE</div><h3>Create a protected package</h3><p>Seal a file with a passphrase. Download the encrypted package and share it using your existing service.</p><p><a href="/app.html">Seal a file</a></p></article>
-<article class="card"><div class="number">03 / VERIFY</div><h3>Recover exact original bytes</h3><p>Open the received package with the correct passphrase. Strata verifies its integrity before offering the original file.</p><p><a href="/app.html">Open a package</a></p></article>
-</div>
+<section class="work" id="workspace" aria-live="polite"><div id="panel-correspond"><h3>Correspond</h3><p>Choose a file to protect and share, or connect directly with someone.</p><div id="drop" class="drop">Drop a file here or choose one below</div><input id="file" type="file"><label for="home-pass" style="display:block;margin-top:14px;color:#c2dfe5">Encryption passphrase (12+ characters)</label><input id="home-pass" type="password" minlength="12" maxlength="1024" autocomplete="new-password" style="width:100%;padding:12px;border-radius:10px;border:1px solid #496675;background:#06141d;color:white;margin-top:7px"><div class="row" style="margin-top:16px"><button class="button" id="protect" type="button">Protect selected file</button><a class="button secondary" href="/connect.html">Connect and send</a></div><div class="status" id="file-status" role="status"></div></div>
+<div id="panel-connect" class="hidden"><h3>Connect</h3><p>Start a secure browser-to-browser session. Both devices exchange a connection code to pair.</p><a class="button" href="/connect.html">Open device connection</a></div>
+<div id="panel-create" class="hidden"><h3>Create</h3><p>Make an encrypted package from a file, then share it using any service you prefer.</p><a class="button" href="/app.html">Open Strata Workspace</a></div>
+<div id="panel-call" class="hidden"><h3>Call</h3><p>Have a Strata connection code or an encrypted package? Bring it here to continue.</p><div class="row"><a class="button" href="/connect.html">Join a connection</a><a class="button secondary" href="/app.html">Open a received package</a></div></div>
 </section>
-<section class="section" id="how">
-<div class="intro"><div class="eyebrow">Getting started</div><h2>Private by design. Straightforward to use.</h2></div>
-<div class="grid steps">
-<div class="card"><span class="stepnum">1</span><h3>Choose a file</h3><p>Select a file up to 16 MiB from your device.</p></div>
-<div class="card"><span class="stepnum">2</span><h3>Protect and send</h3><p>Set a unique passphrase. Transfer directly when a peer connection is available or export a secure package.</p></div>
-<div class="card"><span class="stepnum">3</span><h3>Verify and open</h3><p>The recipient opens the package with the separate passphrase. Altered data or an incorrect passphrase is rejected.</p></div>
-</div>
-</section>
-<section class="section">
-<div class="primary-pane"><div><div class="eyebrow">Start with Strata</div><h2>Move data with control.</h2><p>Open the secure workspace to make a package now, or connect two devices and send directly. No signup flow and no account to configure.</p></div><a class="button primary" href="/app.html">Open Strata Workspace</a></div>
-<p style="font-size:.87rem;margin-top:20px">Direct transfer requires WebRTC connectivity across the devices' networks; some firewall or NAT configurations need a relay, which this browser release does not provide. This is not the native QUIC acceleration service.</p>
-</section>
-</main>
-<footer class="footer">
-<div>Strata Data Port Network · Built by Kindred Labs</div>
-<div><a href="/proof.html">Technical evidence</a> · <a href="/performance.html">Operations</a> · <a href="https://github.com/KindredKJ/strata-data-port-network">Source</a></div>
-<div>Founded and created by Kindred Jermaine Cox.</div>
-</footer></div></body></html>
+<details class="details"><summary>Advanced: network activity and technical information</summary><p>View measured operations, protocol evidence, and underlying port behavior. These tools are optional.</p><div class="row"><a href="/performance.html">Operations</a><a href="/proof.html">Technical evidence</a><a href="https://github.com/KindredKJ/strata-data-port-network">Source code</a></div></details>
+</main><footer><span>Strata Data Port Network · Kindred Labs</span><span>Founded by Kindred Jermaine Cox</span></footer></div>
+<script>
+const modes=['correspond','connect','create','call'];
+for(const button of document.querySelectorAll('[data-mode]'))button.addEventListener('click',()=>{const selected=button.dataset.mode;for(const mode of modes)document.getElementById('panel-'+mode).classList.toggle('hidden',mode!==selected);document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));document.getElementById('workspace').scrollIntoView({behavior:'smooth',block:'nearest'});});
+const file=document.getElementById('file'),status=document.getElementById('file-status'),drop=document.getElementById('drop');
+function picked(){status.textContent=file.files?.length?'Selected: '+file.files[0].name:'Choose a file to continue.';}
+file.addEventListener('change',picked);
+drop.addEventListener('click',()=>file.click());
+drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('over');});
+drop.addEventListener('dragleave',()=>drop.classList.remove('over'));
+drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('over');if(e.dataTransfer.files.length){file.files=e.dataTransfer.files;picked();}});
+document.getElementById('protect').addEventListener('click',async()=>{if(!file.files?.length){status.textContent='Choose a file first.';file.click();return;}const pass=document.getElementById('home-pass');if(pass.value.length<12){status.textContent='Enter a passphrase of at least 12 characters.';pass.focus();return;}const button=document.getElementById('protect');button.disabled=true;status.textContent='Encrypting your file on this device…';try{const {sealFile,MAX_FILE_BYTES}=await import('/app-core.mjs');const chosen=file.files[0];if(chosen.size>MAX_FILE_BYTES)throw Error('Choose a file up to 16 MiB.');const result=await sealFile(chosen,pass.value);const blob=new Blob([JSON.stringify(result.package)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=chosen.name+'.strata';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);pass.value='';status.textContent='Encrypted package downloaded. Share the passphrase separately from the file.';}catch(error){status.textContent=error.message||'Encryption failed.';}finally{button.disabled=false;}});
+document.querySelector('[data-mode="correspond"]').setAttribute('aria-pressed','true');
+</script></body></html>
