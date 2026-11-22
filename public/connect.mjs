@@ -117,7 +117,16 @@ async function receiveMessage(data) {
 async function waitIce(pc) {
   if (pc.iceGatheringState === 'complete') return;
   await new Promise((resolve, reject) => {
-    const timer = setTimeout(() => { cleanup(); reject(new Error('Network discovery timed out; retry pairing')); }, 18000);
+    const timer = setTimeout(() => {
+      const gathered = (pc.localDescription?.sdp || '').match(/^a=candidate:/gm);
+      if (gathered?.length) {
+        cleanup();
+        resolve(); // STUN might be slow or blocked; local candidates can still work.
+      } else {
+        cleanup();
+        reject(new Error('No usable network connection candidates. Retry or use an encrypted package.'));
+      }
+    }, 9000);
     function onState() { if (pc.iceGatheringState === 'complete') { cleanup(); resolve(); } }
     function cleanup() { clearTimeout(timer); pc.removeEventListener('icegatheringstatechange', onState); }
     pc.addEventListener('icegatheringstatechange', onState);
