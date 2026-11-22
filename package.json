@@ -18,7 +18,8 @@
     "port:resolve": "node scripts/port-resolve.mjs",
     "portal:start": "node apps/portal/server.mjs",
     "portal:test": "node --test apps/portal/test/*.test.mjs",
-    "community:test": "node --test community/test/*.test.mjs test/community-interop.test.mjs"
+    "community:test": "node --test community/test/*.test.mjs test/community-interop.test.mjs",
+    "test:browser": "node scripts/test-browser-peer.mjs"
   },
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
@@ -27,5 +28,8 @@
     "./native-identity": "./src/native-port-identity.mjs",
     "./native-session": "./src/native-session.mjs",
     "./port-names": "./src/port-names.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.65.1"
   }
 }
