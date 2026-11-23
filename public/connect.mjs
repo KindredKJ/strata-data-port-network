@@ -10,6 +10,7 @@ let pendingSha = null;
 let incomingBytes = null;
 let inbox = new TransferReceiver();
 let receiveQueue = Promise.resolve();
+let sendGeneration = 0;
 const ICE_SERVERS = [{ urls: 'stun:stun.l.google.com:19302' }];
 
 function status(message, problem = false) {
@@ -19,7 +20,7 @@ function status(message, problem = false) {
 
 function refresh() {
   const open = channel?.readyState === 'open';
-  $('peer-send').disabled = !open || sending;
+  $('peer-send').disabled = !open || sending || Boolean(pendingSha);
   $('peer-create').disabled = Boolean(connection);
   $('peer-join').disabled = Boolean(connection);
   $('peer-confirm').disabled = role !== 'sender' || !connection ||
@@ -31,6 +32,7 @@ function refresh() {
 }
 
 function disconnect(message = 'Connection closed') {
+  sendGeneration += 1;
   try { channel?.close(); } catch {}
   try { connection?.close(); } catch {}
   channel = null; connection = null; role = null;
@@ -72,7 +74,7 @@ function bindChannel(value) {
   channel.binaryType = 'arraybuffer';
   channel.addEventListener('open', () => { refresh(); status('Devices connected. You can send an encrypted file.'); });
   channel.addEventListener('close', () => {
-    if (channel === value) { channel = null; pendingSha = null; sending = false; refresh(); status('Peer data channel closed.'); }
+    if (channel === value) { channel = null; pendingSha = null; sendGeneration += 1; sending = false; refresh(); status('Peer data channel closed.'); }
   });
   channel.addEventListener('message', event => {
     receiveQueue = receiveQueue.then(() => receiveMessage(event.data)).catch(error => {
@@ -104,10 +106,12 @@ async function receiveMessage(data) {
   } else if (frame.type === 'receipt') {
     if (pendingSha && frame.sha256 === pendingSha) {
       pendingSha = null;
+      refresh();
       status('Receiver confirmed the exact encrypted package arrived intact.');
     }
   } else if (frame.type === 'error') {
     pendingSha = null;
+    refresh();
     status('The receiving device rejected the transfer.', true);
   } else {
     throw new Error('Unrecognized peer control frame');
@@ -194,22 +198,45 @@ $('peer-copy').addEventListener('click', operate(async () => {
 }));
 
 $('peer-send').addEventListener('click', operate(async () => {
-  if (sending || channel?.readyState !== 'open') throw new Error('Connect to a peer before sending');
+  const activeChannel = channel;
+  const activeConnection = connection;
+  if (sending || pendingSha || activeChannel?.readyState !== 'open') {
+    throw new Error('Connect to a peer and finish any pending receipt before sending');
+  }
   const file = $('peer-file').files?.[0];
   if (!file || file.size > MAX_FILE_BYTES) throw new Error('Choose a file up to 16 MiB');
   const secret = $('peer-pass').value;
   if (!secret || secret.length < 12) throw new Error('Use a passphrase of at least 12 characters');
+  const attempt = ++sendGeneration;
   sending = true; refresh();
   try {
     status('Encrypting selected file in your browser...');
     const result = await sealFile(file, secret);
     $('peer-pass').value = '';
+    const packageText = JSON.stringify(result.package);
+    const expectedSha = await sha256(new TextEncoder().encode(packageText));
+    if (attempt !== sendGeneration || channel !== activeChannel ||
+        connection !== activeConnection || activeChannel.readyState !== 'open') {
+      throw new Error('The peer connection changed while encrypting. Reconnect and retry.');
+    }
+    pendingSha = expectedSha;
     status('Sending encrypted package to peer...');
-    const fingerprint = await sendPackage(channel, JSON.stringify(result.package),
+    const sentSha = await sendPackage(activeChannel, packageText,
       (sent, total) => { $('peer-progress').value = sent / total * 100; });
-    pendingSha = fingerprint;
-    status('Encrypted transfer sent. Waiting for receiver integrity receipt...');
-  } finally { sending = false; refresh(); }
+    if (sentSha !== expectedSha) throw new Error('Encrypted package fingerprint changed before transfer');
+    if (attempt === sendGeneration && channel === activeChannel &&
+        connection === activeConnection && pendingSha === expectedSha) {
+      status('Encrypted transfer sent. Waiting for receiver integrity receipt...');
+    }
+  } catch (error) {
+    if (attempt === sendGeneration && pendingSha) {
+      pendingSha = null;
+      refresh();
+    }
+    throw error;
+  } finally {
+    if (attempt === sendGeneration) { sending = false; refresh(); }
+  }
 }));
 
 $('peer-download').addEventListener('click', () => {
