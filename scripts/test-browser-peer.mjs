@@ -37,7 +37,7 @@ try {
   const errors = [];
   for (const page of [sender, receiver]) page.on('pageerror', error => errors.push(error.message));
   await sender.goto(origin);
-  assert.match(await sender.title(), /Secure File Transfer/);
+  assert.match(await sender.title(), /Strata.*Correspond.*Connect.*Create.*Call/);
   await sender.goto(origin + '/connect.html');
   await receiver.goto(origin + '/connect.html');
 
