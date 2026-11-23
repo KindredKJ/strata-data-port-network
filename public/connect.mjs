@@ -1,5 +1,5 @@
 import { sealFile, MAX_FILE_BYTES } from './app-core.mjs';
-import { encodeSignal, decodeSignal, TransferReceiver, sendPackage } from './peer-protocol.mjs';
+import { encodeSignal, decodeSignal, TransferReceiver, sendPackage, sha256 } from './peer-protocol.mjs';
 
 const $ = id => document.getElementById(id);
 let connection = null;
