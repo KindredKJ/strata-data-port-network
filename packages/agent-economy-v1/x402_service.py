@@ -124,7 +124,7 @@ def decode_payment(header):
 def encode(value):
     return base64.b64encode(canon(value).encode()).decode("ascii")
 
-class PaidCapabilityService:
+class PaidProductService:
     """One immutable fixed-price service. Payment state is stable across restarts.
 
     This is an application WSGI handler; terminate TLS and authenticate operators
@@ -139,16 +139,47 @@ class PaidCapabilityService:
         self.origin=secure_url(public_origin)
         self.tenant_id,self.agent_id=tenant_id,agent_id
         self.amount=amount
-        self.route="/v1/paid/agent-capabilities"
+        self.route="/v1/paid/agent-commerce-launch-brief"
         self.requirements={"scheme":"exact","network":BASE,
              "amount":str(amount),"asset":BASE_USDC,"payTo":merchant,
              "maxTimeoutSeconds":60,"extra":{"name":"USDC","version":"2"}}
-        self.resource={"url":self.origin+self.route,"description":"Kindred agent capability manifest",
+        self.resource={"url":self.origin+self.route,"description":"Model-agnostic agent commerce launch brief",
              "mimeType":"application/json","serviceName":"Kindred Labs"}
-        self.catalog={"version":"kindred.marketplace.capability.v1",
-                      "capabilities":["agent.discovery","human-agent.matching",
-                                      "proof.receipt.query"],
-                      "provider":"Kindred Labs","delivery":"read-only"}
+        self.product={
+            "contract_version":"kindred.finished-product.agent-commerce-launch-brief.v1",
+            "product_id":"kindred-agent-commerce-launch-brief",
+            "version":"1.0.0",
+            "title":"Model-Agnostic Agent Commerce Launch Brief",
+            "delivery":"complete_digital_report",
+            "sections":[
+                {"id":"customer-outcome","title":"Sell a finished customer outcome",
+                 "actions":["Choose one job customers already pay to complete.",
+                            "Expose the delivered result as the product; keep Kindred models, private APIs, memory and internal SDKs inside the company group.",
+                            "Use a product-specific contract, price, fulfillment proof and refund policy."]},
+                {"id":"model-neutrality","title":"Keep the buyer model-agnostic",
+                 "actions":["Use a stable HTTP payment contract and portable order identifiers.",
+                            "Keep wallet signing in the buyer's wallet and payment policy in the buyer's own control plane.",
+                            "Treat model routing as an internal implementation choice; do not bind the product to one model vendor."]},
+                {"id":"settlement","title":"Separate payment from bank cash",
+                 "actions":["This prototype's x402 adapter is configured for exact USDC payment on Base only.",
+                            "Verify the facilitator result against an independent chain receipt before fulfillment.",
+                            "Treat confirmed USDC as on-chain proceeds until a separately verified provider converts or settles it to the company's bank account."]},
+                {"id":"interoperability","title":"Expand chains only after demand",
+                 "actions":["Keep network and asset identifiers explicit in every order and receipt.",
+                            "Add each chain through an independently tested adapter with replay protection and reconciliation.",
+                            "Do not describe cross-chain routing or fiat payout as live unless a real end-to-end receipt proves it."]},
+                {"id":"commercial-launch","title":"Launch with controlled economics",
+                 "actions":["Start with one customer segment, one finished product, one merchant entity and one settlement path.",
+                            "Measure paid conversion, fulfillment cost, refunds, retained company cash and repeat purchase.",
+                            "Route fiat sales through a verified company merchant account and reconcile provider payout references to the company's bank account."]}
+            ],
+            "scope":{"report_type":"general implementation brief",
+                     "base_payment_adapter":"Base mainnet USDC exact; prototype integration only",
+                     "cross_chain_settlement":"not included in this product",
+                     "fiat_bank_payout":"requires separately configured and verified provider and company bank account",
+                     "private_capabilities":"internal company use only"},
+            "evidence_boundary":"This brief does not claim that any Kindred payment endpoint, bank account, cross-chain route, or customer transaction is live."
+        }
 
     def respond(self,start,status,body,headers=None):
         b=canon(body).encode()
@@ -174,7 +205,7 @@ class PaidCapabilityService:
         except (StateConflict,PermissionError):
             return self.respond(start,"409 Conflict",{"error":"purchase identity conflict"})
         if p["status"]=="settled":
-            return self.respond(start,"200 OK",self.catalog,[
+            return self.respond(start,"200 OK",self.product,[
                 ("PAYMENT-RESPONSE",encode(json.loads(p["facilitator_receipt"])))])
         if p["status"] not in ("required",):
             return self.respond(start,"409 Conflict",{"error":"payment pending reconciliation","purchase_id":purchase_id})
@@ -200,7 +231,7 @@ class PaidCapabilityService:
             self.store.money_event("x402:"+purchase_id,"x402",settlement["transaction"].lower(),
                     purchase_id,"payment",BASE_USDC,self.amount,"settled",{
                         "facilitator":settlement,"chain":chain})
-            return self.respond(start,"200 OK",self.catalog,[
+            return self.respond(start,"200 OK",self.product,[
                 ("PAYMENT-RESPONSE",encode(settlement))])
         except (ValueError,PermissionError) as e:
             return self.respond(start,"402 Payment Required",{"error":str(e)})
@@ -219,7 +250,7 @@ def production_service():
     facilitator=X402Facilitator(env["KINDRED_X402_FACILITATOR_URL"],
                                env.get("KINDRED_X402_FACILITATOR_TOKEN"))
     if not facilitator.supports(BASE): raise RuntimeError("facilitator does not support Base exact V2")
-    return PaidCapabilityService(EconomyStore(env["KINDRED_ECONOMY_DB"]),facilitator,
+    return PaidProductService(EconomyStore(env["KINDRED_ECONOMY_DB"]),facilitator,
             BaseReceiptVerifier(env["KINDRED_BASE_RPC_URL"]),
             merchant=env["KINDRED_MERCHANT_WALLET"],public_origin=env["KINDRED_PUBLIC_ORIGIN"],
             tenant_id=env["KINDRED_SELLER_TENANT"],agent_id=env["KINDRED_SELLER_AGENT"])
