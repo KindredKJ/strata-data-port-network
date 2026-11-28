@@ -9,6 +9,7 @@ import { homedir } from 'node:os';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { verifyPortNames, makePortUri } from '../../src/port-names.mjs';
 import { communityCatalog } from '../../community/src/access.mjs';
+import { requestNativeCognition } from '../../src/native-cognition-client.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const assets = fileURLToPath(new URL('./public/', import.meta.url));
@@ -163,12 +164,11 @@ async function signedNamespace(manifestPath) {
     return { verified: false, ownerPort: null, expiresAt: null, entries: [] };
   }
 }
-async function localAI({ task, prompt }, { model, endpoint }) {
+async function localAI({ task, prompt }, { model, endpoint, nativeCognitionEndpoint }) {
   if (typeof task !== 'string' || !allowedTasks.has(task) ||
       typeof prompt !== 'string' || prompt.trim().length < 3 || prompt.length > 3500) {
     throw new Error('AI task or question rejected');
   }
-  if (!model) return { unavailable: true, reason: 'No local model configured. Set PORTAL_LOCAL_MODEL to a running OpenAI-compatible local model identifier.' };
   let uri;
   try { uri = new URL(endpoint); } catch { throw new Error('Invalid local model endpoint'); }
   if (uri.protocol !== 'http:' || uri.hostname !== '127.0.0.1' ||
@@ -182,6 +182,21 @@ async function localAI({ task, prompt }, { model, endpoint }) {
     build: 'Offer runnable implementation steps, deployment gates and honest verification requirements.',
     plan: 'Sequence practical actions by value, dependencies and owner-approved authority.'
   };
+  if (nativeCognitionEndpoint) {
+    try {
+      const native = await requestNativeCognition({
+        input: directives[task] + '\nTask: ' + task + '\n' + prompt.trim(),
+        source: 'sdpn-portal',
+        endpoint: nativeCognitionEndpoint,
+        timeoutMs: 75000
+      });
+      return { answer: native.output.slice(0, 14000), source: 'sdpn-native-cognition',
+        engine: native.engine, generative: native.generative };
+    } catch {
+      return { unavailable: true, reason: 'SDPN native cognition service unavailable.' };
+    }
+  }
+  if (!model) return { unavailable: true, reason: 'No local model configured. Set PORTAL_LOCAL_MODEL to a running OpenAI-compatible local model identifier.' };
   let response;
   try {
     response = await fetch(endpoint, { method: 'POST',
@@ -226,7 +241,8 @@ async function respondApi(req, res, url, opts, csrf) {
       product: 'Portal', schema: 'kindred.sdpn.portal.v1', scope: 'local-only',
       searchCoverage: 'local-SDPN-documents-and-owned-sites',
       indexedDocuments: documents.length + sites.length, ownedSites: sites.length,
-      signedNamespaceVerified: names.verified, localAIConfigured: Boolean(opts.model),
+      signedNamespaceVerified: names.verified, localAIConfigured: Boolean(opts.model || opts.nativeCognitionEndpoint),
+      nativeCognitionConfigured: Boolean(opts.nativeCognitionEndpoint),
       networkPortSession: false, globalWebIndex: false, paidProviderRequired: false,
     });
   }
@@ -282,10 +298,11 @@ async function respondApi(req, res, url, opts, csrf) {
 }
 export function createPortalServer({ dataDirectory = defaultData, manifestPath = defaultManifest,
   model = process.env.PORTAL_LOCAL_MODEL ?? '',
-  endpoint = process.env.PORTAL_LOCAL_ENDPOINT ?? 'http://127.0.0.1:8080/v1/chat/completions' } = {}) {
+  endpoint = process.env.PORTAL_LOCAL_ENDPOINT ?? 'http://127.0.0.1:8080/v1/chat/completions',
+  nativeCognitionEndpoint = process.env.PORTAL_NATIVE_COGNITION_ENDPOINT ?? '' } = {}) {
   const csrf = randomBytes(32).toString('hex');
   const opts = { dataDirectory: resolve(dataDirectory), manifestPath: resolve(manifestPath),
-    model, endpoint, port: () => server.address()?.port };
+    model, endpoint, nativeCognitionEndpoint, port: () => server.address()?.port };
   const server = createServer(async (req, res) => {
     try {
       const boundPort = server.address()?.port;

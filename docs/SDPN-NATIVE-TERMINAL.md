@@ -164,3 +164,19 @@ These candidate binaries were cross-compiled with Go 1.23.2, the compiler availa
 6. **High-assurance release:** reproducible signed binaries, security policies, test isolation, user documentation, Linux deb/rpm, Windows MSIX, ARM64, updater, encrypted native profiles and telemetry-instrumented benchmarks.
 
 **Readiness impact:** This code is a new native terminal candidate. Its local unit tests and cross-builds do **not** elevate any of the four global SDPN network launch gates without the corresponding independent-device, recovery, sustained-performance and traversal evidence. Founder global GO/NO-GO remains pending.
+
+### PORTAL integration (implemented opt-in path)
+
+The existing SDPN PORTAL workspace now supports the same native local cognition endpoint used by the terminal and Node services. The original local-model route remains available and unchanged when this option is not configured:
+
+```bash
+# Start SDPN local cognition service first:
+./sdpn-terminal-linux-amd64 cognition serve 127.0.0.1 18281
+
+# From the checked-out SDPN repository:
+PORTAL_NATIVE_COGNITION_ENDPOINT=http://127.0.0.1:18281/v1/cognition node apps/portal/server.mjs
+```
+
+PORTAL's existing `/api/assist` task and CSRF/origin checks remain in place. When native cognition is configured, authorized requests use the new first-party `requestNativeCognition` Node adapter, require loopback-only HTTP, reject redirects, return explicit engine/generative metadata, and do not silently fall back to a hosted model. The endpoint is `local-only`; enabling it does not create a public SDPN AI service.
+
+The native PORTAL integration has a dedicated test `apps/portal/test/native-cognition.test.mjs`; independent CI acceptance remains pending while Actions jobs are failing before reporting steps.
