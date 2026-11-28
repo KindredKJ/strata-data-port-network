@@ -26,6 +26,7 @@ function hmac(secret, text) {
 }
 
 function safeEqualHex(left, right) {
+  if (!validSha256(left) || !validSha256(right)) return false;
   try {
     const a = Buffer.from(left, "hex");
     const b = Buffer.from(right, "hex");
@@ -173,30 +174,55 @@ export async function startProofReceiver({
   host = "0.0.0.0",
   port = 47900,
   secret,
-  maxBytes = DEFAULT_MAX_BYTES
+  maxBytes = DEFAULT_MAX_BYTES,
+  maxSessions = 128,
+  challengeTtlMs = CHALLENGE_TTL_MS,
+  onReceipt
 } = {}) {
   requireSecret(secret);
   positiveInteger(maxBytes, "maxBytes");
+  positiveInteger(maxSessions, "maxSessions");
+  positiveInteger(challengeTtlMs, "challengeTtlMs");
+  if (onReceipt !== undefined && typeof onReceipt !== "function") {
+    throw new TypeError("onReceipt must be a function");
+  }
   const destinationHostFingerprint = hostFingerprint();
   const sessions = new Map();
+  const expireSessions = () => {
+    const now = Date.now();
+    for (const [id, session] of sessions) {
+      if (now - session.createdAt >= challengeTtlMs) sessions.delete(id);
+    }
+  };
+  const expiryTimer = setInterval(expireSessions, Math.min(challengeTtlMs, 1000));
+  expiryTimer.unref();
 
   const server = createServer(async (request, response) => {
     try {
       if (request.method === "POST" && request.url === "/proof/challenge") {
+        expireSessions();
+        if (sessions.size >= maxSessions) {
+          return sendJson(response, 429, { error: "proof_session_capacity" });
+        }
         const body = await readBody(request, 64 * 1024);
         const hello = JSON.parse(body.toString("utf8"));
         if (hello.schemaVersion !== TWO_HOST_PROOF_SCHEMA) {
           return sendJson(response, 400, { error: "schema_mismatch" });
         }
         if (
-          !hello.sourceHostFingerprint ||
-          !hello.stateId ||
+          !validSha256(hello.sourceHostFingerprint) ||
+          typeof hello.stateId !== "string" ||
+          hello.stateId.length < 1 || hello.stateId.length > 512 ||
+          /[|\r\n]/.test(hello.stateId) ||
           !validSha256(hello.stateHash) ||
           !Number.isSafeInteger(hello.generation) ||
           hello.generation < 0 ||
           !validSha256(hello.payloadSha256)
         ) {
           return sendJson(response, 400, { error: "invalid_hello" });
+        }
+        if (hello.stateHash.toLowerCase() !== hello.payloadSha256.toLowerCase()) {
+          return sendJson(response, 400, { error: "state_payload_hash_mismatch" });
         }
         if (
           !Number.isSafeInteger(hello.payloadBytes) ||
@@ -206,6 +232,10 @@ export async function startProofReceiver({
           return sendJson(response, 413, { error: "payload_size_rejected" });
         }
 
+        expireSessions();
+        if (sessions.size >= maxSessions) {
+          return sendJson(response, 429, { error: "proof_session_capacity" });
+        }
         const sessionId = randomUUID();
         const challenge = randomBytes(32).toString("hex");
         sessions.set(sessionId, {
@@ -226,7 +256,7 @@ export async function startProofReceiver({
           challenge,
           destinationHostFingerprint,
           cipher: TWO_HOST_CIPHER,
-          expiresInMs: CHALLENGE_TTL_MS
+          expiresInMs: challengeTtlMs
         });
       }
 
@@ -245,7 +275,7 @@ export async function startProofReceiver({
         }
 
         const session = sessions.get(sessionId);
-        if (!session || Date.now() - session.createdAt > CHALLENGE_TTL_MS) {
+        if (!session || Date.now() - session.createdAt >= challengeTtlMs) {
           sessions.delete(sessionId);
           return sendJson(response, 401, { error: "proof_session_invalid" });
         }
@@ -255,6 +285,9 @@ export async function startProofReceiver({
         if (!safeEqualHex(authorization, expectedAuth)) {
           return sendJson(response, 403, { error: "proof_auth_rejected" });
         }
+
+        // Consume before awaiting body IO: one authenticated session has one attempt.
+        sessions.delete(sessionId);
 
         const ciphertext = await readBody(request, maxBytes);
         let payload;
@@ -313,11 +346,15 @@ export async function startProofReceiver({
         };
         const receiptMac = hmac(secret, receiptTranscript(receiptCore));
         sessions.delete(sessionId);
+        const receipt = { ...receiptCore, receiptMac };
+        // Optional audit sink must succeed before a success receipt is returned.
+        try {
+          await onReceipt?.(Object.freeze({ ...receipt }));
+        } catch {
+          return sendJson(response, 503, { error: "proof_receipt_persistence_failed" });
+        }
 
-        return sendJson(response, integrityVerified ? 200 : 422, {
-          ...receiptCore,
-          receiptMac
-        });
+        return sendJson(response, integrityVerified ? 200 : 422, receipt);
       }
 
       sendJson(response, 404, { error: "not_found" });
@@ -328,9 +365,11 @@ export async function startProofReceiver({
       });
     }
   });
+  server.requestTimeout = DEFAULT_TIMEOUT_MS;
+  server.headersTimeout = DEFAULT_TIMEOUT_MS;
 
   await new Promise((resolve, reject) => {
-    server.once("error", reject);
+    server.once("error", (error) => { clearInterval(expiryTimer); reject(error); });
     server.listen(port, host, resolve);
   });
 
@@ -346,6 +385,8 @@ export async function startProofReceiver({
     destinationHostFingerprint,
     cipher: TWO_HOST_CIPHER,
     async close() {
+      clearInterval(expiryTimer);
+      sessions.clear();
       await new Promise((resolve, reject) => {
         server.close((error) => error ? reject(error) : resolve());
       });
@@ -366,7 +407,9 @@ export async function sendTwoHostProof({
   requireSecret(secret);
   positiveInteger(port, "port");
   positiveInteger(timeoutMs, "timeoutMs");
-  if (!stateId) throw new Error("stateId is required");
+  if (typeof stateId !== "string" || !stateId || stateId.length > 512 || /[|\r\n]/.test(stateId)) {
+    throw new Error("stateId must be a bounded, unambiguous transcript field");
+  }
   if (!validSha256(stateHash)) throw new Error("stateHash must be a SHA-256 hex digest");
   if (!Number.isSafeInteger(generation) || generation < 0) {
     throw new Error("generation must be a non-negative safe integer");
@@ -401,8 +444,11 @@ export async function sendTwoHostProof({
     throw new Error(`proof challenge failed: ${challengeResponse.status}`);
   }
   const challenge = await challengeResponse.json();
-  if (challenge.cipher !== TWO_HOST_CIPHER) {
-    throw new Error("proof receiver cipher mismatch");
+  if (challenge.schemaVersion !== TWO_HOST_PROOF_SCHEMA ||
+      typeof challenge.sessionId !== "string" || !/^[0-9a-f-]{36}$/i.test(challenge.sessionId) ||
+      !validSha256(challenge.challenge) || !validSha256(challenge.destinationHostFingerprint) ||
+      challenge.cipher !== TWO_HOST_CIPHER) {
+    throw new Error("proof receiver challenge mismatch");
   }
 
   const transcript = proofTranscript({
@@ -450,8 +496,20 @@ export async function sendTwoHostProof({
     throw new Error("proof receipt MAC verification failed");
   }
   if (
-    !receipt.integrityVerified ||
-    !receipt.encryptedOnWire ||
+    receipt.schemaVersion !== TWO_HOST_PROOF_SCHEMA ||
+    receipt.sessionId !== challenge.sessionId ||
+    receipt.sourceHostFingerprint !== sourceHostFingerprint ||
+    receipt.destinationHostFingerprint !== challenge.destinationHostFingerprint ||
+    receipt.payloadBytes !== payload.length || receipt.ciphertextBytes !== ciphertext.length ||
+    receipt.authenticationVerified !== true ||
+    receipt.integrityVerified !== true ||
+    receipt.encryptedOnWire !== true ||
+    receipt.physicalMachineAttestationProven !== false ||
+    receipt.productionReadyClaim !== false ||
+    receipt.transportClass !== "HTTP_TCP_AES_256_GCM_BUFFERED" ||
+    typeof receipt.loopbackObserved !== "boolean" ||
+    receipt.distinctHostFingerprints !== (sourceHostFingerprint !== challenge.destinationHostFingerprint) ||
+    receipt.twoHostNetworkProofSatisfied !== (receipt.distinctHostFingerprints && !receipt.loopbackObserved) ||
     receipt.cipher !== TWO_HOST_CIPHER ||
     receipt.receivedSha256 !== payloadSha256 ||
     receipt.stateId !== stateId ||
