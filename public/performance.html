@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071412">
+<meta name="description" content="Live SDPN proof API checks and a transparent 40% p95 latency qualification tracker.">
+<title>SDPN Live Operations | Kindred Labs</title>
+<style>
+:root{color-scheme:dark;--bg:#071412;--panel:#0e211b;--border:#2b493b;--fg:#eaf5ef;--sub:#afc2b8;--accent:#76f2c4;--warn:#ffdc9d;--bad:#ffb4a9}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#164632 0,transparent 40rem),var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+main,header,footer{width:min(1080px,calc(100% - 32px));margin:auto}a{color:var(--accent)}nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center;padding:24px 0;border-bottom:1px solid var(--border)}nav a{text-decoration:none}nav a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.kicker{color:var(--accent);font-size:.8rem;font-weight:750;text-transform:uppercase;letter-spacing:.14em}
+h1{font-size:clamp(38px,7vw,72px);line-height:1.08;letter-spacing:-.05em;margin:14px 0}h2{font-size:1.5rem;margin:0 0 14px}h3{margin:0 0 8px;font-size:1rem}p{color:var(--sub)}
+.hero{padding:68px 0 44px}.hero>p{font-size:1.1rem;max-width:740px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{border:1px solid var(--border);border-radius:16px;background:var(--panel);padding:22px;min-width:0}.value{display:block;color:var(--accent);font-size:clamp(1.35rem,3vw,2rem);font-weight:800;overflow-wrap:anywhere}.muted{color:var(--sub);font-size:.86rem}.section{padding:36px 0;border-top:1px solid var(--border);margin-top:36px}.row{display:flex;gap:15px;align-items:center;flex-wrap:wrap}.button{border:1px solid var(--accent);background:var(--accent);border-radius:999px;padding:10px 17px;color:#071412;cursor:pointer;font-weight:800;font:inherit}.button:disabled{opacity:.5;cursor:wait}.warning{color:var(--warn)}.error{color:var(--bad)}.bar{height:12px;border-radius:99px;overflow:hidden;background:#234536;margin:12px 0}.bar>span{display:block;height:100%;width:60%;background:var(--accent)}code{font-family:ui-monospace,Consolas,monospace;overflow-wrap:anywhere}dl{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}dt{color:var(--sub)}dd{margin:0;text-align:right}footer{padding:30px 0 50px;color:var(--sub);font-size:.86rem}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.hero{padding-top:48px}dl{grid-template-columns:1fr}dd{text-align:left;margin-bottom:8px}}
+</style>
+</head>
+<body>
+<header><nav><a href="/" aria-label="SDPN homepage"><strong>STRATA / KINDRED LABS</strong></a><div class="row"><a href="/proof.html">Proof record</a><a href="https://github.com/KindredKJ/strata-data-port-network">Source</a></div></nav></header>
+<main>
+<section class="hero">
+<div class="kicker">Live operations · Public proof endpoint</div>
+<h1>Measure first.<br>Accelerate when qualified.</h1>
+<p>This page monitors the public SDPN proof API from your browser and tracks the separate qualification requirements for the 40% p95 latency objective. API reachability is not a measurement of SDPN transport acceleration.</p>
+<div class="row"><button id="checkNow" class="button" type="button">Check proof API now</button><span class="muted">Automatic check every 60 seconds while this page is open.</span></div>
+</section>
+<section class="grid" aria-label="Live status">
+<article class="card"><h3>Public proof API</h3><output class="value" id="apiStatus" role="status">Checking…</output><div class="muted" id="apiDetail">No check completed yet.</div></article>
+<article class="card"><h3>Browser-to-API p95</h3><output class="value" id="apiP95">—</output><div class="muted">Milliseconds; browser RTT only. Not SDPN transport p95.</div></article>
+<article class="card"><h3>40% network improvement</h3><strong class="value warning">Unverified</strong><div class="muted">Requires signed paired physical-host measurements. No verified result is connected to this page.</div></article>
+</section>
+<section class="section" aria-labelledby="goal">
+<div class="kicker">Activation rule</div><h2 id="goal">At least 40% lower p95, sustained</h2>
+<div class="bar" role="img" aria-label="Candidate p95 must be at most 60 percent of baseline p95"><span></span></div>
+<p>For each of <strong>three consecutive, non-overlapping five-minute windows</strong>, the candidate p95 must be <strong>at most 60% of baseline p95</strong>. Each window needs at least 60 successful paired baseline/candidate samples, and candidate p99 latency and packet loss must be no worse. Fresh verified evidence from distinct physical endpoints is required before activating accelerated transport. A failed active window or restart returns the session to baseline.</p>
+<div class="grid">
+<div class="card"><h3>Measurement windows</h3><strong class="value warning">0 / 3 verified</strong><div class="muted">No trusted live physical-host data feed connected</div></div>
+<div class="card"><h3>Transport state</h3><strong class="value warning">Baseline</strong><div class="muted">No network traffic redirection asserted by this dashboard</div></div>
+<div class="card"><h3>Physical host qualification</h3><strong class="value warning">Pending</strong><div class="muted">Two-device signed evidence not yet confirmed</div></div>
+</div>
+</section>
+<section class="section">
+<div class="kicker">Observability</div><h2>Live API check details</h2>
+<div class="card"><dl>
+<dt>Last observed check</dt><dd id="lastCheck">Not yet checked</dd>
+<dt>Checks completed in this tab</dt><dd id="checkCount">0</dd>
+<dt>Most recent browser-to-API RTT</dt><dd id="recentRtt">—</dd>
+<dt>HTTP response</dt><dd id="httpStatus">—</dd>
+</dl>
+<p class="muted">Samples are collected locally in this open tab and are not retained or signed. A reachable HTTPS endpoint alone does not establish working carrier transport, host isolation, production-ready recovery, or the 40% objective.</p></div>
+</section>
+<section class="section">
+<h2>Source-backed release progress</h2>
+<p>Review the independently verifiable external proof and the implementation candidates for native QUIC, durable ZPS state, and MORPH/1. The public site can be online while those network capabilities remain in qualification.</p>
+<div class="row"><a href="/proof.html">External proof record</a><a href="https://github.com/KindredKJ/strata-data-port-network/pull/50">QUIC candidate</a><a href="https://github.com/KindredKJ/strata-data-port-network/pull/56">MORPH/1 candidate</a><a href="https://github.com/KindredKJ/strata-data-port-network/issues/22">Physical-host acceptance</a></div>
+</section>
+</main>
+<footer>Kindred Labs · SDPN public release observability · This dashboard reports no production acceleration without verified measurement evidence.</footer>
+<script type="module">
+const samples=[];let busy=false;
+const el=id=>document.getElementById(id);
+function p95(values){const sorted=[...values].sort((a,b)=>a-b);return sorted[Math.ceil(.95*sorted.length)-1];}
+async function check(){
+ if(busy)return;busy=true;el('checkNow').disabled=true;
+ const started=performance.now();const controller=new AbortController();
+ const timeout=setTimeout(()=>controller.abort(),8000);
+ let status='Network error';
+ try {
+  const response=await fetch('/api/proof/status?live='+Date.now(),{method:'GET',cache:'no-store',signal:controller.signal,headers:{Accept:'application/json'}});
+  status='HTTP '+response.status;
+  const payload=await response.json();
+  if(!response.ok||!payload||typeof payload!=='object')throw new Error('Invalid status response');
+  const elapsed=performance.now()-started;
+  samples.push(elapsed);if(samples.length>30)samples.shift();
+  el('apiStatus').textContent='Reachable';
+  el('apiStatus').classList.remove('error');
+  el('apiDetail').textContent='Valid JSON response from public proof status endpoint.';
+  el('recentRtt').textContent=elapsed.toFixed(1)+' ms';
+  el('apiP95').textContent=p95(samples).toFixed(1)+' ms';
+ }catch(err){
+  el('apiStatus').textContent='Unavailable';
+  el('apiStatus').classList.add('error');
+  el('apiDetail').textContent=err?.name==='AbortError'?'Timed out after 8 seconds.':'Request failed or returned invalid JSON.';
+  el('recentRtt').textContent='—';
+ }finally{
+  clearTimeout(timeout);el('httpStatus').textContent=status;
+  el('lastCheck').textContent=new Date().toLocaleString();
+  el('checkCount').textContent=String(Number(el('checkCount').textContent)+1);
+  el('checkNow').disabled=false;busy=false;
+ }
+}
+el('checkNow').addEventListener('click',check);check();setInterval(()=>{if(document.visibilityState==='visible')check();},60000);
+</script>
+</body>
+</html>

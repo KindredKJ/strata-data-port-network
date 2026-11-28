@@ -1,0 +1,1 @@
+evidence/two-vm/**/*.log -text -diff
