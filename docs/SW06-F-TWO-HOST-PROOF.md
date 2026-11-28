@@ -53,3 +53,27 @@ stores the returned receipt, and asks Kindred Root to verify/import it.
 CI proves protocol behavior on loopback and must keep `twoHostNetworkProofSatisfied=false`.
 The physical gate changes only after two real authorized hosts complete the run and Kindred verifies
 the receipt.
+
+## Additive protocol hardening (October 7, 2026)
+
+Founder: **Kindred Jermaine Cox / Kindred Labs**. Existing component identities,
+wire MAC vector, candidate classifications and predecessor lineage are preserved.
+
+The receiver caps outstanding sessions (default 128), expires challenges after
+30 seconds, rejects ambiguous identifiers and malformed MACs, and consumes an
+authenticated session before asynchronous work to prevent concurrent replay.
+The sender binds the returned receipt to the exact session, host fingerprints,
+state hash and byte count, and rejects elevated physical/production claims.
+
+The PowerShell launcher now requires strict boolean MAC, lineage and encryption
+success, an exact state hash, and the two-host software gate. For deliberately
+scoped local work, `-AllowLoopbackEvidence` is explicit; it does not authorize any
+physical claim. A hashes index accompanies the payload and receipt. Successful
+completion clears stale native exit status. This change affects the SW06-F
+launcher; the historical SW02 PowerShell wrapper was not recovered or modified.
+
+CI retains Node protocol and Windows verification-gate logs. These jobs verify
+behavior and parsing; they do not execute two physical machines or import a real
+founder-authorized receipt. The existing transport uses its documented ephemeral
+pairing-key AES-GCM/HKDF scheme; mutual TLS and physical identity attestation
+remain separate prerequisites where required by the deployment policy.

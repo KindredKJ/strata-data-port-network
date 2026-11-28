@@ -1,0 +1,19 @@
+SCHEMA................ PASS
+SIGNATURE............. PASS
+PINNED KEY............ PASS
+KEY ID................ PASS
+STATE HASH............ PASS
+RECEIVED HASH......... PASS
+AUTHENTICATION........ PASS
+INTEGRITY............. PASS
+SOURCE NODE........... PASS
+DESTINATION NODE...... PASS
+NO PHYSICAL CLAIM..... PASS
+NO PRODUCTION CLAIM... PASS
+
+challengeId: ba6173a6-7091-4467-9e07-e8e5760f9b92
+stateId:     proof-job-3c1bcfd4-91f0-454a-8f4d-c7e9c41b9fd2
+stateHash:   5ca869c0b666c8c9b5621e368a226b69042f97e421b8f723207812b1f1e4bb15
+keyId:       9cccc27fedfbdb987a3f2f442c550ee4c9978f1a29bc017831f81ff4d4439dd5
+destination deployment: dpl_Djfya8BHBfu77WoypyqPZyEK8BAV
+destination commit:     85581c46f8ac14d1fcebb8ba1b4308bf0764a6bc

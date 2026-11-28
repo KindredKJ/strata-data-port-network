@@ -9,7 +9,9 @@ param(
 
   [string]$KindredBaseUrl = "http://127.0.0.1:8790",
 
-  [string]$EvidenceDir = ""
+  [string]$EvidenceDir = "",
+
+  [switch]$AllowLoopbackEvidence
 )
 
 $ErrorActionPreference = "Stop"
@@ -58,6 +60,18 @@ try {
   } | ConvertTo-Json -Depth 12
 
   $verified = Invoke-RestMethod -Method Post -Uri "$KindredBaseUrl/v1/proof/verify" -ContentType "application/json" -Body $verifyBody
+  & "$PSScriptRoot/Assert-SW06FVerification.ps1" -Verified $verified -ExpectedStateHash $artifact.state_hash -AllowLoopbackEvidence:$AllowLoopbackEvidence
+
+  $evidenceIndex = @{
+    schema = "kindred.sdpn.sw06f.local-file-hashes.v1"
+    founder = "Kindred Jermaine Cox"
+    payload_sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $payloadPath).Hash.ToLowerInvariant()
+    receipt_sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $receiptPath).Hash.ToLowerInvariant()
+    two_host_network_proof_satisfied = $verified.two_host_network_proof_satisfied
+    physical_machine_attestation_proven = $false
+    production_authorized = $false
+  }
+  $evidenceIndex | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath "$receiptPath.hashes.json" -Encoding utf8NoBOM
 
   Write-Host ""
   Write-Host "KINDRED SW06-F VERIFICATION"
@@ -69,6 +83,7 @@ try {
   Write-Host "Two-host network gate: $($verified.two_host_network_proof_satisfied)"
   Write-Host ""
   $verified | ConvertTo-Json -Depth 12
+  $global:LASTEXITCODE = 0
 }
 finally {
   Remove-Item Env:KINDRED_SDPN_PROOF_SECRET -ErrorAction SilentlyContinue

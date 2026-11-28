@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#081412">
+<meta name="description" content="Connect two browsers and transfer an encrypted Strata file directly, with SHA-256 integrity verification.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' stun:; img-src 'self' data:; form-action 'none'; base-uri 'none'; object-src 'none'">
+<title>Connect Devices | Strata Data Port Network</title>
+<style>
+:root{color-scheme:dark;--bg:#081412;--panel:#11251e;--border:#315649;--text:#effbf4;--muted:#aec7b7;--green:#86f8c4;--gold:#e0f5a0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% 0,#174333 0,transparent 35rem),var(--bg);color:var(--text);font:16px/1.55 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{width:min(1120px,calc(100% - 34px));margin:auto}a{color:var(--green);text-underline-offset:4px}
+nav{display:flex;gap:20px;align-items:center;justify-content:space-between;padding:23px 0;border-bottom:1px solid var(--border)}nav a{text-decoration:none}nav>div{display:flex;gap:22px;flex-wrap:wrap;font-size:.92rem}
+.brand{font-weight:800;letter-spacing:.04em}h1{font-size:clamp(40px,6.5vw,70px);letter-spacing:-.06em;line-height:1.02;margin:12px 0 20px}
+h2{font-size:clamp(22px,3vw,30px);line-height:1.2;letter-spacing:-.03em;margin:8px 0 12px}h3{font-size:1.1rem;margin:7px 0}
+p{color:var(--muted);margin:12px 0 18px}strong{color:var(--text)}
+.hero{padding:68px 0 32px;max-width:850px}.hero p{font-size:1.18rem;max-width:720px}
+.eyebrow{color:var(--green);font-weight:800;text-transform:uppercase;font-size:.77rem;letter-spacing:.14em}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{min-width:0;border:1px solid var(--border);background:linear-gradient(145deg,#11271f,#0b1a15);padding:25px;border-radius:22px}
+.card.wide{grid-column:1/-1}.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:20px 0 30px}
+.step{border:1px solid var(--border);border-radius:15px;padding:18px}.step p{font-size:.9rem;margin-bottom:0}
+label{display:block;font-weight:700;margin:14px 0 6px}label small{display:block;color:var(--muted);font-weight:400;margin:5px 0}
+textarea,input{font:inherit;background:#061610;border:1px solid #537763;border-radius:10px;padding:12px;color:var(--text);width:100%;min-width:0}textarea{min-height:100px;resize:vertical;font-family:ui-monospace,monospace;font-size:12px;overflow-wrap:anywhere}
+button,.action{border:1px solid var(--green);background:var(--green);color:#032017;border-radius:999px;padding:11px 17px;font:inherit;font-weight:800;cursor:pointer}
+button:disabled{opacity:.4;cursor:not-allowed}.secondary{background:transparent;color:var(--green)}button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}.status{min-height:28px;color:var(--green);font-weight:700;overflow-wrap:anywhere}.status.error{color:#ffb6ad}
+.state{display:inline-block;border:1px solid var(--border);color:var(--gold);padding:6px 12px;border-radius:99px;font-size:.83rem;margin:10px 0}
+progress{width:100%;height:12px;accent-color:var(--green)}.hint{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:40px}
+footer{border-top:1px solid var(--border);color:var(--muted);font-size:.85rem;padding:25px 0 40px}
+@media(max-width:760px){.grid,.steps{grid-template-columns:1fr}.card.wide{grid-column:auto}.hero{padding:43px 0 22px}nav{align-items:flex-start;flex-direction:column}.card{padding:21px}}
+</style>
+</head>
+<body><div class="wrap">
+<nav><a class="brand" href="/">STRATA / KINDRED LABS</a><div><a href="/app.html">Secure packages</a><a href="/proof.html">Developer evidence</a></div></nav>
+<header class="hero">
+<div class="eyebrow">Strata Connect · Direct device transfer</div>
+<h1>Send the file.<br>Not your trust.</h1>
+<p>Connect two browsers and send a passphrase-encrypted file directly over WebRTC. Your file is encrypted locally and checked on arrival. No file storage account or upload server is involved.</p>
+<div class="state" id="connection-state" role="status">Disconnected</div>
+</header>
+<section class="steps" aria-label="Quick guide">
+<div class="step"><div class="eyebrow">01</div><h3>Create an invitation</h3><p>On the sending device, generate an invitation code and share it privately with the receiving device.</p></div>
+<div class="step"><div class="eyebrow">02</div><h3>Return the answer</h3><p>The receiving device joins with the invitation and returns its answer code. Enter it on the first device.</p></div>
+<div class="step"><div class="eyebrow">03</div><h3>Send securely</h3><p>Choose a file, set a passphrase, send, then separately tell the recipient the passphrase to open it.</p></div>
+</section>
+<main class="grid">
+<section class="card" aria-labelledby="pair-start">
+<div class="eyebrow">Pair devices</div><h2 id="pair-start">1. Start or join</h2>
+<p>Both people should keep this page open until transfer completes.</p>
+<div class="row"><button id="peer-create" type="button">Create invitation</button><button id="peer-join" type="button" class="secondary">Join invitation</button></div>
+<label for="peer-output">Your connection code</label>
+<textarea id="peer-output" readonly spellcheck="false" aria-label="Your connection code"></textarea>
+<div class="row"><button id="peer-copy" type="button" class="secondary">Copy code</button></div>
+</section>
+<section class="card" aria-labelledby="pair-finish">
+<div class="eyebrow">Complete pairing</div><h2 id="pair-finish">2. Enter the other code</h2>
+<p>If you're joining, paste the invitation here before selecting Join invitation. If you created the invitation, paste the other device's answer and finish pairing.</p>
+<label for="peer-input">Code received from the other device</label>
+<textarea id="peer-input" spellcheck="false" aria-label="Other device's connection code"></textarea>
+<div class="row"><button id="peer-confirm" type="button">Finish pairing</button><button id="peer-disconnect" type="button" class="secondary">Disconnect</button></div>
+</section>
+<section class="card" aria-labelledby="send-title">
+<div class="eyebrow">Device-to-device</div><h2 id="send-title">3. Send encrypted file</h2>
+<p>Choose any file up to 16 MiB. The passphrase never travels over the peer connection.</p>
+<label for="peer-file">Choose file<input id="peer-file" type="file"></label>
+<label for="peer-pass">Passphrase<input id="peer-pass" type="password" minlength="12" maxlength="1024" autocomplete="new-password"><small>Use at least 12 characters; share through another private channel.</small></label>
+<div class="row"><button id="peer-send" type="button" disabled>Encrypt and send</button></div>
+<label for="peer-progress">Transfer progress</label><progress id="peer-progress" value="0" max="100"></progress>
+</section>
+<section class="card" aria-labelledby="receive-title">
+<div class="eyebrow">Receive</div><h2 id="receive-title">4. Save and open</h2>
+<p>After the encrypted package arrives, Strata checks its SHA-256. Download the package, then open it locally with the separate passphrase.</p>
+<div class="row"><button id="peer-download" type="button" disabled>Download received package</button><a class="action secondary" href="/app.html">Open in Strata Workspace</a></div>
+<p>Receiving a valid encrypted package doesn't imply its passphrase or original contents have been verified; Strata Workspace performs that check when opening.</p>
+</section>
+<section class="card wide"><div class="eyebrow">Connection activity</div>
+<h2>Session details</h2><p id="peer-status" class="status" role="status" aria-live="polite">Create an invitation on one device or join one from another device.</p>
+<p>WebRTC establishes a DTLS-encrypted peer connection and can work across compatible internet connections. This version uses public STUN discovery but no TURN relay, so restrictive NAT or firewalls can prevent pairing. Manual connection codes may contain network address information—share them only with the intended peer. This is direct WebRTC transport, not a claim that native SDPN QUIC or its 40% latency objective has been verified.</p>
+</section>
+</main>
+<section class="hint"><h2>Prefer an encrypted package you can send anywhere?</h2><p>Strata Workspace seals a file into a portable package you can share using your existing messaging or storage service. The recipient verifies and opens it with the passphrase.</p><a href="/app.html">Open Strata Workspace</a></section>
+<footer>Strata Data Port Network · Kindred Labs · Product engineering and cryptographic evidence are documented separately. <a href="/proof.html">Technical proof</a></footer>
+</div>
+<script type="module" src="/connect.mjs"></script>
+</body>
+</html>
