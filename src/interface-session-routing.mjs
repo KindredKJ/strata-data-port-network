@@ -3,14 +3,56 @@ import { createHash } from "node:crypto";
 export const INTERFACE_ROUTE_SCHEMA = "kindred.sdpn.interface-route.v1";
 export const INTERFACE_FRAME_SCHEMA = "kindred.interface.frame.v1";
 
-function normalize(value) {
-  if (Array.isArray(value)) return value.map(normalize);
-  if (value && typeof value === "object") {
-    return Object.fromEntries(
-      Object.keys(value).sort().map((key) => [key, normalize(value[key])])
-    );
+function normalize(value, seen = new WeakSet()) {
+  if (value === null || typeof value === "string" || typeof value === "boolean") {
+    return value;
   }
-  return value;
+  if (typeof value === "number") {
+    if (!Number.isFinite(value) || Object.is(value, -0) ||
+        (Number.isInteger(value) && !Number.isSafeInteger(value))) {
+      throw new TypeError("interface frame numbers must be finite, unambiguous JSON numbers");
+    }
+    return value;
+  }
+  if (typeof value !== "object" ||
+      (!Array.isArray(value) && Object.getPrototypeOf(value) !== Object.prototype &&
+       Object.getPrototypeOf(value) !== null)) {
+    throw new TypeError("interface frame must contain only JSON-compatible values");
+  }
+  if (seen.has(value)) {
+    throw new TypeError("cyclic interface frame values are not supported");
+  }
+  if (Object.getOwnPropertySymbols(value).length > 0) {
+    throw new TypeError("symbol keys are not supported in interface frames");
+  }
+  seen.add(value);
+  try {
+    if (Array.isArray(value)) {
+      if (Object.keys(value).length !== value.length) {
+        throw new TypeError("sparse or extended interface arrays are not supported");
+      }
+      const output = [];
+      for (let i = 0; i < value.length; i++) {
+        const descriptor = Object.getOwnPropertyDescriptor(value, String(i));
+        if (!descriptor || !Object.hasOwn(descriptor, "value")) {
+          throw new TypeError("interface frame accessors are not supported");
+        }
+        output.push(normalize(descriptor.value, seen));
+      }
+      return output;
+    }
+    const output = Object.create(null);
+    for (const key of Object.keys(value).sort()) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, key);
+      if (!descriptor || !Object.hasOwn(descriptor, "value")) {
+        throw new TypeError("interface frame accessors are not supported");
+      }
+      output[key] = normalize(descriptor.value, seen);
+    }
+    return output;
+  } finally {
+    seen.delete(value);
+  }
 }
 
 export function canonicalFrameBytes(frame) {
@@ -43,6 +85,7 @@ export function validateInterfaceFrame(frame) {
   if (!Number.isSafeInteger(frame.sequence) || frame.sequence < 0) {
     throw new Error("interface frame sequence must be a non-negative integer");
   }
+  normalize(frame);
   return frame;
 }
 
@@ -65,14 +108,16 @@ export class SessionSequencer {
 
   accept(frame) {
     validateInterfaceFrame(frame);
-    const key = `${frame.session_id}|${frame.source_peer_id}`;
+    const key = JSON.stringify([frame.session_id, frame.source_peer_id]);
     const previous = this.#lastBySource.get(key);
     if (previous !== undefined && frame.sequence <= previous) {
       throw new Error("interface frame sequence replay or reordering rejected");
     }
-    this.#lastBySource.set(key, frame.sequence);
 
     if (!["ack", "pong"].includes(frame.type)) {
+      if (this.#pending.has(frame.frame_id)) {
+        throw new Error("duplicate pending interface frame ID");
+      }
       if (this.#pending.size >= this.#maxInFlight) {
         throw new Error("interface session backpressure window is full");
       }
@@ -82,6 +127,8 @@ export class SessionSequencer {
         sequence: frame.sequence
       });
     }
+    // Mutate accepted sequence state only once all rejection conditions pass.
+    this.#lastBySource.set(key, frame.sequence);
     return {
       accepted: true,
       pending: this.#pending.size,
@@ -95,6 +142,27 @@ export class SessionSequencer {
       acknowledged: accepted,
       pending: this.#pending.size
     };
+  }
+
+  closeSession(sessionId) {
+    if (typeof sessionId !== "string" || sessionId.length === 0) {
+      throw new TypeError("sessionId must be a nonempty string");
+    }
+    let removedSources = 0;
+    let removedPending = 0;
+    for (const key of this.#lastBySource.keys()) {
+      if (JSON.parse(key)[0] === sessionId) {
+        this.#lastBySource.delete(key);
+        removedSources++;
+      }
+    }
+    for (const [frameId, pending] of this.#pending) {
+      if (pending.sessionId === sessionId) {
+        this.#pending.delete(frameId);
+        removedPending++;
+      }
+    }
+    return { removedSources, removedPending, pending: this.#pending.size };
   }
 
   status() {
@@ -116,7 +184,7 @@ export class SDPNInterfaceRoutePlanner {
 
   plan(frame, endpoint) {
     validateInterfaceFrame(frame);
-    if (!endpoint?.authorized) {
+    if (endpoint?.authorized !== true) {
       throw new Error("interface route endpoint must be authorized");
     }
     if (!endpoint.endpointId || !endpoint.locator) {
