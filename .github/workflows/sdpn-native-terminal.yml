@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - apps/native-terminal/**
+      - apps/portal/server.mjs
+      - apps/portal/test/native-cognition.test.mjs
       - sdk/python/**
       - src/native-cognition-client.mjs
       - test/native-cognition.test.mjs
@@ -43,6 +45,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.14'
-      - run: node --test test/native-cognition.test.mjs
+      - run: node --test test/native-cognition.test.mjs apps/portal/test/native-cognition.test.mjs
       - run: python -m unittest discover -s sdk/python -p 'test_*.py'
       - run: python sdk/python/build_wheel.py
