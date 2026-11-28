@@ -105,3 +105,73 @@ test("oversized or nonstreaming frame stays conservative", () => {
   assert.equal(plan.executed, false);
   assert.equal(plan.physicalZeroCopyProven, false);
 });
+
+test("backpressure does not consume sequence numbers and allows exact retry", () => {
+  const sequencer = new SessionSequencer({ maxInFlight: 1 });
+  sequencer.accept(frame({ frame_id: "first", sequence: 1 }));
+  const second = frame({ frame_id: "second", sequence: 2 });
+  assert.throws(() => sequencer.accept(second), /backpressure/);
+  assert.equal(sequencer.status().pending, 1);
+  sequencer.acknowledge("first");
+  assert.deepEqual(sequencer.accept(second), {
+    accepted: true, pending: 1, lastSequence: 2
+  });
+});
+
+test("duplicate pending frame IDs cannot overwrite entries across sessions", () => {
+  const sequencer = new SessionSequencer({ maxInFlight: 3 });
+  sequencer.accept(frame({ frame_id: "same", session_id: "alpha" }));
+  assert.throws(() => sequencer.accept(frame({
+    frame_id: "same", session_id: "beta"
+  })), /duplicate pending/);
+  assert.equal(sequencer.status().pending, 1);
+  assert.equal(sequencer.status().trackedSources, 1);
+});
+
+test("delimiters in session and source IDs cannot collide", () => {
+  const sequencer = new SessionSequencer({ maxInFlight: 2 });
+  sequencer.accept(frame({
+    session_id: "a|b", source_peer_id: "c", frame_id: "first"
+  }));
+  sequencer.accept(frame({
+    session_id: "a", source_peer_id: "b|c", frame_id: "second"
+  }));
+  assert.equal(sequencer.status().trackedSources, 2);
+});
+
+test("session teardown releases only that session's replay and pending state", () => {
+  const sequencer = new SessionSequencer({ maxInFlight: 3 });
+  sequencer.accept(frame({ session_id: "alpha", frame_id: "alpha-one" }));
+  sequencer.accept(frame({ session_id: "beta", frame_id: "beta-one" }));
+  const closed = sequencer.closeSession("alpha");
+  assert.deepEqual(closed, { removedSources: 1, removedPending: 1, pending: 1 });
+  assert.equal(sequencer.status().trackedSources, 1);
+  assert.equal(sequencer.acknowledge("beta-one").acknowledged, true);
+  sequencer.accept(frame({ session_id: "alpha", frame_id: "alpha-new" }));
+  assert.throws(() => sequencer.closeSession(""), /sessionId/);
+});
+
+test("route planning requires exactly boolean true authorization", () => {
+  const endpoint = { endpointId: "peer", locator: "session://peer" };
+  const planner = new SDPNInterfaceRoutePlanner();
+  for (const value of ["false", 1, {}, null, undefined]) {
+    assert.throws(() => planner.plan(frame(), { ...endpoint, authorized: value }), /authorized/);
+  }
+  assert.equal(planner.plan(frame(), { ...endpoint, authorized: true }).executed, false);
+});
+
+test("canonical frame digest rejects ambiguous or non-JSON values", () => {
+  const cyclic = {};
+  cyclic.self = cyclic;
+  const sparse = [1, , 3];
+  for (const invalid of [
+    { amount: NaN }, { amount: Infinity }, { amount: -Infinity },
+    { amount: -0 }, { value: undefined }, { value: () => 1 },
+    { value: 2n }, { value: new Date() }, { value: sparse }, cyclic
+  ]) {
+    assert.throws(() => canonicalFrameBytes(frame({ data: invalid })), /JSON|numbers|cyclic|array|compatible/);
+  }
+  const first = canonicalFrameBytes(frame({ data: { b: 2, a: 1 } }));
+  const second = canonicalFrameBytes(frame({ data: { a: 1, b: 2 } }));
+  assert.deepEqual(first, second);
+});
