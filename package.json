@@ -30,7 +30,8 @@
     "./port-names": "./src/port-names.mjs",
     "./interface-routing": "./src/interface-session-routing.mjs",
     "./production-scheduler": "./src/production-capability-scheduler.mjs",
-    "./verification-scheduler": "./src/verification-proof-scheduler.mjs"
+    "./verification-scheduler": "./src/verification-proof-scheduler.mjs",
+    "./repair-scheduler": "./src/repair-experiment-scheduler.mjs"
   },
   "devDependencies": {
     "playwright": "1.65.1"
