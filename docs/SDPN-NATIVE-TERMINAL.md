@@ -68,6 +68,29 @@ To verify a stored SW06-F JSON receipt with its original ephemeral session secre
 ./sdpn-terminal-linux-amd64 sdpn verify ./receipt.json
 ```
 
+## SDPN's own signed offline package system
+
+The terminal has a first-party package format `kindred.sdpn.package.v1` that verifies every file SHA-256, an Ed25519 publisher signature and an **explicitly locally trusted** publisher key before installation. There is no network download or external package registry requirement. It rejects traversals, symlinks, oversized bundles, duplicate version overwrites and private signing keys inside bundles; it installs into a local user-owned package directory. Executing a package remains an explicit user command and uses the same OS privileges as the invoking user. This is a developer package manager, not a sandbox for untrusted code.
+
+1. Place a `sdpn-package.json` in the bundle directory with `schema`, `name`, `version`, and `entry` fields. The `sign` command discovers files and writes signed SHA-256 records.
+2. Create keys **outside the bundle** using `sdpn-terminal pkg keygen <keydir>`; keep the generated `publisher.key` file private.
+3. Sign the bundle with `sdpn-terminal pkg sign <bundle-dir> <keydir>/publisher.key`.
+4. Explicitly trust the publisher with `sdpn-terminal pkg trust <keydir>/publisher.pub`.
+5. Run `sdpn-terminal pkg verify <bundle-dir>`, `sdpn-terminal pkg install <bundle-dir>`, `sdpn-terminal pkg list` and `sdpn-terminal pkg exec <name> <version> [args]`.
+
+### Example minimal `sdpn-package.json`
+
+```json
+{
+  "schema": "kindred.sdpn.package.v1",
+  "name": "hello-tool",
+  "version": "1.0.0",
+  "entry": "bin/hello.sh"
+}
+```
+
+Only installed or trusted local runtimes execute language-specific source. A `.whl` is a Python distribution for an installed local Python environment; it is not a native replacement for Python. This first-party manager will later expand to a signed SDPN package registry, toolchains, reproducible builds and authenticated Port Zero grants.
+
 ## SDPN first-party cognition across components
 
 Local terminal server:
@@ -108,7 +131,7 @@ These candidate binaries were cross-compiled with Go 1.23.2, the compiler availa
 1. **PTY and ConPTY:** native pseudo terminals on Linux and Windows with resize, UTF-8, ANSI/VT, scrollback, search, autocomplete and error rendering; independent OS interactive-app tests.
 2. **Existing identity/agent capability bridge:** bind native command sessions to Kindred Port Zero consent, mutually authenticated agent identity and a durable local audit trail. Preserve company/tenant boundaries.
 3. **Auxiliary native inference:** ship first-party weights and native CPU/GPU inference binaries with tokenizer and evaluation suite; implement memory/recall-before-inference and authorized tool execution. The local protocol is the adapter surface, not a model.
-4. **Language and package substrates:** signed offline package registry, wheel creation and verification, optional private registry mirror, runtimes/toolchains for Python, JS/TS, Go, Rust, C/C++, Java and additional languages. No claim of own compiler for languages not yet implemented.
+4. **Language and package substrates:** extend the implemented Ed25519-signed local package installer into a governed SDPN-native registry with revocation, deterministic package reproducibility, wheel creation and verification, and first-party runtimes/toolchains. No claim of own compiler for languages not yet implemented.
 5. **Native transport and economy tools:** Port administration, identity, direct device pairing, files, service discovery, signed offers, authorized execution, receipts and settlement through existing approved interfaces; no bypass of current controls.
 6. **High-assurance release:** reproducible signed binaries, security policies, test isolation, user documentation, Linux deb/rpm, Windows MSIX, ARM64, updater, encrypted native profiles and telemetry-instrumented benchmarks.
 

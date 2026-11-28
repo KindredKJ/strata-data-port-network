@@ -331,6 +331,8 @@ func (t *Terminal) Execute(args []string) error {
 		return t.runAI(args[1:])
 	case "cognition":
 		return t.runCognition(args[1:])
+	case "pkg":
+		return t.runPackage(args[1:])
 	case "sdpn":
 		return t.runSDPN(args[1:])
 	case "proof":
@@ -353,6 +355,7 @@ var helpText = `SDPN NATIVE TERMINAL
   ai explain <command>        Inspect a command without executing it
   ai ask <question>           Consult approved local Auxiliary endpoint (if configured)
   cognition serve             Start first-party local cognition API (offline-rules now)
+  pkg keygen|trust|sign|verify|install|list|exec    Offline signed tool packages
   sdpn status                  Machine-readable native SDPN capabilities
   sdpn verify <receipt.json>   Check a local SW06-F HMAC receipt with the session secret
   proof send <IP> <file>       Encrypted SW06-F transport to a paired local receiver
