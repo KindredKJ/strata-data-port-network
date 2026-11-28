@@ -1,0 +1,42 @@
+{
+  "receipt": {
+    "schemaVersion": "kindred.external-proof.receipt.v1",
+    "challengeId": "ba6173a6-7091-4467-9e07-e8e5760f9b92",
+    "sourceNodeId": "genesis-render-node-a",
+    "destinationNodeId": "strata-vercel-node-b",
+    "stateId": "proof-job-3c1bcfd4-91f0-454a-8f4d-c7e9c41b9fd2",
+    "stateHash": "5ca869c0b666c8c9b5621e368a226b69042f97e421b8f723207812b1f1e4bb15",
+    "generation": 1,
+    "payloadSha256": "5ca869c0b666c8c9b5621e368a226b69042f97e421b8f723207812b1f1e4bb15",
+    "receivedSha256": "5ca869c0b666c8c9b5621e368a226b69042f97e421b8f723207812b1f1e4bb15",
+    "payloadBytes": 951,
+    "ciphertextBytes": 951,
+    "transport": {
+      "protocol": "HTTPS",
+      "applicationCipher": "AES-256-GCM",
+      "challengeAuthentication": "HMAC-SHA256",
+      "statelessChallenge": true,
+      "authenticationVerified": true,
+      "integrityVerified": true,
+      "encryptedApplicationPayload": true
+    },
+    "destinationExecution": {
+      "provider": "vercel",
+      "deploymentId": "dpl_Djfya8BHBfu77WoypyqPZyEK8BAV",
+      "deploymentUrl": "stratadataportnetwork-qm1eixyxp-kindred-coxs-projects.vercel.app",
+      "commitSha": "85581c46f8ac14d1fcebb8ba1b4308bf0764a6bc",
+      "region": "iad1"
+    },
+    "claims": {
+      "externalRuntime": true,
+      "distinctServiceIdentity": true,
+      "physicalMachineAttestationProven": false,
+      "productionReadyClaim": false
+    },
+    "observedAt": "2026-10-28T02:15:17.165Z"
+  },
+  "signatureAlgorithm": "Ed25519",
+  "keyId": "9cccc27fedfbdb987a3f2f442c550ee4c9978f1a29bc017831f81ff4d4439dd5",
+  "publicKeySpkiBase64": "MCowBQYDK2VwAyEAL10yHg40CyerzhSbvsEWAJOHrHjnmfjXbuGu/exgmcU=",
+  "signature": "znoEjbJsJqIrTgG68riJPzEwNZkftgEphyivUVb2nVMmx0w1Vf2CIhZMV5gmOQtnVMT3hPNQPNcFSM2qSvcPAg"
+}

@@ -47,3 +47,24 @@ autonomous repair lane.
 - Full verification remains the authority for whether a repaired candidate survives.
 
 Scheduling a repair task is not evidence that the repair ran, passed, merged or deployed.
+
+## Release-ready scheduling contract
+
+Repair workers may admit diagnose/synthesize/stage/verify/compare only.
+Full verification is explicitly delegated to the independent
+VerificationProofScheduler; this repair pool cannot self-certify results.
+
+Repair tasks accept only E0/E1. The first admitted experiment/phase attempt
+pins maxAttempts; subsequent changes to the ceiling are rejected, as are
+stale, duplicate and pending-overtaking attempts. Identity keys are structured
+and do not depend on ambiguous string delimiters.
+
+The repair worker registry is isolated from production and verification
+worker registries but reuses the shared, tested secure reservation core.
+Every accepted assignment returns a unique reservationId. Duplicate
+release(reservationId) is harmless and cannot free another task's slot.
+Queue status, in-flight worker counts, attempt state and immutable worker
+snapshots remain inspectable. No scheduling receipt implies actual execution.
+
+A full_verify phase returns an explicit unscheduled handoff until a separate
+authorized verifier issues its own independently checked receipt.

@@ -45,3 +45,19 @@ verification workers -> proof/test/benchmark lanes
 
 Adding more builders does not remove proof capacity. Adding more verifiers increases proof
 parallelism without changing the verification contract.
+
+## Durable scheduler contract
+
+Verification scheduling reuses the tested ProductionCapabilityScheduler reservation
+engine through an isolated verifier registry. Admission requires explicit boolean
+worker authorization and known gate kinds. Every assignment has an independent
+reservationId; duplicate release never frees another verification task's slot.
+
+Required gates retain capacity headroom on multi-slot verifier workers and
+receive priority over advisory gates in the bounded queue. A single-slot
+verifier cannot interrupt an already executing task; required work goes first
+at the next reservation release.
+
+Call release(reservationId), not release(workerId). The return value
+contains reassigned receipts for pending work. A successful schedule remains
+executed=false until independent verification actually completes.
