@@ -11,7 +11,7 @@ The terminal is a **native Go executable** for Windows and Linux (no hosted prov
 | Native shell | Interactive REPL, `cd`, `pwd`, `ls`, `cat`, `echo`, `hash`, `history`, `clear`, direct executable launch, explicit OS-shell pass-through (`!`) | Dedicated PTY/ConPTY process orchestration, rich keyboard editing, full VT emulator, completions, split panes, GUI terminal |
 | Polyglot | `run <file>` dispatch to **installed** Python, Node JS/TS, Go, Ruby, PHP, sh, PowerShell, Java, Swift, Lua, R, Perl; `doctor` toolchain discovery | Self-owned compiler/runtime for every language; Python wheels still require Python for import, and languages need OS-installed runtimes |
 | SDPN transport | First-party pure-Go SW06-F v2 authenticated AES-256-GCM receiver/sender, challenge, HKDF-SHA256, SHA-256, HMAC receipt verification, bounded payload and private IPv4 restrictions | Independent physical peer, official Node/Go interop, reliable restart after in-flight failure, production Port Zero/consent binding |
-| First-party cognition | Offline deterministic diagnostics; local-only `POST /v1/cognition`; Node client and Python SDK; no outside-provider API keys or network call required | **Neural inference not implemented in this module**. Auxiliary native cognitive runtime, model artifact, weights, tokenization and accelerator runtime must be integrated and benchmarked, not assumed |
+| First-party cognition | Offline diagnostics, local-only `POST /v1/cognition`, Node/Python adapters, **local-only streaming bridge to existing first-party NTSA-X recurrent model server** | Validated local checkpoint startup and inference quality, native model weights/inference kernels in this executable, GPU/accelerator packaging and production auth |
 | Packaging | Linux x86-64 and Windows x86-64 compiled binaries; pure-Python `kindred-sdpn` wheel built with stdlib; no pip dependencies | Signed MSI/MSIX, RPM/DEB, updates, ARM64 builds, notarized binaries, package registry with signed manifests |
 | Security | Loopback-only cognition, redirects blocked, cryptographic proof verification, private-IP receiver policy, bounded payloads, no shell command invocation unless explicitly requested | Production sandboxing, per-command approvals, local capability-grants, audit ledger, full SBOM/release signing |
 
@@ -116,7 +116,35 @@ status = native_status("./sdpn-terminal-linux-amd64")
 # ask_local("diagnose transport timeout") requires the local server above.
 ```
 
-All adapter endpoints must be literal loopback addresses. The native cognition port can subsequently be backed by Kindred Labs' **existing proprietary Auxiliary native inference implementation**, if and only if such a verified runtime is attached. Connection requires a first-party adapter with explicit capability identity, local authentication, resource budgets, per-tenant state and request/response receipts. No external inference provider is part of the mandatory path. No representation is made that Auxiliary model inference is implemented by this code.
+### First-party NTSA-X recurrent-model bridge (implemented adapter; actual model requires checkpoint)
+
+The existing [KindredKJ/NTSA-X native COG-FU server](https://github.com/KindredKJ/NTSA-X/blob/main/ntsa_x/cog_fu_server.py) implements a first-party, locally bound streaming chat endpoint. This terminal now supports its native SSE contract directly: bounded `stream=true` requests, model ID, no redirects, literal loopback address only, streaming output with explicit `[DONE]` and a size limit. When the model is actually responding, the SDPN response is accurately marked `engine=ntsa-x-native`, `generative=true`. No external AI API is used. This is a bridge to Kindred's own native model, not a claim that its PyTorch/CPU/CUDA runtime or model weights have been ported into the Go binary.
+
+In the authorized local NTSA-X checkout, with an **existing trained checkpoint**, launch (requires local Python and PyTorch):
+
+```bash
+python -m ntsa_x.cog_fu_server --checkpoint /absolute/path/to/actual-checkpoint.pt --port 8081 --decoder unified
+```
+
+In the shell launching the SDPN native cognition gateway:
+
+```bash
+export SDPN_NATIVE_MODEL_ENDPOINT=http://127.0.0.1:8081/v1/chat/completions
+export SDPN_NATIVE_MODEL_ID=ntsa-cog-fu-v1
+export SDPN_NATIVE_MODEL_MAX_TOKENS=64
+./sdpn-terminal-linux-amd64 cognition serve 127.0.0.1 18281
+```
+
+From a separate native terminal process:
+
+```bash
+export SDPN_AI_ENDPOINT=http://127.0.0.1:18281/v1/cognition
+./sdpn-terminal-linux-amd64 ai ask 'Explain the failing SW06-F receipt'
+```
+
+Never invent a checkpoint filename or assert model availability based on source alone. The server's SSE output is currently treated as generated, **not verified scientific or operational evidence**; actual checkpoint quality and performance need separate tests. The local gateway returns `503` rather than silently claiming generative inference when a configured native model is unavailable. This adapter is additive and keeps model files outside the public SDPN repository.
+
+All adapter endpoints must be literal loopback addresses. The native cognition port can also be backed by Kindred Labs' **existing proprietary Auxiliary native inference implementation**, if and only if such a verified runtime is attached. Connection requires a first-party adapter with explicit capability identity, local authentication, resource budgets, per-tenant state and request/response receipts. No external inference provider is part of the mandatory path. No representation is made that Auxiliary model inference is implemented by this code.
 
 ## Integration boundaries — do not replace working infrastructure
 

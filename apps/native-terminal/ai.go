@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -27,15 +28,19 @@ func (l LocalCognition) Respond(input string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if u.Scheme != "http" || u.Hostname() == "" {
-		return "", errors.New("SDPN AI requires an HTTP loopback endpoint; remote providers are not allowed")
+	if u.Scheme != "http" || u.Path != "/v1/cognition" || u.RawQuery != "" || u.Fragment != "" || u.User != nil {
+		return "", errors.New("SDPN AI requires the local /v1/cognition endpoint; redirects/providers are not allowed")
 	}
 	ip := net.ParseIP(u.Hostname())
 	if ip == nil || !ip.IsLoopback() {
 		return "", errors.New("SDPN AI endpoint must be 127.0.0.1 or ::1")
 	}
+	port, e := strconv.Atoi(u.Port())
+	if e != nil || port < 1024 || port > 65535 {
+		return "", errors.New("local cognition endpoint requires a valid explicit port")
+	}
 	reqBytes, _ := json.Marshal(map[string]any{"input": input, "source": "sdpn-native-terminal", "mode": "local"})
-	client := &http.Client{Timeout: 15 * time.Second, CheckRedirect: func(_ *http.Request, _ []*http.Request) error {
+	client := &http.Client{Timeout: 75 * time.Second, Transport: &http.Transport{Proxy: nil}, CheckRedirect: func(_ *http.Request, _ []*http.Request) error {
 		return errors.New("SDPN cognition redirects are disabled")
 	}}
 	req, err := http.NewRequest("POST", l.Endpoint, bytes.NewReader(reqBytes))
@@ -119,6 +124,19 @@ func (t *Terminal) runAI(args []string) error {
 	case "ask":
 		endpoint := os.Getenv("SDPN_AI_ENDPOINT")
 		if endpoint == "" {
+			native, configured, err := configuredNativeModel()
+			if err != nil {
+				return err
+			}
+			if configured {
+				output, err := native.Respond(input)
+				if err != nil {
+					return err
+				}
+				fmt.Fprintln(t.Out, output)
+				return nil
+			}
+
 			fmt.Fprintln(t.Out, offlineDiagnosis(input))
 			return errors.New("native neural model not yet connected; only deterministic offline assistance is available")
 		}

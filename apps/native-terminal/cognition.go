@@ -33,7 +33,17 @@ func cognitionHandler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"status": "ready", "engine": "offline-rules", "generative": false, "localOnly": true})
+		_, configured, configErr := configuredNativeModel()
+		status := "offline-ready"
+		engine := "offline-rules"
+		if configured {
+			status = "native-model-configured-not-probed"
+			engine = "ntsa-x-native-adapter"
+		}
+		if configErr != nil {
+			status = "configuration-error"
+		}
+		_ = json.NewEncoder(w).Encode(map[string]any{"status": status, "engine": engine, "generativeVerified": false, "modelConfigured": configured, "localOnly": true})
 	})
 	mux.HandleFunc("POST /v1/cognition", func(w http.ResponseWriter, r *http.Request) {
 		if token := os.Getenv("SDPN_AI_LOCAL_TOKEN"); token != "" && r.Header.Get("Authorization") != "Bearer "+token {
@@ -51,6 +61,20 @@ func cognitionHandler() http.Handler {
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
+		native, configured, err := configuredNativeModel()
+		if err != nil {
+			http.Error(w, "native model configuration invalid", http.StatusServiceUnavailable)
+			return
+		}
+		if configured {
+			output, modelErr := native.Respond(input.Input)
+			if modelErr != nil {
+				http.Error(w, "first-party native model unavailable", http.StatusServiceUnavailable)
+				return
+			}
+			_ = json.NewEncoder(w).Encode(cognitionResponse{Schema: "kindred.sdpn.cognition.v1", Output: output, Engine: "ntsa-x-native", Generative: true})
+			return
+		}
 		_ = json.NewEncoder(w).Encode(cognitionResponse{Schema: "kindred.sdpn.cognition.v1", Output: offlineDiagnosis(input.Input), Engine: "offline-rules", Generative: false})
 	})
 	return mux
@@ -61,7 +85,15 @@ func (t *Terminal) runCognition(args []string) error {
 	}
 	switch args[0] {
 	case "health":
-		fmt.Fprintln(t.Out, `{"engine":"offline-rules","generative":false,"providerRequired":false}`)
+		_, configured, e := configuredNativeModel()
+		if e != nil {
+			return e
+		}
+		status := "offline-rules"
+		if configured {
+			status = "ntsa-x-native-adapter-configured-not-probed"
+		}
+		_ = json.NewEncoder(t.Out).Encode(map[string]any{"engine": status, "generativeVerified": false, "providerRequired": false})
 		return nil
 	case "serve":
 		host := "127.0.0.1"
@@ -88,11 +120,16 @@ func (t *Terminal) runCognition(args []string) error {
 			return err
 		}
 		defer listener.Close()
-		srv := &http.Server{Handler: cognitionHandler(), ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 10 * time.Second, WriteTimeout: 15 * time.Second}
+		srv := &http.Server{Handler: cognitionHandler(), ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 10 * time.Second, WriteTimeout: 75 * time.Second}
 		done := make(chan os.Signal, 1)
 		signal.Notify(done, syscall.SIGINT, syscall.SIGTERM)
 		defer signal.Stop(done)
-		fmt.Fprintf(t.Out, "SDPN local cognition API: http://%s/v1/cognition (offline-rules engine; generative=false)\n", net.JoinHostPort(host, fmt.Sprint(port)))
+		_, configured, _ := configuredNativeModel()
+		status := "offline-rules"
+		if configured {
+			status = "NTSA-X adapter configured (model not yet probed)"
+		}
+		fmt.Fprintf(t.Out, "SDPN local cognition API: http://%s/v1/cognition (%s)\n", net.JoinHostPort(host, fmt.Sprint(port)), status)
 		go func() {
 			if e := srv.Serve(listener); e != nil && !errors.Is(e, http.ErrServerClosed) {
 				fmt.Fprintln(t.Err, strings.TrimSpace(e.Error()))
