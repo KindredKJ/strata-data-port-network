@@ -27,7 +27,8 @@
     "./two-machine-proof": "./src/two-machine-proof.mjs",
     "./native-identity": "./src/native-port-identity.mjs",
     "./native-session": "./src/native-session.mjs",
-    "./port-names": "./src/port-names.mjs"
+    "./port-names": "./src/port-names.mjs",
+    "./interface-routing": "./src/interface-session-routing.mjs"
   },
   "devDependencies": {
     "playwright": "1.65.1"

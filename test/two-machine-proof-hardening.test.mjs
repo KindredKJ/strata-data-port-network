@@ -34,12 +34,12 @@ function transfer(receiver, c, suffix = "") {
 }
 
 test("session capacity rejects concurrent excess and recovers after expiry", async (t) => {
-  const receiver = await startProofReceiver({ host: "127.0.0.1", port: 0, secret, maxSessions: 2, challengeTtlMs: 250 });
+  const receiver = await startProofReceiver({ host: "127.0.0.1", port: 0, secret, maxSessions: 2, challengeTtlMs: 3000 });
   t.after(() => receiver.close());
   const responses = await Promise.all(Array.from({ length: 6 }, () => challenge(receiver)));
   assert.equal(responses.filter(x => x.status === 200).length, 2);
   assert.equal(responses.filter(x => x.status === 429).length, 4);
-  await new Promise(resolve => setTimeout(resolve, 300));
+  await new Promise(resolve => setTimeout(resolve, 3100));
   assert.equal((await challenge(receiver)).status, 200);
 });
 
