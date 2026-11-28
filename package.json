@@ -3,17 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "test": "node --test test/*.test.mjs",
+    "test": "node --test test/*.test.mjs apps/portal/test/*.test.mjs community/test/*.test.mjs",
+    "test:standalone": "node --test test/standalone-host.test.mjs",
+    "serve:standalone": "node scripts/serve-standalone.mjs",
     "measure": "node scripts/measure-worker-transfer.mjs",
     "proof:receive": "node scripts/two-machine-receiver.mjs",
-    "proof:send": "node scripts/two-machine-sender.mjs"
+    "proof:send": "node scripts/two-machine-sender.mjs",
+    "port:init": "node scripts/port-domain.mjs init",
+    "port:renew": "node scripts/port-domain.mjs renew",
+    "port:resolve": "node scripts/port-resolve.mjs",
+    "portal:start": "node apps/portal/server.mjs",
+    "portal:test": "node --test apps/portal/test/*.test.mjs",
+    "community:test": "node --test community/test/*.test.mjs test/community-interop.test.mjs",
+    "test:browser": "node scripts/test-browser-peer.mjs"
   },
   "exports": {
     "./worker-transfer": "./src/direct-pipe-worker-transfer.mjs",
     "./state-port": "./src/kindred-state-port.mjs",
     "./two-machine-proof": "./src/two-machine-proof.mjs",
+    "./native-identity": "./src/native-port-identity.mjs",
+    "./native-session": "./src/native-session.mjs",
+    "./port-names": "./src/port-names.mjs",
     "./interface-routing": "./src/interface-session-routing.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.65.1"
   }
 }

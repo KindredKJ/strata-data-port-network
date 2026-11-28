@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "kindred.external-proof.benchmark.v1",
+  "observedAt": "2026-10-28T02:27:15.833Z",
+  "externalClient": {"provider":"vercel","region":"iad1"},
+  "source": {"provider":"render","service":"kindred-external-proof-canary"},
+  "destination": {"provider":"vercel","service":"strata-data-port-network"},
+  "totalJobs": 12,
+  "passedJobs": 12,
+  "failedJobs": 0,
+  "successRate": 1,
+  "latencyMs": {
+    "min": 288.792,
+    "p50": 358.153,
+    "p95": 1044.115,
+    "p99": 1044.115,
+    "max": 1044.115,
+    "mean": 427.988
+  },
+  "allReceiptsIndependentlyVerified": true
+}

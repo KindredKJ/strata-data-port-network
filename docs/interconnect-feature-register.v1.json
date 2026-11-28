@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "kindred.sdpn.interconnect.feature-register.v1",
+  "status": "PROPOSED_NOT_IMPLEMENTED",
+  "date": "2026-10-10",
+  "product": "INTERCONNECT",
+  "policy": {
+    "browserEngine": "NON_CHROMIUM",
+    "existingPortZeroAuthorityUnchanged": true,
+    "independentKindredProducts": true,
+    "existingEncryptedFileWorkspaceUnchanged": true,
+    "productionActivation": false,
+    "privateDataSyncByDefault": false,
+    "proofPromotion": false
+  },
+  "sources": [
+    "https://connect.mozilla.org/t5/discussions/results-from-the-browser-features-survey/m-p/70264",
+    "https://shift.com/blog/the-2026-state-of-browsing-report-is-here/",
+    "https://www.androidauthority.com/browser-feature-absolutely-cant-live-without-poll-results-3667906/",
+    "https://www.gartner.com/en/newsroom/press-releases/2025-09-03-gartner-survey-finds-53-percent-of-consumers-distrust-ai-powered-search-results0",
+    "https://agent-security.cs.washington.edu/agentic_browsers_sop.html"
+  ],
+  "features": [
+    {
+      "id": "IC-001",
+      "name": "Per-site privacy controls and transparent tracker blocking",
+      "priority": "P0",
+      "owner": "browser-local",
+      "sdpnReuse": "optional-policy-metadata",
+      "defaultBehavior": "off-for-private-data-telemetry",
+      "releaseGate": "gate-b",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-002",
+      "name": "Adaptive performance and battery governor",
+      "priority": "P0",
+      "owner": "browser-local",
+      "sdpnReuse": "opt-in-capacity-signals",
+      "defaultBehavior": "no-remote-device-metrics",
+      "releaseGate": "gate-b",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-003",
+      "name": "Durable tabs and workspaces",
+      "priority": "P0",
+      "owner": "browser-local",
+      "sdpnReuse": "verified-state-reference",
+      "defaultBehavior": "local-first",
+      "releaseGate": "gate-b",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-004",
+      "name": "Isolated accounts, profiles and containers",
+      "priority": "P0",
+      "owner": "browser-local",
+      "sdpnReuse": "opt-in-scoped-identity",
+      "defaultBehavior": "no-cross-profile-leakage",
+      "releaseGate": "gate-b",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-005",
+      "name": "User-selectable search and source provenance",
+      "priority": "P0",
+      "owner": "hybrid",
+      "sdpnReuse": "permission-filtered-search",
+      "defaultBehavior": "traditional-results-default",
+      "releaseGate": "gate-c",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-006",
+      "name": "AI master switch and capability firewall",
+      "priority": "P0",
+      "owner": "hybrid",
+      "sdpnReuse": "reviewed-agent-intent",
+      "defaultBehavior": "agent-actions-disabled",
+      "releaseGate": "gate-d",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-007",
+      "name": "Accessibility and adjustable interface",
+      "priority": "P0",
+      "owner": "browser-local",
+      "sdpnReuse": "portable-ux-preferences",
+      "defaultBehavior": "reduced-motion-respected",
+      "releaseGate": "gate-b",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-008",
+      "name": "Independent engine compatibility and sandboxing",
+      "priority": "P0",
+      "owner": "browser-local",
+      "sdpnReuse": "none",
+      "defaultBehavior": "web-sandbox-isolated",
+      "releaseGate": "gate-b",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-009",
+      "name": "Client-encrypted selective cross-device sync",
+      "priority": "P1",
+      "owner": "hybrid",
+      "sdpnReuse": "revocable-state-sync",
+      "defaultBehavior": "sync-disabled",
+      "releaseGate": "gate-d",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-010",
+      "name": "Federated lexical semantic graph search",
+      "priority": "P1",
+      "owner": "network-opt-in",
+      "sdpnReuse": "scope-aware-federated-index",
+      "defaultBehavior": "private-connector-disabled",
+      "releaseGate": "gate-c",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-011",
+      "name": "Priority and attention-aware event stream",
+      "priority": "P1",
+      "owner": "network-opt-in",
+      "sdpnReuse": "priority-event-qos",
+      "defaultBehavior": "notifications-disabled",
+      "releaseGate": "gate-d",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-012",
+      "name": "Permission-scoped extension host",
+      "priority": "P1",
+      "owner": "browser-local",
+      "sdpnReuse": "optional-adapter",
+      "defaultBehavior": "no-extension-privileges",
+      "releaseGate": "gate-d",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-013",
+      "name": "Offline-first navigation and state recovery",
+      "priority": "P1",
+      "owner": "hybrid",
+      "sdpnReuse": "checkpoint-resolution",
+      "defaultBehavior": "network-optional",
+      "releaseGate": "gate-d",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-014",
+      "name": "Native SDPN resource addressing and discovery",
+      "priority": "P2",
+      "owner": "hybrid",
+      "sdpnReuse": "port-zero-resolution",
+      "defaultBehavior": "private-port-off",
+      "releaseGate": "gate-e",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-015",
+      "name": "Spatial Knowledge Universe",
+      "priority": "P2",
+      "owner": "browser-local",
+      "sdpnReuse": "read-only-resource-visualizer",
+      "defaultBehavior": "surface-mode-default",
+      "releaseGate": "gate-e",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    },
+    {
+      "id": "IC-016",
+      "name": "Near-data execution and verified results",
+      "priority": "P2",
+      "owner": "network-opt-in",
+      "sdpnReuse": "consented-compute-capability",
+      "defaultBehavior": "execution-disabled",
+      "releaseGate": "gate-e",
+      "status": "proposed",
+      "requiresExplicitReview": true
+    }
+  ]
+}

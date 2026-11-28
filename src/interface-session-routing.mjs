@@ -20,14 +20,57 @@ export const STREAM_FRAME_TYPES = new Set([
   "audio.output.chunk"
 ]);
 
-function normalize(value) {
-  if (Array.isArray(value)) return value.map(normalize);
-  if (value && typeof value === "object") {
-    return Object.fromEntries(
-      Object.keys(value).sort().map((key) => [key, normalize(value[key])])
-    );
+
+function normalize(value, seen = new WeakSet()) {
+  if (value === null || typeof value === "string" || typeof value === "boolean") {
+    return value;
   }
-  return value;
+  if (typeof value === "number") {
+    if (!Number.isFinite(value) || Object.is(value, -0) ||
+        (Number.isInteger(value) && !Number.isSafeInteger(value))) {
+      throw new TypeError("interface frame numbers must be finite, unambiguous JSON numbers");
+    }
+    return value;
+  }
+  if (typeof value !== "object" ||
+      (!Array.isArray(value) && Object.getPrototypeOf(value) !== Object.prototype &&
+       Object.getPrototypeOf(value) !== null)) {
+    throw new TypeError("interface frame must contain only JSON-compatible values");
+  }
+  if (seen.has(value)) {
+    throw new TypeError("cyclic interface frame values are not supported");
+  }
+  if (Object.getOwnPropertySymbols(value).length > 0) {
+    throw new TypeError("symbol keys are not supported in interface frames");
+  }
+  seen.add(value);
+  try {
+    if (Array.isArray(value)) {
+      if (Object.keys(value).length !== value.length) {
+        throw new TypeError("sparse or extended interface arrays are not supported");
+      }
+      const output = [];
+      for (let i = 0; i < value.length; i++) {
+        const descriptor = Object.getOwnPropertyDescriptor(value, String(i));
+        if (!descriptor || !Object.hasOwn(descriptor, "value")) {
+          throw new TypeError("interface frame accessors are not supported");
+        }
+        output.push(normalize(descriptor.value, seen));
+      }
+      return output;
+    }
+    const output = Object.create(null);
+    for (const key of Object.keys(value).sort()) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, key);
+      if (!descriptor || !Object.hasOwn(descriptor, "value")) {
+        throw new TypeError("interface frame accessors are not supported");
+      }
+      output[key] = normalize(descriptor.value, seen);
+    }
+    return output;
+  } finally {
+    seen.delete(value);
+  }
 }
 
 export function canonicalFrameBytes(frame) {
@@ -60,6 +103,7 @@ export function validateInterfaceFrame(frame) {
   if (!Number.isSafeInteger(frame.sequence) || frame.sequence < 0) {
     throw new Error("interface frame sequence must be a non-negative integer");
   }
+  normalize(frame);
   return frame;
 }
 
@@ -92,16 +136,43 @@ export class SessionPriorityQueue {
 
   enqueue(frame) {
     const priority = framePriority(frame);
-    if (this.depth >= this.#maxDepth && priority !== 0) {
-      throw new Error("realtime stream queue is full");
+    const droppedFrameIds = [];
+    // A cancel replaces older queued work from the same ordered source.
+    // The receiver must never observe a higher sequence before stale queued output.
+    if (frame.type === "cancel" || frame.type === "response.cancelled") {
+      for (const queue of [this.#queues[1], this.#queues[2]]) {
+        for (let i = queue.length - 1; i >= 0; i--) {
+          const previous = queue[i];
+          if (previous.session_id === frame.session_id &&
+              previous.source_peer_id === frame.source_peer_id &&
+              previous.sequence < frame.sequence) {
+            droppedFrameIds.push(queue.splice(i, 1)[0].frame_id);
+          }
+        }
+      }
+    }
+    if (this.depth >= this.#maxDepth) {
+      if (priority !== 0) throw new Error("realtime stream queue is full");
+      const evicted = this.#queues[2].pop() ?? this.#queues[1].pop();
+      if (!evicted) throw new Error("realtime control queue is full");
+      droppedFrameIds.push(evicted.frame_id);
     }
     this.#queues[priority].push(frame);
-    return { priority, depth: this.depth };
+    return { priority, depth: this.depth, droppedFrameIds };
   }
 
   dequeue() {
     for (const queue of this.#queues) {
-      if (queue.length) return queue.shift();
+      for (let i = 0; i < queue.length; i++) {
+        const candidate = queue[i];
+        // Priority may reorder distinct sources, never a single source's sequence.
+        const hasEarlier = this.#queues.some(other => other.some(frame =>
+          frame.session_id === candidate.session_id &&
+          frame.source_peer_id === candidate.source_peer_id &&
+          frame.sequence < candidate.sequence
+        ));
+        if (!hasEarlier) return queue.splice(i, 1)[0];
+      }
     }
     return null;
   }
@@ -121,40 +192,50 @@ export class SessionSequencer {
   #lastBySource = new Map();
   #pending = new Map();
   #maxInFlight;
+  #maxControlInFlight;
 
-  constructor({ maxInFlight = 64 } = {}) {
+  constructor({ maxInFlight = 64, maxControlInFlight = 16 } = {}) {
     if (!Number.isSafeInteger(maxInFlight) || maxInFlight < 1) {
       throw new RangeError("maxInFlight must be a positive integer");
     }
+    if (!Number.isSafeInteger(maxControlInFlight) || maxControlInFlight < 1) {
+      throw new RangeError("maxControlInFlight must be a positive integer");
+    }
     this.#maxInFlight = maxInFlight;
+    this.#maxControlInFlight = maxControlInFlight;
   }
 
   accept(frame) {
     validateInterfaceFrame(frame);
-    const key = `${frame.session_id}|${frame.source_peer_id}`;
+    const key = JSON.stringify([frame.session_id, frame.source_peer_id]);
     const previous = this.#lastBySource.get(key);
     if (previous !== undefined && frame.sequence <= previous) {
       throw new Error("interface frame sequence replay or reordering rejected");
     }
-    this.#lastBySource.set(key, frame.sequence);
-
     const control = CONTROL_FRAME_TYPES.has(frame.type);
-    const noAck = ["ack", "pong"].includes(frame.type);
-
-    if (!control && !noAck) {
-      if (this.#pending.size >= this.#maxInFlight) {
-        throw new Error("interface session backpressure window is full");
+    const noAck = frame.type === "ack" || frame.type === "pong";
+    if (!noAck) {
+      if (this.#pending.has(frame.frame_id)) {
+        throw new Error("duplicate pending interface frame ID");
+      }
+      const pendingCount = [...this.#pending.values()].filter(x => x.control === control).length;
+      const limit = control ? this.#maxControlInFlight : this.#maxInFlight;
+      if (pendingCount >= limit) {
+        throw new Error(control
+          ? "interface control backpressure window is full"
+          : "interface session backpressure window is full");
       }
       this.#pending.set(frame.frame_id, {
         sessionId: frame.session_id,
         sourcePeerId: frame.source_peer_id,
-        sequence: frame.sequence
+        sequence: frame.sequence,
+        control
       });
     }
-
+    this.#lastBySource.set(key, frame.sequence);
     return {
       accepted: true,
-      priority: framePriority(frame),
+      priority: control ? 0 : STREAM_FRAME_TYPES.has(frame.type) ? 2 : 1,
       control,
       pending: this.#pending.size,
       lastSequence: frame.sequence
@@ -162,17 +243,40 @@ export class SessionSequencer {
   }
 
   acknowledge(frameId) {
-    const accepted = this.#pending.delete(frameId);
-    return {
-      acknowledged: accepted,
-      pending: this.#pending.size
-    };
+    const acknowledged = this.#pending.delete(frameId);
+    return { acknowledged, pending: this.#pending.size };
+  }
+
+  closeSession(sessionId) {
+    if (typeof sessionId !== "string" || sessionId.length === 0) {
+      throw new TypeError("sessionId must be a nonempty string");
+    }
+    let removedSources = 0;
+    let removedPending = 0;
+    for (const key of this.#lastBySource.keys()) {
+      if (JSON.parse(key)[0] === sessionId) {
+        this.#lastBySource.delete(key);
+        removedSources++;
+      }
+    }
+    for (const [frameId, pending] of this.#pending) {
+      if (pending.sessionId === sessionId) {
+        this.#pending.delete(frameId);
+        removedPending++;
+      }
+    }
+    return { removedSources, removedPending, pending: this.#pending.size };
   }
 
   status() {
+    let controlPending = 0;
+    for (const pending of this.#pending.values()) if (pending.control) controlPending++;
     return {
       pending: this.#pending.size,
+      normalPending: this.#pending.size - controlPending,
+      controlPending,
       maxInFlight: this.#maxInFlight,
+      maxControlInFlight: this.#maxControlInFlight,
       trackedSources: this.#lastBySource.size
     };
   }
@@ -188,7 +292,7 @@ export class SDPNInterfaceRoutePlanner {
 
   plan(frame, endpoint) {
     validateInterfaceFrame(frame);
-    if (!endpoint?.authorized) {
+    if (endpoint?.authorized !== true) {
       throw new Error("interface route endpoint must be authorized");
     }
     if (!endpoint.endpointId || !endpoint.locator) {
