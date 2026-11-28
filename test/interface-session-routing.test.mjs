@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   INTERFACE_FRAME_SCHEMA,
   SDPNInterfaceRoutePlanner,
+  SessionPriorityQueue,
   SessionSequencer,
   canonicalFrameBytes,
   decodeInterfaceFrame
@@ -114,7 +115,7 @@ test("backpressure does not consume sequence numbers and allows exact retry", ()
   assert.equal(sequencer.status().pending, 1);
   sequencer.acknowledge("first");
   assert.deepEqual(sequencer.accept(second), {
-    accepted: true, pending: 1, lastSequence: 2
+    accepted: true, priority: 1, control: false, pending: 1, lastSequence: 2
   });
 });
 
@@ -174,4 +175,85 @@ test("canonical frame digest rejects ambiguous or non-JSON values", () => {
   const first = canonicalFrameBytes(frame({ data: { b: 2, a: 1 } }));
   const second = canonicalFrameBytes(frame({ data: { a: 1, b: 2 } }));
   assert.deepEqual(first, second);
+});
+
+test("cancel remains admitted when normal in-flight window is saturated", () => {
+  const seq = new SessionSequencer({ maxInFlight: 2, maxControlInFlight: 1 });
+  seq.accept(frame({ frame_id: "one", sequence: 1 }));
+  seq.accept(frame({ frame_id: "two", sequence: 2 }));
+  const cancel = seq.accept(frame({ frame_id: "cancel", sequence: 3, type: "cancel" }));
+  assert.equal(cancel.control, true);
+  assert.equal(cancel.priority, 0);
+  assert.equal(cancel.pending, 3);
+  assert.equal(seq.acknowledge("cancel").acknowledged, true);
+  assert.equal(seq.status().normalPending, 2);
+  assert.equal(seq.status().controlPending, 0);
+});
+
+test("control reserve is bounded and does not consume rejected sequence numbers", () => {
+  const seq = new SessionSequencer({ maxInFlight: 1, maxControlInFlight: 1 });
+  seq.accept(frame({ frame_id: "first", sequence: 1, type: "input" }));
+  seq.accept(frame({ frame_id: "ping1", sequence: 2, type: "ping" }));
+  assert.throws(() => seq.accept(frame({ frame_id: "cancel", sequence: 3, type: "cancel" })),
+    /control backpressure/);
+  seq.acknowledge("ping1");
+  assert.equal(seq.accept(frame({ frame_id: "cancel", sequence: 3, type: "cancel" })).pending, 2);
+  assert.equal(seq.acknowledge("cancel").acknowledged, true);
+});
+
+test("priority queue schedules independent sources by priority", () => {
+  const q = new SessionPriorityQueue({ maxDepth: 3 });
+  q.enqueue(frame({ frame_id: "delta", source_peer_id: "stream", type: "output.delta" }));
+  q.enqueue(frame({ frame_id: "input", source_peer_id: "interactive" }));
+  q.enqueue(frame({ frame_id: "ping", source_peer_id: "control", type: "ping" }));
+  assert.deepEqual([q.dequeue().type, q.dequeue().type, q.dequeue().type],
+    ["ping", "input", "output.delta"]);
+});
+
+test("normal priority cannot reverse same-source monotonically ordered frames", () => {
+  const q = new SessionPriorityQueue({ maxDepth: 4 });
+  q.enqueue(frame({ frame_id: "delta", sequence: 1, type: "output.delta" }));
+  q.enqueue(frame({ frame_id: "ping", sequence: 2, type: "ping" }));
+  const seq = new SessionSequencer();
+  assert.equal(seq.accept(q.dequeue()).lastSequence, 1);
+  assert.equal(seq.accept(q.dequeue()).lastSequence, 2);
+});
+
+test("barge-in cancel drops same-source queued output and reports every drop", () => {
+  const q = new SessionPriorityQueue({ maxDepth: 3 });
+  q.enqueue(frame({ frame_id: "delta", sequence: 1, type: "output.delta" }));
+  q.enqueue(frame({ frame_id: "input", sequence: 2, type: "input" }));
+  const status = q.enqueue(frame({ frame_id: "cancel", sequence: 3, type: "cancel" }));
+  assert.deepEqual(status.droppedFrameIds.sort(), ["delta", "input"]);
+  assert.equal(q.depth, 1);
+  const seq = new SessionSequencer();
+  assert.equal(seq.accept(q.dequeue()).lastSequence, 3);
+});
+
+test("control priority evicts lower-priority work but never exceeds maxDepth", () => {
+  const q = new SessionPriorityQueue({ maxDepth: 2 });
+  q.enqueue(frame({ frame_id: "bulk1", source_peer_id: "a", type: "output.delta" }));
+  q.enqueue(frame({ frame_id: "bulk2", source_peer_id: "b", type: "output.delta" }));
+  const event = q.enqueue(frame({ frame_id: "ping", source_peer_id: "c", type: "ping" }));
+  assert.equal(q.depth, 2);
+  assert.equal(event.droppedFrameIds.length, 1);
+  const q2 = new SessionPriorityQueue({ maxDepth: 1 });
+  q2.enqueue(frame({ frame_id: "ping1", source_peer_id: "p1", type: "ping" }));
+  assert.throws(() => q2.enqueue(frame({ frame_id: "ping2", source_peer_id: "p2", type: "ping" })),
+    /control queue is full/);
+});
+
+test("route planner selects control and bulk streaming lanes", () => {
+  const planner = new SDPNInterfaceRoutePlanner();
+  const endpoint = { endpointId: "peer-b", locator: "session://peer-b",
+    authorized: true, supportsStreaming: true };
+  const control = planner.plan(frame({ type: "cancel" }), endpoint);
+  const stream = planner.plan(frame({ type: "output.delta" }), endpoint);
+  assert.equal(control.classification, "INTERACTIVE_CONTROL");
+  assert.equal(control.lane, "CONTROL");
+  assert.equal(control.priority, 0);
+  assert.equal(stream.classification, "INTERACTIVE_STREAM");
+  assert.equal(stream.lane, "STREAM");
+  assert.equal(stream.priority, 2);
+  assert.equal(stream.executed, false);
 });
