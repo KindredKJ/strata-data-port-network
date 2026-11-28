@@ -14,7 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from agent_economy import EconomyStore, StateConflict, canon, digest
-from x402_service import PaidCapabilityService, BaseReceiptVerifier, BASE_USDC, TRANSFER_TOPIC, decode_payment
+from x402_service import PaidProductService, BaseReceiptVerifier, BASE_USDC, TRANSFER_TOPIC, decode_payment
 from stripe_rails import StripeRails, verified_stripe_webhook, record_webhook
 
 TENANT="kindred-tenant-testing"
@@ -144,7 +144,7 @@ class PaymentTests(unittest.TestCase):
         self.s=EconomyStore(str(Path(self.tmp.name)/"test.sqlite"))
         self.s.register_agent(agent_id=AGENT,tenant_id=TENANT,port_id="port-001",owner_id="owner")
         self.fac=FakeFacilitator()
-        self.service=PaidCapabilityService(self.s,self.fac,FakeChain(),merchant=WALLET,
+        self.service=PaidProductService(self.s,self.fac,FakeChain(),merchant=WALLET,
              public_origin="https://kindredlabs.ai",tenant_id=TENANT,agent_id=AGENT)
         self.pid="examplepurchase0001"
     def tearDown(self):
@@ -171,6 +171,11 @@ class PaymentTests(unittest.TestCase):
         info,response=self.call(header)
         self.assertEqual(info["status"],"200 OK")
         self.assertIn("PAYMENT-RESPONSE",info["headers"])
+        self.assertEqual(self.service.route,"/v1/paid/agent-commerce-launch-brief")
+        self.assertEqual(response["product_id"],"kindred-agent-commerce-launch-brief")
+        self.assertEqual(response["delivery"],"complete_digital_report")
+        self.assertNotIn("capabilities",response)
+        self.assertEqual(response["scope"]["private_capabilities"],"internal company use only")
         self.assertEqual(self.s.purchase(self.pid)["status"],"settled")
         self.assertEqual(self.fac.calls,2)
         info,response=self.call(header)
